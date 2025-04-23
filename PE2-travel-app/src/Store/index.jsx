@@ -2,7 +2,7 @@ import {create} from 'zustand';
 import {persist} from 'zustand/middleware';
 
 
-  const useMyStore = create(persist((set, get) => ({
+//   const useMyStore = create(persist((set, get) => ({
 //     products: [],
 //     cart: [],
 //     cartTotal: 0,
@@ -65,7 +65,7 @@ import {persist} from 'zustand/middleware';
 //   {
 //     name: 'my-store-cart',
 //     getStorage: () => localStorage,
-  }));
+//   }));
 
  
 
