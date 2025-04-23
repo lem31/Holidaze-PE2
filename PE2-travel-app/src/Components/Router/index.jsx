@@ -1,4 +1,4 @@
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, BrowserRouter} from "react-router-dom";
 import Layout from '../Layout';
 
 /**
@@ -15,16 +15,18 @@ import Layout from '../Layout';
 function Router(){
   return(
     <>
-    <Routes className={styles.rooter}>
+    <BrowserRouter>
+    <Routes >
       <Route path="/" element={<Layout/>}>
-      <Route index element={<Home/>}/>
+      {/* <Route index element={<Home/>}/>
       <Route path= "/Venue/:id" element ={<Venue/>}/>
       <Route path= "/MyProfile" element ={<MyProfile/>}/>
       <Route path= "/Login" element ={<Login/>}/>
-      <Route path= "/Register" element = {<Register/>}/> 
+      <Route path= "/Register" element = {<Register/>}/>  */}
 
       </Route>
     </Routes>
+    </BrowserRouter>
 
     </>
   )
