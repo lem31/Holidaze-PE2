@@ -27,7 +27,13 @@ export default [
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
+    
       ],
+      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1, maxBOF: 0 }],
+      'no-trailing-spaces': 'error',
+      'space-before-blocks': ['error', 'always'],
+      'space-before-function-paren': ['error', 'never'],
+     
     },
   },
 ]
