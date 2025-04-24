@@ -17,7 +17,7 @@ import  useMyStore from '../../Store';
  */
 
 function Header(){
-    const [isLoggedIn] = useMyStore();
+    const isLoggedIn = useMyStore((state) => state.isLoggedIn);
 
   return(
     <div>

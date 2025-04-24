@@ -18,11 +18,11 @@ function Router(){
     <BrowserRouter>
     <Routes >
       <Route path="/" element={<Layout/>}>
-      {/* <Route index element={<Stays/>}/>
-      <Route path= "/Venue/:id" element ={<Venue/>}/>
+       {/* <Route index element={<Stays/>}/> */}
+      {/* <Route path= "/Venue/:id" element ={<Venue/>}/>
       <Route path= "/MyProfile" element ={<MyProfile/>}/>
       <Route path= "/Login" element ={<Login/>}/>
-      <Route path= "/Register" element = {<Register/>}/>  */}
+      <Route path= "/Register" element = {<Register/>}/>   */}
 
       </Route>
     </Routes>

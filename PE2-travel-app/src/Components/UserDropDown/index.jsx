@@ -31,8 +31,8 @@ function UserDropDown(){
 
 <img src={Profile} alt="Profile Image" />
 <a href="/Profile">Profile</a>
-<a href='/Stays' onClick= {logout}>
-<img src={handleLogout} alt="Logout Icon" />Logout</a>
+<a href='' onClick= {handleLogout}>
+<img src={Logout} alt="Logout Icon" />Logout</a>
 
 
 </div>
