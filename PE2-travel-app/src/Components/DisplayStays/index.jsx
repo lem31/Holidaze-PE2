@@ -9,6 +9,13 @@ return(
   <div>
 
 <h1> {stay.name}</h1>
+<p>
+    {Array.from({length: 5}).map((_, index)=>(
+        <span key={`${stay.id}-star-${index}`}>
+        {index < stay.rating ? "⭐" : "☆"} 
+     
+    </span>     ))}    </p>
+<p>{stay.location.city}, {stay.location.country}</p>
 <p>{stay.rating}</p>
 <div>
     {mediaImages.length > 0 ? (
@@ -21,6 +28,8 @@ return(
 
 
   <p >{stay.description}</p>
+
+  <p>{stay.price}NOK/night</p>
   </div>
 
   </div>
