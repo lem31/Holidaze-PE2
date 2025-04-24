@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Router from './Components/Router'
-import useMyStore from './Store';
+import useMyStore from './Store ';
 
 /**The App component is the main entry point of the application.
  * It initializes the application.

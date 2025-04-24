@@ -5,7 +5,7 @@ import Register from '../../assets/Images/Register.png';
 import Login from '../../assets/Images/Login.png';
 import Account from '../../assets/Images/Account.png';
 import UserDropDown from '../UserDropDown';
-import  useMyStore from '../../store/store';
+import  useMyStore from '../../Store';
 
 /**
  * 
