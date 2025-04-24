@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { use } from 'react';
 import Logo from '../../assets/Images/Logo.png';
 import Stays from '../../assets/Images/Stays.png';
 import Register from '../../assets/Images/Register.png';
 import Login from '../../assets/Images/Login.png';
 import Account from '../../assets/Images/Account.png';
 import UserDropDown from '../UserDropDown';
+import  useMyStore from '../../store/store';
 
 /**
  * 
@@ -16,6 +17,8 @@ import UserDropDown from '../UserDropDown';
  */
 
 function Header(){
+    const [isLoggedIn] = useMyStore();
+
   return(
     <div>
      
@@ -24,14 +27,25 @@ function Header(){
 <nav>
 <ul>
 <li>
-    <img src={Stays} alt="" /><a href="/">Stays</a></li>
-<li> <img src={Register} alt="" /><a href="/">Register</a></li>
-<li> <img src={Login} alt="" /><a href="/">Login</a></li>
+    <img src={Stays} alt="Stays Icon" /><a href="/Stays">Stays</a></li>
+   {!isLoggedIn && (
+    <>
+<li> <img src={Register} alt="Register Icon" /><a href="/Register">Register</a></li>
+<li> <img src={Login} alt="Login Icon" /><a href="/Login">Login</a></li> </>)}
+
 </ul>
 </nav>
 
-<img src={Account} alt="" />
+{isLoggedIn &&(
+
+    <div>
+
+<img src={Account} alt="Account Dropdown Options Icon" />
 <UserDropDown/>
+
+</div>
+
+)}
 
    </header>
 
@@ -41,3 +55,6 @@ function Header(){
 }
 
 export default Header;
+
+
+
