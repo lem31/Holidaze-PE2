@@ -1,0 +1,32 @@
+// import ViewStayButton from "../View_Product_Btn";
+import React from 'react';
+
+
+const DisplayStays = ({ stay }) => {
+const mediaImages = stay.media && stay.media.length > 0 ? stay.media : [];
+
+return(
+  <div>
+
+<h1> {stay.name}</h1>
+<p>{stay.rating}</p>
+<div>
+    {mediaImages.length > 0 ? (
+        mediaImages.filter((mediaImage) => mediaImage.url).map((mediaImage, index) => (
+            <img  key={`${stay.id}-${index}`} src={mediaImage.url} alt={mediaImage.name || stay.name} loading='lazy' />
+        ))
+    ) : (
+        <p> No images available</p>
+    )}
+
+
+  <p >{stay.description}</p>
+  </div>
+
+  </div>
+  )}
+
+
+
+
+export default DisplayStays;

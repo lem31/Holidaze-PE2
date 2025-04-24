@@ -1,5 +1,6 @@
 import {Routes, Route, BrowserRouter} from "react-router-dom";
 import Layout from '../Layout';
+import Stays from '../Stays';
 
 /**
  * Router component that defines the application's routing structure using React Router.
@@ -18,7 +19,7 @@ function Router(){
     <BrowserRouter>
     <Routes >
       <Route path="/" element={<Layout/>}>
-       {/* <Route index element={<Stays/>}/> */}
+       <Route index element={<Stays/>}/>
       {/* <Route path= "/Venue/:id" element ={<Venue/>}/>
       <Route path= "/MyProfile" element ={<MyProfile/>}/>
       <Route path= "/Login" element ={<Login/>}/>

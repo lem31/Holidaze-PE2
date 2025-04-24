@@ -2,7 +2,8 @@ import {create} from 'zustand';
 import {jwtDecode} from 'jwt-decode';
 
   const useMyStore = create((set) => ({
-
+stays: [],
+setStays: (stays) => set({ stays }),
     token: null, 
     isLoggedIn: false,
 
