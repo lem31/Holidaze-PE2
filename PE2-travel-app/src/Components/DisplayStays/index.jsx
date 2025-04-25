@@ -1,5 +1,7 @@
 // import ViewStayButton from "../View_Product_Btn";
 import React from 'react';
+import Location from '../../assets/Images/Location-purple.png';
+import Price from '../../assets/Images/Price-tag-purple.png';
 
 
 const DisplayStays = ({ stay }) => {
@@ -16,7 +18,10 @@ return(
      
     </span>     ))
     ) : ( <p>No rating</p>)}    
-<p>{stay.location.city}, {stay.location.country}</p>
+
+    
+<p>
+<img src={Location} alt="Location" />{stay.location.city}, {stay.location.country}</p>
 
 <p>{stay.rating > 0 ? stay.rating : 'No rating'}</p>
 
@@ -37,7 +42,7 @@ return(
 
   <p >{stay.description}</p>
 
-  <p>{stay.price}NOK/night</p>
+  <p> <img src={Price} alt="Price tag" />{stay.price}NOK/night</p>
   </div>
 
   </div>
