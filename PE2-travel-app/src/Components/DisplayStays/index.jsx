@@ -1,15 +1,21 @@
-import React, { useEffect } from "react";
+import React, {  useEffect, useState } from "react";
 import Location from "../../assets/Images/Location-purple.png";
 import Price from "../../assets/Images/Price-tag-purple.png";
 import ViewAvailabilityButton from "../ViewAvailabilityButton";
 import useMyStore from "../../Store";
+import SelectionSearchBar from "../SelectionSearchBar";
 
 const DisplayStays = () => {
   const { stays, fetchStays, loading, error } = useMyStore();
+  const [filteredStays, setFilteredStays] = useState([]);
 
    useEffect(() => {
     fetchStays();
   }, [fetchStays]);
+
+  useEffect(() => {
+    setFilteredStays(stays);},
+    [stays]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -23,9 +29,12 @@ const DisplayStays = () => {
     return <p>No stays available.</p>;
   }
 
+ 
+
   return (
     <div>
-      {stays.map((stay) => (
+      <SelectionSearchBar stays={stays} onFilter={setFilteredStays} />
+      {filteredStays.map((stay) => (
         <div key={stay.id}>
           <h1>{stay?.name || "Unknown Stay"}</h1>
 

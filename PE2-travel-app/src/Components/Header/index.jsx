@@ -31,7 +31,7 @@ function Header() {
 </button>
 <ul>
 <li>
-    <img src={Stays} alt="Stays Icon" /><a href="/Stays">Stays</a></li>
+    <img src={Stays} alt="Stays Icon" /><a href="/">Stays</a></li>
    {!isLoggedIn && (
     <>
 <li> <img src={Register} alt="Register Icon" /><a href="/Register">Register</a></li>
