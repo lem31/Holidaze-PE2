@@ -19,6 +19,12 @@ return(
 <p>{stay.location.city}, {stay.location.country}</p>
 
 <p>{stay.rating > 0 ? stay.rating : 'No rating'}</p>
+
+<p>
+    {stay.rating >= 4 ? 'Excellent Quality': 
+    stay.rating >= 2.5 ? 'Good Quality':
+    stay.rating > 0 ? 'Poor Quality': 'N/A'}
+</p>
 <div>
     {mediaImages.length > 0 ? (
         mediaImages.filter((mediaImage) => mediaImage.url).map((mediaImage, index) => (
