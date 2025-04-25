@@ -9,14 +9,16 @@ return(
   <div>
 
 <h1> {stay.name}</h1>
-<p>
-    {Array.from({length: 5}).map((_, index)=>(
+
+   {stay.rating ? ( Array.from({length: 5}).map((_, index)=>(
         <span key={`${stay.id}-star-${index}`}>
-        {index < stay.rating ? "⭐" : "☆"} 
+            {index< Math.floor(stay.rating) ? "⭐" : index < stay.rating ? "⭐" : "☆"} 
      
-    </span>     ))}    </p>
+    </span>     ))
+    ) : ( <p>No rating</p>)}    
 <p>{stay.location.city}, {stay.location.country}</p>
-<p>{stay.rating}</p>
+
+<p>{stay.rating > 0 ? stay.rating : 'No rating'}</p>
 <div>
     {mediaImages.length > 0 ? (
         mediaImages.filter((mediaImage) => mediaImage.url).map((mediaImage, index) => (
