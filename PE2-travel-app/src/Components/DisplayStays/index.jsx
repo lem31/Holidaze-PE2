@@ -35,7 +35,7 @@ const DisplayStays = () => {
 
           <div>
             {stay?.media?.map((media) => (
-              <img key={media.id} src={media.url} alt={stay.name} />
+              <img key={stay.id} src={media.url} alt={stay.name} />
             ))}
           </div>
 
