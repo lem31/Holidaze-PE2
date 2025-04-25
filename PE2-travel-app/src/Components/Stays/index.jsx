@@ -1,11 +1,18 @@
-import React from 'react';
-import FetchStays from '../../API';
+import React, { useEffect } from 'react';
+import DisplayStays from '../DisplayStays';
+import useMyStore from '../../Store';
+
 
 function Stays() {
+const {stays, fetchStays}= useMyStore();
+
+useEffect(() => {
+    fetchStays();
+}, [fetchStays]);
+   
     return(
         <div>
-<FetchStays/>
-
+<DisplayStays stays={stays}/>
         </div>
     )
 }

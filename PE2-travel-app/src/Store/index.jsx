@@ -1,10 +1,15 @@
 import {create} from 'zustand';
 import {jwtDecode} from 'jwt-decode';
+import fetchStays from '../API/index.jsx';
 
   const useMyStore = create((set) => ({
 stays: [],
 setStays: (stays) => set({ stays }),
-    token: null, 
+fetchStays: () => fetchStays(set),
+selectedStay: null,
+setSelectedStay: (stay)=> set({ selectedStay: stay }),
+
+    token: null,
     isLoggedIn: false,
 
     login: (newToken) => {
@@ -16,7 +21,7 @@ setStays: (stays) => set({ stays }),
       localStorage.removeItem('token');
       set({ token: null, isLoggedIn: false });
     },
- 
+
 checkLoginStatus: () => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -25,7 +30,7 @@ checkLoginStatus: () => {
       const isTokenValid = decoded.exp * 1000 > Date.now();
       if (isTokenValid) {
         set({ token, isLoggedIn: true });
-      
+
   } else {
     set({ token: null, isLoggedIn: false });
   }
@@ -34,7 +39,7 @@ checkLoginStatus: () => {
     console.error('Error decoding token:', error);
     set({ token: null, isLoggedIn: false });
   }
-} 
+}
 },
 }));
 

@@ -21,22 +21,20 @@ export default [
       'react-refresh': reactRefresh,
     },
 
-    'extends': ['eslint: recommended', 'plugin: prettier/recommended'],
     rules: {
-      'prettier/prettier': 'error', 
       ...js.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
-    
+
       ],
       'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1, maxBOF: 0 }],
       'no-trailing-spaces': 'error',
       'space-before-blocks': ['error', 'always'],
       'space-before-function-paren': ['error', 'never'],
-     
+
     },
   },
 ]

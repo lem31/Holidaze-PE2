@@ -8,7 +8,7 @@ import Instagram from '../../assets/Images/Instagram.png';
 function Footer() {
     return(
     <div>
-        <footer>    
+        <footer>
 <p>© 2025 Holidaze  </p>
 <a href="/Register">
 <img src={Register} alt="Register icon" />

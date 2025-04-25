@@ -1,17 +1,22 @@
 import {useNavigate} from 'react-router-dom';
-import React, { useCallback} from 'react';
+import useMyStore from '../../Store';
+import React from 'react';
 
+const ViewAvailabilityButton = ({stay}) => {
+  if (!stay || !stay.id) return null;
 
-function ViewAvailabilityButton({id}){
   const navigate = useNavigate();
-  const handleClick = useCallback(() => {
-    navigate(`/stay/${id}`);
-  }, [navigate, id]);
-  return(
-    <div>
-    <button onClick={handleClick}>View Availability</button>
-    </div>
-  );
+  const setSelectedStay = useMyStore((state) => state.setSelectedStay);
+const handleClick = () => {
+  setSelectedStay(stay);
+  navigate(`/stay/${stay.id}`);
+};
+
+return (
+  <button onClick={handleClick} >
+    View Availability
+  </button>
+)
 }
 
 export default ViewAvailabilityButton;

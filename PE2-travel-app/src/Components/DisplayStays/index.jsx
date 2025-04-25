@@ -1,51 +1,56 @@
-import React from 'react';
-import Location from '../../assets/Images/Location-purple.png';
-import Price from '../../assets/Images/Price-tag-purple.png';
-import ViewAvailabilityButton from '../ViewAvailabilityButton';
+import React, {useEffect} from "react";
+import Location from "../../assets/Images/Location-purple.png";
+import Price from "../../assets/Images/Price-tag-purple.png";
+import ViewAvailabilityButton from "../ViewAvailabilityButton";
+import useMyStore from "../../Store";
 
-const DisplayStays = ({ stay }) => {
-const mediaImages = stay.media && stay.media.length > 0 ? stay.media : [];
+const DisplayStays = () => {
+  const { stays, fetchStays, loading, error } = useMyStore();
+ 
 
-return(
-  <div>
 
-<h1> {stay.name}</h1>
+  useEffect(() => {
+    fetchStays(); 
+  }, [fetchStays]);
 
-   {stay.rating ? ( Array.from({length: 5}).map((_, index)=>(
-        <span key={`${stay.id}-star-${index}`}>
-            {index< Math.floor(stay.rating) ? "⭐" : index < stay.rating ? "⭐" : "☆"} 
-     
-    </span>     ))
-    ) : ( <p>No rating</p>)}    
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
-    
-<p>
-<img src={Location} alt="Location" />{stay.location.city}, {stay.location.country}</p>
+  if (error) {
+    return <p>Error: Unable to fetch stays.</p>;
+  }
 
-<p>{stay.rating > 0 ? stay.rating : 'No rating'}</p>
 
-<p>
-    {stay.rating >= 4 ? 'Excellent Quality': 
-    stay.rating >= 2.5 ? 'Good Quality':
-    stay.rating > 0 ? 'Poor Quality': 'N/A'}
-</p>
-<div>
-    {mediaImages.length > 0 ? (
-        mediaImages.filter((mediaImage) => mediaImage.url).map((mediaImage, index) => (
-            <img  key={`${stay.id}-${index}`} src={mediaImage.url} alt={mediaImage.name || stay.name} loading='lazy' />
-        ))
-    ) : (
-        <p> No images available</p>
-    )}
+  return (
+    <div>
+      {stays.map((stay) => (
+        <div key={stay.id}>
+          <h1>{stay?.name || "Unknown Stay"}</h1>
 
-  <p >{stay.description}</p>
+          <p>
+            <img src={Location} alt="Location icon" />
+            {stay?.location?.city || "Unknown City"}, {stay?.location?.country || "Unknown Country"}
+          </p>
 
-  <p> <img src={Price} alt="Price tag" />{stay.price}NOK/night</p>
-  </div>
+          <div>
+            {stay?.media?.map((media) => (
+              <img key={media.id} src={media.url} alt={stay.name} />
+            ))}
+          </div>
 
-<ViewAvailabilityButton id={stay.id}/>
+          <p>{stay?.description || "No description available"}</p>
 
-  </div>
-  )}
+          <p>
+            <img src={Price} alt="Price tag icon" />
+            {stay?.price || "N/A"} NOK/night
+          </p>
+
+          <ViewAvailabilityButton stay={stay} />
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default DisplayStays;

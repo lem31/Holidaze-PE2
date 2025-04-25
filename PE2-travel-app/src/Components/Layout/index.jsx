@@ -3,27 +3,26 @@ import {Outlet} from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
 
-
 /**
  * Layout component is a wrapper for the application's layout structure.
  * It uses React Router's Outlet component to render child routes dynamically.
- * 
+ *
  * @component
  * @returns {JSX.Element} The layout structure containing child routes.
  */
 
-function Layout(){
+function Layout() {
 return(
   <div>
-   
+
   <Header/>
- 
+
   <Outlet/>
-  
+
   <Footer/>
- 
+
   </div>
- 
+
 );
 }
 

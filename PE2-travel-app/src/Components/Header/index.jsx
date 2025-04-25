@@ -8,22 +8,21 @@ import Hamburger from '../../assets/Images/Hamburger.png';
 import UserDropDown from '../UserDropDown';
 import  useMyStore from '../../Store';
 
-
 /**
- * 
+ *
  * @returns {JSX.Element} The Header component containing the logo, navigation links, and user account options.
- * 
+ *
  * This component renders the header section of the application, including the logo,
  * navigation links for "Stays", "Register", and "Login", as well as a user account icon.
  * The user account icon is accompanied by a dropdown menu for user profile and logout options.
  */
 
-function Header(){
+function Header() {
     const isLoggedIn = useMyStore((state) => state.isLoggedIn);
 
   return(
     <div>
-     
+
    <header>
 <img src={Logo} alt="Logo" className="logo"/>
 <nav>
@@ -60,6 +59,4 @@ function Header(){
 }
 
 export default Header;
-
-
 
