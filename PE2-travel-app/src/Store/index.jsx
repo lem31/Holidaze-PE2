@@ -4,13 +4,16 @@ import fetchStays from '../API/index.jsx';
 
   const useMyStore = create((set) => ({
 stays: [],
-setStays: (stays) => set({ stays }),
-fetchStays: () => fetchStays(set),
 selectedStay: null,
-setSelectedStay: (stay)=> set({ selectedStay: stay }),
+token: null,
+isLoggedIn: false,
 
-    token: null,
-    isLoggedIn: false,
+fetchStays: () => fetchStays(set),
+setStays: (stays) => set({ stays }),
+setSelectedStay: (stay) => {localStorage.setItem('selectedStay', JSON.stringify(stay));
+set({ selectedStay: stay })},
+
+  
 
     login: (newToken) => {
       localStorage.setItem('token', newToken);

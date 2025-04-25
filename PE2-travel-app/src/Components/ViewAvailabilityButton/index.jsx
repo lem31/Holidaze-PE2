@@ -9,7 +9,7 @@ const ViewAvailabilityButton = ({stay}) => {
   const setSelectedStay = useMyStore((state) => state.setSelectedStay);
 const handleClick = () => {
   setSelectedStay(stay);
-  navigate(`/stay/${stay.id}`);
+  navigate(`/Stay/${stay.id}`);
 };
 
 return (
