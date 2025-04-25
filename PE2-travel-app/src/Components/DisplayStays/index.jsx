@@ -45,6 +45,8 @@ return(
   <p> <img src={Price} alt="Price tag" />{stay.price}NOK/night</p>
   </div>
 
+  <button>View Availability</button>
+
   </div>
   )}
 
