@@ -4,8 +4,10 @@ import Stays from '../../assets/Images/Stays.png';
 import Register from '../../assets/Images/Register.png';
 import Login from '../../assets/Images/Login.png';
 import Account from '../../assets/Images/Account.png';
+import Hamburger from '../../assets/Images/Hamburger.png';
 import UserDropDown from '../UserDropDown';
 import  useMyStore from '../../Store';
+
 
 /**
  * 
@@ -25,6 +27,9 @@ function Header(){
    <header>
 <img src={Logo} alt="Logo" className="logo"/>
 <nav>
+  <button>
+<img src={Hamburger} alt="Hamburger Menu Icon" className="hamburger" />
+</button>
 <ul>
 <li>
     <img src={Stays} alt="Stays Icon" /><a href="/Stays">Stays</a></li>
