@@ -1,8 +1,7 @@
-// import ViewStayButton from "../View_Product_Btn";
 import React from 'react';
 import Location from '../../assets/Images/Location-purple.png';
 import Price from '../../assets/Images/Price-tag-purple.png';
-
+import ViewAvailabilityButton from '../ViewAvailabilityButton';
 
 const DisplayStays = ({ stay }) => {
 const mediaImages = stay.media && stay.media.length > 0 ? stay.media : [];
@@ -39,18 +38,14 @@ return(
         <p> No images available</p>
     )}
 
-
   <p >{stay.description}</p>
 
   <p> <img src={Price} alt="Price tag" />{stay.price}NOK/night</p>
   </div>
 
-  <button>View Availability</button>
+<ViewAvailabilityButton id={stay.id}/>
 
   </div>
   )}
-
-
-
 
 export default DisplayStays;

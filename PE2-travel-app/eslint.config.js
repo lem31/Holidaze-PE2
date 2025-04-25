@@ -20,7 +20,10 @@ export default [
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
     },
+
+    'extends': ['eslint: recommended', 'plugin: prettier/recommended'],
     rules: {
+      'prettier/prettier': 'error', 
       ...js.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],

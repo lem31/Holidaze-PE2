@@ -20,8 +20,8 @@ function Router(){
     <Routes >
       <Route path="/" element={<Layout/>}>
        <Route index element={<Stays/>}/>
-      {/* <Route path= "/Venue/:id" element ={<Venue/>}/>
-      <Route path= "/MyProfile" element ={<MyProfile/>}/>
+      <Route path= "/Stay/:id" element ={<Stay/>}/>
+      {/* <Route path= "/MyProfile" element ={<MyProfile/>}/>
       <Route path= "/Login" element ={<Login/>}/>
       <Route path= "/Register" element = {<Register/>}/>   */}
 
