@@ -15,6 +15,8 @@ async function postBooking({selectedStayId, dateFrom, dateTo, guests, }) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'X-Noroff-API-Key': process.env.API_KEY,
             },
             body: JSON.stringify(bookingData),
         });
