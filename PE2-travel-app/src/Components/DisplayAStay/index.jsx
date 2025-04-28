@@ -45,6 +45,8 @@ const DisplayAStay = () => {
     const availableFacilities = Object.entries(selectedStay.meta).filter(([key, value]) => value === true);
     return (
         <div>
+
+<h1>{selectedStay.name}</h1>
            
            <div>
            {selectedStay.media.map((image, index) => (
@@ -56,7 +58,7 @@ const DisplayAStay = () => {
                 />
             ))}
 
-<h1>{selectedStay.name}</h1>
+
             <p>{selectedStay.description}</p>
             <p>Price: {selectedStay.price}</p>
             <p>Location: {selectedStay.location.city}, {selectedStay.location.country}</p>
