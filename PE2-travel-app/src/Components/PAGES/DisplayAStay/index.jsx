@@ -1,11 +1,11 @@
 import React,{useEffect, useState} from "react";
-import useMyStore from '../../Store';
+import useMyStore from '../../../Store';
 import {useParams, useNavigate} from 'react-router-dom';
-import BookingCalendar from "../BookingCalendar";
-import Wifi from '../../assets/Images/wifi.png';
-import Parking from '../../assets/Images/parking.png';
-import Pets from '../../assets/Images/pets.png';
-import Breakfast from '../../assets/Images/breakfast.png';
+import BookingCalendar from "../../BookingCalendar";
+import Wifi from '../../../assets/Images/wifi.png';
+import Parking from '../../../assets/Images/parking.png';
+import Pets from '../../../assets/Images/pets.png';
+import Breakfast from '../../../assets/Images/breakfast.png';
 
 
 const DisplayAStay = () => {

@@ -1,7 +1,7 @@
 import {Routes, Route, BrowserRouter} from "react-router-dom";
 import Layout from '../Layout';
-import Stays from '../Stays';
-import DisplayAStay from "../DisplayAStay";
+import Stays from '../PAGES/Stays';
+import DisplayAStay from "../PAGES/DisplayAStay";
 
 
 /**

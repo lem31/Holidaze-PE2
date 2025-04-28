@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import DisplayStays from '../DisplayStays';
-import useMyStore from '../../Store';
+import DisplayStays from '../../DisplayStays';
+import useMyStore from '../../../Store';
 
 
 function Stays() {
