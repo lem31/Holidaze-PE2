@@ -14,23 +14,19 @@ const DisplayAStay = () => {
 
 
     useEffect(() => {
-        const savedStay = JSON.parse(localStorage.getItem("selectedStay"));
-        let status;
-      
-        if (savedStay?.id === id) {
-          status = "savedStayFound";
-        } else if (stays.length > 0) {
-          const stay = stays.find((stay) => stay.id === id);
-          if (stay) {
-            status = "stayFoundInStore";
-            setSelectedStay(stay);
-            setLoading(false);
-          } else {
-            status = "stayNotFound";
-          }
-        } else {
-          status = "fetchStays";
+
+      const savedStay = (() => {
+        try{
+          return JSON.parse(localStorage.getItem("selectedStay"));
+        } catch (error) {
+          console.error("Error parsing selectedStay from localStorage:", error);
+          return null;
         }
+      })()
+      
+      let status = savedStay ?.id === id ? "savedStayFound" : stays.length> 0 ? 
+      stays.find((stay) => stay.id === id )
+      ? "stayFoundInStore" : "stayNotFound" : "fetchStays";
       
         switch (status) {
           case "savedStayFound":
@@ -39,6 +35,7 @@ const DisplayAStay = () => {
             break;
       
           case "stayFoundInStore":
+            const stay = stays.find((stay) => stay.id === id);
             setSelectedStay(stay);
             setLoading(false);
             break;
@@ -49,7 +46,8 @@ const DisplayAStay = () => {
       
           case "fetchStays":
             fetchStays().then(() => {
-              const stay = useMyStore.getState().stays.find((stay) => stay.id === id);
+              const updatedStays = useMyStore.getState().stays;
+              const stay = updatedStays.find((stay) => stay.id === id);
               if (stay) {
                 setSelectedStay(stay);
                 setLoading(false);
@@ -78,7 +76,7 @@ const DisplayAStay = () => {
             <h1>{selectedStay.name}</h1>
             <p>{selectedStay.description}</p>
             <p>Price: {selectedStay.price}</p>
-            <p>Location: {selectedStay.location.city}</p>
+            <p>Location: {selectedStay.location.city}, {selectedStay.location.country}</p>
            <div>
            {selectedStay.media.map((image, index) => (
                 <img 
@@ -88,6 +86,8 @@ const DisplayAStay = () => {
                     loading="lazy"
                 />
             ))}
+
+
            </div>
         </div>
     );
