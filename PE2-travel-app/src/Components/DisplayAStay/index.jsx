@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from "react";
 import useMyStore from '../../Store';
 import {useParams, useNavigate} from 'react-router-dom';
+import Calendar from "../Calendar";
 
 
 const DisplayAStay = () => {
@@ -86,7 +87,7 @@ const DisplayAStay = () => {
                     loading="lazy"
                 />
             ))}
-
+<Calendar/>
 
            </div>
         </div>
