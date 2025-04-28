@@ -11,16 +11,37 @@ const BookingCalendar = () => {
     const [endDate, setEndDate] = useState(null);
     const [numberOfGuests, setNumberOfGuests] = useState(1);
     const [bookingMessage, setBookingMessage] = useState(null);
+    const [guestWarning, setGuestWarning] = useState(null);
 
     const handleBooking = async () => {
-        if (!startDate || !endDate) {
-            setBookingMessage("Please select both check-in and check-out dates.");
+     
+
+        let validationError = null;
+
+        switch (true) {
+            case !startDate || !endDate:
+                validationError = "Please select both check-in and check-out dates.";
+                break;
+            case !selectedStay:
+                validationError = "No stay selected.";
+                break;
+            case numberOfGuests < 1:
+                validationError = "Please select at least one guest.";
+                break;
+            case selectedStay.maxGuests < numberOfGuests:
+                validationError = `The maximum number of guests for this stay is ${selectedStay.maxGuests}.`;
+                break;
+            default:
+                validationError = null;
+        }
+
+        if (validationError) {
+            setBookingMessage(validationError);
             return;
         }
-        if (!selectedStay) {
-            setBookingMessage("No stay selected.");
-            return;
-        }
+      
+        
+    
         const bookingData = {
             selectedStayId: selectedStay.id,
             dateFrom: startDate.format("YYYY-MM-DD"),
@@ -30,11 +51,21 @@ const BookingCalendar = () => {
         };
 
         try {
-            const response = await postBooking(bookingData);
+             await postBooking(bookingData);
             setBookingMessage("Booking successful!");
         } catch (error) {
             setBookingMessage("Booking failed. Please try again.");
         }
+};
+
+const handleGuestChange = (e) => {
+    const value = Number(e.target.value);
+    setNumberOfGuests(value);
+
+    if (value < 1) {
+        setGuestWarning("Please select at least one guest.");
+    }
+    else setGuestWarning(null);
 };
 
 return (
@@ -56,13 +87,15 @@ return (
 
             <div>
                 <label htmlFor="guests">Number of Guests:</label>
-                <input
-                    type="number"
-                    id="guests"
-                    value={numberOfGuests}
-                    onChange={(e) => setNumberOfGuests(e.target.value)}
-                    min={1}
-                />
+              <select id='guests' value={numberOfGuests} onChange={handleGuestChange}>
+                <option value=''>Select number of guests</option>
+                {Array.from({length: 21}, (_, index) => (
+                    <option key={index} value={index}>
+                        {index}
+                    </option>
+                ))}
+                </select>
+                {guestWarning && <p> {guestWarning}</p>}
             </div>
             <button onClick={handleBooking}>Book Now</button>
             {bookingMessage && <p>{bookingMessage}</p>}
