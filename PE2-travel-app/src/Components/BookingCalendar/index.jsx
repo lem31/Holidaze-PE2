@@ -1,106 +1,118 @@
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import postBooking from "../../API/PostBooking";
 import useMyStore from "../../Store";
 
 const BookingCalendar = () => {
-    const selectedStay = useMyStore((state) => state.selectedStay);
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-    const [numberOfGuests, setNumberOfGuests] = useState(1);
-    const [bookingMessage, setBookingMessage] = useState(null);
-    const [guestWarning, setGuestWarning] = useState(null);
+  const selectedStay = useMyStore((state) => state.selectedStay);
+  const isLoggedIn = useMyStore((state) => state.isLoggedIn);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [numberOfGuests, setNumberOfGuests] = useState(1);
+  const [bookingMessage, setBookingMessage] = useState(null);
+  const [guestWarning, setGuestWarning] = useState(null);
 
-    const handleBooking = async () => {
-     
+  const checkLoginStatus = useMyStore((state) => state.checkLoginStatus);
+    useEffect(() => {
+      checkLoginStatus();
+    }, [checkLoginStatus]);
 
-        let validationError = null;
+  const handleBooking = async () => {
+  
 
-        switch (true) {
-            case !startDate || !endDate:
-                validationError = "Please select both check-in and check-out dates.";
-                break;
-            case !selectedStay:
-                validationError = "No stay selected.";
-                break;
-            case numberOfGuests < 1:
-                validationError = "Please select at least one guest.";
-                break;
-            case selectedStay.maxGuests < numberOfGuests:
-                validationError = `The maximum number of guests for this stay is ${selectedStay.maxGuests}.`;
-                break;
-            default:
-                validationError = null;
-        }
+  
+  
+    let validationError = null;
 
-        if (validationError) {
-            setBookingMessage(validationError);
-            return;
-        }
-      
-        
-    
-        const bookingData = {
-            selectedStayId: selectedStay.id,
-            dateFrom: startDate.format("YYYY-MM-DD"),
-            dateTo: endDate.format("YYYY-MM-DD"),
-            guests: numberOfGuests,
+    switch (true) {
+      case !isLoggedIn:
+        validationError = "Please log in to make a booking.";
+        break;
+      case !startDate || !endDate:
+        validationError = "Please select both check-in and check-out dates.";
+        break;
+      case !selectedStay:
+        validationError = "No stay selected.";
+        break;
+      case numberOfGuests < 1:
+        validationError = "Please select at least one guest.";
+        break;
+      case selectedStay.maxGuests < numberOfGuests:
+        validationError = `The maximum number of guests for this stay is ${selectedStay.maxGuests}.`;
+        break;
 
-        };
+      default:
+        validationError = null;
+    }
 
-        try {
-             await postBooking(bookingData);
-            setBookingMessage("Booking successful!");
-        } catch (error) {
-            setBookingMessage("Booking failed. Please try again.");
-        }
-};
+    if (validationError) {
+      setBookingMessage(validationError);
+      return;
+    }
 
-const handleGuestChange = (e) => {
+    const bookingData = {
+      selectedStayId: selectedStay.id,
+      dateFrom: startDate.format("YYYY-MM-DD"),
+      dateTo: endDate.format("YYYY-MM-DD"),
+      guests: numberOfGuests,
+    };
+
+    try {
+      await postBooking(bookingData);
+      setBookingMessage("Booking successful!");
+    } catch (error) {
+      setBookingMessage("Booking failed. Please try again.");
+    }
+  };
+
+  const handleGuestChange = (e) => {
     const value = Number(e.target.value);
     setNumberOfGuests(value);
 
     if (value < 1) {
-        setGuestWarning("Please select at least one guest.");
-    }
-    else setGuestWarning(null);
-};
+      setGuestWarning("Please select at least one guest.");
+    } else setGuestWarning(null);
+  };
 
-return (
+  return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <div>
+        <h1>Make a Booking</h1>
+        <DatePicker
+          label="Check-in"
+          value={startDate}
+          onChange={(newValue) => setStartDate(newValue)}
+        />
+
+        <DatePicker
+          label="Check-out"
+          value={endDate}
+          onChange={(newValue) => setEndDate(newValue)}
+        />
+
         <div>
-            <h1>Make a Booking</h1>
-            <DatePicker
-                label="Check-in"
-                value={startDate}
-                onChange={(newValue) => setStartDate(newValue)}
-               
-            />
-
-            <DatePicker
-                label="Check-out"
-                value={endDate}
-                onChange={(newValue) => setEndDate(newValue)}
-            />
-
-            <div>
-                <label htmlFor="guests">Number of Guests:</label>
-              <select id='guests' value={numberOfGuests} onChange={handleGuestChange}>
-                <option value=''>Select number of guests</option>
-                {Array.from({length: 21}, (_, index) => (
-                    <option key={index} value={index}>
-                        {index}
-                    </option>
-                ))}
-                </select>
-                {guestWarning && <p> {guestWarning}</p>}
-            </div>
-            <button onClick={handleBooking}>Book Now</button>
-            {bookingMessage && <p>{bookingMessage}</p>}
+          <label htmlFor="guests">Number of Guests:</label>
+          <select
+            id="guests"
+            value={numberOfGuests}
+            onChange={handleGuestChange}
+          >
+            <option value="">Select number of guests</option>
+            {Array.from({ length: 21 }, (_, index) => (
+              <option key={index} value={index}>
+                {index}
+              </option>
+            ))}
+          </select>
+          {guestWarning && <p> {guestWarning}</p>}
         </div>
+        <button onClick={handleBooking}>Book Now</button>
+        {bookingMessage && <p>{bookingMessage}</p>}
+      </div>
     </LocalizationProvider>
-) };
+  );
+};
 
 export default BookingCalendar;
