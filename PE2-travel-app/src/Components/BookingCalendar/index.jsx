@@ -4,6 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { useState, useEffect } from "react";
 import postBooking from "../../API/PostBooking";
 import useMyStore from "../../Store";
+import Guests from "../../assets/Images/guests.png";
 
 const BookingCalendar = () => {
   const selectedStay = useMyStore((state) => state.selectedStay);
@@ -94,6 +95,7 @@ const BookingCalendar = () => {
 
         <div>
           <label htmlFor="guests">Number of Guests:</label>
+          <img src={Guests} alt="Guests" />
           <select
             id="guests"
             value={numberOfGuests}
