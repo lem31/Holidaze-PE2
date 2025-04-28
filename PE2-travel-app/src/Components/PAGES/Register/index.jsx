@@ -1,4 +1,3 @@
-
 import RegisterBox from "../../RegistrationBox";
 
 function Register() {

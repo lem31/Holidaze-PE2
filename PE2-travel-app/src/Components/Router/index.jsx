@@ -3,6 +3,7 @@ import Layout from '../Layout';
 import Stays from '../PAGES/Stays';
 import DisplayAStay from "../PAGES/DisplayAStay";
 import Register from '../PAGES/Register';
+import Login from '../PAGES/Login';
 
 
 /**
@@ -25,8 +26,9 @@ function Router() {
        <Route index element={<Stays/>}/>
       <Route path= "/Stay/:id" element ={<DisplayAStay/>}/>
       <Route path= "/Register" element = {<Register/>}/>  
-      {/* <Route path= "/MyProfile" element ={<MyProfile/>}/>
-      <Route path= "/Login" element ={<Login/>}/> */}
+      <Route path= "/Login" element ={<Login/>}/>
+      {/* <Route path= "/MyProfile" element ={<MyProfile/>}/> */}
+     
      
 
       </Route>

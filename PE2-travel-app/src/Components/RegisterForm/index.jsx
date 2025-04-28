@@ -83,7 +83,7 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
         Add Another Image
       </Button>
       <Button type="submit" variant="contained" color="primary" fullWidth>
-        Submit
+    Register
       </Button>
     </form>
   );
