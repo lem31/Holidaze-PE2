@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
 import RegisterForm from "../RegisterForm";
 import onRegister from "../../API/OnRegister/index.js";
+import RegisterFormValidator from '../RegisterFormValidator';
 
 const RegisterBox = () => {
+ const API_URL = "https://v2.api.noroff.dev/holidaze/auth/register";
+ const [validationErrors, setValidationErrors] = useState({});
   const [activeTab, setActiveTab] = useState(0);
   const [formValues, setFormValues] = useState({
     name: "",
@@ -47,8 +50,13 @@ const RegisterBox = () => {
   };
 
   const handleFormSubmit = async (event) => {
+    if(!event) return;
     event.preventDefault();
-
+    const errors = RegisterFormValidator(formValues);
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
     try {
       const response = await onRegister(API_URL, formValues);
       console.log("Registration successful:", response);
@@ -81,6 +89,7 @@ const RegisterBox = () => {
           onImageChange={handleImageChange}
           onAddImage={handleAddImageInput}
           onSubmit={handleFormSubmit}
+          validationErrors={validationErrors}
         />
       </Box>
     </Box>

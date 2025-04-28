@@ -1,12 +1,12 @@
 import React from "react";
 import { Box, TextField, Button } from "@mui/material";
 
-const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit }) => {
+const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors= {}, }) => {
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        onSubmit();
+        onSubmit(e);
       }}
     >
       <TextField
@@ -19,6 +19,7 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
         required
         sx={{ marginBottom: 2 }}
       />
+        {validationErrors.name && <p>{validationErrors.name}</p>}
       <TextField
         label="Email"
         name="email"
@@ -30,6 +31,7 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
         required
         sx={{ marginBottom: 2 }}
       />
+        {validationErrors.email && <p style={{ color: "red" }}>{validationErrors.email}</p>}
       <TextField
         label="Password"
         name="password"
@@ -41,6 +43,7 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
         required
         sx={{ marginBottom: 2 }}
       />
+        {validationErrors.password && <p>{validationErrors.password}</p>}
       <TextField
         label="Bio"
         name="bio"
@@ -52,6 +55,7 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
         rows={3}
         sx={{ marginBottom: 2 }}
       />
+        {validationErrors.bio && <p>{validationErrors.bio}</p>}
       {formValues.images.map((image, index) => (
         <Box key={index} sx={{ marginBottom: 2 }}>
           <TextField
@@ -63,6 +67,7 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
             fullWidth
             sx={{ marginBottom: 1 }}
           />
+            {validationErrors.url && <p>{validationErrors.url}</p>}
           <TextField
             label="Alt Text"
             name="alt"
@@ -71,6 +76,7 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
             variant="outlined"
             fullWidth
           />
+            {validationErrors.alt && <p>{validationErrors.alt}</p>}
         </Box>
       ))}
       <Button
@@ -85,6 +91,8 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
       <Button type="submit" variant="contained" color="primary" fullWidth>
     Register
       </Button>
+
+    
     </form>
   );
 };
