@@ -14,7 +14,7 @@ const RegisterBox = () => {
     venueManager: true,
   });
 
-  const handleTabChange = (newValue) => {
+  const handleTabChange = ( event, newValue) => {
     setActiveTab(newValue);
 
     setFormValues((prevValues) => ({
