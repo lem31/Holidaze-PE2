@@ -1,12 +1,7 @@
 
 
 async function postBooking({selectedStayId, dateFrom, dateTo, guests, }) {
-    const bookingData ={
-        dateFrom: dateFrom,
-        dateTo: dateTo,
-        guests: guests,
-        venueId: selectedStayId,
-    };
+  
 
     const url = 'https://v2.api.noroff.dev/holidaze/bookings'
 
