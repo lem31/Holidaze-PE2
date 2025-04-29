@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Box,Typography } from "@mui/material";
 import LoginForm from "../LoginForm";
-import onLogin from "../../API/OnRegister/index.js";
+import onLogin from "../../API/OnLogin";
 
 const LoginBox = () => {
   const [formValues, setFormValues] = useState({
