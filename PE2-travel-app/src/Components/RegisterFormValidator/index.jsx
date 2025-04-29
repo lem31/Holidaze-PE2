@@ -1,5 +1,25 @@
 import * as Yup from "yup";
 
+/**
+ * Validator for the RegisterForm component.
+ * It uses Yup to define the validation schema for the form fields.
+ * 
+ * @constant
+ * @type {Yup.ObjectSchema}
+ * @default
+ * 
+ * @property {Yup.StringSchema} name - Name field validation.
+ * @property {Yup.StringSchema} email - Email field validation.
+ * @property {Yup.StringSchema} password - Password field validation.
+ * @property {Yup.StringSchema} bio - Bio field validation.
+ * @property {Yup.ArraySchema} images - Images field validation.
+ * @property {Yup.ObjectSchema} images[].url - URL field validation for each image.
+ * @property {Yup.StringSchema} images[].alt - Alt text field validation for each image.
+ * 
+ * @returns {Yup.ObjectSchema} The validation schema for the RegisterForm.
+ */
+
+
 const RegisterFormValidator = Yup.object().shape({
     name: Yup.string().matches(/^[a-zA-Z0-9_]*$/, "Name must not contain punctuation symbols apart from underscore (_).").required("Name is required"),
     email: Yup.string()

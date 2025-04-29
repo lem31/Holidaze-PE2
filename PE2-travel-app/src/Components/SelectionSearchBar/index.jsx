@@ -3,6 +3,20 @@ import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import useMyStore from '../../Store';
 
+/**
+ * SelectionSearchBar component provides a search bar and country filter
+ * for filtering stays based on user input.
+ * It uses the useMyStore hook to access the store and fetch stays.
+ * @param {Object} props - The component props.
+ * @param {Array} props.stays - The list of stays to filter.
+ * @param {Function} props.onFilter - Callback function to handle filtered stays.
+ * * @returns {JSX.Element} The rendered component.
+ * * @component
+ * * @example
+ * * return (
+ * * *  <SelectionSearchBar stays={stays} onFilter={setFilteredStays} />);
+ */
+
 const SelectionSearchBar = ({ stays, onFilter }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedCountry, setSelectedCountry] = useState('');

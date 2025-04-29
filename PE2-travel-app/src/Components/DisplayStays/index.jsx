@@ -5,6 +5,18 @@ import ViewAvailabilityButton from "../ViewAvailabilityButton";
 import useMyStore from "../../Store";
 import SelectionSearchBar from "../SelectionSearchBar";
 
+/**
+  * DisplayStays component fetches and displays a list of stays.
+  * It uses the useMyStore hook to access the store and fetch stays.
+  * It also includes a search bar for filtering stays based on user input.
+  * @returns {JSX.Element} The rendered component.
+  * @component
+  * @example
+  * return (
+  *  <DisplayStays />
+  * );
+ */
+
 const DisplayStays = () => {
   const { stays, fetchStays, loading, error } = useMyStore();
   const [filteredStays, setFilteredStays] = useState([]);

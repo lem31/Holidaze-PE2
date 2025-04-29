@@ -1,6 +1,27 @@
 import React from "react";
 import { Box, TextField, Button } from "@mui/material";
 
+/**
+ * RegisterForm component renders a registration form with fields for name, email, password, bio, and images.
+ * It handles input changes, image changes, adding new images, and form submission.
+ * @param {Object} param0 - The component props.
+ * @param {Object} param0.formValues - The form values for the registration form.
+ * @param {Function} param0.onInputChange - Function to handle input changes.
+ * @param {Function} param0.onImageChange - Function to handle image input changes.
+ * @param {Function} param0.onAddImage - Function to handle adding new images.
+ * @param {Function} param0.onSubmit - Function to handle form submission.
+ * @param {Object} param0.validationErrors - Object containing validation errors for the form fields.
+ * @param {string} param0.validationErrors.name - Validation error for the name field.
+ * @param {string} param0.validationErrors.email - Validation error for the email field.
+ * @param {string} param0.validationErrors.password - Validation error for the password field.
+ * @param {string} param0.validationErrors.bio - Validation error for the bio field.
+ * @param {string} param0.validationErrors.url - Validation error for the image URL field.
+ * @param {string} param0.validationErrors.alt - Validation error for the image alt text field.
+ * @returns {JSX.Element} The rendered component.
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ */
+
 const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors= {}, }) => {
   return (
     <form

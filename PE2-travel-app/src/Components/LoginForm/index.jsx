@@ -1,6 +1,21 @@
 import React from "react";
 import { Box, TextField, Button } from "@mui/material";
 
+/**
+ * LoginForm component renders a login form with email and password fields.
+ * It handles input changes and form submission.
+ * @param {*} param0 
+ * @param {Object} param0.formValues - The form values for the login form.
+ * @param {Function} param0.onInputChange - Function to handle input changes.
+ * @param {Function} param0.onSubmit - Function to handle form submission.
+ * @returns {JSX.Element} The rendered component.
+ * @component
+ * @example
+ * return (
+ *  <LoginForm formValues={formValues} onInputChange={handleInputChange} onSubmit={handleFormSubmit} />
+ * );
+ */
+
 const LoginForm = ({ formValues, onInputChange, onSubmit }) => {
   return (
     <form

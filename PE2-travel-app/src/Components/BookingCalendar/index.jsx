@@ -6,6 +6,22 @@ import postBooking from "../../API/PostBooking";
 import useMyStore from "../../Store";
 import Guests from "../../assets/Images/guests.png";
 
+/**
+ * BookingCalendar component allows users to make a booking for a selected stay.
+ * It includes date pickers for check-in and check-out dates,
+ * a dropdown for selecting the number of guests, and a button to confirm the booking.
+ * It uses the useMyStore hook to access the store and manage booking state.
+ * The component also handles validation for user input and displays appropriate messages.
+ * It also checks the user's login status before allowing a booking.
+ * @returns {JSX.Element} The rendered component.
+ * @component
+ * @example
+ * 
+ * return (
+ * <BookingCalendar />
+ * );
+ */
+
 const BookingCalendar = () => {
   const selectedStay = useMyStore((state) => state.selectedStay);
   const isLoggedIn = useMyStore((state) => state.isLoggedIn);

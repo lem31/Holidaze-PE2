@@ -7,6 +7,21 @@ import Parking from '../../../assets/Images/parking.png';
 import Pets from '../../../assets/Images/pets.png';
 import Breakfast from '../../../assets/Images/breakfast.png';
 
+/**
+ * DisplayAStay component fetches and displays details of a selected stay.
+ * It uses the useMyStore hook to access the store and fetch stay data.
+ * It also includes a booking calendar for users to make reservations.
+ * The component handles loading and error states,
+ * and displays the stay's name, images, description, price, location,
+ * and available facilities.
+ * @param {Object} props - The component props.
+ * @returns {JSX.Element} The rendered component.
+ * @component
+ * @example
+ * return (
+ * <DisplayAStay />
+ * );
+ */
 
 const DisplayAStay = () => {
     const {id} = useParams();

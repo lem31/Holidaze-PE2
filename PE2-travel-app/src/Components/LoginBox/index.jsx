@@ -4,6 +4,22 @@ import LoginForm from "../LoginForm";
 import onLogin from "../../API/OnLogin";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * LoginBox component handles user login functionality.
+ * It includes a form for entering email and password,
+ * and handles form submission to authenticate the user.
+ * It uses the onLogin function to send a login request to the API.
+ * The component also uses the useNavigate hook from react-router-dom
+ * to navigate to different routes after successful login.
+ * @param {Object} props - The component props.
+ * @returns {JSX.Element} The rendered component.
+ * @component
+ * @example
+ * return (
+ * <LoginBox />
+ * );
+ */
+
 const LoginBox = () => {
   const API_URL = "https://v2.api.noroff.dev/auth/login";
   const navigate = useNavigate();

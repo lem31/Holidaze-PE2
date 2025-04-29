@@ -4,6 +4,20 @@ import RegisterForm from "../RegisterForm";
 import onRegister from "../../API/OnRegister/index.js";
 import RegisterFormValidator from '../RegisterFormValidator';
 
+/**
+ * RegisterBox component handles user registration functionality.
+ * It includes a form for entering user details such as name, email, password, bio, and images.
+ * It also allows the user to select between registering as a Venue Manager or a Customer.
+ * The component uses the onRegister function to send a registration request to the API.
+ * It also handles validation of the form inputs using the RegisterFormValidator.
+ * @param {Object} props - The component props.
+ * @returns {JSX.Element} The rendered component.
+ * @component
+ * @example
+ * return (
+ * <RegisterBox />
+ */
+
 const RegisterBox = () => {
  const API_URL = "https://v2.api.noroff.dev/auth/register";
  const [validationErrors, setValidationErrors] = useState({});
