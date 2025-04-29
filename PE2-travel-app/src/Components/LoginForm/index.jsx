@@ -6,7 +6,7 @@ const LoginForm = ({ formValues, onInputChange, onSubmit }) => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        onSubmit();
+        onSubmit(e);
       }}
     >
 
@@ -20,6 +20,7 @@ const LoginForm = ({ formValues, onInputChange, onSubmit }) => {
         variant="outlined"
         fullWidth
         required
+        autoComplete='email'
         sx={{ marginBottom: 2 }}
       />
       <TextField
