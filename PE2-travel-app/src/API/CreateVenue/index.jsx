@@ -1,35 +1,6 @@
 async function createVenue(){
 
-    const venueData ={
-      name: venueName,
-        description: description,
-        media: [
-            {
-                url: imageUrl,
-                type: 'image',
-                alt: url,
-                type: 'text',
-            },
-        ],
-        price: price,
-        maxGuests: maxGuests,
-        rating: rating,
-        meta: {
-            wifi: wifi,
-            parking: parking,
-            breakfast: breakfast,
-            pets: pets,},
-        location: {
-            address: address,
-            city: city,
-            zip: zip,
-            country: country,
-            continent: continent,
-            lat: lat,
-            lng: lng,
-        },
-
-    };
+    
 
     const url = 'https://v2.api.noroff.dev/holidaze/venues'
 
