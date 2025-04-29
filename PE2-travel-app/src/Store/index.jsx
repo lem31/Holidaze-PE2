@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { jwtDecode } from "jwt-decode";
 import fetchStays from "../API/index.jsx";
 import fetchUserProfile from "../API/FetchUserProfile/index.js";
+import fetchVMVenues from "../API/FetchVMVenues/index.js";
 
 const useMyStore = create((set, get) => ({
   stays: [],
@@ -114,6 +115,21 @@ const useMyStore = create((set, get) => ({
       throw new Error("Failed to fetch user profile");
     }
   },
+fetchVMVenues: async () => {
+  set({ loading: true, error: false });
+  
+  try{
+    const venues = await fetchVMVenues();
+    set({vmVenues: venues, loading: false});
+  } catch(error){
+    set({error: error.message, loading: false});
+    console.error("Error fetching venues:", error);
+  }
+  
+},
+
+
+
 }));
 
 export default useMyStore;
