@@ -52,16 +52,18 @@ const RegisterBox = () => {
   const handleFormSubmit = async (event) => {
     if(!event) return;
     event.preventDefault();
-    const errors = RegisterFormValidator(formValues);
-    if (Object.keys(errors).length > 0) {
-      setValidationErrors(errors);
-      return;
-    }
-    try {
+    try{
+   await RegisterFormValidator.validate(formValues, {abortEarly: false});
+  setValidationErrors({});
+  
       const response = await onRegister(API_URL, formValues);
       console.log("Registration successful:", response);
-    } catch (error) {
-      throw error;
+    } catch (validationError) {
+      const errors = {};
+      validationError.inner.forEach((err)=>{
+        errors[err.path]= err.message;
+      });
+      setValidationErrors(errors);
     }
   };
 
