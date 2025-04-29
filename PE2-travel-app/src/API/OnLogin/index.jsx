@@ -22,13 +22,14 @@ async function onLogin(endpoint, userData, navigate) {
     const data = await response.json();
 
     const accessToken = data?.data?.accessToken;
+    const userName = data.data.name;
 
     if (accessToken) {
       const decodedToken = jwtDecode(accessToken);
       console.log('Token decoded:", decodedToken);');
-      navigate("/");
+      navigate("/MyProfile");
 
-      login(accessToken);
+      login(accessToken, userName);
 
       console.log("Login successful and token stored:", decodedToken);
     } else {

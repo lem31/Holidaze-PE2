@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { jwtDecode } from "jwt-decode";
 import fetchStays from "../API/index.jsx";
+import fetchUserProfile from "../API/FetchUserProfile/index.js";
 
 const useMyStore = create((set, get) => ({
   stays: [],
@@ -22,6 +23,9 @@ const useMyStore = create((set, get) => ({
       });
     }
   },
+  
+
+
 
   fetchAndSetSelectedStay: async (stayId) => {
     const { stays, fetchStays } = get();
@@ -59,8 +63,11 @@ const useMyStore = create((set, get) => ({
   // setSelectedStay: (stay) => {localStorage.setItem('selectedStay', JSON.stringify(stay));
   // set({ selectedStay: stay })},
 
-  login: (newToken) => {
+  login: (newToken, userName) => {
     localStorage.setItem("token", newToken);
+    console.log("Token stored in local storage:", newToken);
+    localStorage.setItem("userName", userName);
+    console.log("User name stored in local storage:", userName);
     set({ token: newToken, isLoggedIn: true });
   },
 
@@ -84,6 +91,27 @@ const useMyStore = create((set, get) => ({
         console.error("Error decoding token:", error);
         set({ token: null, isLoggedIn: false });
       }
+    }
+  },
+
+  fetchUserProfile: async () =>{
+    try{
+      const token = get().token;
+      if(!token){
+        throw new Error("User not authenticated");
+      }
+     const userName= localStorage.getItem("userName");
+     if(!userName){
+        throw new Error("User name not found in local storage");
+      }
+
+      const profileData= await fetchUserProfile(userName, token);
+      console.log("Profile data fetched:", profileData);
+      set({userProfile:profileData});
+      return profileData;
+    } catch(error){
+      set({ userProfile: null});
+      throw new Error("Failed to fetch user profile");
     }
   },
 }));

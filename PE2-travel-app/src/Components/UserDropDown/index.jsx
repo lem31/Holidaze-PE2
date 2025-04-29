@@ -29,7 +29,7 @@ function UserDropDown() {
 <p>Username</p>
 
 <img src={Profile} alt="Profile Image" />
-<a href="/Profile">Profile</a>
+<a href="/MyProfile">Profile</a>
 <a href='' onClick= {handleLogout}>
 <img src={Logout} alt="Logout Icon" />Logout</a>
 
