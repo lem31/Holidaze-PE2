@@ -38,8 +38,6 @@ getProfile();}, [fetchUserProfile]);
                     {selectedView === 'Venues' && <div>Venues Component Placeholder</div>}
                     {selectedView === 'Bookings' && <div>Bookings Component Placeholder</div>}
                     {selectedView === 'Edit Profile' && <div>Edit Profile Component Placeholder</div>}
-                    {selectedView === 'Create Venue' && <div>Create Venue Component Placeholder</div>}
-               
                 </div>
             ) : (
                 <p>Loading profile...</p>

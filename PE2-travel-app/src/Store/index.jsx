@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { jwtDecode } from "jwt-decode";
 import fetchStays from "../API/index.jsx";
 import fetchUserProfile from "../API/FetchUserProfile/index.js";
-import fetchVMVenues from "../API/FetchVMVenues/index.js";
+import fetchVMVenues from "../API/FetchVMVenues";
 
 const useMyStore = create((set, get) => ({
   stays: [],
