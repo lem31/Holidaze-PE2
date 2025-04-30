@@ -21,7 +21,6 @@ const ProfileVenueManager = () => {
         <button onClick={() => setSelectedView("Edit Profile")}>Edit Profile</button>
         <button onClick={() => setSelectedView("Venues")}>Venues</button>
         <button onClick={() => setSelectedView("Bookings")}>Bookings</button>
-        <button onClick={() => setSelectedView("Create Venue")}>Create Venue</button>
       </div>
 
       <div>

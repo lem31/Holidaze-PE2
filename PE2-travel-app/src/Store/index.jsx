@@ -20,12 +20,19 @@ const useMyStore = create(
 
    
       login: (newToken, userName) => {
+        if(newToken){
+          localStorage.setItem("token", newToken);
+        }
+        if(userName){
+          localStorage.setItem("userName", userName);
+        }
         set({ token: newToken, userName, isLoggedIn: true });
         console.log("Login state persisted successfully.");
       },
 
       setUserProfile: (profileData) => {
         set({ userProfile: profileData });
+        console.log('userProfile', profileData);
         console.log("User profile persisted successfully.");
       },
 

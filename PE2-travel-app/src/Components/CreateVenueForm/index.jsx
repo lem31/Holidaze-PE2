@@ -2,6 +2,8 @@ import Pets from '../../assets/Images/Pets.png';
 import Breakfast from '../../assets/Images/Breakfast.png';
 import Parking from '../../assets/Images/Parking.png';
 import Wifi from '../../assets/Images/Wifi.png';
+import React from 'react';
+import { Box, TextField, Button } from "@mui/material";
 
 
 
@@ -11,6 +13,8 @@ const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage,
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit(e);
+          console.log('Form submitted with values:', formValues);
+        
         }}
       >
         <TextField
@@ -73,12 +77,10 @@ const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage,
         </Button>
 
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
-      Register
-        </Button>
    <TextField
           label="price"
           name="price"
+            type='number'
           value={formValues.price}
             onChange={(e) => onInputChange(e.target.name, e.target.value)}
             variant="outlined"
@@ -90,6 +92,7 @@ const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage,
           <TextField
           label="maxGuests"
           name="maxGuests"
+          type='number'
           value={formValues.maxGuests}
             onChange={(e) => onInputChange(e.target.name, e.target.value)}
             variant="outlined"
@@ -224,6 +227,10 @@ const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage,
         />
         {validationErrors['location.lng'] && <p>{validationErrors['location.lng']}</p>}
     </Box>
+
+    <Button type="submit" variant="contained" color="primary" fullWidth>
+     Create Venue
+        </Button>
       
       </form>
     );

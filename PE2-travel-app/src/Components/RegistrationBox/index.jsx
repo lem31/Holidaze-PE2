@@ -35,10 +35,17 @@ const RegisterBox = () => {
     setActiveTab(newValue);
 
     setFormValues((prevValues) => ({
+   
       ...prevValues,
       venueManager: newValue === 0,
     }));
+
+    console.log("Tab changed to:", newValue);
+
   };
+
+
+ 
 
   const handleInputChange = (name, value) => {
     setFormValues((prevValues) => ({
@@ -71,6 +78,7 @@ const RegisterBox = () => {
   setValidationErrors({});
   
       const response = await onRegister(API_URL, formValues);
+      console.log('Form submitted with values:', formValues);
       console.log("Registration successful:", response);
     } catch (validationError) {
       const errors = {};
