@@ -23,6 +23,11 @@ const useMyStore = create(
         console.log("Login state persisted successfully.");
       },
 
+      setUserProfile: (profileData) => {
+        set({ userProfile: profileData });
+        console.log("User profile persisted successfully.");
+      },
+
 
       logout: () => {
         set({ token: null, userName: null, isLoggedIn: false });
@@ -31,33 +36,21 @@ const useMyStore = create(
 
 
       checkLoginStatus: () => {
-    const token = localStorage.getItem("token");
-    const userName = localStorage.getItem("userName");
+        const token = get().token;
+        const userName = get().userName;
 
         console.log("Restored token:", token);
-  console.log("Restored username:", userName);
+        console.log("Restored username:", userName);
 
         if (token && userName) {
-          try {
-            const decoded = jwtDecode(token);
-            const isTokenValid = decoded.exp * 1000 > Date.now();
-
-            if (isTokenValid) {
-              set({ isLoggedIn: true, loginChecked: true });
-              console.log("Login state restored successfully.");
-            } else {
-              console.log("Token expired but retained in storage.");
-              set({ isLoggedIn: true, loginChecked: true }); 
-            }
-          } catch (error) {
-            console.error("Error decoding token:", error);
-            set({ token: null, userName: null, isLoggedIn: false, loginChecked: true });
-          }
+          set({ isLoggedIn: true, loginChecked: true });
+          console.log("Login state restored successfully.");
         } else {
-          console.log("No login state found.");
           set({ isLoggedIn: false, loginChecked: true });
+          console.log("No login state found.");
         }
       },
+    
 
 
       fetchUserProfile: async () => {
@@ -152,8 +145,12 @@ const useMyStore = create(
       },
     }),
     {
-      name: "auth-storage", 
-      storage: localStorage, 
+      name: "auth-storage",
+      storage: {
+        getItem: (key) => JSON.parse(localStorage.getItem(key)), 
+        setItem: (key, value) => localStorage.setItem(key, JSON.stringify(value)), 
+        removeItem: (key) => localStorage.removeItem(key),
+      },
     }
   )
 );

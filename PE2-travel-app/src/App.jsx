@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Router from './Components/Router'
-import useMyStore from '../src/Store';
+import useMyStore from './Store'
 
 /**The App component is the main entry point of the application.
  * It initializes the application.
@@ -13,30 +13,19 @@ import useMyStore from '../src/Store';
  */
 
 function App() {
-
-const {checkLoginStatus, loginChecked} = useMyStore()
-const rehydrated = useMyStore.persist.hasHydrated();
+  const { checkLoginStatus, loginChecked } = useMyStore();
+  const rehydrated = useMyStore.persist.hasHydrated();
 
   useEffect(() => {
-
     if (rehydrated) {
-checkLoginStatus();
-  }}, [rehydrated, checkLoginStatus]);
-
-if (!rehydrated) {
-    return <div>Loading...</div>;
-  }
-
- 
-   
-
-  return (
-   
-    
-  <Router/>
+      console.log("Rehydration complete. Checking login status...");
+      checkLoginStatus(); 
+    }
+  }, [rehydrated, checkLoginStatus]);
 
 
-  );
+
+  return <Router />;
 }
 
 export default App;

@@ -31,16 +31,8 @@ const BookingCalendar = () => {
   const [bookingMessage, setBookingMessage] = useState(null);
   const [guestWarning, setGuestWarning] = useState(null);
 
-  const checkLoginStatus = useMyStore((state) => state.checkLoginStatus);
-    useEffect(() => {
-      checkLoginStatus();
-    }, [checkLoginStatus]);
-
   const handleBooking = async () => {
-  
 
-  
-  
     let validationError = null;
 
     switch (true) {
