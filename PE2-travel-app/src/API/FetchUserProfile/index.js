@@ -4,6 +4,8 @@ async function fetchUserProfile(userName, token) {
  }
 
  try{
+    console.log('Fetching user profile for:', userName);
+    console.log('Using token:', token);
     const response = await fetch(`https://v2.api.noroff.dev/holidaze/profiles/${userName}`, {
         method: 'GET',
         headers: {

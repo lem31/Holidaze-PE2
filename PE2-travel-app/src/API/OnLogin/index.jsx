@@ -24,7 +24,7 @@ async function onLogin(endpoint, userData, navigate) {
     const accessToken = data?.data?.accessToken;
     const userName = data.data.name;
 
-    if (accessToken) {
+    if (accessToken && userName) {
       const decodedToken = jwtDecode(accessToken);
       console.log('Token decoded:", decodedToken);');
       login(accessToken, userName);

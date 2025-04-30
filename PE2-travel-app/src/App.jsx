@@ -14,18 +14,28 @@ import useMyStore from '../src/Store';
 
 function App() {
 
-  const checkLoginStatus = useMyStore((state)=> state.checkLoginStatus);
+const {checkLoginStatus, loginChecked} = useMyStore()
+const rehydrated = useMyStore.persist.hasHydrated();
 
   useEffect(() => {
-    checkLoginStatus();
-  }, [checkLoginStatus]);
+
+    if (rehydrated) {
+checkLoginStatus();
+  }}, [rehydrated, checkLoginStatus]);
+
+if (!rehydrated) {
+    return <div>Loading...</div>;
+  }
+
+ 
+   
 
   return (
-    <>
-
+   
+    
   <Router/>
 
-     </>
+
   );
 }
 
