@@ -2,14 +2,14 @@ async function fetchUserProfile(userName, token) {
  if(!token){
     throw new Error('User not authenticated');
  }
- const apiKey = import.meta.env.API_KEY;
+
  try{
     console.log('Fetching user profile for:', userName);
     const response = await fetch(`https://v2.api.noroff.dev/holidaze/profiles/${userName}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
-            'X-Noroff-API-Key': apiKey,
+            'X-Noroff-API-Key': 'f920c7be-b352-412a-bfe3-67cf36aebe41',
         },
     });
 

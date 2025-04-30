@@ -31,7 +31,7 @@ const useMyStore = create(
 
 
       logout: () => {
-        set({ token: null, userName: null, isLoggedIn: false });
+        set({ token: null, userName: null, userProfile: null, isLoggedIn: false });
         console.log("User logged out successfully.");
       },
 

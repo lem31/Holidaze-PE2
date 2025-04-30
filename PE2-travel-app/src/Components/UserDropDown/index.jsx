@@ -2,6 +2,7 @@ import React from 'react';
 import Profile from '../../assets/Images/Profile.png';
 import Logout from '../../assets/Images/Logout.png';
 import useMyStore from '../../Store';
+import {useNavigate} from 'react-router-dom';
 
 /**
  * UserDropDown component renders a dropdown menu for user profile and logout options.
@@ -19,6 +20,7 @@ function UserDropDown() {
 
     const handleLogout = () => {
         logout();
+        navigate('/');
     };
 
     return(
