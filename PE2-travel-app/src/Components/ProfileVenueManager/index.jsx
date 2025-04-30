@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useMyStore from "../../Store/index";
+import Venues from "../Venues";
 
 const ProfileVenueManager = () => {
   const { userProfile } = useMyStore(); 
@@ -21,6 +22,12 @@ const ProfileVenueManager = () => {
         <button onClick={() => setSelectedView("Venues")}>Venues</button>
         <button onClick={() => setSelectedView("Bookings")}>Bookings</button>
         <button onClick={() => setSelectedView("Create Venue")}>Create Venue</button>
+      </div>
+
+      <div>
+       
+        {selectedView === "Venues" && <Venues />}
+       
       </div>
     </div>
   );

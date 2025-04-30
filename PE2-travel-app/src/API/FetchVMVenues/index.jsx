@@ -1,18 +1,19 @@
-async function fetchVMVenues(){
+async function fetchVMVenues(userName, token) {
        
-       const userName = localStorage.getItem('userName');
+     
+       const apiKey = import.meta.env.API_KEY;
         try{
            const response = await fetch(`https://v2.api.noroff.dev/holidaze/${userName}/venues`, {
                method: 'GET',
                headers: {
                    'Authorization': `Bearer ${token}`,
-                   'X-Noroff-API-Key': process.env.API_KEY,
+                   'X-Noroff-API-Key': apiKey,
                },
            });
        
            if(!response.ok){
                console.error('Failed API Response:', response);
-               console.error('API Key Used:', process.env.API_KEY);
+          
                throw new Error('Failed to fetch user venues');
            }
        

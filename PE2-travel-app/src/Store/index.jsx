@@ -16,6 +16,7 @@ const useMyStore = create(
       userProfile: null,
       loadingProfile: false,
       loginChecked: false,
+      vmVenues: [],
 
    
       login: (newToken, userName) => {
@@ -133,10 +134,17 @@ const useMyStore = create(
 
 
       fetchVMVenues: async () => {
+        const token = get().token;
+        const userName = get().userName;
+        if (!token || !userName) {
+          console.error("Token or username not found in local storage.");
+          set({error: "Token or username not found in local storage.", loading: false});
+          return;
+        }
         set({ loading: true, error: false });
 
         try {
-          const venues = await fetchVMVenues();
+          const venues = await fetchVMVenues(userName, token);
           set({ vmVenues: venues, loading: false });
         } catch (error) {
           set({ error: error.message, loading: false });
