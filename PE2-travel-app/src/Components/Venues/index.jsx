@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
 import CreateVenueFormBox from "../CreateVenueFormBox";
+import Wifi from '../../assets/Images/wifi.png';
+import Parking from '../../assets/Images/parking.png';
+import Pets from '../../assets/Images/pets.png';
+import Breakfast from '../../assets/Images/breakfast.png';
 
 
 function Venues({vmVenues}) {
 
+const facilityIcons = {
+  wifi: Wifi,
+  parking: Parking,
+  pets: Pets,
+  breakfast: Breakfast,
+};
 
 const [isFormVisible, setIsFormVisible] = useState(false);
-const availableFacilities = vmVenues?.meta ? Object.entries(vmVenues.meta).filter(([key, value]) => value === true) : [];
+
 
 const toggleForm = ()=>{
     setIsFormVisible((prevVisible)=> !prevVisible);
@@ -81,18 +91,20 @@ const toggleForm = ()=>{
             ))}
 
       <h2>Available Facilities</h2>
-            {availableFacilities.length > 0 ? (
-                  <ul>
-            {availableFacilities.map(([facility])=>(
-                <li key={facility}>
-                    <img src={facilityIcons[facility]} alt={`${facility} icon`} />
-                    {facility.charAt(0).toUpperCase() + facility.slice(1)}
-                </li>
+      {venue.meta ? (
+        <ul>
+          {Object.entries(venue.meta)
+            .filter(([key, value]) => value === true)
+            .map(([facility]) => (
+              <li key={facility}>
+                <img src={facilityIcons[facility]} alt={`${facility} icon`} />
+                {facility.charAt(0).toUpperCase() + facility.slice(1)}
+              </li>
             ))}
-           </ul>
-           ) : (
-             <p>No Facilities Available</p>
-           )}
+        </ul>
+      ) : (
+        <p>No Facilities Available</p>
+      )}
     </div>
   ))
 ) : (

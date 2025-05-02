@@ -49,7 +49,7 @@ description: "",
     };
   } else {
   return {
-    ...prevValues,[name]: name === "price" || name === "maxGuests" || name === "rating" ? parseInt(value, 10) : value || "",
+    ...prevValues,[name]: name === "price" || name === "maxGuests" || name === "rating" ? (value ? parseInt(value, 10) : "") : value,
   }}
     })
 

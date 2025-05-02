@@ -23,6 +23,7 @@ if (!token) {
         }
         const data = await response.json();
         console.log('Venue created successfully:', data);
+ 
         return data;
     } catch (error) {
        
