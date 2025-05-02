@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { jwtDecode } from "jwt-decode";
 import { persist } from "zustand/middleware";
 import fetchStays from "../API/index.jsx";
 import fetchUserProfile from "../API/FetchUserProfile/index.js";
