@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useMyStore from "../../Store/index";
 import Venues from "../Venues";
 
+
 const ProfileVenueManager = () => {
-  const { userProfile } = useMyStore(); 
+  const { userProfile, fetchVMVenues, vmVenues } = useMyStore(); 
   const [selectedView, setSelectedView] = useState("");
+
+  useEffect(() => {
+    console.log("Fetching venues...");
+    fetchVMVenues();
+  }, [fetchVMVenues]);
 
   if (!userProfile) {
     return <p>No profile data available, please log in again.</p>;
@@ -19,14 +25,19 @@ const ProfileVenueManager = () => {
       <img src={userProfile.data.avatar.url} alt="avatar" />
       <div>
         <button onClick={() => setSelectedView("Edit Profile")}>Edit Profile</button>
-        <button onClick={() => setSelectedView("Venues")}>Venues</button>
+        <button
+          onClick={() => {
+            setSelectedView("Venues");
+            fetchVMVenues(); 
+          }}
+        >
+          Venues
+        </button>
         <button onClick={() => setSelectedView("Bookings")}>Bookings</button>
       </div>
 
       <div>
-       
-        {selectedView === "Venues" && <Venues />}
-       
+        {selectedView === "Venues" && <Venues vmVenues={vmVenues} />}
       </div>
     </div>
   );

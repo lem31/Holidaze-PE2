@@ -1,37 +1,20 @@
 import React, { useEffect, useState } from "react";
-import useMyStore from '../../Store';
 import CreateVenueFormBox from "../CreateVenueFormBox";
 
 
-function Venues() {
-const {vmVenues, fetchVMVenues, loading, error} = useMyStore();
+function Venues({vmVenues}) {
+
+
 const [isFormVisible, setIsFormVisible] = useState(false);
 
 const toggleForm = ()=>{
     setIsFormVisible((prevVisible)=> !prevVisible);
 };
-useEffect(() => {
-    async function getVenues(){
-try{
-    await fetchVMVenues( );
-    console.log('Fetched venues:', vmVenues);
-} catch (error) {
-    console.error('Error fetching venues:', error);
-}
-    }
-    getVenues(); }, [fetchVMVenues]);
 
-    console.log('Venues:', vmVenues);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
 
   return (
     <div>
+   
       <h1>Venues</h1>
       <button onClick={toggleForm}>Create Venue</button>
       {isFormVisible && (

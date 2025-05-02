@@ -18,12 +18,11 @@ const useMyStore = create(
       loginChecked: false,
       vmVenues: [],
 
-   
       login: (newToken, userName) => {
-        if(newToken){
+        if (newToken) {
           localStorage.setItem("token", newToken);
         }
-        if(userName){
+        if (userName) {
           localStorage.setItem("userName", userName);
         }
         set({ token: newToken, userName, isLoggedIn: true });
@@ -32,16 +31,19 @@ const useMyStore = create(
 
       setUserProfile: (profileData) => {
         set({ userProfile: profileData });
-        console.log('userProfile', profileData);
+        console.log("userProfile", profileData);
         console.log("User profile persisted successfully.");
       },
 
-
       logout: () => {
-        set({ token: null, userName: null, userProfile: null, isLoggedIn: false });
+        set({
+          token: null,
+          userName: null,
+          userProfile: null,
+          isLoggedIn: false,
+        });
         console.log("User logged out successfully.");
       },
-
 
       checkLoginStatus: () => {
         const token = get().token;
@@ -58,8 +60,6 @@ const useMyStore = create(
           console.log("No login state found.");
         }
       },
-    
-
 
       fetchUserProfile: async () => {
         try {
@@ -89,7 +89,6 @@ const useMyStore = create(
         }
       },
 
-
       fetchStays: async () => {
         try {
           set({ loading: true, error: false });
@@ -104,7 +103,6 @@ const useMyStore = create(
           });
         }
       },
-
 
       fetchAndSetSelectedStay: async (stayId) => {
         const { stays, fetchStays } = get();
@@ -132,38 +130,55 @@ const useMyStore = create(
           }
         }
       },
-      
 
       setSelectedStay: (stay) => {
         localStorage.setItem("selectedStay", JSON.stringify(stay));
         set({ selectedStay: stay });
       },
 
-
       fetchVMVenues: async () => {
-        const token = get().token;
-        const userName = get().userName;
-        if (!token || !userName) {
-          console.error("Token or username not found in local storage.");
-          set({error: "Token or username not found in local storage.", loading: false});
-          return;
-        }
-        set({ loading: true, error: false });
+    console.log("fetchVMVenues() is being called");
+    const token = get().token;
+    const userName = get().userName;
 
-        try {
-          const venues = await fetchVMVenues(userName, token);
-          set({ vmVenues: venues, loading: false });
-        } catch (error) {
-          set({ error: error.message, loading: false });
-          console.error("Error fetching venues:", error);
-        }
+    if (!token || !userName) {
+      console.error("Token or username not found in local storage.");
+      set({
+        vmVenues: null,
+        loading: false,
+        error: "Token or username not found in local storage.",
+      });
+      return;
+    }
+
+    try {
+      set({ loading: true });
+      const venues = await fetchVMVenues(userName, token);
+      console.log("venues:", venues);
+      if (venues) {
+        set({ vmVenues: venues.data, loading: false });
+        return venues;
+      } else {
+        throw new Error("Failed to fetch venues");
+      }
+    } catch (error) {
+      console.error("Error fetching venues:", error);
+      set({
+        vmVenues: null,
+        loading: false,
+        error: error.message || "Failed to fetch venues",
+      });
+      throw error;
+    }
       },
     }),
+
     {
       name: "auth-storage",
       storage: {
-        getItem: (key) => JSON.parse(localStorage.getItem(key)), 
-        setItem: (key, value) => localStorage.setItem(key, JSON.stringify(value)), 
+        getItem: (key) => JSON.parse(localStorage.getItem(key)),
+        setItem: (key, value) =>
+          localStorage.setItem(key, JSON.stringify(value)),
         removeItem: (key) => localStorage.removeItem(key),
       },
     }
