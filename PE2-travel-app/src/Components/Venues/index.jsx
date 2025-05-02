@@ -6,6 +6,7 @@ function Venues({vmVenues}) {
 
 
 const [isFormVisible, setIsFormVisible] = useState(false);
+const availableFacilities = vmVenues?.meta ? Object.entries(vmVenues.meta).filter(([key, value]) => value === true) : [];
 
 const toggleForm = ()=>{
     setIsFormVisible((prevVisible)=> !prevVisible);
@@ -70,7 +71,28 @@ const toggleForm = ()=>{
       <p>{venue.description}</p>
       <p>Location: {venue.location?.city || 'Unknown'}</p>
       <p>Price: {venue.price || 'N/A'}</p>
-      <img src={venue.media?.[0]?.url || ''} alt={venue.name || 'Venue'} />
+      {venue.media.map((image, index) => (
+                <img 
+                    key={index} 
+                    src={image.url} 
+                    alt={`${selectedStay.name} image ${index + 1}`} 
+                    loading="lazy"
+                />
+            ))}
+
+      <h2>Available Facilities</h2>
+            {availableFacilities.length > 0 ? (
+                  <ul>
+            {availableFacilities.map(([facility])=>(
+                <li key={facility}>
+                    <img src={facilityIcons[facility]} alt={`${facility} icon`} />
+                    {facility.charAt(0).toUpperCase() + facility.slice(1)}
+                </li>
+            ))}
+           </ul>
+           ) : (
+             <p>No Facilities Available</p>
+           )}
     </div>
   ))
 ) : (

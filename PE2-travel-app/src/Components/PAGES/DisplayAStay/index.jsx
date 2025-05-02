@@ -57,7 +57,7 @@ const DisplayAStay = () => {
         return <div>Stay not found</div>;
     }
     
-    const availableFacilities = Object.entries(selectedStay.meta).filter(([key, value]) => value === true);
+    const availableFacilities = selectedStay?.meta? Object.entries(selectedStay.meta).filter(([key, value]) => value === true): [];
     return (
         <div>
 

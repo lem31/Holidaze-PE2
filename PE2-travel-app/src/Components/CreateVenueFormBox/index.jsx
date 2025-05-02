@@ -22,11 +22,11 @@ description: "",
       pets: false,
     },
     location: {
-      address: null,  
-  city: null,
-  zip: null,
-  country: null,
-  continent: null,
+      address: "",  
+  city: "",
+  zip: "",
+  country: "",
+  continent: "",
   lat: 0,
   lng: 0,
     },
@@ -36,10 +36,24 @@ description: "",
  
 
   const handleInputChange = (name, value) => {
-    setFormValues((prevValues) => ({
+    setFormValues((prevValues) => {
+
+      if (name.startsWith('meta.')){
+        const metaKey = name.split('.')[1];
+        return {
       ...prevValues,
-      [name]: name=== 'price' || name === 'maxGuests' || name === 'rating' ? parseInt(value, 10) || 0: value,
-    }));
+      meta: {
+        ...prevValues.meta, 
+        [metaKey]: value, 
+      },
+    };
+  } else {
+  return {
+    ...prevValues,[name]: name === "price" || name === "maxGuests" || name === "rating" ? parseInt(value, 10) : value || "",
+  }}
+    })
+
+    
   };
 
   const handleImageChange = (index, name, value) => {

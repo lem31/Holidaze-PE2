@@ -2,12 +2,16 @@ import Pets from '../../assets/Images/Pets.png';
 import Breakfast from '../../assets/Images/Breakfast.png';
 import Parking from '../../assets/Images/Parking.png';
 import Wifi from '../../assets/Images/Wifi.png';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Box, TextField, Button } from "@mui/material";
 
 
 
-const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors= {}, }) => {
+const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors = {} }) => {
+  useEffect(() => {
+    console.log("Updated Facilities State:", formValues.meta);
+  }, [formValues.meta]);
+  
     return (
       <form
         onSubmit={(e) => {
@@ -21,7 +25,7 @@ const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage,
           label="Name"
           name="name"
           value={formValues.name}
-          onChange={(e) => onInputChange(e.target.name, e.target.value)}
+          onChange={(e) =>onInputChange(e.target.name, e.target.value)}
           variant="outlined"
           fullWidth
           required
@@ -43,7 +47,7 @@ const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage,
           {validationErrors.description && <p>{validationErrors.description}</p>}
       
      
-        {formValues.images.map((image, index) => (
+        {Array.isArray(formValues.images) && formValues.images.map((image, index) => (
           <Box key={index} sx={{ marginBottom: 2 }}>
             <TextField
               label="Image URL"
@@ -115,32 +119,32 @@ const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage,
     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
         <Button
       
-            variant={formValues.parking ? "contained" : "outlined"}
-            onClick={() => onInputChange("parking", !formValues.parking)}
+            variant={formValues.meta.parking ? "contained" : "outlined"}
+            onClick={() => onInputChange("meta.parking", !formValues.meta.parking)}
             startIcon={<img src={Parking} alt="Parking" style={{ width: 24, height: 24 }} />}
         >
               <img src={Parking} alt="Parking" />
             Parking
         </Button>
         <Button
-            variant={formValues.wifi ? "contained" : "outlined"}
-            onClick={() => onInputChange("wifi", !formValues.wifi)}
+            variant={formValues.meta.wifi ? "contained" : "outlined"}
+            onClick={() => onInputChange("meta.wifi", !formValues.meta.wifi)}
             startIcon={<img src={Wifi} alt="Wifi" style={{ width: 24, height: 24 }} />}
         >
               <img src={Wifi} alt="Wifi" />
             Wifi
         </Button>
         <Button
-            variant={formValues.breakfast ? "contained" : "outlined"}
-            onClick={() => onInputChange("breakfast", !formValues.breakfast)}
+            variant={formValues.meta.breakfast ? "contained" : "outlined"}
+            onClick={() => onInputChange("meta.breakfast", !formValues.meta.breakfast)}
             startIcon={<img src={Breakfast} alt="Breakfast" style={{ width: 24, height: 24 }} />}
         >
               <img src={Breakfast} alt="Breakfast" />
             Breakfast
         </Button>
         <Button
-            variant={formValues.pets ? "contained" : "outlined"}
-            onClick={() => onInputChange("pets", !formValues.pets)}
+            variant={formValues.meta.pets ? "contained" : "outlined"}
+            onClick={() => onInputChange("meta.pets", !formValues.meta.pets)}
             startIcon={<img src={Pets} alt="Pets" style={{ width: 24, height: 24 }} />}
         >
               <img src={Pets} alt="Pets" />
@@ -185,7 +189,7 @@ const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage,
             label="Country"
             name="location.country"
             value={formValues.location?.country || ''}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
+            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             variant="outlined"
             fullWidth
             sx={{ marginBottom: 2 }}
