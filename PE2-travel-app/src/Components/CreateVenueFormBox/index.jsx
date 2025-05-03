@@ -5,7 +5,7 @@ import createVenue from '../../API/CreateVenue';
 import CreateVenueFormValidator from '../CreateVenueFormValidator';
 
 
-const CreateVenueFormBox = () => {
+const CreateVenueFormBox = ({toggleForm}) => {
  const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
  const [validationErrors, setValidationErrors] = useState({});
   const [formValues, setFormValues] = useState({
@@ -138,6 +138,7 @@ description: "",
           onAddImage={handleAddImageInput}
           onSubmit={handleFormSubmit}
           validationErrors={validationErrors}
+          toggleForm = {toggleForm}
         />
       </Box>
     </Box>

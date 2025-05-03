@@ -69,7 +69,7 @@ const toggleForm = ()=>{
             >
               Close
             </button>
-            <CreateVenueFormBox />
+            <CreateVenueFormBox toggleForm = {toggleForm} />
           </div>
        
       )}

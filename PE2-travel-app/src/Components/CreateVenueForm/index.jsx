@@ -7,7 +7,7 @@ import { Box, TextField, Button } from "@mui/material";
 
 
 
-const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors = {} }) => {
+const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors = {} }) => {
   useEffect(() => {
     console.log("Updated Facilities State:", formValues.meta);
   }, [formValues.meta]);
@@ -17,6 +17,7 @@ const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage,
         onSubmit={(e) => {
           e.preventDefault();
           onSubmit(e);
+          toggleForm();
           console.log('Form submitted with values:', formValues);
         
         }}
@@ -235,6 +236,8 @@ const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage,
     <Button type="submit" variant="contained" color="primary" fullWidth>
      Create Venue
         </Button>
+    
+        <Button onClick={toggleForm} style={{ marginTop: 10 }} >CANCEL</Button>
       
       </form>
     );
