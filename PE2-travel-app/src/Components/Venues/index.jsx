@@ -41,9 +41,8 @@ const toggleForm = ()=>{
           style={{
             position: "fixed",
            
-            width: "100vw",
-            height: "100vh",
-            backgroundColor: "rgba(0, 2, 10, 0.2)", 
+            width: "80vw",
+            height: "80vh",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -51,6 +50,8 @@ const toggleForm = ()=>{
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
+            overflowY: "auto",
+            padding: "20px",
     
             
           }}

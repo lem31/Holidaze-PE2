@@ -24,6 +24,8 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
         
         }}
       >
+
+        <Box sx={{ marginBottom: 2, width: '100%', maxWidth: '600px', height: 'auto', maxHeight:'70vh', padding:3, backgroundColor:'white'}}>
         <TextField
           label="Name"
           name="name"
@@ -51,7 +53,7 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
       
      
         {Array.isArray(formValues.images) && formValues.images.map((image, index) => (
-          <Box key={index} sx={{ marginBottom: 2 }}>
+          <Box key={index} >
             <TextField
               label="Image URL"
               name="url"
@@ -239,8 +241,9 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
      Create Venue
         </Button>
     
-        <Button onClick={toggleForm} style={{ marginTop: 10 }} >CANCEL</Button>
+        <Button type='button' variant="contained" color="primary" fullWidth onClick={toggleForm} style={{ marginTop: 10 }} >CANCEL</Button>
       
+        </Box>
       </form>
     );
   };
