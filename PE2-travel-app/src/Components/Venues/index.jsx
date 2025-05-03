@@ -4,7 +4,7 @@ import Wifi from '../../assets/Images/wifi.png';
 import Parking from '../../assets/Images/parking.png';
 import Pets from '../../assets/Images/pets.png';
 import Breakfast from '../../assets/Images/breakfast.png';
-import{Snackbar, Alert} from '@mui/material';
+import{Snackbar, Alert, Button} from '@mui/material';
 
 
 function Venues({vmVenues, successMessage, setSuccessMessage}) {
@@ -155,6 +155,7 @@ display: "flex",
                         alt={`${facility} icon`}
                       />
                       {facility.charAt(0).toUpperCase() + facility.slice(1)}
+                      <Button>Delete</Button>
                     </li>
                   ))}
               </ul>
