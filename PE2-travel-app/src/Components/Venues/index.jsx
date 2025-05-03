@@ -4,9 +4,10 @@ import Wifi from '../../assets/Images/wifi.png';
 import Parking from '../../assets/Images/parking.png';
 import Pets from '../../assets/Images/pets.png';
 import Breakfast from '../../assets/Images/breakfast.png';
+import{Snackbar, Alert} from '@mui/material';
 
 
-function Venues({vmVenues}) {
+function Venues({vmVenues, successMessage, setSuccessMessage}) {
 
 const facilityIcons = {
   wifi: Wifi,
@@ -27,6 +28,13 @@ const toggleForm = ()=>{
     <div>
    
       <h1>Venues</h1>
+
+      <Snackbar open={successMessage} autoHideDuration={3000} onClose={() => setSuccessMessage(false)}>
+        <Alert severity='success' onClose={()=> setSuccessMessage(false)}>
+          Venue created successfully!
+        </Alert>
+      </Snackbar>
+
       <button onClick={toggleForm}>Create Venue</button>
       {isFormVisible && (
         <div
@@ -69,7 +77,7 @@ const toggleForm = ()=>{
             >
               Close
             </button>
-            <CreateVenueFormBox toggleForm = {toggleForm} />
+            <CreateVenueFormBox toggleForm = {toggleForm} setSuccessMessage={setSuccessMessage} />
           </div>
        
       )}

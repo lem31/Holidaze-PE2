@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography} from "@mui/material";
 import CreateVenueForm from "../CreateVenueForm";
 import createVenue from '../../API/CreateVenue';
 import CreateVenueFormValidator from '../CreateVenueFormValidator';
 
 
-const CreateVenueFormBox = ({toggleForm}) => {
+const CreateVenueFormBox = ({toggleForm, setSuccessMessage}) => {
  const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
  const [validationErrors, setValidationErrors] = useState({});
   const [formValues, setFormValues] = useState({
@@ -32,6 +32,7 @@ description: "",
     },
 
   });
+
 
  
 
@@ -111,6 +112,7 @@ description: "",
       const response = await createVenue(API_URL, venueData);
       console.log('Form submitted with values:', venueData);
       console.log("Venue successfully created:", response);
+setSuccessMessage(true);
       console.log('API RESPONSE:', response);
     } catch (validationError) {
       const errors = {};
@@ -141,6 +143,8 @@ description: "",
           toggleForm = {toggleForm}
         />
       </Box>
+
+   
     </Box>
   );
 };

@@ -3,7 +3,9 @@ import useMyStore from "../../Store/index";
 import Venues from "../Venues";
 
 
+
 const ProfileVenueManager = () => {
+  const [successMessage, setSuccessMessage] = useState(false);
   const { userProfile, fetchVMVenues, vmVenues } = useMyStore(); 
   const [selectedView, setSelectedView] = useState("");
 
@@ -37,7 +39,7 @@ const ProfileVenueManager = () => {
       </div>
 
       <div>
-        {selectedView === "Venues" && <Venues vmVenues={vmVenues} />}
+        {selectedView === "Venues" && <Venues successMessage={successMessage} setSuccessMessage={setSuccessMessage} vmVenues={vmVenues} />}
       </div>
     </div>
   );
