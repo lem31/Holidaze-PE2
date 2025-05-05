@@ -1,84 +1,76 @@
 import React, { useEffect, useState } from "react";
 import CreateVenueFormBox from "../CreateVenueFormBox";
-import Wifi from '../../assets/Images/wifi.png';
-import Parking from '../../assets/Images/parking.png';
-import Pets from '../../assets/Images/pets.png';
-import Breakfast from '../../assets/Images/breakfast.png';
-import{Snackbar, Alert, Button} from '@mui/material';
+import Wifi from "../../assets/Images/wifi.png";
+import Parking from "../../assets/Images/parking.png";
+import Pets from "../../assets/Images/pets.png";
+import Breakfast from "../../assets/Images/breakfast.png";
+import { Snackbar, Alert, Button } from "@mui/material";
 
+function Venues({ vmVenues, successMessage, setSuccessMessage }) {
+  const facilityIcons = {
+    wifi: Wifi,
+    parking: Parking,
+    pets: Pets,
+    breakfast: Breakfast,
+  };
 
-function Venues({vmVenues, successMessage, setSuccessMessage}) {
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
-const facilityIcons = {
-  wifi: Wifi,
-  parking: Parking,
-  pets: Pets,
-  breakfast: Breakfast,
-};
-
-const [isFormVisible, setIsFormVisible] = useState(false);
-
-
-const toggleForm = ()=>{
-    setIsFormVisible((prevVisible)=> !prevVisible);
-};
-
+  const toggleForm = () => {
+    setIsFormVisible((prevVisible) => !prevVisible);
+  };
 
   return (
     <div>
       <h1>Venues</h1>
 
       <div
-  style={{
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "auto",
-    height: "auto",
-  }}
->
-
-      <Snackbar
-        open={successMessage}
-        autoHideDuration={3000}
-        onClose={() => setSuccessMessage(false)}
-        anchorOrigin={{ vertical: "center", horizontal: "center" }}
-        sx={{
-        
-display: "flex",
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "auto",
+          height: "auto",
+        }}
+      >
+        <Snackbar
+          open={successMessage}
+          autoHideDuration={3000}
+          onClose={() => setSuccessMessage(false)}
+          anchorOrigin={{ vertical: "center", horizontal: "center" }}
+          sx={{
+            display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "100vw",
-            height: "100vh",
+
             position: "fixed",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             zIndex: 1500,
-          width: '400px',
+            width: "400px",
             height: "auto",
             backgroundColor: "transparent",
             boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-          
-        }}
-      >
-        <Alert
-          severity="success"
-          onClose={() => setSuccessMessage(false)}
-          sx={{
-            fontSize: "20px",
-            padding: "20px",
-          
-            textAlign: "center",
           }}
         >
-          Venue created successfully!
-        </Alert>
-      </Snackbar>
+          <Alert
+            severity="success"
+            onClose={() => setSuccessMessage(false)}
+            sx={{
+              fontSize: "20px",
+              padding: "20px",
+
+              textAlign: "center",
+            }}
+          >
+            Venue created successfully!
+          </Alert>
+        </Snackbar>
       </div>
 
       <button onClick={toggleForm}>Create Venue</button>
@@ -109,17 +101,7 @@ display: "flex",
               position: "relative",
             }}
           ></div>
-          <button
-            style={{
-              position: "absolute",
-              top: "10px",
-              right: "10px",
-              cursor: "pointer",
-            }}
-            onClick={toggleForm}
-          >
-            Close
-          </button>
+
           <CreateVenueFormBox
             toggleForm={toggleForm}
             setSuccessMessage={setSuccessMessage}
