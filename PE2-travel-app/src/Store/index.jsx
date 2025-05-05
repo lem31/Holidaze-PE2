@@ -4,6 +4,8 @@ import fetchStays from "../API/index.jsx";
 import fetchUserProfile from "../API/FetchUserProfile/index.js";
 import fetchVMVenues from "../API/FetchVMVenues";
 import deleteVenue from "../API/DeleteVenue";
+import updateProfile from "../API/UpdateProfile/index.js";
+import { use } from "react";
 
 const useMyStore = create(
   persist(
@@ -34,6 +36,8 @@ const useMyStore = create(
         console.log("userProfile", profileData);
         console.log("User profile persisted successfully.");
       },
+
+  
 
       logout: () => {
         set({
@@ -85,6 +89,35 @@ const useMyStore = create(
         } catch (error) {
           set({ userProfile: null, loadingProfile: false });
           console.error("Error fetching user profile:", error);
+          throw error;
+        }
+      },
+
+      updateUserProfile: async (userData) => {
+        const token = get().token;
+        const userName = get().userName;
+        if (!token || !userName) {
+          console.error("Token or username not found in local storage.");
+          return;
+        }
+        try {
+          set({ loadingProfile: true });
+
+          const updatedProfile = await updateProfile(
+            userName,
+            token,
+            userData
+          );
+          if (updatedProfile) {
+            set({ userProfile: updatedProfile, loadingProfile: false });
+            console.log("Profile updated successfully:", updatedProfile);
+            return updatedProfile;
+          } else {
+            throw new Error("Failed to update profile");
+          }
+        } catch (error) {
+          set({ loadingProfile: false });
+          console.error("Error updating profile:", error);
           throw error;
         }
       },
