@@ -170,6 +170,16 @@ const useMyStore = create(
       throw error;
     }
       },
+
+deleteVenue: async (venueId) => {
+  const token = get().token;
+  const success = await deleteVenue(venueId, token);
+  if (success) {
+    set((state) => ({
+      vmVenues: state.vmVenues.filter((venue) => venue.id !== venueId),
+    }));
+  }},
+
     }),
 
  
