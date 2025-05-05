@@ -25,7 +25,7 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
         }}
       >
 
-        <Box sx={{ marginBottom: 2, width: '100%', maxWidth: '600px', height: 'auto', maxHeight:'70vh', padding:3, backgroundColor:'white'}}>
+        <Box sx={{ marginBottom: 2, width: '800px', maxWidth: '800px', height: 'auto', maxHeight:'80vh', padding:3, backgroundColor:'white'}}>
         <TextField
           label="Name"
           name="name"

@@ -16,9 +16,16 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
     breakfast: Breakfast,
   };
 
+  const {fetchVMVenues} = useMyStore();
+
+
   useEffect(()=>{
     console.log('current success message:', successMessage);
   
+  }, [successMessage]);
+
+  useEffect(() => {
+    fetchVMVenues();
   }, [successMessage]);
 
   const {deleteVenue} = useMyStore();
@@ -59,7 +66,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
           open={!!successMessage}
           autoHideDuration={3000}
           onClose={() => setSuccessMessage('')}
-          anchorOrigin={{ vertical: "center", horizontal: "center" }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
           sx={{
             display: "flex",
             alignItems: "center",

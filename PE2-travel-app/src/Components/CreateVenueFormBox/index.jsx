@@ -3,6 +3,7 @@ import { Box, Typography} from "@mui/material";
 import CreateVenueForm from "../CreateVenueForm";
 import createVenue from '../../API/CreateVenue';
 import CreateVenueFormValidator from '../CreateVenueFormValidator';
+import fetchVMVenues from "../../API/FetchVMVenues";
 
 
 const CreateVenueFormBox = ({toggleForm, setSuccessMessage}) => {
@@ -113,6 +114,7 @@ description: "",
       console.log('Form submitted with values:', venueData);
       console.log("Venue successfully created:", response);
 setSuccessMessage('Venue created successfully!');
+fetchVMVenues();
       console.log('API RESPONSE:', response);
     } catch (validationError) {
       const errors = {};
