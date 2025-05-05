@@ -17,9 +17,9 @@ import { Box, TextField, Button } from "@mui/material";
 const EditProfileForm = ({
     formValues,
     onInputChange,
-    onImageChange,
-    onAddImage,
     onSubmit,
+    defaultBanner,
+    defaultAvatar,
     validationErrors = {},
 }) => {
     return (
@@ -77,37 +77,37 @@ const EditProfileForm = ({
             />
             {validationErrors.bio && <p>{validationErrors.bio}</p>}
             <Box sx={{ marginBottom: 2 }}>
-                <TextField
-                    label="Banner Image URL"
-                    name="bannerUrl"
-                    value={formValues.bannerUrl}
-                    onChange={(e) => onInputChange(e.target.name, e.target.value)}
-                    variant="outlined"
-                    fullWidth
-                    sx={{ marginBottom: 1 }}
-                />
-                {validationErrors.bannerUrl && <p>{validationErrors.bannerUrl}</p>}
-                <TextField
-                    label="Banner Alt Text"
-                    name="bannerAlt"
-                    value={formValues.bannerAlt}
-                    onChange={(e) => onInputChange(e.target.name, e.target.value)}
-                    variant="outlined"
-                    fullWidth
-                />
-                {validationErrors.bannerAlt && <p>{validationErrors.bannerAlt}</p>}
-            </Box>
-            <Box sx={{ marginBottom: 2 }}>
-                <TextField
-                    label="Avatar Image URL"
-                    name="avatarUrl"
-                    value={formValues.avatarUrl}
-                    onChange={(e) => onInputChange(e.target.name, e.target.value)}
-                    variant="outlined"
-                    fullWidth
-                    sx={{ marginBottom: 1 }}
-                />
-                {validationErrors.avatarUrl && <p>{validationErrors.avatarUrl}</p>}
+              {validationErrors.bannerUrl && <p>{validationErrors.bannerUrl}</p>}
+                   <TextField
+                     label="Banner Alt Text"
+                     name="bannerAlt"
+                     value={formValues.bannerAlt || defaultBanner.alt}
+                     onChange={(e) => onInputChange(e.target.name, e.target.value)}
+                     variant="outlined"
+                     fullWidth
+                   />
+                   {validationErrors.bannerAlt && <p>{validationErrors.banner.alt}</p>}
+                 </Box>
+                 <Box sx={{ marginBottom: 2 }}>
+                   <TextField
+                     label="Avatar Image URL"
+                     name="avatarUrl"
+                     value={formValues.avatarUrl || defaultAvatar.url}
+                     onChange={(e) => onInputChange(e.target.name, e.target.value)}
+                     variant="outlined"
+                     fullWidth
+                     sx={{ marginBottom: 1 }}
+                   />
+                   {validationErrors.avatarUrl && <p>{validationErrors.avatar.url}</p>}
+                   <TextField
+                     label="Avatar Alt Text"
+                     name="avatarAlt"
+                     value={formValues.avatar.alt}
+                     onChange={(e) => onInputChange(e.target.name, e.target.value)}
+                     variant="outlined"
+                     fullWidth
+                   />
+                   {validationErrors.avatarAlt && <p>{validationErrors.avatar.alt}</p>}
                 <TextField
                     label="Avatar Alt Text"
                     name="avatarAlt"

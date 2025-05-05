@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useMyStore from "../../Store/index";
+import EditProfileFormBox from "../EditProfileFormBox";
 import Venues from "../Venues";
 
 
@@ -19,6 +20,8 @@ const ProfileVenueManager = () => {
     return <p>No profile data available, please log in again.</p>;
   }
 
+  const [isEditProfileVisible, setIsEditProfileVisible] = useState(false);
+
   return (
     <div>
       <h1>{selectedView}</h1>
@@ -27,11 +30,18 @@ const ProfileVenueManager = () => {
       <img src={userProfile.data.banner.url} alt="banner" />
       <img src={userProfile.data.avatar.url} alt="avatar" />
       <div>
-        <button onClick={() => setSelectedView("Edit Profile")}>Edit Profile</button>
+        <button
+          onClick={() => {
+            setSelectedView("Edit Profile");
+            setIsEditProfileVisible(!isEditProfileVisible);
+          }}
+        >
+          {isEditProfileVisible ? "Close Edit Profile" : "Edit Profile"}
+        </button>
         <button
           onClick={() => {
             setSelectedView("Venues");
-            fetchVMVenues(); 
+            fetchVMVenues();
           }}
         >
           Venues
@@ -40,7 +50,14 @@ const ProfileVenueManager = () => {
       </div>
 
       <div>
-        {selectedView === "Venues" && <Venues successMessage={successMessage} setSuccessMessage={setSuccessMessage} vmVenues={vmVenues} />}
+        {isEditProfileVisible && <EditProfileFormBox />}
+        {selectedView === "Venues" && (
+          <Venues
+            successMessage={successMessage}
+            setSuccessMessage={setSuccessMessage}
+            vmVenues={vmVenues}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
-async function updateProfile(endpoint, userData) {
+async function updateProfile(userData, endpoint, token) {
+ 
     try {
       const response = await fetch(endpoint, {
         method: "PUT",

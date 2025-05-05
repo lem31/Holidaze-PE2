@@ -94,8 +94,10 @@ const useMyStore = create(
       },
 
       updateUserProfile: async (userData) => {
-        const token = get().token;
         const userName = get().userName;
+        const token = get().token;
+        const endpoint= `https://v2.api.noroff.dev/holidaze/profiles/${userName}`;
+     
         if (!token || !userName) {
           console.error("Token or username not found in local storage.");
           return;
@@ -104,9 +106,10 @@ const useMyStore = create(
           set({ loadingProfile: true });
 
           const updatedProfile = await updateProfile(
-            userName,
+            userData,
+            endpoint,
             token,
-            userData
+          
           );
           if (updatedProfile) {
             set({ userProfile: updatedProfile, loadingProfile: false });
