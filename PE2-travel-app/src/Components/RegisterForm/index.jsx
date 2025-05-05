@@ -22,12 +22,16 @@ import { Box, TextField, Button } from "@mui/material";
  * @returns {JSX.Element} The rendered component.
  */
 
-const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors= {}, }) => {
+const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {}, defaultBanner, defaultAvatar }) => {
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(e);
+
+        useEffect(() => {
+          console.log("Form values state:", formValues);
+        }, [formValues]);
       }}
     >
       <TextField
@@ -40,7 +44,7 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
         required
         sx={{ marginBottom: 2 }}
       />
-        {validationErrors.name && <p>{validationErrors.name}</p>}
+      {validationErrors.name && <p>{validationErrors.name}</p>}
       <TextField
         label="Email"
         name="email"
@@ -52,7 +56,7 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
         required
         sx={{ marginBottom: 2 }}
       />
-        {validationErrors.email && <p style={{ color: "red" }}>{validationErrors.email}</p>}
+      {validationErrors.email && <p style={{ color: "red" }}>{validationErrors.email}</p>}
       <TextField
         label="Password"
         name="password"
@@ -64,7 +68,7 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
         required
         sx={{ marginBottom: 2 }}
       />
-        {validationErrors.password && <p>{validationErrors.password}</p>}
+      {validationErrors.password && <p>{validationErrors.password}</p>}
       <TextField
         label="Bio"
         name="bio"
@@ -76,44 +80,52 @@ const RegisterForm = ({ formValues, onInputChange, onImageChange, onAddImage, on
         rows={3}
         sx={{ marginBottom: 2 }}
       />
-        {validationErrors.bio && <p>{validationErrors.bio}</p>}
-      {formValues.images.map((image, index) => (
-        <Box key={index} sx={{ marginBottom: 2 }}>
-          <TextField
-            label="Image URL"
-            name="url"
-            value={image.url}
-            onChange={(e) => onImageChange(index, e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 1 }}
-          />
-            {validationErrors.url && <p>{validationErrors.url}</p>}
-          <TextField
-            label="Alt Text"
-            name="alt"
-            value={image.alt}
-            onChange={(e) => onImageChange(index, e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-          />
-            {validationErrors.alt && <p>{validationErrors.alt}</p>}
-        </Box>
-      ))}
-      <Button
-        onClick={onAddImage}
-        type="button"
-        variant="outlined"
-        fullWidth
-        sx={{ marginBottom: 2 }}
-      >
-        Add Another Image
-      </Button>
+      {validationErrors.bio && <p>{validationErrors.bio}</p>}
+      <Box sx={{ marginBottom: 2 }}>
+        <TextField
+          label="Banner Image URL"
+          name="bannerUrl"
+          value={formValues.bannerUrl || defaultBanner.url}
+          onChange={(e) => onInputChange(e.target.name, e.target.value)}
+          variant="outlined"
+          fullWidth
+          sx={{ marginBottom: 1 }}
+        />
+        {validationErrors.bannerUrl && <p>{validationErrors.bannerUrl}</p>}
+        <TextField
+          label="Banner Alt Text"
+          name="bannerAlt"
+          value={formValues.bannerAlt || defaultBanner.alt}
+          onChange={(e) => onInputChange(e.target.name, e.target.value)}
+          variant="outlined"
+          fullWidth
+        />
+        {validationErrors.bannerAlt && <p>{validationErrors.banner.alt}</p>}
+      </Box>
+      <Box sx={{ marginBottom: 2 }}>
+        <TextField
+          label="Avatar Image URL"
+          name="avatarUrl"
+          value={formValues.avatarUrl || defaultAvatar.url}
+          onChange={(e) => onInputChange(e.target.name, e.target.value)}
+          variant="outlined"
+          fullWidth
+          sx={{ marginBottom: 1 }}
+        />
+        {validationErrors.avatarUrl && <p>{validationErrors.avatar.url}</p>}
+        <TextField
+          label="Avatar Alt Text"
+          name="avatarAlt"
+          value={formValues.avatar.alt}
+          onChange={(e) => onInputChange(e.target.name, e.target.value)}
+          variant="outlined"
+          fullWidth
+        />
+        {validationErrors.avatarAlt && <p>{validationErrors.avatar.alt}</p>}
+      </Box>
       <Button type="submit" variant="contained" color="primary" fullWidth>
-    Register
+        Register
       </Button>
-
-    
     </form>
   );
 };

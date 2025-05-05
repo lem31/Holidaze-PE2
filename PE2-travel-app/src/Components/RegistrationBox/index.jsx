@@ -19,6 +19,14 @@ import RegisterFormValidator from '../RegisterFormValidator';
  */
 
 const RegisterBox = () => {
+  const defaultBanner = {
+    url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
+    alt: "Default Banner",
+  }
+  const defaultAvatar = {
+    url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
+    alt: "Default Avatar",
+  }
  const API_URL = "https://v2.api.noroff.dev/auth/register";
  const [validationErrors, setValidationErrors] = useState({});
   const [activeTab, setActiveTab] = useState(0);
@@ -27,9 +35,12 @@ const RegisterBox = () => {
     email: "",
     password: "",
     bio: "",
-    images: [{ url: "", alt: "" }],
+    banner: defaultBanner,
+    avatar: defaultAvatar,
     venueManager: true,
   });
+
+
 
   const handleTabChange = ( event, newValue) => {
     setActiveTab(newValue);
@@ -55,11 +66,10 @@ const RegisterBox = () => {
   };
 
   const handleImageChange = (index, name, value) => {
-    const updatedImages = [...formValues.images];
-    updatedImages[index][name] = value;
+    const updatedImage = { ...formValues[name], [index]: value };
     setFormValues((prevValues) => ({
       ...prevValues,
-      images: updatedImages,
+      [name]: updatedImage,
     }));
   };
 
@@ -73,18 +83,32 @@ const RegisterBox = () => {
   const handleFormSubmit = async (event) => {
     if(!event) return;
     event.preventDefault();
+
+    const updatedFormValues = {
+      ...formValues,
+      banner: {
+        url: formValues.banner.url || defaultBanner.url,
+        alt: formValues.banner.alt || defaultBanner.alt,
+      },
+      avatar: {
+        url: formValues.avatar.url || defaultAvatar.url,
+        alt: formValues.avatar.alt || defaultAvatar.alt,
+      },
+    };
     try{
-   await RegisterFormValidator.validate(formValues, {abortEarly: false});
+ await RegisterFormValidator.validate(updatedFormValues, {abortEarly: false});
   setValidationErrors({});
   
-      const response = await onRegister(API_URL, formValues);
+      const response =  await onRegister(API_URL, formValues);
       console.log('Form submitted with values:', formValues);
       console.log("Registration successful:", response);
     } catch (validationError) {
       const errors = {};
-      validationError.inner.forEach((err)=>{
-        errors[err.path]= err.message;
-      });
+      if (validationError.inner) {
+        validationError.inner.forEach((err) => {
+          errors[err.path] = err.message;
+        });
+      }
       setValidationErrors(errors);
     }
   };
@@ -114,6 +138,8 @@ const RegisterBox = () => {
           onAddImage={handleAddImageInput}
           onSubmit={handleFormSubmit}
           validationErrors={validationErrors}
+          defaultBanner={defaultBanner}
+          defaultAvatar={defaultAvatar}
         />
       </Box>
     </Box>
