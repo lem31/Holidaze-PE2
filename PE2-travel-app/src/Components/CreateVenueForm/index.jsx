@@ -7,7 +7,7 @@ import { Box, TextField, Button, } from "@mui/material";
 
 
 
-const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors = {},   toggleForm,   }) => {
+const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors,   toggleForm,   }) => {
 
  
   useEffect(() => {

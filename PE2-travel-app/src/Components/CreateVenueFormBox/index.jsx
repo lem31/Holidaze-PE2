@@ -78,31 +78,14 @@ description: "",
   };
 
   const handleFormSubmit = async (event) => {
+
+      
     if(!event) return;
     event.preventDefault();
     try{
    await CreateVenueFormValidator.validate(formValues, {abortEarly: false});
   setValidationErrors({});
-  console.log("Form values are valid:", formValues);
-    } catch (validationError) {
-      const errors = {};
-      if (validationError.inner && validationError.inner.length > 0) {
-        validationError.inner.forEach((err) => {
-          console.log(`Setting error: ${err.path} -> ${err.message}`); 
-          errors[err.path] = err.message;
-        });
-  
-        console.log("Validation Errors Before Setting State:", errors); 
-  
-        setValidationErrors(errors); 
-      } else {
-        setValidationErrors({ general: validationError.message || "Validation error occurred" });
-      }
-  
-      return; 
-    }
-  
-     
+
   const venueData = {
     name: formValues.name.trim(), 
     description: formValues.description.trim(),
@@ -130,20 +113,25 @@ description: "",
         lat: formValues.location.lat || 0,
         lng: formValues.location.lng || 0,
       },
-    };
-
-    try{
-      const response = await createVenue(API_URL, venueData);
-      console.log("Venue successfully created:", response);
-setSuccessMessage('Venue created successfully!');
-fetchVMVenues();
-      console.log('API RESPONSE:', response);
-    } catch (error) {
-      console.error("Error creating venue:", error);
-     
-    }
   };
 
+    const response = await createVenue(API_URL, venueData);
+    console.log("Venue successfully created:", response);
+setSuccessMessage('Venue created successfully!');
+fetchVMVenues();
+    console.log('API RESPONSE:', response);
+    } catch (error) {
+      const errors = {};
+      if (error.inner) {
+      error.inner.forEach((err) => {
+          errors[err.path] = err.message;
+        });
+      }
+      setValidationErrors(errors);
+    }
+  };
+  
+  
   return (
     <Box>
     

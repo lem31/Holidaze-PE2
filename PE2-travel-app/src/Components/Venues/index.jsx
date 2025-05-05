@@ -117,15 +117,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
             padding: "20px",
           }}
         >
-          <div
-            style={{
-              backgroundColor: "red",
-              padding: "20px",
-              borderRadius: "8px",
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-              position: "relative",
-            }}
-          ></div>
+        
 
           <CreateVenueFormBox
             toggleForm={toggleForm}
