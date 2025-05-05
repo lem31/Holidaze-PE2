@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 import fetchStays from "../API/index.jsx";
 import fetchUserProfile from "../API/FetchUserProfile/index.js";
 import fetchVMVenues from "../API/FetchVMVenues";
+import deleteVenue from "../API/DeleteVenue";
 
 const useMyStore = create(
   persist(

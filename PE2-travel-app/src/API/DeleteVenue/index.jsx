@@ -1,13 +1,15 @@
-const API_URL = 'https://v2.api.noroff.dev/holidaze/venues/${venueId}';
-
-
 const deleteVenue = async (venueId, token) =>{
     try{ 
         if(!token){
             console.error("No token provided");
             return;
         }
-    const response = await fetch (`${API_URL}`, {
+
+        if (!venueId || typeof venueId !== "string" || venueId.length !== 36) { 
+            console.error("Invalid venue ID format:", venueId);
+            return false;
+          }
+    const response = await fetch (`https://v2.api.noroff.dev/holidaze/venues/${venueId}`, {
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`,

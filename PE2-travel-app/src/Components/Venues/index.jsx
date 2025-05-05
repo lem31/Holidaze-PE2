@@ -5,6 +5,8 @@ import Parking from "../../assets/Images/parking.png";
 import Pets from "../../assets/Images/pets.png";
 import Breakfast from "../../assets/Images/breakfast.png";
 import { Snackbar, Alert, Button } from "@mui/material";
+import useMyStore from "../../Store";
+
 
 function Venues({ vmVenues, successMessage, setSuccessMessage }) {
   const facilityIcons = {
@@ -12,6 +14,11 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
     parking: Parking,
     pets: Pets,
     breakfast: Breakfast,
+  };
+
+  const {deleteVenue} = useMyStore();
+  const handleDelete = (venueId) => {
+    deleteVenue(venueId);
   };
 
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -137,7 +144,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
                         alt={`${facility} icon`}
                       />
                       {facility.charAt(0).toUpperCase() + facility.slice(1)}
-                      <Button>Delete</Button>
+                      <Button onClick={()=> handleDelete(venue.id)}>Delete</Button>
                     </li>
                   ))}
               </ul>
