@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography} from "@mui/material";
 import CreateVenueForm from "../CreateVenueForm";
 import createVenue from '../../API/CreateVenue';
@@ -34,7 +34,10 @@ description: "",
 
   });
 
-
+  useEffect(() => {
+    console.log("Validation Errors:", validationErrors);
+  }, [validationErrors]);
+  
  
 
   const handleInputChange = (name, value) => {
@@ -81,7 +84,25 @@ description: "",
    await CreateVenueFormValidator.validate(formValues, {abortEarly: false});
   setValidationErrors({});
   console.log("Form values are valid:", formValues);
-
+    } catch (validationError) {
+      const errors = {};
+      if (validationError.inner && validationError.inner.length > 0) {
+        validationError.inner.forEach((err) => {
+          console.log(`Setting error: ${err.path} -> ${err.message}`); 
+          errors[err.path] = err.message;
+        });
+  
+        console.log("Validation Errors Before Setting State:", errors); 
+  
+        setValidationErrors(errors); 
+      } else {
+        setValidationErrors({ general: validationError.message || "Validation error occurred" });
+      }
+  
+      return; 
+    }
+  
+     
   const venueData = {
     name: formValues.name.trim(), 
     description: formValues.description.trim(),
@@ -110,20 +131,16 @@ description: "",
         lng: formValues.location.lng || 0,
       },
     };
+
+    try{
       const response = await createVenue(API_URL, venueData);
-      console.log('Form submitted with values:', venueData);
       console.log("Venue successfully created:", response);
 setSuccessMessage('Venue created successfully!');
 fetchVMVenues();
       console.log('API RESPONSE:', response);
-    } catch (validationError) {
-      const errors = {};
-      if (validationError.inner && Array.isArray(validationError.inner)) {
-        validationError.inner.forEach((err) => {
-          errors[err.path] = err.message;
-        });
-      }
-      setValidationErrors(errors);
+    } catch (error) {
+      console.error("Error creating venue:", error);
+     
     }
   };
 

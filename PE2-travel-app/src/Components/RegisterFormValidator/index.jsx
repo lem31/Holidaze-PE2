@@ -21,7 +21,7 @@ import * as Yup from "yup";
 
 
 const RegisterFormValidator = Yup.object().shape({
-    name: Yup.string().matches(/^[a-zA-Z0-9_]*$/, "Name must not contain punctuation symbols apart from underscore (_).").required("Name is required"),
+    name: Yup.string().required("Name is required").matches(/^[a-zA-Z0-9_]*$/, "Name must not contain punctuation symbols apart from underscore (_)."),
     email: Yup.string()
     .matches(/^.+@stud\.noroff\.no$/, "Email must be a valid Noroff email address.")
     .required("Email is required"),

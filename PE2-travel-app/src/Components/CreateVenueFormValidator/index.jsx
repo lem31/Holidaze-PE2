@@ -3,14 +3,21 @@ import * as Yup from "yup";
 
 
 const CreateVenueFormValidator = Yup.object().shape({
-    name: Yup.string()
-        .required("Name is required"),
+    name: Yup.string().required("Name is required")
+    .min(3, "Name must be at least 3 characters")
+    .max(50, "Name must be at most 50 characters"),
     description: Yup.string()
         .required("Description is required"),
     price: Yup.number()
-        .required("Price is required"),
+        .required("Price is required")
+        .positive('Price must be a positive number')
+    .integer('Price must be a whole number'),
     maxGuests: Yup.number()
-        .required("Max guests is required"),
+        .required("Max guests is required")
+        .integer('Max guests must be a whole number')
+        .min(1, 'At least 1 max guest is required'),
+        rating: Yup.number(),
+        
     media: Yup.array().of(
         Yup.object().shape({
             url: Yup.string()
@@ -18,8 +25,7 @@ const CreateVenueFormValidator = Yup.object().shape({
             alt: Yup.string()
         })
     ),
-    rating: Yup.number()
-        .default(0),
+ 
     meta: Yup.object().shape({
         wifi: Yup.boolean()
             .default(false),

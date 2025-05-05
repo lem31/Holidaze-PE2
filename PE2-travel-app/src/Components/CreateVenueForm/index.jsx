@@ -7,12 +7,14 @@ import { Box, TextField, Button, } from "@mui/material";
 
 
 
-const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors = {} }) => {
+const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors = {},   toggleForm,   }) => {
 
  
   useEffect(() => {
     console.log("Updated Facilities State:", formValues.meta);
   }, [formValues.meta]);
+
+
   
     return (
       <form
@@ -26,6 +28,7 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
       >
 
         <Box sx={{ marginBottom: 2, width: '800px', maxWidth: '800px', height: 'auto', maxHeight:'80vh', padding:3, backgroundColor:'white'}}>
+       
         <TextField
           label="Name"
           name="name"
@@ -36,7 +39,7 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
           required
           sx={{ marginBottom: 2 }}
         />
-          {validationErrors.name && <p>{validationErrors.name}</p>}
+        {validationErrors.name && <p style={{ color: "red" }}>{validationErrors.name}</p>}
     
 
         <TextField
@@ -49,7 +52,7 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
             required
             sx={{ marginBottom: 2 }}
         />
-          {validationErrors.description && <p>{validationErrors.description}</p>}
+               {validationErrors.description && <p style={{ color: "red" }}>{validationErrors.description}</p>}
       
      
         {Array.isArray(formValues.images) && formValues.images.map((image, index) => (
@@ -63,7 +66,7 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
               fullWidth
               sx={{ marginBottom: 1 }}
             />
-              {validationErrors.url && <p>{validationErrors.url}</p>}
+              {validationErrors.alt && <p>{validationErrors.alt}</p>}
             <TextField
               label="Alt Text"
               name="alt"
@@ -87,7 +90,7 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
 
 
    <TextField
-          label="price"
+          label="Price"
           name="price"
             type='number'
           value={formValues.price}
@@ -97,9 +100,9 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
             required
             sx={{ marginBottom: 2 }}
         />
-          {validationErrors.price && <p>{validationErrors.price}</p>}
+          {validationErrors.price && <p style={{ color: "red" }}>{validationErrors.price}</p>}
           <TextField
-          label="maxGuests"
+          label="MaxGuests"
           name="maxGuests"
           type='number'
           value={formValues.maxGuests}
@@ -109,7 +112,7 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
             required
             sx={{ marginBottom: 2 }}
         />
-          {validationErrors.maxGuests && <p>{validationErrors.maxGuests}</p>}
+          {validationErrors.maxGuests && <p style={{ color: "red" }}>{validationErrors.maxGuests}</p>}
           <TextField
           label="Rating"
           name="rating"
@@ -120,7 +123,7 @@ const CreateVenueForm = ({ toggleForm, formValues, onInputChange, onImageChange,
             required
             sx={{ marginBottom: 2 }}
         />
-          {validationErrors.rating && <p>{validationErrors.rating}</p>}
+          {validationErrors.rating && <p style={{ color: "red" }}>{validationErrors.rating}</p>}
     <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
         <Button
       
