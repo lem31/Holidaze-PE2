@@ -16,9 +16,20 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
     breakfast: Breakfast,
   };
 
+  useEffect(()=>{
+    console.log('current success message:', successMessage);
+  
+  }, [successMessage]);
+
   const {deleteVenue} = useMyStore();
-  const handleDelete = (venueId) => {
-    deleteVenue(venueId);
+  const handleDelete =  (venueId) => {
+   const success =  deleteVenue(venueId);
+   console.log('Delete success:', success);
+   if(success){
+    setSuccessMessage('Venue deleted successfully!');
+   } else {
+    console.error('Failed to delete venue');
+   }
   };
 
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -45,9 +56,9 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
         }}
       >
         <Snackbar
-          open={successMessage}
+          open={!!successMessage}
           autoHideDuration={3000}
-          onClose={() => setSuccessMessage(false)}
+          onClose={() => setSuccessMessage('')}
           anchorOrigin={{ vertical: "center", horizontal: "center" }}
           sx={{
             display: "flex",
@@ -67,7 +78,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
         >
           <Alert
             severity="success"
-            onClose={() => setSuccessMessage(false)}
+            onClose={() => setSuccessMessage('')}
             sx={{
               fontSize: "20px",
               padding: "20px",
@@ -75,7 +86,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
               textAlign: "center",
             }}
           >
-            Venue created successfully!
+            {successMessage}
           </Alert>
         </Snackbar>
       </div>
@@ -144,13 +155,15 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
                         alt={`${facility} icon`}
                       />
                       {facility.charAt(0).toUpperCase() + facility.slice(1)}
-                      <Button onClick={()=> handleDelete(venue.id)}>Delete</Button>
+                 
                     </li>
                   ))}
               </ul>
             ) : (
               <p>No Facilities Available</p>
             )}
+
+<Button onClick={()=> handleDelete(venue.id)}>Delete</Button>
           </div>
         ))
       ) : (

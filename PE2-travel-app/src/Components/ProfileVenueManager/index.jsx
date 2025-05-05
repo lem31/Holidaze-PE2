@@ -5,7 +5,7 @@ import Venues from "../Venues";
 
 
 const ProfileVenueManager = () => {
-  const [successMessage, setSuccessMessage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
   const { userProfile, fetchVMVenues, vmVenues } = useMyStore(); 
   const [selectedView, setSelectedView] = useState("");
 

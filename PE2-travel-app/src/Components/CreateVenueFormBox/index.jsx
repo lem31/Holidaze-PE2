@@ -112,7 +112,7 @@ description: "",
       const response = await createVenue(API_URL, venueData);
       console.log('Form submitted with values:', venueData);
       console.log("Venue successfully created:", response);
-setSuccessMessage(true);
+setSuccessMessage('Venue created successfully!');
       console.log('API RESPONSE:', response);
     } catch (validationError) {
       const errors = {};
