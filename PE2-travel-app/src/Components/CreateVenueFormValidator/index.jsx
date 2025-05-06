@@ -5,7 +5,7 @@ import * as Yup from "yup";
 const CreateVenueFormValidator = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   description: Yup.string().required("Description is required").min(10, "Description must be at least 10 characters long"),
-  images: Yup.array()
+  media: Yup.array()
     .of(
       Yup.object().shape({
         url: Yup.string().url("Invalid URL").required("Image URL is required"),
@@ -23,16 +23,14 @@ const CreateVenueFormValidator = Yup.object().shape({
     pets: Yup.boolean().default(false),
   }),
   location: Yup.object().shape({
-    address: Yup.string(),
-    city: Yup.string(),
-    zip: Yup.number(),
-    country: Yup.string(),
-    continent: Yup.string(),
-    lat: Yup.number(),
-    lng: Yup.number(),
-  }),
-
-
+    address: Yup.string().optional(),
+    city: Yup.string().optional(),
+    zip: Yup.number().optional(),
+    country: Yup.string().optional(),
+    continent: Yup.string().optional(),
+    lat: Yup.number().optional(),
+    lng: Yup.number().optional(),
+  }).optional(),
 });
 
 export default CreateVenueFormValidator;

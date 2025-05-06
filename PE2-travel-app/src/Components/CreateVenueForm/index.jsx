@@ -1,13 +1,23 @@
 import { Box, TextField, Button } from "@mui/material";
 import React from "react";
+import { useEffect, useState } from "react";
 
 
 
 const CreateVenueForm = ({ register, setValue, watch, errors, handleSubmit, onSubmit, toggleForm, onAddImage, removeImage }) => {
-  const metaValues = watch("meta") || { wifi: false, parking: false, breakfast: false, pets: false };
+  const  [metaValues, setMetaValues]= useState({ wifi: false, parking: false, breakfast: false, pets: false });
+  useEffect(() => {
+    setMetaValues(watch("meta") || { wifi: false, parking: false, breakfast: false, pets: false });
+  }, [watch("meta")]);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submission triggered");
+    handleSubmit(onSubmit)();
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleFormSubmit}>
       <Box sx={{ marginBottom: 2, width: "800px", height: '100px', padding: 3, backgroundColor: "white" }}>
 
       {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
@@ -172,7 +182,7 @@ const CreateVenueForm = ({ register, setValue, watch, errors, handleSubmit, onSu
 {errors.location?.lng && <p style={{ color: "red" }}>{errors.location.lng.message}</p>}
 
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button  type="submit" variant="contained" color="primary" fullWidth>
           Create Venue
         </Button>
 

@@ -6,9 +6,7 @@ import Pets from "../../assets/Images/pets.png";
 import Breakfast from "../../assets/Images/breakfast.png";
 import { Snackbar, Alert, Button } from "@mui/material";
 import useMyStore from "../../Store";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import CreateVenueFormValidator from "../CreateVenueFormValidator/index";
+
 
 
 function Venues({ vmVenues, successMessage, setSuccessMessage }) {
@@ -22,14 +20,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
   const {fetchVMVenues} = useMyStore();
 
 
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(CreateVenueFormValidator),
-  });
+
 
   useEffect(()=>{
     console.log('current success message:', successMessage);
@@ -110,7 +101,9 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
         </Snackbar>
       </div>
 
-      <button onClick={toggleForm}>Create Venue</button>
+      <button onClick={toggleForm}>
+        {isFormVisible ? "Close Form" : "Create Venue"}
+      </button>
       {isFormVisible && (
         <div
           style={{
@@ -121,7 +114,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
 
             alignItems: "center",
             justifyContent: "center",
-            zIndex: 1000,
+            zIndex: 3000,
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
@@ -132,12 +125,10 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
         
 
           <CreateVenueFormBox
-            toggleForm={toggleForm}
             setSuccessMessage={setSuccessMessage}
-            register={register}
-            errors={errors}
-            handleSubmit={handleSubmit}
-          
+      
+            fetchVMVenues={fetchVMVenues}
+            toggleForm={toggleForm}
           />
         </div>
       )}
