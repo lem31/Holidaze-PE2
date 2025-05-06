@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import CreateVenueFormBox from "../CreateVenueFormBox";
 import Wifi from "../../assets/Images/wifi.png";
 import Parking from "../../assets/Images/parking.png";
 import Pets from "../../assets/Images/pets.png";
 import Breakfast from "../../assets/Images/breakfast.png";
 import { Snackbar, Alert, Button } from "@mui/material";
 import useMyStore from "../../Store";
+import CreateVenueForm from "../CreateVenueForm";
 
 
 
@@ -128,7 +128,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
         >
        
 
-          <CreateVenueFormBox
+          <CreateVenueForm
             setSuccessMessage={setSuccessMessage}
             
             fetchVMVenues={fetchVMVenues}

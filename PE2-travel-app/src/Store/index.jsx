@@ -218,7 +218,7 @@ const useMyStore = create(
         console.log("🚀 API call triggered with:", venueData);
         const token = get().token;
         console.log("🔍 Token value:", token );
-        const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
+   
         if (!token){
           console.error("Token not found in local storage.");
         
@@ -226,9 +226,11 @@ const useMyStore = create(
 
         try{
           console.log('calling createVenue API');
-          const response = await createVenue(API_URL, venueData, token);
-          console.log("✅ API response:", response);
-          console.log("✅ createVenue function is running!");
+          const response = await createVenue(venueData);
+          await fetchVMVenues();
+          setSuccessMessage("Venue created successfully!");
+          console.log("API response:", response);
+          console.log("createVenue function is running!");
 
           if (!response || response.error) {
             throw new Error("Venue creation failed");

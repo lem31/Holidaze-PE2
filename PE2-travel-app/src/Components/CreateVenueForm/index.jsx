@@ -1,17 +1,88 @@
 import { Box, TextField, Button } from "@mui/material";
 import React from "react";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import CreateVenueFormValidator from "../CreateVenueFormValidator";
+import useMyStore from "../../Store/index";
 
 
 
-const CreateVenueForm = ({ register, setValue, watch, errors, handleSubmit, onSubmit, toggleForm, onAddImage, removeImage }) => {
+const CreateVenueForm = ({   toggleForm, setSuccessMessage, fetchVMVenues }) => {
+
+
+
+  const { createVenue } = useMyStore();
+  console.log("🛠 Zustand createVenue function:", createVenue);
+
+
+ 
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    setError,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(CreateVenueFormValidator),
+    mode: 'onSubmit',
+    defaultValues: {
+      name: "",
+      description: "",
+      media: [],
+      price: "",
+      maxGuests: "",
+      rating: 0,
+      meta: { wifi: false, parking: false, breakfast: false, pets: false },
+      location: {
+        address: "",
+        city: "",
+        country: "",
+      }
+    },
+  });
+
+  const onAddImage = () => {
+    setValue("media", [...watch("media"), { url: "", alt: "" }]);
+  };
+
+  const removeImage = (index) => {
+    const updatedMedia = [...watch("media")];
+    updatedMedia.splice(index, 1);
+    setValue("media", updatedMedia);
+  };
+
+
+
+
+  const onSubmit = async (data) => {
+  
+    console.log("🚀 Form submission triggered!", data);
+   try{
+    const response = await createVenue(data);
+    console.log("API response:", response);
+    await fetchVMVenues();
+    setSuccessMessage("Venue created successfully!");
+    setTimeout(() => {
+      reset();
+      toggleForm();
+    }, 500);
+  
+   }catch (error) {
+    console.error("Error creating venue:", error);
+    setError("api", { message: "Failed to create venue" });
+   }
+  };
+  
+
+
   const  [metaValues, setMetaValues]= useState({ wifi: false, parking: false, breakfast: false, pets: false });
   useEffect(() => {
     setMetaValues(watch("meta") || { wifi: false, parking: false, breakfast: false, pets: false });
   }, [watch("meta")]);
-
-
-
 
 
   return (
