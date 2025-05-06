@@ -25,6 +25,15 @@ const CreateVenueFormBox = ({
     resolver: yupResolver(CreateVenueFormValidator),
     mode: 'onSubmit',
     defaultValues: {
+      name: "",
+      description: "",
+      price: "",
+      location: {
+        address: "",
+        city: "",
+        country: "",
+      },
+      media: [],
       meta: { wifi: false, parking: false, breakfast: false, pets: false },
     },
   });
@@ -38,6 +47,7 @@ const CreateVenueFormBox = ({
     updatedMedia.splice(index, 1);
     setValue("media", updatedMedia);
   };
+
 
 
   const onSubmit = async (formData) => {

@@ -5,7 +5,7 @@ import fetchUserProfile from "../API/FetchUserProfile/index.js";
 import fetchVMVenues from "../API/FetchVMVenues";
 import deleteVenue from "../API/DeleteVenue";
 import updateProfile from "../API/UpdateProfile/index.js";
-import { use } from "react";
+
 
 const useMyStore = create(
   persist(
@@ -184,6 +184,11 @@ const useMyStore = create(
         loading: false,
         error: "Token or username not found in local storage.",
       });
+      return;
+    }
+
+    if (get().vmVenues.length > 0) {
+      console.log("Using cached venues data");
       return;
     }
 

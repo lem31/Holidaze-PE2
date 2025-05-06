@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import useMyStore from "../../Store/index";
 import EditProfileFormBox from "../EditProfileFormBox";
 import Venues from "../Venues";
@@ -8,13 +8,14 @@ import Venues from "../Venues";
 
 const ProfileVenueManager = () => {
   const [successMessage, setSuccessMessage] = useState('');
-  const { userProfile, fetchVMVenues, vmVenues } = useMyStore(); 
+  const { userProfile, vmVenues } = useMyStore(); 
+  const fetchVMVenues = useCallback(useMyStore.getState().fetchVMVenues, []);
   const [selectedView, setSelectedView] = useState("");
 
   useEffect(() => {
     console.log("Fetching venues...");
     fetchVMVenues();
-  }, [fetchVMVenues]);
+  }, []);
 
   if (!userProfile) {
     return <p>No profile data available, please log in again.</p>;
@@ -41,7 +42,7 @@ const ProfileVenueManager = () => {
         <button
           onClick={() => {
             setSelectedView("Venues");
-            fetchVMVenues();
+            if (!vmVenues.length) fetchVMVenues();
           }}
         >
           Venues
