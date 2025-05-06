@@ -1,255 +1,187 @@
-import Pets from '../../assets/Images/Pets.png';
-import Breakfast from '../../assets/Images/Breakfast.png';
-import Parking from '../../assets/Images/Parking.png';
-import Wifi from '../../assets/Images/Wifi.png';
-import React, {useEffect, useState} from 'react';
-import { Box, TextField, Button, } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
+import React from "react";
 
 
 
-const CreateVenueForm = ({ formValues, onInputChange, onImageChange, onAddImage, onSubmit, validationErrors,   toggleForm,   }) => {
+const CreateVenueForm = ({ register, setValue, watch, errors, handleSubmit, onSubmit, toggleForm, onAddImage }) => {
+  const metaValues = watch("meta") || { wifi: false, parking: false, breakfast: false, pets: false };
 
- 
-  useEffect(() => {
-    console.log("Updated Facilities State:", formValues.meta);
-  }, [formValues.meta]);
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Box sx={{ marginBottom: 2, width: "800px", padding: 3, backgroundColor: "white" }}>
 
-
-  
-    return (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit(e);
-          toggleForm();
-          console.log('Form submitted with values:', formValues);
-        
-        }}
-      >
-
-        <Box sx={{ marginBottom: 2, width: '800px', maxWidth: '800px', height: 'auto', maxHeight:'80vh', padding:3, backgroundColor:'white'}}>
+      {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
+        <TextField label="Name" {...register("name")} variant="outlined" fullWidth required sx={{ marginBottom: 2 }} />
+      
+        {errors.description && <p style={{ color: "red" }}>{errors.description.message}</p>}
+        <TextField label="Description" {...register("description")} variant="outlined" fullWidth required sx={{ marginBottom: 2 }} />
        
-        <TextField
-          label="Name"
-          name="name"
-          value={formValues.name}
-          onChange={(e) =>onInputChange(e.target.name, e.target.value)}
-          variant="outlined"
-          fullWidth
-          required
-          sx={{ marginBottom: 2 }}
-        />
-        {validationErrors.name && <p style={{ color: "red" }}>{validationErrors.name}</p>}
-    
 
-        <TextField
-          label="Description"
-          name="description"
-          value={formValues.description}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-            required
-            sx={{ marginBottom: 2 }}
-        />
-               {validationErrors.description && <p style={{ color: "red" }}>{validationErrors.description}</p>}
-      
-     
-        {Array.isArray(formValues.images) && formValues.images.map((image, index) => (
-          <Box key={index} >
-            <TextField
-              label="Image URL"
-              name="url"
-              value={image.url}
-              onChange={(e) => onImageChange(index, e.target.name, e.target.value)}
-              variant="outlined"
-              fullWidth
-              sx={{ marginBottom: 1 }}
-            />
-              {validationErrors.alt && <p>{validationErrors.alt}</p>}
-            <TextField
-              label="Alt Text"
-              name="alt"
-              value={image.alt}
-              onChange={(e) => onImageChange(index, e.target.name, e.target.value)}
-              variant="outlined"
-              fullWidth
-            />
-              {validationErrors.alt && <p>{validationErrors.alt}</p>}
-          </Box>
-        ))}
-        <Button
-          onClick={onAddImage}
-          type="button"
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        >
-          Add Another Image
-        </Button>
+        {Array.isArray(watch("media")) &&
+  watch("media").map((image, index) => (
+    <Box key={index}>
+      <TextField
+        label="Image URL"
+        {...register(`media.${index}.url`)}
+        variant="outlined"
+        fullWidth
+        sx={{ marginBottom: 1 }}
+      />
+      {errors.media?.[index]?.url && <p style={{ color: "red" }}>{errors.media[index].url.message}</p>}
+
+      <TextField
+        label="Alt Text"
+        {...register(`media.${index}.alt`)}
+        variant="outlined"
+        fullWidth
+      />
+      {errors.media?.[index]?.alt && <p style={{ color: "red" }}>{errors.media[index].alt.message}</p>}
+
+      <Button type="button" onClick={() => removeImage(index)}>Remove Image</Button>
+    </Box>
+  ))}
+<Button type="button" onClick={onAddImage}>Add Image</Button>
+
+<TextField
+  label="Price"
+  type="number"
+  {...register("price")}
+  variant="outlined"
+  fullWidth
+  required
+  sx={{ marginBottom: 2 }}
+/>
+{errors.price && <p style={{ color: "red" }}>{errors.price.message}</p>}
+
+<TextField
+  label="Max Guests"
+  type="number"
+  {...register("maxGuests")}
+  variant="outlined"
+  fullWidth
+  required
+  sx={{ marginBottom: 2 }}
+/>
+{errors.maxGuests && <p style={{ color: "red" }}>{errors.maxGuests.message}</p>}
+
+<TextField
+  label="Rating"
+  type="number"
+  {...register("rating")}
+  variant="outlined"
+  fullWidth
+  required
+  sx={{ marginBottom: 2 }}
+/>
+{errors.rating && <p style={{ color: "red" }}>{errors.rating.message}</p>}
 
 
-   <TextField
-          label="Price"
-          name="price"
-            type='number'
-          value={formValues.price}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-            required
-            sx={{ marginBottom: 2 }}
-        />
-          {validationErrors.price && <p style={{ color: "red" }}>{validationErrors.price}</p>}
-          <TextField
-          label="MaxGuests"
-          name="maxGuests"
-          type='number'
-          value={formValues.maxGuests}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-            required
-            sx={{ marginBottom: 2 }}
-        />
-          {validationErrors.maxGuests && <p style={{ color: "red" }}>{validationErrors.maxGuests}</p>}
-          <TextField
-          label="Rating"
-          name="rating"
-          value={formValues.rating}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-            required
-            sx={{ marginBottom: 2 }}
-        />
-          {validationErrors.rating && <p style={{ color: "red" }}>{validationErrors.rating}</p>}
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: 2 }}>
-        <Button
-      
-            variant={formValues.meta.parking ? "contained" : "outlined"}
-            onClick={() => onInputChange("meta.parking", !formValues.meta.parking)}
-            startIcon={<img src={Parking} alt="Parking" style={{ width: 24, height: 24 }} />}
-        >
-              <img src={Parking} alt="Parking" />
+        <Box sx={{ display: "flex", justifyContent: "space-between", marginBottom: 2 }}>
+          <Button
+            variant={metaValues.parking ? "contained" : "outlined"} 
+            onClick={() => setValue("meta.parking", !metaValues.parking)} 
+          >
             Parking
-        </Button>
-        <Button
-            variant={formValues.meta.wifi ? "contained" : "outlined"}
-            onClick={() => onInputChange("meta.wifi", !formValues.meta.wifi)}
-            startIcon={<img src={Wifi} alt="Wifi" style={{ width: 24, height: 24 }} />}
-        >
-              <img src={Wifi} alt="Wifi" />
+          </Button>
+
+          <Button
+            variant={metaValues.wifi ? "contained" : "outlined"}
+            onClick={() => setValue("meta.wifi", !metaValues.wifi)}
+          >
             Wifi
-        </Button>
-        <Button
-            variant={formValues.meta.breakfast ? "contained" : "outlined"}
-            onClick={() => onInputChange("meta.breakfast", !formValues.meta.breakfast)}
-            startIcon={<img src={Breakfast} alt="Breakfast" style={{ width: 24, height: 24 }} />}
-        >
-              <img src={Breakfast} alt="Breakfast" />
+          </Button>
+
+          <Button
+            variant={metaValues.breakfast ? "contained" : "outlined"}
+            onClick={() => setValue("meta.breakfast", !metaValues.breakfast)}
+          >
             Breakfast
-        </Button>
-        <Button
-            variant={formValues.meta.pets ? "contained" : "outlined"}
-            onClick={() => onInputChange("meta.pets", !formValues.meta.pets)}
-            startIcon={<img src={Pets} alt="Pets" style={{ width: 24, height: 24 }} />}
-        >
-              <img src={Pets} alt="Pets" />
+          </Button>
+
+          <Button
+            variant={metaValues.pets ? "contained" : "outlined"}
+            onClick={() => setValue("meta.pets", !metaValues.pets)}
+          >
             Pets
-        </Button>
-    </Box>
-    <Box sx={{ marginBottom: 2 }}>
-        <TextField
-            label="Address"
-            name="location.address"
-            value={formValues.location?.address || ''}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-        />
-        {validationErrors['location.address'] && <p>{validationErrors['location.address']}</p>}
-
-        <TextField
-            label="City"
-            name="location.city"
-            value={formValues.location?.city || ''}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-        />
-        {validationErrors['location.city'] && <p>{validationErrors['location.city']}</p>}
-
-        <TextField
-            label="Zip"
-            name="location.zip"
-            value={formValues.location?.zip || ''}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-        />
-        {validationErrors['location.zip'] && <p>{validationErrors['location.zip']}</p>}
-
-        <TextField
-            label="Country"
-            name="location.country"
-            value={formValues.location?.country || ''}
-            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-        />
-        {validationErrors['location.country'] && <p>{validationErrors['location.country']}</p>}
-
-        <TextField
-            label="Continent"
-            name="location.continent"
-            value={formValues.location?.continent || ''}
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-        />
-        {validationErrors['location.continent'] && <p>{validationErrors['location.continent']}</p>}
-
-        <TextField
-            label="Latitude"
-            name="location.lat"
-            type="number"
-            value={formValues.location?.lat || 0}
-            onChange={(e) => onInputChange(e.target.name, parseFloat(e.target.value))}
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-        />
-        {validationErrors['location.lat'] && <p>{validationErrors['location.lat']}</p>}
-
-        <TextField
-            label="Longitude"
-            name="location.lng"
-            type="number"
-            value={formValues.location?.lng || 0}
-            onChange={(e) => onInputChange(e.target.name, parseFloat(e.target.value))}
-            variant="outlined"
-            fullWidth
-            sx={{ marginBottom: 2 }}
-        />
-        {validationErrors['location.lng'] && <p>{validationErrors['location.lng']}</p>}
-    </Box>
-
-    <Button type="submit" variant="contained" color="primary" fullWidth>
-     Create Venue
-        </Button>
-    
-        <Button type='button' variant="contained" color="primary" fullWidth onClick={toggleForm} style={{ marginTop: 10 }} >CANCEL</Button>
-      
+          </Button>
         </Box>
-      </form>
-    );
-  };
-  
-  export default CreateVenueForm;
-  
+
+        <TextField
+  label="Address"
+  {...register("location.address")}
+  variant="outlined"
+  fullWidth
+  sx={{ marginBottom: 2 }}
+/>
+{errors.location?.address && <p style={{ color: "red" }}>{errors.location.address.message}</p>}
+
+<TextField
+  label="City"
+  {...register("location.city")}
+  variant="outlined"
+  fullWidth
+  sx={{ marginBottom: 2 }}
+/>
+{errors.location?.city && <p style={{ color: "red" }}>{errors.location.city.message}</p>}
+
+<TextField
+  label="Zip"
+  {...register("location.zip")}
+  variant="outlined"
+  fullWidth
+  sx={{ marginBottom: 2 }}
+/>
+{errors.location?.zip && <p style={{ color: "red" }}>{errors.location.zip.message}</p>}
+
+<TextField
+  label="Country"
+  {...register("location.country")}
+  variant="outlined"
+  fullWidth
+  sx={{ marginBottom: 2 }}
+/>
+{errors.location?.country && <p style={{ color: "red" }}>{errors.location.country.message}</p>}
+
+<TextField
+  label="Continent"
+  {...register("location.continent")}
+  variant="outlined"
+  fullWidth
+  sx={{ marginBottom: 2 }}
+/>
+{errors.location?.continent && <p style={{ color: "red" }}>{errors.location.continent.message}</p>}
+
+<TextField
+  label="Latitude"
+  type="number"
+  {...register("location.lat")}
+  variant="outlined"
+  fullWidth
+  sx={{ marginBottom: 2 }}
+/>
+{errors.location?.lat && <p style={{ color: "red" }}>{errors.location.lat.message}</p>}
+
+<TextField
+  label="Longitude"
+  type="number"
+  {...register("location.lng")}
+  variant="outlined"
+  fullWidth
+  sx={{ marginBottom: 2 }}
+/>
+{errors.location?.lng && <p style={{ color: "red" }}>{errors.location.lng.message}</p>}
+
+
+        <Button type="submit" variant="contained" color="primary" fullWidth>
+          Create Venue
+        </Button>
+
+        <Button type="button" variant="contained" color="primary" fullWidth onClick={toggleForm} sx={{ marginTop: 2 }}>
+          CANCEL
+        </Button>
+      </Box>
+    </form>
+  );
+};
+
+export default CreateVenueForm;

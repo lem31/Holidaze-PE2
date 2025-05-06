@@ -6,6 +6,9 @@ import Pets from "../../assets/Images/pets.png";
 import Breakfast from "../../assets/Images/breakfast.png";
 import { Snackbar, Alert, Button } from "@mui/material";
 import useMyStore from "../../Store";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import CreateVenueFormValidator from "../CreateVenueFormValidator/index";
 
 
 function Venues({ vmVenues, successMessage, setSuccessMessage }) {
@@ -18,6 +21,15 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
 
   const {fetchVMVenues} = useMyStore();
 
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(CreateVenueFormValidator),
+  });
 
   useEffect(()=>{
     console.log('current success message:', successMessage);
@@ -122,6 +134,10 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
           <CreateVenueFormBox
             toggleForm={toggleForm}
             setSuccessMessage={setSuccessMessage}
+            register={register}
+            errors={errors}
+            handleSubmit={handleSubmit}
+          
           />
         </div>
       )}

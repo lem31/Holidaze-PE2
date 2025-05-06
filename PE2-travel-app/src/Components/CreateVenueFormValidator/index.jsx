@@ -3,56 +3,36 @@ import * as Yup from "yup";
 
 
 const CreateVenueFormValidator = Yup.object().shape({
-    name: Yup.string().required("Name is required")
-    .min(3, "Name must be at least 3 characters")
-    .max(50, "Name must be at most 50 characters"),
-    description: Yup.string()
-        .required("Description is required"),
-    price: Yup.number()
-        .required("Price is required")
-        .positive('Price must be a positive number')
-    .integer('Price must be a whole number'),
-    maxGuests: Yup.number()
-        .required("Max guests is required")
-        .integer('Max guests must be a whole number')
-        .min(1, 'At least 1 max guest is required'),
-        rating: Yup.number(),
-        
-    media: Yup.array().of(
-        Yup.object().shape({
-            url: Yup.string()
-                .url("URL must be a valid and accessible URL"),
-            alt: Yup.string()
-        })
-    ),
- 
-    meta: Yup.object().shape({
-        wifi: Yup.boolean()
-            .default(false),
-        parking: Yup.boolean()
-            .default(false),
-        breakfast: Yup.boolean()
-            .default(false),
-        pets: Yup.boolean()
-            .default(false),
-    }),
-    location: Yup.object().shape({
-        address: Yup.string()
-            .nullable(),
-        city: Yup.string()
-            .nullable(),
-        zip: Yup.string()
-            .nullable(),
-        country: Yup.string()
-            .nullable(),
-        continent: Yup.string()
-            .nullable(),
-        lat: Yup.number()
-            .default(0),
-        lng: Yup.number()
-            .default(0),
-    }),
+  name: Yup.string().required("Name is required"),
+  description: Yup.string().required("Description is required").min(10, "Description must be at least 10 characters long"),
+  images: Yup.array()
+    .of(
+      Yup.object().shape({
+        url: Yup.string().url("Invalid URL").required("Image URL is required"),
+        alt: Yup.string().optional(),
+      })
+    )
+    .min(1, "At least one image is required"),
+  price: Yup.number().min(1, "Price must be greater than 0").required("Price is required"),
+  maxGuests: Yup.number().min(1, "Max guests must be at least 1").required("Max guests is required"),
+  rating: Yup.number().min(0).max(5, "Rating must be between 0 and 5").optional(),
+  meta: Yup.object().shape({
+    wifi: Yup.boolean().default(false),
+    parking: Yup.boolean().default(false),
+    breakfast: Yup.boolean().default(false),
+    pets: Yup.boolean().default(false),
+  }),
+  location: Yup.object().shape({
+    address: Yup.string().required("Address is required"),
+    city: Yup.string().required("City is required"),
+    zip: Yup.string().required("ZIP code is required"),
+    country: Yup.string().required("Country is required"),
+    continent: Yup.string().required("Continent is required"),
+    lat: Yup.number().required("Latitude is required"),
+    lng: Yup.number().required("Longitude is required"),
+  }),
+
+
 });
- 
 
 export default CreateVenueFormValidator;
