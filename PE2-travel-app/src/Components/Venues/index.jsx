@@ -20,7 +20,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
   const {fetchVMVenues} = useMyStore();
 
 
-
+  console.log("Current success message:", successMessage);
 
   useEffect(()=>{
     console.log('current success message:', successMessage);
@@ -29,7 +29,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
 
   useEffect(() => {
     fetchVMVenues();
-  }, [successMessage]);
+  }, []);
 
   const {deleteVenue} = useMyStore();
   const handleDelete =  (venueId) => {
@@ -45,9 +45,13 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const toggleForm = () => {
-    setIsFormVisible((prevVisible) => !prevVisible);
+    console.log("🚀 ToggleForm Clicked!");
+    setIsFormVisible((prevVisible) => {
+      console.log("New form visibility:", !prevVisible);
+      return !prevVisible;
+    });
   };
-
+  
   return (
     <div>
       <h1>Venues</h1>
@@ -66,7 +70,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
         }}
       >
         <Snackbar
-          open={!!successMessage}
+          open={Boolean(successMessage)}
           autoHideDuration={3000}
           onClose={() => setSuccessMessage('')}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
@@ -101,9 +105,9 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
         </Snackbar>
       </div>
 
-      <button onClick={toggleForm}>
+      <Button onClick={toggleForm}>
         {isFormVisible ? "Close Form" : "Create Venue"}
-      </button>
+      </Button>
       {isFormVisible && (
         <div
           style={{
@@ -122,7 +126,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
             padding: "20px",
           }}
         >
-        
+       
 
           <CreateVenueFormBox
             setSuccessMessage={setSuccessMessage}

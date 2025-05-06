@@ -1,12 +1,8 @@
-async function createVenue(endPoint, venueData) {
-const token = localStorage.getItem('token');
-console.log("Token in createVenue:", token);
-  console.log("API Endpoint in createVenue:", endPoint);
-if (!token) {
-    throw new Error('No token found in local storage');
-}
+export const createVenue = async (API_URL, venueData, token) => {
+
+  
     try{
-        const response = await fetch(endPoint, {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,10 +17,9 @@ if (!token) {
            
             throw new Error('Failed to post venue');
         }
-        const data = await response.json();
-        console.log('Venue created successfully:', data);
+      
  
-        return data;
+       return await response.json();
     } catch (error) {
        
         throw error;

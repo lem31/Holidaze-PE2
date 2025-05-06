@@ -1,17 +1,23 @@
-import React from "react";
+import React, {useCallback} from "react";
 import { Box, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CreateVenueForm from '../CreateVenueForm';
 import CreateVenueFormValidator from "../CreateVenueFormValidator";
-import createVenue from "../../API/CreateVenue";
+import useMyStore from "../../Store/index";
 
 const CreateVenueFormBox = ({
   setSuccessMessage,
   toggleForm,
   fetchVMVenues,
 }) => {
-  const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
+ 
+
+  const { createVenue } = useMyStore();
+
+  const memoizedCreateVenue = useCallback((data) => {
+    createVenue(data);  
+  }, [createVenue]);
 
   const {
     register,
@@ -50,27 +56,17 @@ const CreateVenueFormBox = ({
 
 
 
-  const onSubmit = async (formData) => {
-    console.log("Submitting form...", formData);
-    console.log("Current validation errors:", errors);
-  
-    try {
-      const response = await createVenue(API_URL, formData);
-      console.log("Venue created successfully:", response);
-  
-      if (!response || response.error) {
-        throw new Error("Venue creation failed");
-      }
-  
-      setSuccessMessage("Venue created successfully!");
-      await fetchVMVenues();
-      reset();
-      toggleForm();
-      console.log("Current errors:", errors);
-    } catch (error) {
-      console.error("Error creating venue:", error);
-      setError("general", { type: "manual", message: "Failed to create venue" });
-    }
+  const onSubmit = async (data) => {
+    console.log("🚀 Form submission triggered!", data);
+   try{
+     memoizedCreateVenue(data);
+    setSuccessMessage("Venue created successfully!");
+    reset();
+    toggleForm();
+   }catch (error) {
+    console.error("Error creating venue:", error);
+    setError("api", { message: "Failed to create venue" });
+   }
   };
   
 

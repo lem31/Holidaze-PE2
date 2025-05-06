@@ -5,6 +5,7 @@ import fetchUserProfile from "../API/FetchUserProfile/index.js";
 import fetchVMVenues from "../API/FetchVMVenues";
 import deleteVenue from "../API/DeleteVenue";
 import updateProfile from "../API/UpdateProfile/index.js";
+import createVenue from "../API/CreateVenue";
 
 
 const useMyStore = create(
@@ -213,6 +214,32 @@ const useMyStore = create(
     }
       },
 
+      createVenue: async (venueData) => {
+        const token= get().token;
+        const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
+        if (!token){
+          console.error("Token not found in local storage.");
+          return;
+        }
+
+        try{
+          console.log('calling createVenue API');
+          const response = await createVenue(API_URL, venueData, token);
+
+          if (!response || response.error) {
+            throw new Error("Venue creation failed");
+          }
+          console.log("Venue created successfully:", response);
+          set((state) => ({
+            vmVenues: [...state.vmVenues, response.data]}));
+            return response;
+          }catch (error) {
+            console.error("Error creating venue:", error);
+            throw error;
+            }
+          }, 
+
+
 deleteVenue: async (venueId) => {
   const token = get().token;
   const success = await deleteVenue(venueId, token);
@@ -221,10 +248,8 @@ deleteVenue: async (venueId) => {
       vmVenues: state.vmVenues.filter((venue) => venue.id !== venueId),
     }));
   }},
-
     }),
 
- 
 
     {
       name: "auth-storage",
@@ -237,5 +262,7 @@ deleteVenue: async (venueId) => {
     }
   )
 );
+
+
 
 export default useMyStore;

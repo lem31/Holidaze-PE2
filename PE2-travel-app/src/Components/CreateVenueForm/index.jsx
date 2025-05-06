@@ -10,18 +10,22 @@ const CreateVenueForm = ({ register, setValue, watch, errors, handleSubmit, onSu
     setMetaValues(watch("meta") || { wifi: false, parking: false, breakfast: false, pets: false });
   }, [watch("meta")]);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submission triggered");
-    handleSubmit(onSubmit)();
-  };
+
+
+const handleFormSubmit = handleSubmit((data) =>{
+  console.log("Form submitted with data:", data);
+  onSubmit(data);
+  toggleForm();
+  reset();
+  setMetaValues({ wifi: false, parking: false, breakfast: false, pets: false });
+})
 
   return (
     <form onSubmit={handleFormSubmit}>
       <Box sx={{ marginBottom: 2, width: "800px", height: '100px', padding: 3, backgroundColor: "white" }}>
 
       {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
-        <TextField label="Name" {...register("name")} variant="outlined" fullWidth required sx={{ marginBottom: 2 }} />
+        <TextField label="Name" {...register("name")} variant="outlined" fullWidth required sx={{ marginBottom: 2 }}   autoComplete="name" />
       
         {errors.description && <p style={{ color: "red" }}>{errors.description.message}</p>}
         <TextField label="Description" {...register("description")} variant="outlined" fullWidth required sx={{ marginBottom: 2 }} />
@@ -185,7 +189,7 @@ const CreateVenueForm = ({ register, setValue, watch, errors, handleSubmit, onSu
         <Button  type="submit" variant="contained" color="primary" fullWidth>
           Create Venue
         </Button>
-
+       
         <Button type="button" variant="contained" color="primary" fullWidth onClick={toggleForm} sx={{ marginTop: 2 }}>
           CANCEL
         </Button>

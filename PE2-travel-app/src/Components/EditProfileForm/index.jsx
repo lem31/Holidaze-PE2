@@ -27,6 +27,7 @@ const EditProfileForm = ({
             onSubmit={(e) => {
                 e.preventDefault();
                 onSubmit(e);
+                console.log("🚀 Form submission reached onSubmit!", data);
             }}
         >
             <TextField
