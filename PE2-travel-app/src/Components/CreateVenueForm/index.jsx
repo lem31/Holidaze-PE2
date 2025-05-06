@@ -3,12 +3,12 @@ import React from "react";
 
 
 
-const CreateVenueForm = ({ register, setValue, watch, errors, handleSubmit, onSubmit, toggleForm, onAddImage }) => {
+const CreateVenueForm = ({ register, setValue, watch, errors, handleSubmit, onSubmit, toggleForm, onAddImage, removeImage }) => {
   const metaValues = watch("meta") || { wifi: false, parking: false, breakfast: false, pets: false };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Box sx={{ marginBottom: 2, width: "800px", padding: 3, backgroundColor: "white" }}>
+      <Box sx={{ marginBottom: 2, width: "800px", height: '100px', padding: 3, backgroundColor: "white" }}>
 
       {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
         <TextField label="Name" {...register("name")} variant="outlined" fullWidth required sx={{ marginBottom: 2 }} />

@@ -58,7 +58,7 @@ const CreateVenueFormBox = ({ toggleForm, setSuccessMessage }) => {
         <CreateVenueForm
           register={register}
           errors={errors}
-          handleSubmit={handleSubmit}
+          handleSubmit={handleSubmit(onSubmit)}
           onSubmit={onSubmit}
           toggleForm={toggleForm}
           setValue={setValue}

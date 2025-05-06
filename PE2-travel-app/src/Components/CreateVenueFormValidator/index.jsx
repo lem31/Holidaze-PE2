@@ -23,13 +23,13 @@ const CreateVenueFormValidator = Yup.object().shape({
     pets: Yup.boolean().default(false),
   }),
   location: Yup.object().shape({
-    address: Yup.string().required("Address is required"),
-    city: Yup.string().required("City is required"),
-    zip: Yup.string().required("ZIP code is required"),
-    country: Yup.string().required("Country is required"),
-    continent: Yup.string().required("Continent is required"),
-    lat: Yup.number().required("Latitude is required"),
-    lng: Yup.number().required("Longitude is required"),
+    address: Yup.string(),
+    city: Yup.string(),
+    zip: Yup.number(),
+    country: Yup.string(),
+    continent: Yup.string(),
+    lat: Yup.number(),
+    lng: Yup.number(),
   }),
 
 
