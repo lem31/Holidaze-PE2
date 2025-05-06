@@ -29,7 +29,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
 
   useEffect(() => {
     fetchVMVenues();
-  }, []);
+  }, [successMessage]);
 
   const {deleteVenue} = useMyStore();
   const handleDelete =  (venueId) => {
@@ -130,7 +130,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
 
           <CreateVenueFormBox
             setSuccessMessage={setSuccessMessage}
-      
+            
             fetchVMVenues={fetchVMVenues}
             toggleForm={toggleForm}
           />

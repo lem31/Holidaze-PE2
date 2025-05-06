@@ -2,6 +2,7 @@ export const createVenue = async (API_URL, venueData, token) => {
 
   
     try{
+        console.log("📡 About to send API request...");
         const response = await fetch(API_URL, {
             method: 'POST',
             headers: {

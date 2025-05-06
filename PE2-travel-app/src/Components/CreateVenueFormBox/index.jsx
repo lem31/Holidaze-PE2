@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import { Box, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,9 +15,8 @@ const CreateVenueFormBox = ({
 
   const { createVenue } = useMyStore();
 
-  const memoizedCreateVenue = useCallback((data) => {
-    createVenue(data);  
-  }, [createVenue]);
+
+ 
 
   const {
     register,
@@ -33,14 +32,16 @@ const CreateVenueFormBox = ({
     defaultValues: {
       name: "",
       description: "",
+      media: [],
       price: "",
+      maxGuests: "",
+      rating: 0,
+      meta: { wifi: false, parking: false, breakfast: false, pets: false },
       location: {
         address: "",
         city: "",
         country: "",
-      },
-      media: [],
-      meta: { wifi: false, parking: false, breakfast: false, pets: false },
+      }
     },
   });
 
@@ -55,14 +56,23 @@ const CreateVenueFormBox = ({
   };
 
 
+  useEffect(() => {
+    console.log("🛠 Form reset detected!", watch("name"));
+  }, [watch("name")]); 
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, event) => {
+    event.preventDefault();
     console.log("🚀 Form submission triggered!", data);
    try{
-     memoizedCreateVenue(data);
+    const response = await createVenue(data);
+    console.log("✅ API response:", response);
+    await fetchVMVenues();
     setSuccessMessage("Venue created successfully!");
-    reset();
-    toggleForm();
+    setTimeout(() => {
+      reset();
+      toggleForm();
+    }, 500);
+  
    }catch (error) {
     console.error("Error creating venue:", error);
     setError("api", { message: "Failed to create venue" });

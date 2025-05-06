@@ -12,16 +12,10 @@ const CreateVenueForm = ({ register, setValue, watch, errors, handleSubmit, onSu
 
 
 
-const handleFormSubmit = handleSubmit((data) =>{
-  console.log("Form submitted with data:", data);
-  onSubmit(data);
-  toggleForm();
-  reset();
-  setMetaValues({ wifi: false, parking: false, breakfast: false, pets: false });
-})
+
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit= {handleSubmit(onSubmit)}>
       <Box sx={{ marginBottom: 2, width: "800px", height: '100px', padding: 3, backgroundColor: "white" }}>
 
       {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
