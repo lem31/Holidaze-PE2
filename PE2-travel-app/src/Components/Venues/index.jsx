@@ -9,7 +9,8 @@ import CreateVenueForm from "../CreateVenueForm";
 
 
 
-function Venues({ vmVenues, successMessage, setSuccessMessage }) {
+
+function Venues({ vmVenues}) {
   const facilityIcons = {
     wifi: Wifi,
     parking: Parking,
@@ -17,17 +18,15 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
     breakfast: Breakfast,
   };
 
-  const {fetchVMVenues} = useMyStore();
-
-  console.log("🛠 Zustand Store Functions:", useMyStore.getState());
-
+  const {fetchVMVenues, successMessage, setSuccessMessage} = useMyStore();
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
 
   useEffect(() => {
     fetchVMVenues();
   }, []);
 
-  console.log('successMessage:', successMessage);
+
 
   const {deleteVenue} = useMyStore();
   const handleDelete =  (venueId) => {
@@ -40,7 +39,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
    }
   };
 
-  const [isFormVisible, setIsFormVisible] = useState(false);
+
 
   const toggleForm = () => {
     console.log("🚀 ToggleForm Clicked!");

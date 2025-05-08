@@ -1,6 +1,6 @@
-export const createVenue = async (venueData, API_URL, token) => {
+export const createVenue = async (token, venueData) => {
 
-
+    const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
 
     if (!token) {
         console.error("No token found! API request skipped.");

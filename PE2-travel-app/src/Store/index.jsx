@@ -20,8 +20,11 @@ const useMyStore = create(
       loadingProfile: false,
       loginChecked: false,
       vmVenues: [],
-      successMessage: null, 
+      successMessage: "", 
       venueData: null,
+
+      setSuccessMessage: (message) => set({ successMessage: message }),
+
 
       login: (newToken, userName) => {
         if (newToken) {
@@ -217,7 +220,7 @@ const useMyStore = create(
       createNewVenue: async (venueData) => {
 
         console.log("📡 Preparing to call API...");
-        const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
+      
         const token = get().token;
         console.log("🔍 Token value:", token );
    
@@ -228,9 +231,11 @@ const useMyStore = create(
 
         try{
           console.log("📡 Sending API request with venue data:", venueData);
-          console.log("API URL:", API_URL);
+         
+
+         
           
-          const response = await createVenue(venueData, API_URL, token);
+          const response = await createVenue(token, venueData);
           console.log("🚀 API call triggered with:", venueData);
           console.log("API response:", response);
 
