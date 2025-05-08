@@ -19,17 +19,15 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
 
   const {fetchVMVenues} = useMyStore();
 
+  console.log("🛠 Zustand Store Functions:", useMyStore.getState());
 
-  console.log("Current success message:", successMessage);
 
-  useEffect(()=>{
-    console.log('current success message:', successMessage);
-  
-  }, [successMessage]);
 
   useEffect(() => {
     fetchVMVenues();
-  }, [successMessage]);
+  }, []);
+
+  console.log('successMessage:', successMessage);
 
   const {deleteVenue} = useMyStore();
   const handleDelete =  (venueId) => {
@@ -72,7 +70,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
         <Snackbar
           open={Boolean(successMessage)}
           autoHideDuration={3000}
-          onClose={() => setSuccessMessage('')}
+          onClose={() => setSuccessMessage(null)}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           sx={{
             display: "flex",
@@ -129,9 +127,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
        
 
           <CreateVenueForm
-            setSuccessMessage={setSuccessMessage}
-            
-            fetchVMVenues={fetchVMVenues}
+        
             toggleForm={toggleForm}
           />
         </div>
@@ -148,7 +144,7 @@ function Venues({ vmVenues, successMessage, setSuccessMessage }) {
               <img
                 key={index}
                 src={image.url}
-                alt={`${selectedStay.name} image ${index + 1}`}
+                alt={`${venue.name} image ${index + 1}`}
                 loading="lazy"
               />
             ))}

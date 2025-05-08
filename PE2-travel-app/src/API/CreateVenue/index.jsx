@@ -1,6 +1,6 @@
-export const createVenue = async (venueData) => {
-    const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
-    const token = localStorage.getItem('token');
+export const createVenue = async (venueData, API_URL, token) => {
+
+
 
     if (!token) {
         console.error("No token found! API request skipped.");
@@ -9,7 +9,8 @@ export const createVenue = async (venueData) => {
 
     try {
         console.log("📡 Sending API request...");
-        const response = await fetch(API_URL, {
+        const response = await fetch(API_URL,  {
+        
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -18,6 +19,8 @@ export const createVenue = async (venueData) => {
             },
             body: JSON.stringify(venueData),
         });
+
+        console.log("🔍 Raw API response:", response);
 
         if (!response.ok) {
             const errorMessage = await response.text();

@@ -11,7 +11,7 @@ const ProfileVenueManager = () => {
   const { userProfile, vmVenues } = useMyStore(); 
   const {fetchVMVenues} = useMyStore();
   const [selectedView, setSelectedView] = useState("");
-
+  console.log("Store state:", useMyStore.getState());
   useEffect(() => {
     console.log("Fetching venues...");
     fetchVMVenues();

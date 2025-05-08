@@ -20,6 +20,8 @@ const useMyStore = create(
       loadingProfile: false,
       loginChecked: false,
       vmVenues: [],
+      successMessage: null, 
+      venueData: null,
 
       login: (newToken, userName) => {
         if (newToken) {
@@ -37,8 +39,6 @@ const useMyStore = create(
         console.log("userProfile", profileData);
         console.log("User profile persisted successfully.");
       },
-
-  
 
       logout: () => {
         set({
@@ -214,8 +214,10 @@ const useMyStore = create(
     }
       },
 
-      createVenue: async (venueData) => {
-        console.log("🚀 API call triggered with:", venueData);
+      createNewVenue: async (venueData) => {
+
+        console.log("📡 Preparing to call API...");
+        const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
         const token = get().token;
         console.log("🔍 Token value:", token );
    
@@ -225,17 +227,23 @@ const useMyStore = create(
         }
 
         try{
-          console.log('calling createVenue API');
-          const response = await createVenue(venueData);
-          await fetchVMVenues();
-          setSuccessMessage("Venue created successfully!");
+          console.log("📡 Sending API request with venue data:", venueData);
+          console.log("API URL:", API_URL);
+          
+          const response = await createVenue(venueData, API_URL, token);
+          console.log("🚀 API call triggered with:", venueData);
+          console.log("API response:", response);
+
+      
+          set({ successMessage: "Venue created successfully!" });
           console.log("API response:", response);
           console.log("createVenue function is running!");
 
-          if (!response || response.error) {
+          if (!response || !response.data) {
             throw new Error("Venue creation failed");
           }
-          console.log("Venue created successfully:", response);
+          console.log("Venue created successfully:", response.data);
+          
           set((state) => ({
             vmVenues: [...state.vmVenues, response.data]}));
             return response;

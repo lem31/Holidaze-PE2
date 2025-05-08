@@ -1,22 +1,20 @@
 import { Box, TextField, Button } from "@mui/material";
-import React from "react";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React, {useEffect, useState} from "react";
 import CreateVenueFormValidator from "../CreateVenueFormValidator";
 import useMyStore from "../../Store/index";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 
 
-const CreateVenueForm = ({   toggleForm, setSuccessMessage, fetchVMVenues }) => {
 
+const CreateVenueForm = ({ toggleForm  }) => {
 
+  const {createNewVenue, fetchVMVenues}  = useMyStore();
+  console.log("🛠 Zustand createVenue function:", createNewVenue);
 
-  const { createVenue } = useMyStore();
-  console.log("🛠 Zustand createVenue function:", createVenue);
+const [metaValues, setMetaValues] = useState({ wifi: false, parking: false, breakfast: false, pets: false });
 
-
- 
 
   const {
     register,
@@ -29,45 +27,45 @@ const CreateVenueForm = ({   toggleForm, setSuccessMessage, fetchVMVenues }) => 
   } = useForm({
     resolver: yupResolver(CreateVenueFormValidator),
     mode: 'onSubmit',
-    defaultValues: {
-      name: "",
-      description: "",
-      media: [],
-      price: "",
-      maxGuests: "",
-      rating: 0,
-      meta: { wifi: false, parking: false, breakfast: false, pets: false },
-      location: {
-        address: "",
-        city: "",
-        country: "",
-      }
-    },
+    
+  defaultValues: {
+    media: [], 
+  },
   });
 
-  const onAddImage = () => {
-    setValue("media", [...watch("media"), { url: "", alt: "" }]);
-  };
 
-  const removeImage = (index) => {
-    const updatedMedia = [...watch("media")];
-    updatedMedia.splice(index, 1);
-    setValue("media", updatedMedia);
-  };
+  useEffect(() => {
+      console.log("Store state updated:", useMyStore.getState());
+    }, []);
+    
 
 
+  const onSubmit = async (formValues) => {
+   const venueData = {
+      ...formValues,
+      price: Number(formValues.price), 
+      maxGuests: Number(formValues.maxGuests),
+      rating: Number(formValues.rating),
+      location: {
+        ...formValues.location,
+        lat: Number(formValues.location.lat),
+        lng: Number(formValues.location.lng),
+        zip: String(formValues.location.zip).trim(),
+      },
+   };
 
+    console.log("Zip type before API call:", typeof venueData.location.zip, venueData.location.zip);
 
-  const onSubmit = async (data) => {
-  
-    console.log("🚀 Form submission triggered!", data);
    try{
-    const response = await createVenue(data);
+      console.log("📝 venueData before submission:", venueData);
+ 
+
+
+    const response = await createNewVenue(venueData);
+    fetchVMVenues();
     console.log("API response:", response);
-    await fetchVMVenues();
-    setSuccessMessage("Venue created successfully!");
+  
     setTimeout(() => {
-      reset();
       toggleForm();
     }, 500);
   
@@ -79,11 +77,27 @@ const CreateVenueForm = ({   toggleForm, setSuccessMessage, fetchVMVenues }) => 
   
 
 
-  const  [metaValues, setMetaValues]= useState({ wifi: false, parking: false, breakfast: false, pets: false });
-  useEffect(() => {
-    setMetaValues(watch("meta") || { wifi: false, parking: false, breakfast: false, pets: false });
-  }, [watch("meta")]);
 
+
+useEffect(() => {
+  const meta = watch("meta") || {};
+  setMetaValues({
+    wifi: meta.wifi || false,
+    parking: meta.parking || false,
+    breakfast: meta.breakfast || false,
+    pets: meta.pets || false,
+  });
+}, [watch("meta")]);
+ 
+    const onAddImage = () => {
+      setValue("media", [...watch("media"), { url: "", alt: "" }]);
+    };
+  
+    const removeImage = (index) => {
+      const updatedMedia = [...watch("media")];
+      updatedMedia.splice(index, 1);
+      setValue("media", updatedMedia);
+    };
 
   return (
     <form onSubmit= {handleSubmit(onSubmit)}>
@@ -205,7 +219,7 @@ const CreateVenueForm = ({   toggleForm, setSuccessMessage, fetchVMVenues }) => 
 
 <TextField
   label="Zip"
-  {...register("location.zip")}
+  {...register("location.zip", {valueAsString: true})}
   variant="outlined"
   fullWidth
   sx={{ marginBottom: 2 }}
@@ -251,9 +265,9 @@ const CreateVenueForm = ({   toggleForm, setSuccessMessage, fetchVMVenues }) => 
 {errors.location?.lng && <p style={{ color: "red" }}>{errors.location.lng.message}</p>}
 
 
-        <Button  type="submit" variant="contained" color="primary" fullWidth>
+        <button  type="submit" variant="contained" color="primary" fullWidth>
           Create Venue
-        </Button>
+        </button>
        
         <Button type="button" variant="contained" color="primary" fullWidth onClick={toggleForm} sx={{ marginTop: 2 }}>
           CANCEL
