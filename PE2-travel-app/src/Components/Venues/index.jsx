@@ -6,6 +6,7 @@ import Breakfast from "../../assets/Images/breakfast.png";
 import { Snackbar, Alert, Button } from "@mui/material";
 import useMyStore from "../../Store";
 import CreateVenueForm from "../CreateVenueForm";
+import EditVenueForm from "../EditVenueForm";
 
 
 
@@ -20,6 +21,8 @@ function Venues({ vmVenues}) {
 
   const {fetchVMVenues, successMessage, setSuccessMessage} = useMyStore();
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+  const { selectedVenue, setSelectedVenue } = useMyStore();
 
 
   useEffect(() => {
@@ -48,6 +51,14 @@ function Venues({ vmVenues}) {
       return !prevVisible;
     });
   };
+
+  const toggleEditForm = () => {
+    console.log("🚀 ToggleEditForm Clicked!");
+    setIsEditFormVisible((prevVisible) => {
+      console.log("New edit form visibility:", !prevVisible);
+      return !prevVisible;
+    });
+  }
   
   return (
     <div>
@@ -128,6 +139,8 @@ function Venues({ vmVenues}) {
           <CreateVenueForm
         
             toggleForm={toggleForm}
+    
+            
           />
         </div>
       )}
@@ -139,9 +152,9 @@ function Venues({ vmVenues}) {
             <p>{venue.description}</p>
             <p>Location: {venue.location?.city || "Unknown"}</p>
             <p>Price: {venue.price || "N/A"}</p>
-            {venue.media.map((image, index) => (
+            {Array.isArray(venue.media) && venue.media.map((image, index) => (
               <img
-                key={index}
+                key={`${venue.id}-${index}`}
                 src={image.url}
                 alt={`${venue.name} image ${index + 1}`}
                 loading="lazy"
@@ -168,18 +181,53 @@ function Venues({ vmVenues}) {
               <p>No Facilities Available</p>
             )}
 
-<Button onClick={()=> handleDelete(venue.id)}>Edit Venue</Button>
+<Button onClick={()=> handleDelete(venue.id)}>Delete Venue</Button>
 
-<Button onClick={()=> setselectedVenue(venueData)}></Button>
+<Button onClick={() => {
+  setSelectedVenue(venue);
+  setIsEditFormVisible(true); }}>Edit Venue</Button>
           </div>
         ))
       ) : (
         <p>No venues available.</p>
       )}
 
-{selectedStay && <EditVenueForm selectedVenue={venueData} />}
+<Button onClick={toggleEditForm}>
+        {isFormVisible ? "Close Form" : "Edit Venue"}
+      </Button>
+
+{isEditFormVisible && selectedVenue &&(
+  <div
+    style={{
+      position: "fixed",
+      width: "80vw",
+      height: "80vh",
+      display: "hidden",
+
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: 3000,
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      overflowY: "auto",
+      padding: "20px",
+    }}
+  >
+    <EditVenueForm selectedVenue={selectedVenue} toggleEditForm={toggleEditForm} />
+  </div>
+)}
+ 
+
     </div>
   );
 }
+
+
+
+
+
+  
+
 
 export default Venues;

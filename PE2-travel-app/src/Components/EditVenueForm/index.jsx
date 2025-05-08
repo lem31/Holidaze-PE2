@@ -1,10 +1,26 @@
-function EditVenueForm({selectedStay, toggleForm}) {
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import useMyStore from "../../Store";
+import CreateVenueFormValidator  from "../CreateVenueFormValidator";
+import { Box, Button, TextField } from "@mui/material";
 
 
-    const { fetchVMVenues, createNewVenue, setSuccessMessage } = useMyStore();
+
+function EditVenueForm({toggleEditForm}) {
+
+    const { fetchVMVenues, editVenue, setSuccessMessage } = useMyStore();
+
+console.log("🔍 Selected Venue in EditVenueForm:", selectedVenue);
+
+const { selectedVenue, setSelectedVenue } = useMyStore();
  
 
-    console.log("🛠 Zustand createVenue function:", createNewVenue);
+    const toggleFacility = (facility) => {
+        const currentMeta = watch('meta') || {};
+        setValue("meta", { ...currentMeta, [facility]: !currentMeta[facility] });
+      };
+      
   
     const [metaValues, setMetaValues] = useState({
       wifi: false,
@@ -31,7 +47,7 @@ function EditVenueForm({selectedStay, toggleForm}) {
     const onSubmit = async (formValues) => {
       console.log(" handleSubmit is executing!");
       console.log("🚀 Form submission triggered!", formValues);
-      const venueData = {
+      const updatedVenueData = {
         ...formValues,
         price: Number(formValues.price),
         maxGuests: Number(formValues.maxGuests),
@@ -44,17 +60,18 @@ function EditVenueForm({selectedStay, toggleForm}) {
         },
       };
   
-    
+      const selectedVenueID = selectedVenue.id;
   
       try {
-        console.log("📝 venueData before submission:", venueData);
-  
-        const response = await EditVenue(selectedVenue.id, venueData);
+        console.log("📝 venueData before submission:", updatedVenueData);
+       
+  console.log ("🔍 Selected Venue ID:", selectedVenueID);
+        const response = await editVenue(selectedVenueID, updatedVenueData);
   
         console.log("API response:", response);
         fetchVMVenues();
         setTimeout(() => {
-          toggleForm();
+          toggleEditForm();
           setSuccessMessage("Venue successfully updated!");
         }, 500);
       } catch (error) {
@@ -90,7 +107,7 @@ function EditVenueForm({selectedStay, toggleForm}) {
     };
   
     useEffect(() => {
-        if (selectedStay) {
+        if (selectedVenue) {
           setValue("name", selectedVenue.name);
           setValue("description", selectedVenue.description);
           setValue("price", selectedVenue.price);
@@ -111,7 +128,7 @@ function EditVenueForm({selectedStay, toggleForm}) {
           setValue("location.lat", selectedVenue.location?.lat || "");
           setValue("location.lng", selectedVenue.location?.lng || "");
       
-          setValue("media", selectedStay.media || []);
+          setValue("media", selectedVenue.media || []);
           setValue("meta.parking", selectedVenue.meta?.parking || false);
           setValue("meta.wifi", selectedVenue.meta?.wifi || false);
           setValue("meta.breakfast", selectedVenue.meta?.breakfast || false);
@@ -122,7 +139,7 @@ function EditVenueForm({selectedStay, toggleForm}) {
   
 
     return(
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit) }>
         <Box
           sx={{
             marginBottom: 2,
@@ -130,6 +147,8 @@ function EditVenueForm({selectedStay, toggleForm}) {
             height: "100px",
             padding: 3,
             backgroundColor: "white",
+            zIndex: 2000,
+            position: "relative",
           }}
         >
           {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
@@ -166,9 +185,7 @@ function EditVenueForm({selectedStay, toggleForm}) {
                   sx={{ marginBottom: 1 }}
                 />
                 {errors.media?.[index]?.url && (
-                  <p style={{ color: "red" }}>
-                    {errors.media[index].url.message}
-                  </p>
+                  <p style={{ color: "red" }}>{errors.media[index].url.message}</p>
                 )}
   
                 <TextField
@@ -238,28 +255,28 @@ function EditVenueForm({selectedStay, toggleForm}) {
           >
             <Button
               variant={metaValues.parking ? "contained" : "outlined"}
-              onClick={() => setValue("meta.parking", !metaValues.parking)}
+              onClick={() => toggleFacility("parking")}
             >
               Parking
             </Button>
   
             <Button
               variant={metaValues.wifi ? "contained" : "outlined"}
-              onClick={() => setValue("meta.wifi", !metaValues.wifi)}
+              onClick={() => toggleFacility("wifi")}
             >
               Wifi
             </Button>
   
             <Button
               variant={metaValues.breakfast ? "contained" : "outlined"}
-              onClick={() => setValue("meta.breakfast", !metaValues.breakfast)}
+              onClick={() => toggleFacility("breakfast")}
             >
               Breakfast
             </Button>
   
             <Button
               variant={metaValues.pets ? "contained" : "outlined"}
-              onClick={() => setValue("meta.pets", !metaValues.pets)}
+              onClick={() => toggleFacility("pets")}
             >
               Pets
             </Button>
@@ -344,16 +361,16 @@ function EditVenueForm({selectedStay, toggleForm}) {
             <p style={{ color: "red" }}>{errors.location.lng.message}</p>
           )}
   
-          <button type="submit" style={{ width: "100%" }}>
-            Create Venue
-          </button>
+          <Button type="submit" style={{ width: "100%" }}>
+           Save Venue
+          </Button>
   
           <Button
             type="button"
             variant="contained"
             color="primary"
             fullWidth
-            onClick={toggleForm}
+            onClick={toggleEditForm}
             sx={{ marginTop: 2 }}
           >
             CANCEL
@@ -362,3 +379,5 @@ function EditVenueForm({selectedStay, toggleForm}) {
       </form>
     )
 }
+
+export default EditVenueForm;
