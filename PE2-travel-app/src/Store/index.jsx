@@ -176,6 +176,12 @@ const useMyStore = create(
         set({ selectedStay: stay });
       },
 
+      setSelectedVenue: (venue) => {
+        localStorage.setItem("selectedVenue", JSON.stringify(venue));
+        set({ venueData: venue }); 
+      },
+      
+
       fetchVMVenues: async () => {
     console.log("fetchVMVenues() is being called");
     const token = get().token;

@@ -168,12 +168,16 @@ function Venues({ vmVenues}) {
               <p>No Facilities Available</p>
             )}
 
-<Button onClick={()=> handleDelete(venue.id)}>Delete</Button>
+<Button onClick={()=> handleDelete(venue.id)}>Edit Venue</Button>
+
+<Button onClick={()=> setselectedVenue(venueData)}></Button>
           </div>
         ))
       ) : (
         <p>No venues available.</p>
       )}
+
+{selectedStay && <EditVenueForm selectedVenue={venueData} />}
     </div>
   );
 }
