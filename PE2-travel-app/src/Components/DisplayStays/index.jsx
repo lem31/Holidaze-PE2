@@ -18,16 +18,21 @@ import SelectionSearchBar from "../SelectionSearchBar";
  */
 
 const DisplayStays = () => {
-  const { stays, fetchStays, loading, error } = useMyStore();
+  const { stays, loading, error, setStays, fetchStays } = useMyStore();
   const [filteredStays, setFilteredStays] = useState([]);
 
-   useEffect(() => {
-    fetchStays();
-  }, [fetchStays]);
+  
 
   useEffect(() => {
-    setFilteredStays(stays);},
-    [stays]);
+    const storedStays = JSON.parse(localStorage.getItem("stays"));
+    if (storedStays?.length) {
+      setStays(storedStays);
+    } else {
+      fetchStays(); 
+    }
+  }, []);
+
+console.log("Stays data:", stays);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -46,9 +51,9 @@ const DisplayStays = () => {
   return (
     <div>
       <SelectionSearchBar stays={stays} onFilter={setFilteredStays} />
-      {filteredStays.map((stay) => (
-        <div key={stay.id}>
-          <h1>{stay?.name || "Unknown Stay"}</h1>
+      {filteredStays.map((stay, index) => (
+         <div key={`${stay.id || index}`}>
+    <h1>{stay?.name || "Unknown Stay"}</h1>
 
           <p>
             <img src={Location} alt="Location icon" />

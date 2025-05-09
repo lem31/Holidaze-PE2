@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 
 const CreateVenueForm = ({ toggleForm }) => {
-  const { fetchVMVenues, createNewVenue, setSuccessMessage } = useMyStore();
+  const {  createNewVenue, setSuccessMessage } = useMyStore();
  
 
   console.log("🛠 Zustand createVenue function:", createNewVenue);
@@ -61,7 +61,7 @@ const CreateVenueForm = ({ toggleForm }) => {
       const response = await createNewVenue(venueData);
 
       console.log("API response:", response);
-      fetchVMVenues();
+   
       setTimeout(() => {
         toggleForm();
         setSuccessMessage("Venue created successfully!");

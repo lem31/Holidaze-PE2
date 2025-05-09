@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import useMyStore from '../../Store';
@@ -26,16 +26,19 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
     const countries = [...new Set(stays.map(stay => stay.location.country))];
     
 
-  useEffect(() => {
-        const filteredStays = stays.filter((stay) => {
-        const matchesCountry = selectedCountry 
-        ? stay.location.country === selectedCountry : true;
-        const matchesSearch = searchQuery 
-        ? stay.name.toLowerCase().includes(searchQuery.toLowerCase()) : true;
-        return matchesCountry && matchesSearch;
-        });
-        onFilter(filteredStays);  },
-        [stays, selectedCountry, searchQuery, onFilter]);
+    useEffect(() => {
+        if (!searchQuery && !selectedCountry) {
+          onFilter(stays); 
+        } else {
+          const filteredStays = stays.filter((stay) => {
+            const matchesCountry = selectedCountry ? stay.location.country === selectedCountry : true;
+            const matchesSearch = searchQuery ? stay.name.toLowerCase().includes(searchQuery.toLowerCase()) : true;
+            return matchesCountry && matchesSearch;
+          });
+      
+          onFilter(filteredStays);
+        }
+      }, [stays, selectedCountry, searchQuery]);
     
         useEffect(() => {
             const suggestions = stays.filter((stay) =>

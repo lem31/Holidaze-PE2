@@ -157,7 +157,8 @@ function Venues({ vmVenues}) {
           <div key={`${venue.id || `fallback`}-${index}`}>
             <h2>{venue.name}</h2>
             <p>{venue.description}</p>
-            <p>Location: {venue.location?.city || "Unknown"}</p>
+            <p>City: {venue.location?.city || "Unknown"}</p>
+            <p>Country: {venue.location?.country}</p>
             <p>Price: {venue.price || "N/A"}</p>
             {Array.isArray(venue.media) && venue.media.map((image, index) => (
               <img
@@ -201,9 +202,7 @@ function Venues({ vmVenues}) {
         <p>No venues available.</p>
       )}
 
-<Button onClick={toggleEditForm}>
-        {isFormVisible ? "Close Form" : "Edit Venue"}
-      </Button>
+
 
 {isEditFormVisible && selectedVenue &&(
   <div

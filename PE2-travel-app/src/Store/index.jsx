@@ -12,6 +12,11 @@ const useMyStore = create(
   persist(
     (set, get) => ({
       stays: [],
+
+      setStays: (newStays) => {
+        set({ stays: newStays });
+        localStorage.setItem("stays", JSON.stringify(newStays));
+      },
       selectedStay: null,
       token: null,
       userName: null,
@@ -23,7 +28,8 @@ const useMyStore = create(
       successMessage: "",
       venueData: null,
 
-      setSuccessMessage: (message) => set({ successMessage: message }),
+      setSuccessMessage: (message) => set({ successMessage: message }), 
+
 
       login: (newToken, userName) => {
         if (newToken) {
@@ -128,6 +134,7 @@ const useMyStore = create(
           set({ loading: true, error: false });
           const fetchedStays = await fetchStays();
           set({ stays: fetchedStays, loading: false });
+          console.log("Fetched stays:", fetchedStays);
           return fetchedStays;
         } catch (error) {
           set({
@@ -177,47 +184,33 @@ const useMyStore = create(
       },
 
       fetchVMVenues: async () => {
-        console.log("fetchVMVenues() is being called");
         const token = get().token;
         const userName = get().userName;
 
         if (!token || !userName) {
-          console.error("Token or username not found in local storage.");
-          set({
-            vmVenues: null,
-            loading: false,
-            error: "Authentication error: Token or username is required.",
-          });
-          throw new Error(
-            "Authentication error: Token or username is required."
-          );
-        }
-
-        const vmVenues = get().vmVenues || [];
-        if (vmVenues.length > 0) {
-          console.log("Using cached venues data");
-          console.log("vmVenues:", vmVenues);
+          console.error("Missing token or username.");
+          set({ vmVenues: [], loading: false, error: "Authentication error." });
           return;
         }
 
         try {
           set({ loading: true });
-          const venues = await fetchVMVenues(userName, token);
-          console.log("venues:", venues);
-          if (venues) {
-            set({ vmVenues: venues.data, loading: false });
-            return venues;
+          const userVenues = await fetchVMVenues(userName, token); // ✅ Only venues tied to this profile
+
+          if (userVenues && userVenues.data) {
+            set({ vmVenues: userVenues.data, loading: false });
+            console.log("✅ Profile-specific venues fetched:", userVenues.data);
+            return userVenues.data;
           } else {
-            throw new Error("Failed to fetch venues");
+            throw new Error("Failed to fetch profile venues.");
           }
         } catch (error) {
           console.error("Error fetching venues:", error);
           set({
-            vmVenues: null,
+            vmVenues: [],
             loading: false,
             error: error.message || "Failed to fetch venues",
           });
-          throw error;
         }
       },
 
@@ -225,6 +218,7 @@ const useMyStore = create(
         console.log("📡 Preparing to call API...");
 
         const token = get().token;
+        const userName = get().userName;
         console.log("🔍 Token value:", token);
 
         if (!token) {
@@ -247,9 +241,14 @@ const useMyStore = create(
           }
           console.log("Venue created successfully:", response.data);
 
-          set((state) => ({
-            vmVenues: [...state.vmVenues, response.data],
-          }));
+          set((state) => {
+            const newStays = [...state.stays, response.data];
+            localStorage.setItem("stays", JSON.stringify(newStays));
+            return { stays: newStays, vmVenues: newStays };
+          });
+
+          await fetchVMVenues(userName, token);
+          await await fetchStays();
           return response;
         } catch (error) {
           console.error("Error creating venue:", error);
@@ -291,15 +290,13 @@ const useMyStore = create(
           );
 
           console.log("✅ API Response:", updatedVenue);
-console.log("🔄 vmVenues after update:", get().vmVenues);
+          console.log("🔄 vmVenues after update:", get().vmVenues);
 
-set((state) => ({
-  vmVenues: state.vmVenues.map(v =>
-    v.id === selectedVenueId
-      ? { ...v, ...updatedVenue.data } 
-      : v
-  )
-}));
+          set((state) => ({
+            vmVenues: state.vmVenues.map((v) =>
+              v.id === selectedVenueId ? { ...v, ...updatedVenue.data } : v
+            ),
+          }));
 
           await fetchVMVenues(userName, token);
 
@@ -319,21 +316,21 @@ set((state) => ({
         const success = await deleteVenue(venueId, token);
         if (success) {
           set((state) => ({
-            vmVenues: state.vmVenues.filter(venue => venue.id !== venueId),
+            vmVenues: state.vmVenues.filter((venue) => venue.id !== venueId),
           }));
-        
+
           set({ vmVenues: [...get().vmVenues] }); // 👈 Forces React to recognize the change
         }
 
-          await fetchVMVenues(userName, token);
+        await fetchVMVenues(userName, token);
 
-          return;
-        }
+        return;
+      },
     }),
-    
 
     {
       name: "auth-storage",
+
       storage: {
         getItem: (key) => JSON.parse(localStorage.getItem(key)),
         setItem: (key, value) =>
