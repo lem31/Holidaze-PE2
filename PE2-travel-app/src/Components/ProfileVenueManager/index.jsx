@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import useMyStore from "../../Store/index";
 import EditProfileFormBox from "../EditProfileFormBox";
 import Venues from "../Venues";
+import VMBookings from "../VMBookings";
+
+
 
 
 
 
 const ProfileVenueManager = () => {
   const [successMessage, setSuccessMessage] = useState('');
-  const { userProfile, vmVenues } = useMyStore(); 
+  const { userProfile, vmVenues, vmBookings } = useMyStore(); 
+  const { fetchVMBookings } = useMyStore();
   const {fetchVMVenues} = useMyStore();
   const [selectedView, setSelectedView] = useState("");
   console.log("Store state:", useMyStore.getState());
@@ -47,7 +51,7 @@ const ProfileVenueManager = () => {
         >
           Venues
         </button>
-        <button onClick={() => setSelectedView("Bookings")}>Bookings</button>
+        <button onClick={() => {setSelectedView("Bookings"); if (!vmBookings) fetchVMBookings()}}>Bookings</button>
       </div>
 
       <div>
@@ -57,6 +61,14 @@ const ProfileVenueManager = () => {
             successMessage={successMessage}
             setSuccessMessage={setSuccessMessage}
             vmVenues={vmVenues}
+          />
+        )}
+
+        {selectedView === "Bookings" && (
+          <VMBookings
+            successMessage={successMessage}
+            setSuccessMessage={setSuccessMessage}
+            vmBookings={vmBookings}
           />
         )}
       </div>

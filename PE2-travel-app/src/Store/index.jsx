@@ -17,6 +17,12 @@ const useMyStore = create(
         set({ stays: newStays });
         localStorage.setItem("stays", JSON.stringify(newStays));
       },
+
+      vmBookings: [],
+      setVmBookings: (newVMBookings) => {
+        set({ vmBookings: newVMBookings });
+        localStorage.setItem("vmBookings", JSON.stringify(newVMBookings));
+      },
       selectedStay: null,
       token: null,
       userName: null,
@@ -147,7 +153,7 @@ const useMyStore = create(
           set({ loading: false, error: true, errorMessage: error.message || "Failed to fetch stays" });
         }
       },
-      
+
       fetchAndSetSelectedStay: async (stayId) => {
         const { stays, fetchStays } = get();
         let selectedStay = JSON.parse(localStorage.getItem("selectedStay"));
@@ -336,7 +342,28 @@ const useMyStore = create(
 
         return;
       },
+
+
+      fetchVMBookings: async () => {
+        const token = get().token;
+        const userName = get().userName;
+        try {
+          set({ loading: true, error: false });
+          const fetchedBookings = await fetchVMBookings(userName, token);
+          set((state) => ({
+            vmBookings: [...state.vmBookings, ...fetchedBookings.filter(booking => !state.vmBookings.some(s => b.id === vmBooking.id))],
+            loading: false
+          }));
+          localStorage.setItem("vmBookings", JSON.stringify(get().vmBookings));
+          return get().vmBookings;
+        } catch (error) {
+          set({ loading: false, error: true, errorMessage: error.message || "Failed to fetch bookings" });
+        }
+      },
     }),
+
+
+    
 
     {
       name: "auth-storage",
