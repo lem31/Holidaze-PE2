@@ -25,6 +25,10 @@ const useMyStore = create(
       loadingProfile: false,
       loginChecked: false,
       vmVenues: [],
+     setVmVenues: (newVMVenues) => {
+        set({ vmVenues: newVMVenues });
+        localStorage.setItem("vmVenues", JSON.stringify(newVMVenues));
+      },
       successMessage: "",
       venueData: null,
 
@@ -134,8 +138,9 @@ const useMyStore = create(
           set({ loading: true, error: false });
           const fetchedStays = await fetchStays();
           set({ stays: fetchedStays, loading: false });
+          console.log("✅ Stays in store AFTER update:", get().stays);
           console.log("Fetched stays:", fetchedStays);
-          return fetchedStays;
+          return get().stays;
         } catch (error) {
           set({
             loading: false,
@@ -195,7 +200,7 @@ const useMyStore = create(
 
         try {
           set({ loading: true });
-          const userVenues = await fetchVMVenues(userName, token); // ✅ Only venues tied to this profile
+          const userVenues = await fetchVMVenues(userName, token); 
 
           if (userVenues && userVenues.data) {
             set({ vmVenues: userVenues.data, loading: false });
@@ -243,12 +248,13 @@ const useMyStore = create(
 
           set((state) => {
             const newStays = [...state.stays, response.data];
+            const newVMVenues = [...state.vmVenues, response.data];
             localStorage.setItem("stays", JSON.stringify(newStays));
-            return { stays: newStays, vmVenues: newStays };
+            return { stays: newStays, vmVenues: newVMVenues };
           });
 
           await fetchVMVenues(userName, token);
-          await await fetchStays();
+          await fetchStays();
           return response;
         } catch (error) {
           console.error("Error creating venue:", error);
@@ -289,16 +295,20 @@ const useMyStore = create(
             token
           );
 
-          console.log("✅ API Response:", updatedVenue);
-          console.log("🔄 vmVenues after update:", get().vmVenues);
+          console.log("API Response:", updatedVenue);
+          console.log("vmVenues after update:", get().vmVenues);
 
           set((state) => ({
             vmVenues: state.vmVenues.map((v) =>
               v.id === selectedVenueId ? { ...v, ...updatedVenue.data } : v
             ),
+            stays: state.stays.map((s) =>
+              s.id === selectedVenueId ? { ...s, ...updatedVenue.data } : s
+            ),
           }));
 
           await fetchVMVenues(userName, token);
+          await fetchStays();
 
           set({ successMessage: "Venue updated successfully!" });
           console.log("Venue updated successfully:", updatedVenue);
@@ -317,9 +327,11 @@ const useMyStore = create(
         if (success) {
           set((state) => ({
             vmVenues: state.vmVenues.filter((venue) => venue.id !== venueId),
+            stays: state.stays.filter((stay) => stay.id !== venueId),
           }));
 
-          set({ vmVenues: [...get().vmVenues] }); // 👈 Forces React to recognize the change
+          set({ vmVenues: [...get().vmVenues] }); 
+          set({stays: [...get().stays]});
         }
 
         await fetchVMVenues(userName, token);
