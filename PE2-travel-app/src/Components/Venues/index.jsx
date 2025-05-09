@@ -184,6 +184,7 @@ function Venues({ vmVenues}) {
 <Button onClick={()=> handleDelete(venue.id)}>Delete Venue</Button>
 
 <Button onClick={() => {
+  console.log("Setting Selected Venue:", venue); 
   setSelectedVenue(venue);
   setIsEditFormVisible(true); }}>Edit Venue</Button>
           </div>

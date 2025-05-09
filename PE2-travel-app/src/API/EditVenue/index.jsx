@@ -1,5 +1,5 @@
-export const EditVenue = async (selectedVenueId, updatedVenueData, token) => {
-  const API_URL = `https://v2.api.noroff.dev/holidaze/venues/${selectedVenueId}`;
+export const editVenue = async (API_URL,  updatedVenueData, token) => {
+
 
   if (!token) {
     console.error("No token found! API request skipped.");
@@ -7,15 +7,14 @@ export const EditVenue = async (selectedVenueId, updatedVenueData, token) => {
   }
 
   try {
-    console.log("📡 Sending API request...");
-    console.log("🔍 Selected Venue ID:", selectedVenueId);
-    console.log("📡 Sending API request with token:", token);
+   
     const response = await fetch(API_URL, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`,
-            'X-Noroff-API-Key': 'f920c7be-b352-412a-bfe3-67cf36aebe41',
+        Authorization: `Bearer ${token}`,
+        'X-Noroff-API-Key': 'f920c7be-b352-412a-bfe3-67cf36aebe41',
+        'Content-Type': 'application/json',
+       
       },
       body: JSON.stringify(updatedVenueData),
     });
@@ -36,4 +35,4 @@ export const EditVenue = async (selectedVenueId, updatedVenueData, token) => {
   }
 };
 
-export default EditVenue;
+export default editVenue;

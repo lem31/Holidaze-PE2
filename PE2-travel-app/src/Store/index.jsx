@@ -6,7 +6,7 @@ import fetchVMVenues from "../API/FetchVMVenues";
 import deleteVenue from "../API/DeleteVenue";
 import updateProfile from "../API/UpdateProfile/index.js";
 import createVenue from "../API/CreateVenue";
-import EditVenue from "../API/EditVenue";
+import editVenue from "../API/EditVenue";
 
 
 const useMyStore = create(
@@ -14,7 +14,6 @@ const useMyStore = create(
     (set, get) => ({
       stays: [],
       selectedStay: null,
-      selectedVenue: null,
       token: null,
       userName: null,
       isLoggedIn: false,
@@ -200,7 +199,8 @@ const useMyStore = create(
       return;
     }
 
-    if (get().vmVenues.length > 0) {
+    const vmVenues = get().vmVenues || [];
+    if (vmVenues.length > 0) {
       console.log("Using cached venues data");
       return;
     }
@@ -267,18 +267,31 @@ const useMyStore = create(
             }
           }, 
 
-          editVenue: async(selectedVenueId, updatedVenueData ) => {
+          editVenue: async ( updatedVenueData ) => {
             const token = get().token;
             if (!token) {
-              console.error("Token not found in local storage.");
+              console.error("Authentication error: Token is missing or invalid.");
+              throw new Error("Authentication error: Please login again.");
+            }
+            console.log("🔍 Token before API request:", token);
+            const selectedVenue = get().selectedVenue;
+            const selectedVenueId = selectedVenue?.id;
+            const API_URL = `https://v2.api.noroff.dev/holidaze/venues/${selectedVenueId}`;
+        
+            if (!token) {
+              setError("api", { message: "Authentication error: Token missing." });
               return;
             }
             try{
-              const updatedVenue = await EditVenue(selectedVenueId, updatedVenueData, token);
+              const updatedVenue = await editVenue(API_URL, selectedVenueId,  updatedVenueData, token);
+          
               set((state) => ({
                 vmVenues: state.vmVenues.map((venue) =>
                   venue.id === selectedVenueId ? updatedVenue : venue
+                
                 ),
+
+                
               }));
 
               set({successMessage: "Venue updated successfully!"});

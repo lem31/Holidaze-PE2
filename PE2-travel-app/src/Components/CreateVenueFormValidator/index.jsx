@@ -11,8 +11,7 @@ const CreateVenueFormValidator = Yup.object().shape({
         url: Yup.string().url("Invalid URL").required("Image URL is required"),
         alt: Yup.string().optional(),
       })
-    )
-    .min(1, "At least one image is required"),
+    ),
   price: Yup.number().min(1, "Price must be greater than 0").required("Price is required"),
   maxGuests: Yup.number().min(1, "Max guests must be at least 1").required("Max guests is required"),
   rating: Yup.number().min(0).max(5, "Rating must be between 0 and 5").optional(),
