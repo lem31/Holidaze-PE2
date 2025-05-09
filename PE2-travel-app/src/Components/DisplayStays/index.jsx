@@ -18,7 +18,7 @@ import SelectionSearchBar from "../SelectionSearchBar";
  */
 
 const DisplayStays = () => {
-  const { loading, error, stays } = useMyStore();
+  const { loading, error, stays, fetchStays } = useMyStore();
   const [filteredStays, setFilteredStays] = useState([]);
 
 

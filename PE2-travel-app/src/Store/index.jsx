@@ -137,19 +137,17 @@ const useMyStore = create(
         try {
           set({ loading: true, error: false });
           const fetchedStays = await fetchStays();
-          set({ stays: fetchedStays, loading: false });
-          console.log("✅ Stays in store AFTER update:", get().stays);
-          console.log("Fetched stays:", fetchedStays);
+          set((state) => ({
+            stays: [...state.stays, ...fetchedStays.filter(stay => !state.stays.some(s => s.id === stay.id))],
+            loading: false
+          }));
+          localStorage.setItem("stays", JSON.stringify(get().stays));
           return get().stays;
         } catch (error) {
-          set({
-            loading: false,
-            error: true,
-            errorMessage: error.message || "Failed to fetch stays",
-          });
+          set({ loading: false, error: true, errorMessage: error.message || "Failed to fetch stays" });
         }
       },
-
+      
       fetchAndSetSelectedStay: async (stayId) => {
         const { stays, fetchStays } = get();
         let selectedStay = JSON.parse(localStorage.getItem("selectedStay"));
@@ -204,7 +202,7 @@ const useMyStore = create(
 
           if (userVenues && userVenues.data) {
             set({ vmVenues: userVenues.data, loading: false });
-            
+
             console.log("✅ Profile-specific venues fetched:", userVenues.data);
             return userVenues.data;
           } else {
@@ -248,10 +246,9 @@ const useMyStore = create(
           console.log("Venue created successfully:", response.data);
 
           set((state) => {
-            const newStays = [...state.stays, response.data];
-            const newVMVenues = [...state.vmVenues, response.data];
-            localStorage.setItem("stays", JSON.stringify(newStays));
-            return { stays: newStays, vmVenues: newVMVenues };
+           const updatedStays = [...state.stays, response.data];
+           localStorage.setItem("stays", JSON.stringify(updatedStays));
+            return { stays: updatedStays };
           });
 
           await fetchVMVenues(userName, token);
