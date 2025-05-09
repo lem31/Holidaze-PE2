@@ -18,19 +18,26 @@ import SelectionSearchBar from "../SelectionSearchBar";
  */
 
 const DisplayStays = () => {
-  const { stays, loading, error, setStays, fetchStays } = useMyStore();
+  const { stays, loading, error,  fetchStays } = useMyStore();
   const [filteredStays, setFilteredStays] = useState([]);
+const [ setStays] = useState([]); 
 
   
-
   useEffect(() => {
-    const storedStays = JSON.parse(localStorage.getItem("stays"));
-    if (storedStays?.length) {
-      setStays(storedStays);
-    } else {
-      fetchStays(); 
-    }
-  }, []);
+    const fetchData = async () => {
+      try {
+        await fetchStays(); 
+  
+        setStays(stays);
+        console.log("✅ Stays fetched from API:", get().stays); 
+      } catch (error) {
+        console.error("Error fetching stays:", error);
+      }
+    };
+  
+    fetchData();
+  }, [fetchStays, setStays]);
+  
 
 console.log("Stays data:", stays);
 
