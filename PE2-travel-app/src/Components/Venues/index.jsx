@@ -29,7 +29,7 @@ function Venues({ vmVenues}) {
    
 
     fetchVMVenues();
-  }, []);
+  }, [successMessage]);
 
 
 
@@ -189,7 +189,7 @@ function Venues({ vmVenues}) {
               <p>No Facilities Available</p>
             )}
 
-<Button onClick={() => handleDelete(venue.data.id)}>Delete Venue</Button>
+<Button onClick={() => handleDelete(venue.id)}>Delete Venue</Button>
 
 <Button onClick={() => {
   console.log("Setting Selected Venue:", venue); 

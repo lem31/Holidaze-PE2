@@ -8,7 +8,6 @@ import updateProfile from "../API/UpdateProfile/index.js";
 import createVenue from "../API/CreateVenue";
 import editVenue from "../API/EditVenue";
 
-
 const useMyStore = create(
   persist(
     (set, get) => ({
@@ -21,7 +20,7 @@ const useMyStore = create(
       loadingProfile: false,
       loginChecked: false,
       vmVenues: [],
-      successMessage: "", 
+      successMessage: "",
       venueData: null,
 
       setSuccessMessage: (message) => set({ successMessage: message }),
@@ -100,8 +99,8 @@ const useMyStore = create(
       updateUserProfile: async (userData) => {
         const userName = get().userName;
         const token = get().token;
-        const endpoint= `https://v2.api.noroff.dev/holidaze/profiles/${userName}`;
-     
+        const endpoint = `https://v2.api.noroff.dev/holidaze/profiles/${userName}`;
+
         if (!token || !userName) {
           console.error("Token or username not found in local storage.");
           return;
@@ -109,12 +108,7 @@ const useMyStore = create(
         try {
           set({ loadingProfile: true });
 
-          const updatedProfile = await updateProfile(
-            userData,
-            endpoint,
-            token,
-          
-          );
+          const updatedProfile = await updateProfile(userData, endpoint, token);
           if (updatedProfile) {
             set({ userProfile: updatedProfile, loadingProfile: false });
             console.log("Profile updated successfully:", updatedProfile);
@@ -178,77 +172,72 @@ const useMyStore = create(
 
       setSelectedVenue: (venue) => {
         localStorage.setItem("selectedVenue", JSON.stringify(venue));
-        set({ selectedVenue: venue }); 
+        set({ selectedVenue: venue });
         console.log("Selected venue:", venue);
       },
-      
 
       fetchVMVenues: async () => {
-    console.log("fetchVMVenues() is being called");
-    const token = get().token;
-    const userName = get().userName;
+        console.log("fetchVMVenues() is being called");
+        const token = get().token;
+        const userName = get().userName;
 
-    if (!token || !userName) {
-      console.error("Token or username not found in local storage.");
-      set({
-        vmVenues: null,
-        loading: false,
-        error: "Authentication error: Token or username is required.",
-      });
-      throw new Error("Authentication error: Token or username is required.");
-    }
+        if (!token || !userName) {
+          console.error("Token or username not found in local storage.");
+          set({
+            vmVenues: null,
+            loading: false,
+            error: "Authentication error: Token or username is required.",
+          });
+          throw new Error(
+            "Authentication error: Token or username is required."
+          );
+        }
 
-    const vmVenues = get().vmVenues || [];
-    if (vmVenues.length > 0) {
-      console.log("Using cached venues data");
-      console.log("vmVenues:", vmVenues);
-      return;
-    }
+        const vmVenues = get().vmVenues || [];
+        if (vmVenues.length > 0) {
+          console.log("Using cached venues data");
+          console.log("vmVenues:", vmVenues);
+          return;
+        }
 
-    try {
-      set({ loading: true });
-      const venues = await fetchVMVenues(userName, token);
-      console.log("venues:", venues);
-      if (venues) {
-        set({ vmVenues: venues.data, loading: false });
-        return venues;
-      } else {
-        throw new Error("Failed to fetch venues");
-      }
-    } catch (error) {
-      console.error("Error fetching venues:", error);
-      set({
-        vmVenues: null,
-        loading: false,
-        error: error.message || "Failed to fetch venues",
-      });
-      throw error;
-    }
+        try {
+          set({ loading: true });
+          const venues = await fetchVMVenues(userName, token);
+          console.log("venues:", venues);
+          if (venues) {
+            set({ vmVenues: venues.data, loading: false });
+            return venues;
+          } else {
+            throw new Error("Failed to fetch venues");
+          }
+        } catch (error) {
+          console.error("Error fetching venues:", error);
+          set({
+            vmVenues: null,
+            loading: false,
+            error: error.message || "Failed to fetch venues",
+          });
+          throw error;
+        }
       },
 
       createNewVenue: async (venueData) => {
-
         console.log("📡 Preparing to call API...");
-      
+
         const token = get().token;
-        console.log("🔍 Token value:", token );
-   
-        if (!token){
+        console.log("🔍 Token value:", token);
+
+        if (!token) {
           console.error("Token not found in local storage.");
-        
         }
 
-        try{
+        try {
           console.log("📡 Sending API request with venue data:", venueData);
-         
 
-         
-          
           const response = await createVenue(token, venueData);
           console.log("🚀 API call triggered with:", venueData);
           console.log("API response:", response);
 
-      
           set({ successMessage: "Venue created successfully!" });
           console.log("API response:", response);
           console.log("createVenue function is running!");
@@ -257,79 +246,91 @@ const useMyStore = create(
             throw new Error("Venue creation failed");
           }
           console.log("Venue created successfully:", response.data);
-          
+
           set((state) => ({
-            vmVenues: [...state.vmVenues, response.data]}));
-            return response;
-          }catch (error) {
-            console.error("Error creating venue:", error);
-            throw error;
-            }
-          }, 
+            vmVenues: [...state.vmVenues, response.data],
+          }));
+          return response;
+        } catch (error) {
+          console.error("Error creating venue:", error);
+          throw error;
+        }
+      },
 
-          editVenue: async ( updatedVenueData ) => {
-            const token = get().token;
-            const userName = get().userName;
+      editVenue: async (updatedVenueData) => {
+        const token = get().token;
+        const userName = get().userName;
 
-            console.log("Before update:", get().vmVenues);
+        console.log("Before update:", get().vmVenues);
 
+        console.log("🔍 Token before request:", token);
+        console.log("🔍 Username before request:", userName);
+        if (!token || !userName) {
+          console.error(
+            "Authentication error: Token or username is missing or invalid."
+          );
+          throw new Error(
+            "Authentication error: Token and username are required. Please login again."
+          );
+        }
+        console.log("🔍 Token before API request:", token);
+        const selectedVenue = get().selectedVenue;
+        const selectedVenueId = selectedVenue?.id;
+        console.log("🔍 Selected Venue:", selectedVenue);
+        console.log("🔍 Selected Venue ID:", selectedVenueId);
 
-            console.log("🔍 Token before request:", token);
-            console.log("🔍 Username before request:", userName);
-            if (!token || !userName) {
-              console.error("Authentication error: Token or username is missing or invalid.");
-              throw new Error("Authentication error: Token and username are required. Please login again.");
-            }
-            console.log("🔍 Token before API request:", token);
-            const selectedVenue = get().selectedVenue;
-            const selectedVenueId = selectedVenue?.id;
-           console.log("🔍 Selected Venue:", selectedVenue);
-console.log("🔍 Selected Venue ID:", selectedVenueId);
+        if (!token) {
+          setError("api", { message: "Authentication error: Token missing." });
+          return;
+        }
+        try {
+          const updatedVenue = await editVenue(
+            selectedVenueId,
+            updatedVenueData,
+            token
+          );
+
+          console.log("✅ API Response:", updatedVenue);
+console.log("🔄 vmVenues after update:", get().vmVenues);
+
+set((state) => ({
+  vmVenues: state.vmVenues.map(v =>
+    v.id === selectedVenueId
+      ? { ...v, ...updatedVenue.data } 
+      : v
+  )
+}));
+
+          await fetchVMVenues(userName, token);
+
+          set({ successMessage: "Venue updated successfully!" });
+          console.log("Venue updated successfully:", updatedVenue);
+          return updatedVenue;
+        } catch (error) {
+          console.error("Error updating venue:", error);
+          throw error;
+        }
+      },
+
+      deleteVenue: async (venueId) => {
+        const token = get().token;
+        const userName = get().userName;
+
+        const success = await deleteVenue(venueId, token);
+        if (success) {
+          set((state) => ({
+            vmVenues: state.vmVenues.filter(venue => venue.id !== venueId),
+          }));
         
-            if (!token) {
-              setError("api", { message: "Authentication error: Token missing." });
-              return;
-            }
-            try{
-              const updatedVenue = await editVenue(selectedVenueId,  updatedVenueData, token);
-             
-          
-              set((state) => ({
-                vmVenues: state.vmVenues.map(v =>
-                  v.data?.id === selectedVenueId
-                    ? { ...v, data: { ...v.data, ...updatedVenue.data, meta: { ...v.data.meta, ...updatedVenue.data.meta } } }
-                    : v
-                )
-              }));
-             
+          set({ vmVenues: [...get().vmVenues] }); // 👈 Forces React to recognize the change
+        }
 
-                
-     
+          await fetchVMVenues(userName, token);
 
-
-              set({successMessage: "Venue updated successfully!"});
-              console.log("Venue updated successfully:", updatedVenue);
-              return updatedVenue;
-            } catch (error) {
-              console.error("Error updating venue:", error);
-              throw error;
-            }
-          },
-
-
-deleteVenue: async (venueId) => {
-  const token = get().token;
- 
-  const success = await deleteVenue(venueId, token);
-  if (success) {
-    set((state) => ({
-      vmVenues: state.vmVenues.filter((venue) => venue.data.id !== venueId),
-    }));
-
-    return
-  }},
+          return;
+        }
     }),
-
+    
 
     {
       name: "auth-storage",
@@ -342,7 +343,5 @@ deleteVenue: async (venueId) => {
     }
   )
 );
-
-
 
 export default useMyStore;

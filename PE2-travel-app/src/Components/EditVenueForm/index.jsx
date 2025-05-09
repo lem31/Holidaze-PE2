@@ -123,7 +123,7 @@ function EditVenueForm({ toggleEditForm }) {
       else if (response){
 
       console.log("API response:", response);
-      await fetchVMVenues();
+fetchVMVenues();
       setTimeout(() => {
         toggleEditForm();
         setSuccessMessage("Venue successfully updated!");
@@ -135,7 +135,7 @@ function EditVenueForm({ toggleEditForm }) {
     }
   };
 
-  console.log("⚠️ Form errors:", errors);
+  console.log("Form errors:", errors);
 
   return (
     
