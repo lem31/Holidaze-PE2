@@ -204,6 +204,7 @@ const useMyStore = create(
 
           if (userVenues && userVenues.data) {
             set({ vmVenues: userVenues.data, loading: false });
+            
             console.log("✅ Profile-specific venues fetched:", userVenues.data);
             return userVenues.data;
           } else {
