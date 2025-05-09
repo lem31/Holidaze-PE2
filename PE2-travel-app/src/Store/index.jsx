@@ -26,7 +26,6 @@ const useMyStore = create(
 
       setSuccessMessage: (message) => set({ successMessage: message }),
 
-
       login: (newToken, userName) => {
         if (newToken) {
           localStorage.setItem("token", newToken);
@@ -194,14 +193,15 @@ const useMyStore = create(
       set({
         vmVenues: null,
         loading: false,
-        error: "Token or username not found in local storage.",
+        error: "Authentication error: Token or username is required.",
       });
-      return;
+      throw new Error("Authentication error: Token or username is required.");
     }
 
     const vmVenues = get().vmVenues || [];
     if (vmVenues.length > 0) {
       console.log("Using cached venues data");
+      console.log("vmVenues:", vmVenues);
       return;
     }
 
@@ -269,30 +269,43 @@ const useMyStore = create(
 
           editVenue: async ( updatedVenueData ) => {
             const token = get().token;
-            if (!token) {
-              console.error("Authentication error: Token is missing or invalid.");
-              throw new Error("Authentication error: Please login again.");
+            const userName = get().userName;
+
+            console.log("Before update:", get().vmVenues);
+
+
+            console.log("🔍 Token before request:", token);
+            console.log("🔍 Username before request:", userName);
+            if (!token || !userName) {
+              console.error("Authentication error: Token or username is missing or invalid.");
+              throw new Error("Authentication error: Token and username are required. Please login again.");
             }
             console.log("🔍 Token before API request:", token);
             const selectedVenue = get().selectedVenue;
             const selectedVenueId = selectedVenue?.id;
-            const API_URL = `https://v2.api.noroff.dev/holidaze/venues/${selectedVenueId}`;
+           console.log("🔍 Selected Venue:", selectedVenue);
+console.log("🔍 Selected Venue ID:", selectedVenueId);
         
             if (!token) {
               setError("api", { message: "Authentication error: Token missing." });
               return;
             }
             try{
-              const updatedVenue = await editVenue(API_URL, selectedVenueId,  updatedVenueData, token);
+              const updatedVenue = await editVenue(selectedVenueId,  updatedVenueData, token);
+             
           
               set((state) => ({
-                vmVenues: state.vmVenues.map((venue) =>
-                  venue.id === selectedVenueId ? updatedVenue : venue
-                
-                ),
+                vmVenues: state.vmVenues.map(v =>
+                  v.data?.id === selectedVenueId
+                    ? { ...v, data: { ...v.data, ...updatedVenue.data, meta: { ...v.data.meta, ...updatedVenue.data.meta } } }
+                    : v
+                )
+              }));
+             
 
                 
-              }));
+     
+
 
               set({successMessage: "Venue updated successfully!"});
               console.log("Venue updated successfully:", updatedVenue);
@@ -306,11 +319,14 @@ const useMyStore = create(
 
 deleteVenue: async (venueId) => {
   const token = get().token;
+ 
   const success = await deleteVenue(venueId, token);
   if (success) {
     set((state) => ({
-      vmVenues: state.vmVenues.filter((venue) => venue.id !== venueId),
+      vmVenues: state.vmVenues.filter((venue) => venue.data.id !== venueId),
     }));
+
+    return
   }},
     }),
 

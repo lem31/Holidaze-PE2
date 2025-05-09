@@ -10,6 +10,7 @@ const deleteVenue = async (venueId, token) =>{
             return false;
           }
     const response = await fetch (`https://v2.api.noroff.dev/holidaze/venues/${venueId}`, {
+        
         method: 'DELETE',
         headers: {
             'Authorization': `Bearer ${token}`,

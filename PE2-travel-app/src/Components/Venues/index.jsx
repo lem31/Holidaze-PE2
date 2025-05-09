@@ -26,14 +26,21 @@ function Venues({ vmVenues}) {
 
 
   useEffect(() => {
+   
+
     fetchVMVenues();
   }, []);
 
 
 
   const {deleteVenue} = useMyStore();
+
+ 
+
   const handleDelete =  (venueId) => {
-   const success =  deleteVenue(venueId);
+    console.log("🔍 Venue ID before deletion:", venueId);
+   
+   const success = deleteVenue(venueId);
    console.log('Delete success:', success);
    if(success){
     setSuccessMessage('Venue deleted successfully!');
@@ -146,8 +153,8 @@ function Venues({ vmVenues}) {
       )}
 
       {Array.isArray(vmVenues) && vmVenues.length > 0 ? (
-        vmVenues.map((venue) => (
-          <div key={venue.id}>
+        vmVenues.filter(venue=> venue).map((venue, index) => (
+          <div key={`${venue.id || `fallback`}-${index}`}>
             <h2>{venue.name}</h2>
             <p>{venue.description}</p>
             <p>Location: {venue.location?.city || "Unknown"}</p>
@@ -155,7 +162,7 @@ function Venues({ vmVenues}) {
             {Array.isArray(venue.media) && venue.media.map((image, index) => (
               <img
                 key={`${venue.id}-${index}`}
-                src={image.url}
+                src={image.url || ""}
                 alt={`${venue.name} image ${index + 1}`}
                 loading="lazy"
               />
@@ -165,15 +172,16 @@ function Venues({ vmVenues}) {
             {venue.meta ? (
               <ul>
                 {Object.entries(venue.meta)
-                  .filter(([key, value]) => value === true)
+                  .filter(([key, value]) => value === true && facilityIcons[key])
                   .map(([facility]) => (
-                    <li key={facility}>
+                    <li key={`${venue.id}-${facility || "unknown"}`}>
                       <img
                         src={facilityIcons[facility]}
-                        alt={`${facility} icon`}
+                        alt={`${facility || "unknown"} icon`}
                       />
-                      {facility.charAt(0).toUpperCase() + facility.slice(1)}
-                 
+                      {facility
+                        ? facility.charAt(0).toUpperCase() + facility.slice(1)
+                        : "Unknown Facility"}
                     </li>
                   ))}
               </ul>
@@ -181,7 +189,7 @@ function Venues({ vmVenues}) {
               <p>No Facilities Available</p>
             )}
 
-<Button onClick={()=> handleDelete(venue.id)}>Delete Venue</Button>
+<Button onClick={() => handleDelete(venue.data.id)}>Delete Venue</Button>
 
 <Button onClick={() => {
   console.log("Setting Selected Venue:", venue); 

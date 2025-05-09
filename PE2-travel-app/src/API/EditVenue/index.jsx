@@ -1,5 +1,6 @@
-export const editVenue = async (API_URL,  updatedVenueData, token) => {
+export const editVenue = async (selectedVenueId, updatedVenueData, token) => {
 
+  const API_URL = `https://v2.api.noroff.dev/holidaze/venues/${selectedVenueId}`;
 
   if (!token) {
     console.error("No token found! API request skipped.");
@@ -11,9 +12,9 @@ export const editVenue = async (API_URL,  updatedVenueData, token) => {
     const response = await fetch(API_URL, {
       method: 'PUT',
       headers: {
-        Authorization: `Bearer ${token}`,
-        'X-Noroff-API-Key': 'f920c7be-b352-412a-bfe3-67cf36aebe41',
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        "X-Noroff-API-Key": 'f920c7be-b352-412a-bfe3-67cf36aebe41',
        
       },
       body: JSON.stringify(updatedVenueData),

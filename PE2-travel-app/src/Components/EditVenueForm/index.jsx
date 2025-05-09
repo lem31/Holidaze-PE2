@@ -6,10 +6,10 @@ import CreateVenueFormValidator from "../CreateVenueFormValidator";
 import { Box, Button, TextField } from "@mui/material";
 
 function EditVenueForm({ toggleEditForm }) {
-  const { fetchVMVenues, editVenue, setSuccessMessage, selectedVenue } =
+  const { editVenue, setSuccessMessage, selectedVenue, fetchVMVenues} =
     useMyStore();
 
- 
+
 
   console.log("🔍 Selected Venue in EditVenueForm:", selectedVenue);
 
@@ -23,7 +23,7 @@ function EditVenueForm({ toggleEditForm }) {
   const toggleFacility = (facility) => {
     setMetaValues((prev) => {
       const updatedMeta = { ...prev, [facility]: !prev[facility] };
-      setValue("meta", updatedMeta);
+      setValue(`meta.${facility}`, updatedMeta[facility]); 
       return updatedMeta;
     });
   };
@@ -42,21 +42,17 @@ function EditVenueForm({ toggleEditForm }) {
   });
 
   useEffect(() => {
-    if (!selectedVenue) return;
-
-    Object.entries(selectedVenue).forEach(([key, value]) => {
-      setValue(key, value || "");
-    });
-
-    if (selectedVenue.meta) {
-      setValue("meta", {
-        parking: selectedVenue.meta.parking || false,
-        wifi: selectedVenue.meta.wifi || false,
-        breakfast: selectedVenue.meta.breakfast || false,
-        pets: selectedVenue.meta.pets || false,
+    if (selectedVenue?.meta) {
+      setMetaValues({
+        parking: selectedVenue.meta.parking ?? false,
+        wifi: selectedVenue.meta.wifi ?? false,
+        breakfast: selectedVenue.meta.breakfast ?? false,
+        pets: selectedVenue.meta.pets ?? false,
       });
+  
+      setValue("meta", selectedVenue.meta);
     }
-  }, [selectedVenue]);
+  }, [selectedVenue, setValue]);
 
   const onAddImage = () => {
     const currentMedia = watch("media") || [];
@@ -71,6 +67,7 @@ function EditVenueForm({ toggleEditForm }) {
 
   useEffect(() => {
     if (selectedVenue) {
+      const meta = selectedVenue.meta || {};
       setValue("name", selectedVenue.name);
       setValue("description", selectedVenue.description);
       setValue("price", selectedVenue.price);
@@ -84,10 +81,10 @@ function EditVenueForm({ toggleEditForm }) {
       setValue("location.lat", selectedVenue.location?.lat || "");
       setValue("location.lng", selectedVenue.location?.lng || "");
       setValue("media", selectedVenue.media || []);
-      setValue("meta.parking", selectedVenue.meta?.parking || false);
-      setValue("meta.wifi", selectedVenue.meta?.wifi || false);
-      setValue("meta.breakfast", selectedVenue.meta?.breakfast || false);
-      setValue("meta.pets", selectedVenue.meta?.pets || false);
+      setValue("meta.parking", meta.parking ?? false);
+      setValue("meta.wifi", meta.wifi ?? false);
+      setValue("meta.breakfast", meta.breakfast ?? false);
+      setValue("meta.pets", meta.pets ?? false);
     }
   }, [selectedVenue, setValue]);
 
@@ -104,7 +101,11 @@ function EditVenueForm({ toggleEditForm }) {
         lat: Number(formValues.location.lat),
         lng: Number(formValues.location.lng),
         zip: String(formValues.location.zip).trim(),
+        ...formValues,
+    
       },
+
+      meta: metaValues,
     };
 
 
@@ -119,12 +120,15 @@ function EditVenueForm({ toggleEditForm }) {
         throw new Error("Venue update failed");
       }
 
+      else if (response){
+
       console.log("API response:", response);
-      fetchVMVenues();
+      await fetchVMVenues();
       setTimeout(() => {
         toggleEditForm();
         setSuccessMessage("Venue successfully updated!");
-      }, 500);
+       
+      }, 500);}
     } catch (error) {
       console.error("Error creating venue:", error);
       setError("api", { message: "Failed to create venue" });
