@@ -5,10 +5,10 @@ async function fetchVMVenues(userName, token) {
     }
 
     try {
-        const response = await fetch(`https://v2.api.noroff.dev/holidaze/profiles/${userName}/venues`, {
+        const response = await fetch(`https://v2.api.noroff.dev/holidaze/profiles/${userName}/venues?_bookings=true`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
                 'X-Noroff-API-Key': 'f920c7be-b352-412a-bfe3-67cf36aebe41',
             },
         });

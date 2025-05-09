@@ -1,5 +1,6 @@
 
-
+import React from 'react';
+import useMyStore from '../../Store/index';
 async function postBooking(bookingData) {
   
 
@@ -20,6 +21,9 @@ async function postBooking(bookingData) {
         }
         const data = await response.json();
         console.log('Booking successful:', data);
+        useMyStore.getState().setVmBookings([...useMyStore.getState().vmBookings, data]);
+        localStorage.setItem('vmBookings', JSON.stringify(useMyStore.getState().vmBookings ));
+        console.log('Updated bookings:', useMyStore.getState().vmBookings);
         return data;
     } catch (error) {
        

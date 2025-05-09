@@ -8,6 +8,7 @@ import updateProfile from "../API/UpdateProfile/index.js";
 import createVenue from "../API/CreateVenue";
 import editVenue from "../API/EditVenue";
 
+
 const useMyStore = create(
   persist(
     (set, get) => ({
@@ -16,12 +17,18 @@ const useMyStore = create(
       setStays: (newStays) => {
         set({ stays: newStays });
         localStorage.setItem("stays", JSON.stringify(newStays));
+        
       },
 
       vmBookings: [],
       setVmBookings: (newVMBookings) => {
+     
         set({ vmBookings: newVMBookings });
+       
+        
         localStorage.setItem("vmBookings", JSON.stringify(newVMBookings));
+        console.log("Stored vmBookings:", JSON.parse(localStorage.getItem("vmBookings")));
+
       },
       selectedStay: null,
       token: null,
@@ -343,23 +350,23 @@ const useMyStore = create(
         return;
       },
 
-
       fetchVMBookings: async () => {
-        const token = get().token;
-        const userName = get().userName;
         try {
           set({ loading: true, error: false });
-          const fetchedBookings = await fetchVMBookings(userName, token);
-          set((state) => ({
-            vmBookings: [...state.vmBookings, ...fetchedBookings.filter(booking => !state.vmBookings.some(s => b.id === vmBooking.id))],
-            loading: false
-          }));
-          localStorage.setItem("vmBookings", JSON.stringify(get().vmBookings));
-          return get().vmBookings;
+          const fetchedBookings = await fetchVMBookings();
+          set((state) => {
+            const updatedBookings = [
+              ...state.vmBookings, 
+              ...fetchedBookings.filter(booking => !state.vmBookings.some(existingBooking => existingBooking.id === booking.id))
+            ];
+            localStorage.setItem("vmBookings", JSON.stringify(updatedBookings));
+            return { vmBookings: updatedBookings, loading: false };
+          });
         } catch (error) {
           set({ loading: false, error: true, errorMessage: error.message || "Failed to fetch bookings" });
         }
       },
+      
     }),
 
 

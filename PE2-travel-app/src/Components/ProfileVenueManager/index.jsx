@@ -11,15 +11,26 @@ import VMBookings from "../VMBookings";
 
 const ProfileVenueManager = () => {
   const [successMessage, setSuccessMessage] = useState('');
-  const { userProfile, vmVenues, vmBookings } = useMyStore(); 
-  const { fetchVMBookings } = useMyStore();
-  const {fetchVMVenues} = useMyStore();
+  const { userProfile, vmVenues, vmBookings, fetchVMVenues, fetchVMBookings } = useMyStore(); 
   const [selectedView, setSelectedView] = useState("");
+  const [bookings, setVMBookings] = useState([]);
+
   console.log("Store state:", useMyStore.getState());
   useEffect(() => {
     console.log("Fetching venues...");
     fetchVMVenues();
+
   }, [successMessage]);
+
+
+  useEffect(() => {
+    console.log("Fetching bookings...");
+    fetchVMBookings();
+    console.log("Bookings fetched:", vmBookings);
+    setVMBookings(vmBookings);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+  }
+  , [successMessage, vmBookings]);
 
   if (!userProfile) {
     return <p>No profile data available, please log in again.</p>;
@@ -51,7 +62,7 @@ const ProfileVenueManager = () => {
         >
           Venues
         </button>
-        <button onClick={() => {setSelectedView("Bookings"); if (!vmBookings) fetchVMBookings()}}>Bookings</button>
+        <button onClick={() => {setSelectedView("Bookings"); fetchVMBookings()}}>Bookings</button>
       </div>
 
       <div>
@@ -68,7 +79,7 @@ const ProfileVenueManager = () => {
           <VMBookings
             successMessage={successMessage}
             setSuccessMessage={setSuccessMessage}
-            vmBookings={vmBookings}
+           vmVenues={vmVenues}
           />
         )}
       </div>
