@@ -32,7 +32,6 @@ const BookingCalendar = () => {
   const [guestWarning, setGuestWarning] = useState(null);
 
   const handleBooking = async () => {
-
     let validationError = null;
 
     switch (true) {
@@ -62,10 +61,10 @@ const BookingCalendar = () => {
     }
 
     const bookingData = {
-      selectedStayId: selectedStay.id,
-      dateFrom: startDate.format("YYYY-MM-DD"),
-      dateTo: endDate.format("YYYY-MM-DD"),
+      dateFrom: new Date(startDate).toISOString(),
+      dateTo: new Date(endDate).toISOString(),
       guests: numberOfGuests,
+      venueId: selectedStay.id,
     };
 
     try {
@@ -73,6 +72,7 @@ const BookingCalendar = () => {
       setBookingMessage("Booking successful!");
     } catch (error) {
       setBookingMessage("Booking failed. Please try again.");
+      console.error("Booking error:", error);
     }
   };
 
@@ -118,7 +118,7 @@ const BookingCalendar = () => {
           </select>
           {guestWarning && <p> {guestWarning}</p>}
         </div>
-        <button onClick={handleBooking}>Book Now</button>
+        <button type='submit' onClick={handleBooking}>Book Now</button>
         {bookingMessage && <p>{bookingMessage}</p>}
       </div>
     </LocalizationProvider>

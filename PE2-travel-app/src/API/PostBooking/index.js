@@ -1,17 +1,17 @@
 
 
-async function postBooking({selectedStayId, dateFrom, dateTo, guests, }) {
+async function postBooking(bookingData) {
   
 
-    const url = 'https://v2.api.noroff.dev/holidaze/bookings'
+    const API_URL = 'https://v2.api.noroff.dev/holidaze/bookings'
 
     try{
-        const response = await fetch(url, {
+        const response = await fetch(API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
-                'X-Noroff-API-Key': process.env.API_KEY,
+                'X-Noroff-API-Key': 'f920c7be-b352-412a-bfe3-67cf36aebe41' ,
             },
             body: JSON.stringify(bookingData),
         });
