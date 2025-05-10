@@ -142,7 +142,7 @@ function Venues({ vmVenues}) {
           }}
         >
        
-
+   
           <CreateVenueForm
         
             toggleForm={toggleForm}
@@ -167,6 +167,7 @@ function Venues({ vmVenues}) {
                 alt={`${venue.name} image ${index + 1}`}
                 loading="lazy"
               />
+
             ))}
 
             <h2>Available Facilities</h2>
@@ -189,6 +190,14 @@ function Venues({ vmVenues}) {
             ) : (
               <p>No Facilities Available</p>
             )}
+
+<Alert
+  severity="info"
+  onClick={() => alert(`This venue has ${venue.bookings?.length || 0} bookings.`)}
+  style={{ cursor: 'pointer' }} 
+>
+  {`Bookings: ${venue.bookings?.length || 0}`}
+</Alert>
 
 <Button onClick={() => handleDelete(venue.id)}>Delete Venue</Button>
 
