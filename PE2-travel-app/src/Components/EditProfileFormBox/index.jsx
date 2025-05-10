@@ -9,7 +9,9 @@ import useMyStore from "../../Store";
 
 const EditProfileFormBox = () => {
 
-    const {userProfile, updateUserProfile} = useMyStore();
+
+
+    const {userProfile, updateUserProfile, successMessage, setSuccessMessage} = useMyStore();
   const defaultBanner = {
     url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
     alt: "Default Banner",
@@ -96,7 +98,7 @@ useEffect(() => {
   setValidationErrors({});
   const success = await updateUserProfile(userData);
   if (success) {
-    console.log("Profile updated successfully");
+    setSuccessMessage('Venue deleted successfully!');
   } else {
     console.error("Failed to update profile");
   }
@@ -122,6 +124,8 @@ useEffect(() => {
           validationErrors={validationErrors}
           defaultBanner={defaultBanner}
           defaultAvatar={defaultAvatar}
+          successMessage={successMessage}
+        
         />
     )}
       </Box>

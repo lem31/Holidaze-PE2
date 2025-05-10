@@ -4,11 +4,6 @@ import EditProfileFormBox from "../EditProfileFormBox";
 import Venues from "../Venues";
 import VMBookings from "../VMBookings";
 
-
-
-
-
-
 const ProfileVenueManager = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const { userProfile, vmVenues, vmBookings, fetchVMVenues, fetchVMBookings } = useMyStore(); 
@@ -66,7 +61,12 @@ const ProfileVenueManager = () => {
       </div>
 
       <div>
-        {isEditProfileVisible && <EditProfileFormBox />}
+        {isEditProfileVisible && (
+          <EditProfileFormBox
+            successMessage={successMessage}
+            onSubmit={() => setIsEditProfileVisible(false)}
+          />
+        )}
         {selectedView === "Venues" && (
           <Venues
             successMessage={successMessage}
@@ -79,7 +79,7 @@ const ProfileVenueManager = () => {
           <VMBookings
             successMessage={successMessage}
             setSuccessMessage={setSuccessMessage}
-           vmVenues={vmVenues}
+            vmVenues={vmVenues}
           />
         )}
       </div>
