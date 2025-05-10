@@ -3,10 +3,11 @@ import Wifi from "../../assets/Images/wifi.png";
 import Parking from "../../assets/Images/parking.png";
 import Pets from "../../assets/Images/pets.png";
 import Breakfast from "../../assets/Images/breakfast.png";
-import { Snackbar, Alert, Button } from "@mui/material";
+import { Snackbar, Alert, Button, Dialog } from "@mui/material";
 import useMyStore from "../../Store";
 import CreateVenueForm from "../CreateVenueForm";
 import EditVenueForm from "../EditVenueForm";
+import SpecificVenueBookings from "../SpecificVenueBookings";
 
 
 
@@ -23,6 +24,10 @@ function Venues({ vmVenues}) {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
   const { selectedVenue, setSelectedVenue } = useMyStore();
+  const [selectedVenueId, setSelectedVenueId] = useState(null);
+  const [isBookingsVisible, setIsBookingsVisible] = useState(false);
+
+
 
 
   useEffect(() => {
@@ -65,7 +70,12 @@ function Venues({ vmVenues}) {
       console.log("New edit form visibility:", !prevVisible);
       return !prevVisible;
     });
-  }
+  };
+
+  const toggleBookingsPopup = (venueId) => {
+    setSelectedVenueId(venueId);
+    setIsBookingsVisible(!isBookingsVisible);
+  };
   
   return (
     <div>
@@ -193,7 +203,7 @@ function Venues({ vmVenues}) {
 
 <Alert
   severity="info"
-  onClick={() => alert(`This venue has ${venue.bookings?.length || 0} bookings.`)}
+  onClick={() => toggleBookingsPopup(venue.id)}
   style={{ cursor: 'pointer' }} 
 >
   {`This Venue has: (${venue.bookings?.length || 0}) bookings`}
@@ -210,6 +220,10 @@ function Venues({ vmVenues}) {
       ) : (
         <p>No venues available.</p>
       )}
+
+<Dialog open={isBookingsVisible} onClose={() => setIsBookingsVisible(false)}>
+        {selectedVenueId && <SpecificVenueBookings venueId={selectedVenueId} />}
+      </Dialog>
 
 
 
