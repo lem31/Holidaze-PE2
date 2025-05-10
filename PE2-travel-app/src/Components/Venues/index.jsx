@@ -196,7 +196,7 @@ function Venues({ vmVenues}) {
   onClick={() => alert(`This venue has ${venue.bookings?.length || 0} bookings.`)}
   style={{ cursor: 'pointer' }} 
 >
-  {`Bookings: ${venue.bookings?.length || 0}`}
+  {`This Venue has: (${venue.bookings?.length || 0}) bookings`}
 </Alert>
 
 <Button onClick={() => handleDelete(venue.id)}>Delete Venue</Button>
