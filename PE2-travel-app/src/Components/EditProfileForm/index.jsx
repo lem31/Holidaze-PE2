@@ -21,12 +21,17 @@ const EditProfileForm = ({
     defaultBanner,
     defaultAvatar,
     validationErrors = {},
+  
 }) => {
     return (
         <form
             onSubmit={(e) => {
                 e.preventDefault();
                 onSubmit(e);
+              
+              
+               
+               
               
             }}
         >

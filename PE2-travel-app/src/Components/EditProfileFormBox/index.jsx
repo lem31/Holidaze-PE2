@@ -7,11 +7,14 @@ import useMyStore from "../../Store";
 
 
 
-const EditProfileFormBox = () => {
+const EditProfileFormBox = ({toggleForm, setSuccessMessage, successMessage, isEditProfileVisible}) => {
 
 
+  const [validationErrors, setValidationErrors] = useState({});
 
-    const {userProfile, updateUserProfile, successMessage, setSuccessMessage} = useMyStore();
+    const {userProfile, updateUserProfile} = useMyStore();
+
+
   const defaultBanner = {
     url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
     alt: "Default Banner",
@@ -20,10 +23,6 @@ const EditProfileFormBox = () => {
     url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
     alt: "Default Avatar",
   }
-
- const [validationErrors, setValidationErrors] = useState({});
-
-
 
   const [formValues, setFormValues] = useState({
     name: "",
@@ -34,6 +33,9 @@ const EditProfileFormBox = () => {
     avatar: defaultAvatar,
     venueManager: true,
   });
+
+
+
 
 useEffect(() => {
     console.log("userProfile:", userProfile);
@@ -79,7 +81,7 @@ useEffect(() => {
   const handleFormSubmit = async (event) => {
     if(!event) return;
     event.preventDefault();
-
+   
     const updatedFormValues = {
       ...formValues,
       banner: {
@@ -98,7 +100,12 @@ useEffect(() => {
   setValidationErrors({});
   const success = await updateUserProfile(userData);
   if (success) {
-    setSuccessMessage('Venue deleted successfully!');
+    setSuccessMessage('Profile Updated successfully!');
+    setTimeout(() => {
+   toggleForm(); }, 500);
+   
+ 
+  
   } else {
     console.error("Failed to update profile");
   }
@@ -108,13 +115,30 @@ useEffect(() => {
   return (
  
    
+<>
+{isEditProfileVisible && (
+    <Box sx={{ marginTop: 3 }}>
+      {!userProfile ? (
+        <Typography>Loading Profile...</Typography>
+      ) : (
 
-      <Box sx={{ marginTop: 3 }}>
-        {!userProfile ? (
-            <Typography> Loading Profile...</Typography>
-        ) : (
-        
-      
+        <div
+        style={{
+          position: "fixed",
+          width: "80vw",
+          height: "80vh",
+          display: "flex",
+
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 3000,
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          overflowY: "auto",
+          padding: "20px",
+        }}
+      >
         <EditProfileForm
           formValues={formValues}
           onInputChange={handleInputChange}
@@ -124,11 +148,17 @@ useEffect(() => {
           validationErrors={validationErrors}
           defaultBanner={defaultBanner}
           defaultAvatar={defaultAvatar}
-          successMessage={successMessage}
-        
+      
+         
         />
-    )}
-      </Box>
+
+      </div>
+      )}
+
+    </Box>
+  )}
+  
+</>
 
   );}
 
