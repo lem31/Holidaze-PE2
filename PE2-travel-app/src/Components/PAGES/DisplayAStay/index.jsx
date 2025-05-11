@@ -6,6 +6,7 @@ import Wifi from '../../../assets/Images/wifi.png';
 import Parking from '../../../assets/Images/parking.png';
 import Pets from '../../../assets/Images/pets.png';
 import Breakfast from '../../../assets/Images/breakfast.png';
+import { Snackbar, Alert } from "@mui/material";
 
 /**
  * DisplayAStay component fetches and displays details of a selected stay.
@@ -28,7 +29,10 @@ const DisplayAStay = () => {
     const navigate = useNavigate();
     const fetchAndSetSelectedStay = useMyStore((state) => state.fetchAndSetSelectedStay);
     const selectedStay = useMyStore((state) => state.selectedStay);
+    const [bookingMessage, setBookingMessage] = useState(null);
     const [loading, setLoading] =useState(true);
+
+    console.log("Selected Stay:", selectedStay);
 
     const facilityIcons ={
       wifi: Wifi,
@@ -92,9 +96,62 @@ const DisplayAStay = () => {
              <p>No Facilities Available</p>
            )}
 
-<BookingCalendar/>
+<BookingCalendar setBookingMessage={setBookingMessage} bookingMessage={bookingMessage}/>
+  <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "auto",
+            height: "auto",
+          }}
+        >
+          <Snackbar
+            open={Boolean(bookingMessage)}
+            autoHideDuration={3000}
+            onClose={() => setBookingMessage(null)}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 1500,
+              width: "400px",
+              height: "auto",
+              backgroundColor: "transparent",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            }}
+          >
+            <Alert
+              severity="success"
+              onClose={() => setBookingMessage(null)}
+              sx={{
+                fontSize: "20px",
+                padding: "20px",
+
+                textAlign: "center",
+              }}
+            >
+              {bookingMessage}
+            </Alert>
+          </Snackbar>
+        </div>
+
+        {bookingMessage && <p style={{ color: "red" }}>{bookingMessage}</p>}
+
 
            </div>
+
+           
         </div>
     );
 };

@@ -1,4 +1,4 @@
-const url = "https://v2.api.noroff.dev/holidaze/venues";
+const url = "https://v2.api.noroff.dev/holidaze/venues?_bookings=true";
 
 const fetchStays = async (set) => {
 

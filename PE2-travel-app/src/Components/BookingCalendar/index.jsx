@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import postBooking from "../../API/PostBooking";
 import useMyStore from "../../Store";
 import Guests from "../../assets/Images/guests.png";
+import CheckDateConflicts from "../CheckDateConflicts";
 
 /**
  * BookingCalendar component allows users to make a booking for a selected stay.
@@ -22,59 +23,65 @@ import Guests from "../../assets/Images/guests.png";
  * );
  */
 
-const BookingCalendar = () => {
+const BookingCalendar = ({bookingMessage, setBookingMessage}) => {
   const selectedStay = useMyStore((state) => state.selectedStay);
   const isLoggedIn = useMyStore((state) => state.isLoggedIn);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [numberOfGuests, setNumberOfGuests] = useState(1);
-  const [bookingMessage, setBookingMessage] = useState(null);
+
   const [guestWarning, setGuestWarning] = useState(null);
 
   const handleBooking = async () => {
-    let validationError = null;
+   
 
-    switch (true) {
-      case !isLoggedIn:
-        validationError = "Please log in to make a booking.";
-        break;
-      case !startDate || !endDate:
-        validationError = "Please select both check-in and check-out dates.";
-        break;
-      case !selectedStay:
-        validationError = "No stay selected.";
-        break;
-      case numberOfGuests < 1:
-        validationError = "Please select at least one guest.";
-        break;
-      case selectedStay.maxGuests < numberOfGuests:
-        validationError = `The maximum number of guests for this stay is ${selectedStay.maxGuests}.`;
-        break;
-
-      default:
-        validationError = null;
-    }
-
-    if (validationError) {
-      setBookingMessage(validationError);
-      return;
-    }
-
-    const bookingData = {
-      dateFrom: new Date(startDate).toISOString(),
-      dateTo: new Date(endDate).toISOString(),
-      guests: numberOfGuests,
-      venueId: selectedStay.id,
+    
+      if (!isLoggedIn) {
+        setBookingMessage("Please log in to make a booking.");
+        return;
+      }
+      if (!startDate || !endDate) {
+        setBookingMessage("Please select both check-in and check-out dates.");
+        return;
+      }
+      if (!selectedStay) {
+        setBookingMessage("No stay selected.");
+        return;
+      }
+      if (numberOfGuests < 1) {
+        setBookingMessage("Please select at least one guest.");
+        return;
+      }
+      if (selectedStay.maxGuests < numberOfGuests) {
+        setBookingMessage(`The maximum number of guests for this stay is ${selectedStay.maxGuests}.`);
+        return;
+      }
+    
+     
+      if (selectedStay.bookings && selectedStay.bookings.length > 0) {
+        if (CheckDateConflicts(new Date(startDate), new Date(endDate), selectedStay)) {
+          setBookingMessage("Selected dates are already booked. Please choose different dates.");
+          return;
+        }
+      }
+    
+      const bookingData = {
+        dateFrom: new Date(startDate).toISOString(),
+        dateTo: new Date(endDate).toISOString(),
+        guests: numberOfGuests,
+        venueId: selectedStay.id,
+      };
+    
+      try {
+        await postBooking(bookingData);
+        setBookingMessage("Booking successful!");
+        setTimeout(() => setBookingMessage(null), 5000);
+      } catch (error) {
+        setBookingMessage("Booking failed. Please try again.");
+        console.error("Booking error:", error);
+      }
     };
-
-    try {
-      await postBooking(bookingData);
-      setBookingMessage("Booking successful!");
-    } catch (error) {
-      setBookingMessage("Booking failed. Please try again.");
-      console.error("Booking error:", error);
-    }
-  };
+    
 
   const handleGuestChange = (e) => {
     const value = Number(e.target.value);

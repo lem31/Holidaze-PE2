@@ -1,6 +1,15 @@
 import React from "react";
 import useMyStore from "../../Store/index";
 async function postBooking(bookingData) {
+
+  const token = localStorage.getItem("token");
+
+  console.log("Token from localStorage:", token);
+  if (!token) {
+    console.error("Token not found in localStorage");
+    throw new Error("Token not found in localStorage");
+  }
+
   const API_URL = "https://v2.api.noroff.dev/holidaze/bookings";
 
   try {
@@ -8,7 +17,7 @@ async function postBooking(bookingData) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${token}`,
         "X-Noroff-API-Key": "f920c7be-b352-412a-bfe3-67cf36aebe41",
       },
       body: JSON.stringify(bookingData),
