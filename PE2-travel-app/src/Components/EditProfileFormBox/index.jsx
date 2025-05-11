@@ -4,57 +4,48 @@ import EditProfileForm from "../EditProfileForm";
 import EditProfileFormValidator from "../EditProfileFormValidator";
 import useMyStore from "../../Store";
 
-
-
-
-const EditProfileFormBox = ({toggleForm, setSuccessMessage, successMessage, isEditProfileVisible}) => {
-
-
+const EditProfileFormBox = ({
+  toggleForm,
+  setSuccessMessage,
+  isEditProfileVisible,
+  setIsEditProfileVisible,
+}) => {
   const [validationErrors, setValidationErrors] = useState({});
 
-    const {userProfile, updateUserProfile} = useMyStore();
-
+  const { userProfile, updateUserProfile } = useMyStore();
 
   const defaultBanner = {
     url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
     alt: "Default Banner",
-  }
+  };
   const defaultAvatar = {
     url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
     alt: "Default Avatar",
-  }
+  };
 
   const [formValues, setFormValues] = useState({
     name: "",
-    email:  "",
+    email: "",
     password: "",
-    bio: "",    
+    bio: "",
     banner: defaultBanner,
     avatar: defaultAvatar,
     venueManager: true,
   });
 
-
-
-
-useEffect(() => {
-    console.log("userProfile:", userProfile);
-  if (userProfile) {
-    setFormValues({
-        name: userProfile.data.name || "",       
+  useEffect(() => {
+    if (userProfile) {
+      setFormValues({
+        name: userProfile.data.name || "",
         email: userProfile.data.email || "",
         password: "",
         bio: userProfile.data.bio || "",
         banner: userProfile.data.banner || defaultBanner,
         avatar: userProfile.data.avatar || defaultAvatar,
         venueManager: true,
-    });
-  }
-}, [userProfile]);
-
-
-
- 
+      });
+    }
+  }, [userProfile]);
 
   const handleInputChange = (name, value) => {
     setFormValues((prevValues) => ({
@@ -79,9 +70,9 @@ useEffect(() => {
   };
 
   const handleFormSubmit = async (event) => {
-    if(!event) return;
+    if (!event) return;
     event.preventDefault();
-   
+
     const updatedFormValues = {
       ...formValues,
       banner: {
@@ -95,72 +86,68 @@ useEffect(() => {
     };
 
     const userData = updatedFormValues;
-    try{
- await EditProfileFormValidator.validate(updatedFormValues, {abortEarly: false});
-  setValidationErrors({});
-  const success = await updateUserProfile(userData);
-  if (success) {
-    setSuccessMessage('Profile Updated successfully!');
-    setTimeout(() => {
-   toggleForm(); }, 500);
-   
- 
-  
-  } else {
-    console.error("Failed to update profile");
-  }
-} catch (error) {
-    console.error("Error updating profile:", error);}};
+    try {
+      await EditProfileFormValidator.validate(updatedFormValues, {
+        abortEarly: false,
+      });
+      setValidationErrors({});
+      const success = await updateUserProfile(userData);
+      if (success) {
+        setSuccessMessage("Profile Updated successfully!");
+        setTimeout(() => {
+          toggleForm();
+        }, 500);
+      } else {
+        console.error("Failed to update profile");
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
 
   return (
- 
-   
-<>
-{isEditProfileVisible && (
-    <Box sx={{ marginTop: 3 }}>
-      {!userProfile ? (
-        <Typography>Loading Profile...</Typography>
-      ) : (
+    <>
+      {isEditProfileVisible && (
+        <Box sx={{ marginTop: 3,  }}>
+          {!userProfile ? (
+            <Typography>Loading Profile...</Typography>
+          ) : (
+            <div
+              style={{
+                position: "fixed",
+                width: "80vw",
+                height: "80vh",
+                display: "flex",
 
-        <div
-        style={{
-          position: "fixed",
-          width: "80vw",
-          height: "80vh",
-          display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 3000,
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                overflowY: "auto",
+                padding: "60px",
+              }}
+            >
+              <EditProfileForm
+                formValues={formValues}
+                onInputChange={handleInputChange}
+                onImageChange={handleImageChange}
+                onAddImage={handleAddImageInput}
+                onSubmit={handleFormSubmit}
+                validationErrors={validationErrors}
+                defaultBanner={defaultBanner}
+                defaultAvatar={defaultAvatar}
+           setIsEditProfileVisible={setIsEditProfileVisible}
+           isEditProfileVisible={isEditProfileVisible}
 
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 3000,
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          overflowY: "auto",
-          padding: "20px",
-        }}
-      >
-        <EditProfileForm
-          formValues={formValues}
-          onInputChange={handleInputChange}
-          onImageChange={handleImageChange}
-          onAddImage={handleAddImageInput}
-          onSubmit={handleFormSubmit}
-          validationErrors={validationErrors}
-          defaultBanner={defaultBanner}
-          defaultAvatar={defaultAvatar}
-      
-         
-        />
-
-      </div>
+              />
+            </div>
+          )}
+        </Box>
       )}
-
-    </Box>
-  )}
-  
-</>
-
-  );}
-
+    </>
+  );
+};
 
 export default EditProfileFormBox;

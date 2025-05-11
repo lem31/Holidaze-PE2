@@ -1,14 +1,11 @@
 import useMyStore from "../../Store/index";
 import { jwtDecode } from "jwt-decode";
-import fetchUserProfile from "../../API/FetchUserProfile/index"; 
+import fetchUserProfile from "../../API/FetchUserProfile/index";
 
 async function onLogin(endpoint, userData, navigate) {
-  const { login, setUserProfile } = useMyStore.getState(); 
-  console.log("onLogin called with endpoint:", endpoint);
-  console.log("onLogin called with userData:", userData);
+  const { login, setUserProfile } = useMyStore.getState();
 
   try {
-
     const response = await fetch(endpoint, {
       method: "POST",
       headers: {
@@ -27,18 +24,12 @@ async function onLogin(endpoint, userData, navigate) {
 
     if (accessToken && userName) {
       const decodedToken = jwtDecode(accessToken);
-      console.log("Token decoded:", decodedToken);
 
-    
       login(accessToken, userName);
-      console.log("Login successful and token stored:", decodedToken);
 
-     
-      console.log("Fetching user profile...");
       const profileData = await fetchUserProfile(userName, accessToken);
       if (profileData) {
-        console.log("Profile fetched successfully:", profileData);
-        setUserProfile(profileData); 
+        setUserProfile(profileData);
       } else {
         console.warn("Failed to fetch user profile data.");
       }

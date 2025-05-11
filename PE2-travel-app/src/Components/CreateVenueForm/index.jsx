@@ -1,19 +1,12 @@
 import { Box, TextField, Button } from "@mui/material";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import CreateVenueFormValidator from "../CreateVenueFormValidator";
 import useMyStore from "../../Store/index";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-
-
-
-
 const CreateVenueForm = ({ toggleForm }) => {
-  const {  createNewVenue, setSuccessMessage } = useMyStore();
- 
-
-  console.log("🛠 Zustand createVenue function:", createNewVenue);
+  const { createNewVenue, setSuccessMessage } = useMyStore();
 
   const [metaValues, setMetaValues] = useState({
     wifi: false,
@@ -32,14 +25,9 @@ const CreateVenueForm = ({ toggleForm }) => {
   } = useForm({
     resolver: yupResolver(CreateVenueFormValidator),
     mode: "onSubmit",
-
-   
   });
 
- 
   const onSubmit = async (formValues) => {
-    console.log(" handleSubmit is executing!");
-    console.log("🚀 Form submission triggered!", formValues);
     const venueData = {
       ...formValues,
       price: Number(formValues.price),
@@ -53,15 +41,9 @@ const CreateVenueForm = ({ toggleForm }) => {
       },
     };
 
-  
-
     try {
-      console.log("📝 venueData before submission:", venueData);
-
       const response = await createNewVenue(venueData);
 
-      console.log("API response:", response);
-   
       setTimeout(() => {
         toggleForm();
         setSuccessMessage("Venue created successfully!");
@@ -84,12 +66,9 @@ const CreateVenueForm = ({ toggleForm }) => {
 
   const onAddImage = () => {
     const currentMedia = watch("media") || [];
-    console.log("🔍 Current media before adding:", currentMedia);
 
     const updatedMedia = [...currentMedia, { url: "", alt: "" }];
     setValue("media", updatedMedia);
-
-    console.log("✅ Media after adding:", updatedMedia);
   };
 
   const removeImage = (index) => {
@@ -97,11 +76,6 @@ const CreateVenueForm = ({ toggleForm }) => {
     updatedMedia.splice(index, 1);
     setValue("media", updatedMedia);
   };
-
-
-
-
-
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

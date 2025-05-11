@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Box,Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import LoginForm from "../LoginForm";
 import onLogin from "../../API/OnLogin";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 /**
  * LoginBox component handles user login functionality.
@@ -40,7 +40,6 @@ const LoginBox = () => {
 
     try {
       const response = await onLogin(API_URL, formValues, navigate);
-      console.log("Login successful:", response);
     } catch (error) {
       throw error;
     }
@@ -50,7 +49,7 @@ const LoginBox = () => {
     <Box>
       <Box sx={{ marginTop: 3 }}>
         <Typography variant="h6" sx={{ marginBottom: 2 }}>
-        Login
+          Login
         </Typography>
         <LoginForm
           formValues={formValues}

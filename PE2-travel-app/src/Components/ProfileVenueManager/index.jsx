@@ -6,48 +6,35 @@ import VMBookings from "../VMBookings";
 import { Snackbar, Alert } from "@mui/material";
 
 const ProfileVenueManager = () => {
-  const [successMessage, setSuccessMessage] = useState('');
-  const { userProfile, vmVenues, vmBookings, fetchVMVenues, fetchVMBookings } = useMyStore(); 
+  const [successMessage, setSuccessMessage] = useState("");
+  const { userProfile, vmVenues, vmBookings, fetchVMVenues, fetchVMBookings } =
+    useMyStore();
   const [selectedView, setSelectedView] = useState("");
   const [bookings, setVMBookings] = useState([]);
   const [isEditProfileVisible, setIsEditProfileVisible] = useState(false);
 
-
-
-
-
-  console.log("Store state:", useMyStore.getState());
   useEffect(() => {
-    console.log("Fetching venues...");
     fetchVMVenues();
-
   }, [successMessage]);
-
 
   useEffect(() => {
     if (successMessage) {
       setTimeout(() => {
-        setSuccessMessage('');
-      }, 3000); 
+        setSuccessMessage("");
+      }, 3000);
     }
   }, [successMessage]);
-  
-
 
   useEffect(() => {
-    console.log("Fetching bookings...");
     fetchVMBookings();
-    console.log("Bookings fetched:", vmBookings);
+
     setVMBookings(vmBookings);
     localStorage.setItem("bookings", JSON.stringify(bookings));
-  }
-  , [successMessage, vmBookings]);
+  }, [successMessage, vmBookings]);
 
   if (!userProfile) {
     return <p>No profile data available, please log in again.</p>;
   }
-
-
 
   return (
     <div>
@@ -60,10 +47,10 @@ const ProfileVenueManager = () => {
         <button
           onClick={() => {
             setSelectedView("Edit Profile");
-            setIsEditProfileVisible(!isEditProfileVisible);
+            setIsEditProfileVisible(true); 
           }}
         >
-          {isEditProfileVisible ? "Close Edit Profile" : "Edit Profile"}
+          Edit Profile
         </button>
         <button
           onClick={() => {
@@ -73,18 +60,24 @@ const ProfileVenueManager = () => {
         >
           Venues
         </button>
-        <button onClick={() => {setSelectedView("Bookings"); fetchVMBookings()}}>Bookings</button>
+        <button
+          onClick={() => {
+            setSelectedView("Bookings");
+            fetchVMBookings();
+          }}
+        >
+          Bookings
+        </button>
       </div>
 
       <div>
         {isEditProfileVisible && (
           <EditProfileFormBox
-        
             toggleForm={() => setIsEditProfileVisible(false)}
             setSuccessMessage={setSuccessMessage}
             successMessage={successMessage}
             isEditProfileVisible={isEditProfileVisible}
-         
+            setIsEditProfileVisible={setIsEditProfileVisible}
           />
         )}
         {selectedView === "Venues" && (
@@ -102,56 +95,54 @@ const ProfileVenueManager = () => {
             vmVenues={vmVenues}
           />
         )}
-  <div
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "auto",
-          height: "auto",
-        }}
-      >
-        <Snackbar
-          open={Boolean(successMessage)}
-          autoHideDuration={3000}
-          onClose={() => setSuccessMessage(null)}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-
+        <div
+          style={{
             position: "fixed",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            zIndex: 1500,
-            width: "400px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "auto",
             height: "auto",
-            backgroundColor: "transparent",
-            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
           }}
         >
-          <Alert
-            severity="success"
-            onClose={() => setSuccessMessage('')}
+          <Snackbar
+            open={Boolean(successMessage)}
+            autoHideDuration={3000}
+            onClose={() => setSuccessMessage(null)}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
             sx={{
-              fontSize: "20px",
-              padding: "20px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
 
-              textAlign: "center",
+              position: "fixed",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 1500,
+              width: "400px",
+              height: "auto",
+              backgroundColor: "transparent",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
             }}
           >
-            {successMessage}
-          </Alert>
-        </Snackbar>
-      </div>
+            <Alert
+              severity="success"
+              onClose={() => setSuccessMessage("")}
+              sx={{
+                fontSize: "20px",
+                padding: "20px",
 
-
+                textAlign: "center",
+              }}
+            >
+              {successMessage}
+            </Alert>
+          </Snackbar>
+        </div>
       </div>
     </div>
   );

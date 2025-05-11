@@ -6,12 +6,8 @@ import CreateVenueFormValidator from "../CreateVenueFormValidator";
 import { Box, Button, TextField } from "@mui/material";
 
 function EditVenueForm({ toggleEditForm }) {
-  const { editVenue, setSuccessMessage, selectedVenue, fetchVMVenues} =
+  const { editVenue, setSuccessMessage, selectedVenue, fetchVMVenues } =
     useMyStore();
-
-
-
-  console.log("🔍 Selected Venue in EditVenueForm:", selectedVenue);
 
   const [metaValues, setMetaValues] = useState({
     wifi: false,
@@ -23,7 +19,7 @@ function EditVenueForm({ toggleEditForm }) {
   const toggleFacility = (facility) => {
     setMetaValues((prev) => {
       const updatedMeta = { ...prev, [facility]: !prev[facility] };
-      setValue(`meta.${facility}`, updatedMeta[facility]); 
+      setValue(`meta.${facility}`, updatedMeta[facility]);
       return updatedMeta;
     });
   };
@@ -49,7 +45,7 @@ function EditVenueForm({ toggleEditForm }) {
         breakfast: selectedVenue.meta.breakfast ?? false,
         pets: selectedVenue.meta.pets ?? false,
       });
-  
+
       setValue("meta", selectedVenue.meta);
     }
   }, [selectedVenue, setValue]);
@@ -89,8 +85,6 @@ function EditVenueForm({ toggleEditForm }) {
   }, [selectedVenue, setValue]);
 
   const onSubmit = async (formValues) => {
-    console.log(" handleSubmit is executing!");
-    console.log("🚀 Form submission triggered!", formValues);
     const updatedVenueData = {
       ...formValues,
       price: Number(formValues.price),
@@ -102,44 +96,31 @@ function EditVenueForm({ toggleEditForm }) {
         lng: Number(formValues.location.lng),
         zip: String(formValues.location.zip).trim(),
         ...formValues,
-    
       },
 
       meta: metaValues,
     };
 
-
-
     try {
-      console.log("📝 venueData before submission:", updatedVenueData);
-
-  
       const response = await editVenue(updatedVenueData);
 
-      if(!response){
+      if (!response) {
         throw new Error("Venue update failed");
+      } else if (response) {
+        fetchVMVenues();
+        setTimeout(() => {
+          toggleEditForm();
+          setSuccessMessage("Venue successfully updated!");
+        }, 500);
       }
-
-      else if (response){
-
-      console.log("API response:", response);
-fetchVMVenues();
-      setTimeout(() => {
-        toggleEditForm();
-        setSuccessMessage("Venue successfully updated!");
-       
-      }, 500);}
     } catch (error) {
       console.error("Error creating venue:", error);
       setError("api", { message: "Failed to create venue" });
     }
   };
 
-  console.log("Form errors:", errors);
-
   return (
-    
-    <form onSubmit= {handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Box
         sx={{
           marginBottom: 2,
@@ -363,7 +344,7 @@ fetchVMVenues();
           <p style={{ color: "red" }}>{errors.location.lng.message}</p>
         )}
 
-        <button type="submit"  style={{ width: "100%", padding: "40px" }}>
+        <button type="submit" style={{ width: "100%", padding: "40px" }}>
           Save Venue
         </button>
 

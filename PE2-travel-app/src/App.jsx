@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo } from 'react';
-import Router from './Components/Router'
-import useMyStore from './Store'
+import React, { useEffect, useMemo } from "react";
+import Router from "./Components/Router";
+import useMyStore from "./Store";
 
 /**The App component is the main entry point of the application.
  * It initializes the application.
@@ -14,16 +14,13 @@ import useMyStore from './Store'
 
 function App() {
   const { checkLoginStatus, loginChecked } = useMyStore();
-const isHydrated = useMemo(() => useMyStore.persist.hasHydrated(), []);
+  const isHydrated = useMemo(() => useMyStore.persist.hasHydrated(), []);
 
   useEffect(() => {
     if (isHydrated && !loginChecked) {
-      console.log("Rehydration complete. Checking login status...");
-      checkLoginStatus(); 
+      checkLoginStatus();
     }
   }, [isHydrated, checkLoginStatus]);
-
-
 
   return <Router />;
 }

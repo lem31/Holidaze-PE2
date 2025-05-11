@@ -13,7 +13,7 @@ async function onRegister(endpoint, userData) {
     }
 
     const data = await response.json();
-    console.log("Registration successful:", data);
+
     return data;
   } catch (error) {
     throw error;
