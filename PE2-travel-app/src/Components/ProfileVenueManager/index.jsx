@@ -4,6 +4,7 @@ import EditProfileFormBox from "../EditProfileFormBox";
 import Venues from "../Venues";
 import VMBookings from "../VMBookings";
 import { Snackbar, Alert } from "@mui/material";
+import ProfileGlobal from "../ProfileGlobal";
 
 const ProfileVenueManager = () => {
   const [successMessage, setSuccessMessage] = useState("");
@@ -38,20 +39,14 @@ const ProfileVenueManager = () => {
 
   return (
     <div>
-      <h1>{selectedView}</h1>
-      <h2>{userProfile.data.name}</h2>
-      <p>{userProfile.data.bio}</p>
-      <img src={userProfile.data.banner.url} alt="banner" />
-      <img src={userProfile.data.avatar.url} alt="avatar" />
       <div>
-        <button
-          onClick={() => {
-            setSelectedView("Edit Profile");
-            setIsEditProfileVisible(true); 
-          }}
-        >
-          Edit Profile
-        </button>
+<ProfileGlobal
+          setIsEditProfileVisible={setIsEditProfileVisible}
+          setSelectedView={setSelectedView}
+          selectedView={selectedView}
+          userProfile={userProfile}
+        />
+        
         <button
           onClick={() => {
             setSelectedView("Venues");
