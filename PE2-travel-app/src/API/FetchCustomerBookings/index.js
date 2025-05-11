@@ -22,6 +22,7 @@ async function fetchCustomerBookings() {
         }
 
         const bookingsData = await response.json();
+        console.log('Bookings Data:', bookingsData);
         return bookingsData;
     } catch (error) {
         console.error('Error fetching user venues:', error);
