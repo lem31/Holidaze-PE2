@@ -1,16 +1,19 @@
 import React from "react";
+import useMyStore from "../../Store/index";
+import DefaultImage from '../../assets/Images/DefaultBannerProfileImg.jpg';
 
 
 
-const ProfileGlobal= ({setIsEditProfileVisible, setSelectedView, selectedView, userProfile}) => { 
+const ProfileGlobal= ({setIsEditProfileVisible, setSelectedView, selectedView}) => { 
+const { userProfile } = useMyStore();
   return (
     <div>
     
     <h1>{selectedView}</h1>
-    <h2>{userProfile.data.name}</h2>
-    <p>{userProfile.data.bio}</p>
-    <img src={userProfile.data.banner.url} alt="banner" />
-    <img src={userProfile.data.avatar.url} alt="avatar" />
+    <h2>{userProfile.name}</h2>
+    <p>{userProfile.bio}</p>
+    <img src={userProfile.banner?.url || DefaultImage } alt="banner" />
+    <img src={userProfile.banner?.url || DefaultImage } alt="avatar" />
     <div>
       <button
         onClick={() => {
