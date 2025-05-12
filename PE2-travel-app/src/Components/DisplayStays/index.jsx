@@ -21,10 +21,19 @@ const DisplayStays = () => {
   const { loading, error, stays, fetchStays, successMessage } = useMyStore();
   const [filteredStays, setFilteredStays] = useState([]);
 
-  useEffect(() => {
+//   useEffect(() => {
+//     fetchStays();
+//   }, [fetchStays, successMessage]);
+// console.log("Stays:", stays);
+
+useEffect(() => {
+  const storedStays = JSON.parse(localStorage.getItem("stays"));
+  if (storedStays) {
+    setFilteredStays(storedStays); 
+  } else {
     fetchStays();
-  }, [fetchStays, successMessage]);
-console.log("Stays:", stays);
+  }
+}, [successMessage]);
 
 useEffect(() => {
   setFilteredStays(Array.isArray(stays) ? stays.filter(stay => stay !== null) : []);

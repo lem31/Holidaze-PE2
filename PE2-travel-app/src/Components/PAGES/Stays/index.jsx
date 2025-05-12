@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import DisplayStays from '../../DisplayStays';
 import useMyStore from '../../../Store';
+import fetchStays from '../../../API/index.jsx';
+
 
 /**
  * Stays component fetches and displays a list of stays.
@@ -9,12 +11,26 @@ import useMyStore from '../../../Store';
  */
 
 function Stays() {
-const {stays, fetchStays}= useMyStore();
+
+
+const [stays, setStays] = useState([]);
 
 useEffect(() => {
-    fetchStays();
-}, [fetchStays]);
-   
+    const fetchData = async () => {
+        try {
+            const data = await fetchStays();
+            setStays(data);
+        } catch (error) {
+            console.error('Error fetching stays:', error);
+        }
+    };
+
+    fetchData();
+}, []);
+
+
+
+
     return(
         <div>
 <DisplayStays stays={stays}/>
