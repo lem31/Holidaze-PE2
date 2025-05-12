@@ -45,7 +45,7 @@ const useMyStore = create(
       userProfile: null,
       loadingProfile: false,
       loginChecked: false,
-      vmVenues: JSON.parse(localStorage.getItem("vmVenues")) || [],
+      vmVenues: [],
       setVmVenues: (newVMVenues) => {
         set({ vmVenues: newVMVenues });
         localStorage.setItem("vmVenues", JSON.stringify(newVMVenues));
@@ -156,18 +156,23 @@ const useMyStore = create(
 
    
       fetchStays: async () => {
+        const token = get().token;
+        const userName = get().userName;
         try {
           set({ loading: true, error: false });
-      await fetchVMVenues();
+      await fetchVMVenues(userName, token);
           const apiStays = await fetchStays();
-          const storedStays = get().stays || [];
+          const storedStays = Array.isArray(get().stays) ? get().stays : [];
           const vmVenues = Array.isArray(get().vmVenues) ? get().vmVenues : [];
       
      
+          const validStoredStays = storedStays.filter(s => s && s.id);
+          const validVmVenues = vmVenues.filter(v => v && v.id);
+
           const mergedStays = [
-            ...storedStays,
-            ...apiStays.filter(stay => !storedStays.some(s => s.id === stay.id)),
-            ...vmVenues.filter(venue => !storedStays.some(s => s.id === venue.id))
+            ...validStoredStays,
+            ...apiStays.filter(stay => !validStoredStays.some(s => s.id === stay.id)),
+            ...validVmVenues.filter(venue => !validStoredStays.some(s => s.id === venue.id))
           ];
       
           set({ stays: mergedStays, loading: false });
@@ -238,15 +243,19 @@ const useMyStore = create(
         try {
           set({ loading: true });
           const userVenues = await fetchVMVenues(userName, token);
-          console.log("Fetched vmVenues:", userVenues);
+          console.log("🔍 API Response for vmVenues:", userVenues);
       
-          if (Array.isArray(userVenues) && userVenues.length > 0) {
-            set({ vmVenues: userVenues, loading: false });
-            localStorage.setItem("vmVenues", JSON.stringify(userVenues));
-            console.log(" Fetched and stored vmVenues:", userVenues);
-            return userVenues;
+ 
+          const venuesArray = Array.isArray(userVenues.data) ? userVenues.data : (Array.isArray(userVenues) ? userVenues : []);
+          
+          if (venuesArray.length > 0) {
+            set({ vmVenues: venuesArray, loading: false });
+            localStorage.setItem("vmVenues", JSON.stringify(venuesArray));
+            
+            console.log("✅ Stored vmVenues Correctly:", venuesArray);
+            return venuesArray;
           } else {
-            throw new Error("Failed to fetch valid profile venues.");
+            throw new Error("Invalid API response: expected an array.");
           }
         } catch (error) {
           console.error("Error fetching venues:", error);

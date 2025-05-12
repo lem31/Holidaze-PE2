@@ -27,7 +27,9 @@ function Venues({ vmVenues}) {
   const [isBookingsVisible, setIsBookingsVisible] = useState(false);
 
 
-
+useEffect(() => {
+  fetchVMVenues();
+}, [fetchVMVenues]);
 
   
 
@@ -164,8 +166,8 @@ function Venues({ vmVenues}) {
         </div>
       )}
 
-      {Array.isArray(vmVenues.data) && vmVenues.data.length > 0 ? (
-        vmVenues.data.filter(venue=> venue).map((venue, index) => (
+      {Array.isArray(vmVenues) && vmVenues.length > 0 ? (
+        vmVenues.filter(venue=> venue).map((venue, index) => (
           <div key={`${venue.id || `fallback`}-${index}`}>
             <h2>{venue.name}</h2>
             <p>{venue.description}</p>
