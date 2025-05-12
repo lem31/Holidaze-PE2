@@ -133,23 +133,42 @@ const useMyStore = create(
         }
       },
 
+
       updateUserProfile: async (userData) => {
         const userName = get().userName;
         const token = get().token;
         const endpoint = `https://v2.api.noroff.dev/holidaze/profiles/${userName}`;
-
+      
         if (!token || !userName) {
           console.error("Token or username not found in local storage.");
           return;
         }
+      
         try {
           set({ loadingProfile: true });
-
+      
           const updatedProfile = await updateProfile(userData, endpoint, token);
           if (updatedProfile) {
             set({ userProfile: updatedProfile, loadingProfile: false });
+            localStorage.setItem("userProfile", JSON.stringify(updatedProfile));
             console.log("Profile updated successfully:", updatedProfile);
-            return updatedProfile;
+      
+
+            const response = await fetch(endpoint, {
+              method: 'PUT',
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+                "X-Noroff-API-Key": "f920c7be-b352-412a-bfe3-67cf36aebe41",
+              
+              },
+              body: JSON.stringify(userData),
+            });
+      
+            const refreshedProfile = await response.json();
+            set({ userProfile: refreshedProfile, loadingProfile: false });
+      
+            return refreshedProfile;
           } else {
             throw new Error("Failed to update profile");
           }
@@ -160,6 +179,9 @@ const useMyStore = create(
         }
       },
 
+     
+
+      
       
        
         fetchStays: async () => {

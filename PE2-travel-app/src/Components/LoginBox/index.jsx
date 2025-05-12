@@ -3,6 +3,8 @@ import { Box, Typography } from "@mui/material";
 import LoginForm from "../LoginForm";
 import onLogin from "../../API/OnLogin";
 import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import { set } from "react-hook-form";
 
 /**
  * LoginBox component handles user login functionality.
@@ -23,6 +25,7 @@ import { useNavigate } from "react-router-dom";
 const LoginBox = () => {
   const API_URL = "https://v2.api.noroff.dev/auth/login";
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -37,11 +40,16 @@ const LoginBox = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage('');
 
     try {
       const response = await onLogin(API_URL, formValues, navigate);
+      if(!response.ok){
+        const errorData = await response.json();
+        setErrorMessage(errorData.message || 'Invalid email or password');
+      }
     } catch (error) {
-      throw error;
+     setErrorMessage('An error occurred during login. Please try again.');
     }
   };
 
@@ -51,6 +59,7 @@ const LoginBox = () => {
         <Typography variant="h6" sx={{ marginBottom: 2 }}>
           Login
         </Typography>
+        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <LoginForm
           formValues={formValues}
           onInputChange={handleInputChange}

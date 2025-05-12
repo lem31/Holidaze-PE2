@@ -28,24 +28,31 @@ const EditProfileFormBox = ({
     email: "",
     password: "",
     bio: "",
-    banner: defaultBanner,
-    avatar: defaultAvatar,
+    banner: {url: '', alt: ''},
+    avatar: {url: '', alt: ''},
     venueManager: true,
   });
 
   useEffect(() => {
-    if (userProfile) {
+    if (userProfile && !formValues.name) {
       setFormValues({
         name: userProfile.data.name || "",
         email: userProfile.data.email || "",
         password: "",
         bio: userProfile.data.bio || "",
-        banner: userProfile.data.banner || defaultBanner,
-        avatar: userProfile.data.avatar || defaultAvatar,
+        banner: {
+          url: userProfile.data.banner?.url || defaultBanner.url,
+          alt: userProfile.data.banner?.alt || defaultBanner.alt,
+        },
+        avatar: {
+          url: userProfile.data.avatar?.url || defaultAvatar.url,
+          alt: userProfile.data.avatar?.alt || defaultAvatar.alt,
+        },
         venueManager: true,
       });
     }
   }, [userProfile]);
+  
 
   const handleInputChange = (name, value) => {
     setFormValues((prevValues) => ({
@@ -54,11 +61,11 @@ const EditProfileFormBox = ({
     }));
   };
 
-  const handleImageChange = (index, name, value) => {
-    const updatedImage = { ...formValues[name], [index]: value };
+  const handleImageChange = ( name, property, value) => {
+   
     setFormValues((prevValues) => ({
       ...prevValues,
-      [name]: updatedImage,
+      [name]: {...prevValues[name], [property]: value||""}, 
     }));
   };
 
@@ -76,12 +83,12 @@ const EditProfileFormBox = ({
     const updatedFormValues = {
       ...formValues,
       banner: {
-        url: formValues.banner.url || defaultBanner.url,
-        alt: formValues.banner.alt || defaultBanner.alt,
+        url: formValues.banner.url?.trim() || defaultBanner.url,
+        alt: formValues.banner.alt?.trim() || defaultBanner.alt,
       },
       avatar: {
-        url: formValues.avatar.url || defaultAvatar.url,
-        alt: formValues.avatar.alt || defaultAvatar.alt,
+        url: formValues.avatar.url?.trim() || defaultAvatar.url,
+        alt: formValues.avatar.alt?.trim() || defaultAvatar.alt,
       },
     };
 

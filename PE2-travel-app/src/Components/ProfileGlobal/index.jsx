@@ -6,6 +6,10 @@ import DefaultImage from '../../assets/Images/DefaultBannerProfileImg.jpg';
 
 const ProfileGlobal= ({setIsEditProfileVisible, setSelectedView, selectedView}) => { 
 const { userProfile } = useMyStore();
+const [refresh, setRefresh] = React.useState(false);
+React.useEffect(() => {
+  console.log('profile updated, forcing refresh');
+}, [refresh]);
   return (
     <div>
     
@@ -13,7 +17,7 @@ const { userProfile } = useMyStore();
     <h2>{userProfile.name}</h2>
     <p>{userProfile.bio}</p>
     <img src={userProfile.banner?.url || DefaultImage } alt="banner" />
-    <img src={userProfile.banner?.url || DefaultImage } alt="avatar" />
+    <img src={userProfile.avatar?.url || DefaultImage } alt="avatar" />
     <div>
       <button
         onClick={() => {

@@ -172,7 +172,7 @@ useEffect(() => {
             <h2>{venue.name}</h2>
             <p>{venue.description}</p>
             <p>City: {venue.location?.city || "Unknown"}</p>
-            <p>Country: {venue.location?.country}</p>
+            <p>Country: {venue.location?.country || 'Unknown'}</p>
             <p>Price: {venue.price || "N/A"}</p>
             {Array.isArray(venue.media) && venue.media.map((image, index) => (
               <img

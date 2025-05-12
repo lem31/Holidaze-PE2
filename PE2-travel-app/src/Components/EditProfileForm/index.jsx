@@ -17,9 +17,8 @@ import { Box, TextField, Button } from "@mui/material";
 const EditProfileForm = ({
   formValues,
   onInputChange,
+  onImageChange,
   onSubmit,
-  defaultBanner,
-  defaultAvatar,
   validationErrors = {},
   setIsEditProfileVisible,
   isEditProfileVisible,
@@ -31,43 +30,9 @@ const EditProfileForm = ({
         onSubmit(e);
       }}
     >
-      <TextField
-        label="Name"
-        name="name"
-        value={formValues.name}
-        onChange={(e) => onInputChange(e.target.name, e.target.value)}
-        variant="outlined"
-        fullWidth
-        required
-        sx={{ marginBottom: 2 }}
-      />
-      {validationErrors.name && <p>{validationErrors.name}</p>}
-      <TextField
-        label="Email"
-        name="email"
-        type="email"
-        value={formValues.email}
-        onChange={(e) => onInputChange(e.target.name, e.target.value)}
-        variant="outlined"
-        fullWidth
-        required
-        sx={{ marginBottom: 2 }}
-      />
-      {validationErrors.email && (
-        <p style={{ color: "red" }}>{validationErrors.email}</p>
-      )}
-      <TextField
-        label="Password"
-        name="password"
-        type="password"
-        value={formValues.password}
-        onChange={(e) => onInputChange(e.target.name, e.target.value)}
-        variant="outlined"
-        fullWidth
-        required
-        sx={{ marginBottom: 2 }}
-      />
-      {validationErrors.password && <p>{validationErrors.password}</p>}
+     
+    
+  
       <TextField
         label="Bio"
         name="bio"
@@ -80,13 +45,26 @@ const EditProfileForm = ({
         sx={{ marginBottom: 2 }}
       />
       {validationErrors.bio && <p>{validationErrors.bio}</p>}
+
+      <Box sx={{ marginBottom: 2 }}>
+       
+        <TextField
+          label="Banner URL"
+          name="bannerUrl"
+          value={formValues.banner?.url || ''}
+          onChange={(e) => onImageChange('banner', 'url', e.target.value)}
+          variant="outlined"
+          fullWidth
+        />
+        {validationErrors.bannerUrl && <p>{validationErrors.banner.url}</p>}
+      </Box>
       <Box sx={{ marginBottom: 2 }}>
         {validationErrors.bannerUrl && <p>{validationErrors.bannerUrl}</p>}
         <TextField
           label="Banner Alt Text"
           name="bannerAlt"
-          value={formValues.bannerAlt || defaultBanner.alt}
-          onChange={(e) => onInputChange(e.target.name, e.target.value)}
+          value={formValues.banner?.alt || ''}
+          onChange={(e) => onImageChange( 'banner', 'alt', e.target.value)}
           variant="outlined"
           fullWidth
         />
@@ -94,10 +72,10 @@ const EditProfileForm = ({
       </Box>
       <Box sx={{ marginBottom: 2 }}>
         <TextField
-          label="Avatar Image URL"
+          label="Avatar URL"
           name="avatarUrl"
-          value={formValues.avatarUrl || defaultAvatar.url}
-          onChange={(e) => onInputChange(e.target.name, e.target.value)}
+          value={formValues.avatar?.url || ''}
+          onChange={(e) => onImageChange('avatar', 'url',  e.target.value)}
           variant="outlined"
           fullWidth
           sx={{ marginBottom: 1 }}
@@ -106,21 +84,13 @@ const EditProfileForm = ({
         <TextField
           label="Avatar Alt Text"
           name="avatarAlt"
-          value={formValues.avatar.alt}
-          onChange={(e) => onInputChange(e.target.name, e.target.value)}
+          value={formValues.avatar?.alt || ''}
+          onChange={(e) => onImageChange( 'avatar', 'alt', e.target.value)}
           variant="outlined"
           fullWidth
         />
         {validationErrors.avatarAlt && <p>{validationErrors.avatar.alt}</p>}
-        <TextField
-          label="Avatar Alt Text"
-          name="avatarAlt"
-          value={formValues.avatarAlt}
-          onChange={(e) => onInputChange(e.target.name, e.target.value)}
-          variant="outlined"
-          fullWidth
-        />
-        {validationErrors.avatarAlt && <p>{validationErrors.avatarAlt}</p>}
+     
       </Box>
       <Button type="submit" variant="contained" color="primary" fullWidth>
         Save Changes
