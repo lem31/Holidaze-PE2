@@ -37,6 +37,17 @@ const BookingCalendar = ({bookingMessage, setBookingMessage}) => {
   const [guestWarning, setGuestWarning] = useState(null);
 
 
+  const unavailableDates = new Set();
+  selectedStay?.bookings?.forEach((booking) => {
+    let currentDate = new Date(booking.dateFrom);
+    const endDate = new Date(booking.dateTo);
+    while (currentDate <= endDate) {
+      unavailableDates.add(currentDate.toISOString().split("T")[0]);
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+  });
+
+
   const handleBooking = async () => {
    
 
@@ -105,12 +116,18 @@ const BookingCalendar = ({bookingMessage, setBookingMessage}) => {
           label="Check-in"
           value={startDate}
           onChange={(newValue) => setStartDate(newValue)}
+          shouldDisableDate={(date) =>
+            unavailableDates.has(date.toISOString().split("T")[0])
+          }
         />
 
         <DatePicker
           label="Check-out"
           value={endDate}
           onChange={(newValue) => setEndDate(newValue)}
+          shouldDisableDate={(date) =>
+            unavailableDates.has(date.toISOString().split("T")[0])
+          }
         />
 
         <div>
