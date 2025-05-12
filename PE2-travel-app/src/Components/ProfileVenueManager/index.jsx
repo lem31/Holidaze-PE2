@@ -12,7 +12,7 @@ const ProfileVenueManager = () => {
     useMyStore();
   const [selectedView, setSelectedView] = useState("");
   const [bookings, setVMBookings] = useState([]);
-  const [isEditProfileVisible, setIsEditProfileVisible] = useState(false);
+
 
   useEffect(() => {
     fetchVMVenues();
@@ -41,7 +41,7 @@ const ProfileVenueManager = () => {
     <div>
       <div>
 <ProfileGlobal
-          setIsEditProfileVisible={setIsEditProfileVisible}
+       
           setSelectedView={setSelectedView}
           selectedView={selectedView}
           userProfile={userProfile}
@@ -66,15 +66,8 @@ const ProfileVenueManager = () => {
       </div>
 
       <div>
-        {isEditProfileVisible && (
-          <EditProfileFormBox
-            toggleForm={() => setIsEditProfileVisible(false)}
-            setSuccessMessage={setSuccessMessage}
-            successMessage={successMessage}
-            isEditProfileVisible={isEditProfileVisible}
-            setIsEditProfileVisible={setIsEditProfileVisible}
-          />
-        )}
+     
+     
         {selectedView === "Venues" && (
           <Venues
             successMessage={successMessage}

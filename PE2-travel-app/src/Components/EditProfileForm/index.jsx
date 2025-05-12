@@ -36,7 +36,7 @@ const EditProfileForm = ({
       <TextField
         label="Bio"
         name="bio"
-        value={formValues.bio}
+        value={formValues?.bio || ""}
         onChange={(e) => onInputChange(e.target.name, e.target.value)}
         variant="outlined"
         fullWidth
@@ -51,7 +51,7 @@ const EditProfileForm = ({
         <TextField
           label="Banner URL"
           name="bannerUrl"
-          value={formValues.banner?.url || ''}
+          value={formValues?.banner?.url || ''}
           onChange={(e) => onImageChange('banner', 'url', e.target.value)}
           variant="outlined"
           fullWidth
@@ -63,7 +63,7 @@ const EditProfileForm = ({
         <TextField
           label="Banner Alt Text"
           name="bannerAlt"
-          value={formValues.banner?.alt || ''}
+          value={formValues?.banner?.alt || ''}
           onChange={(e) => onImageChange( 'banner', 'alt', e.target.value)}
           variant="outlined"
           fullWidth
@@ -74,7 +74,7 @@ const EditProfileForm = ({
         <TextField
           label="Avatar URL"
           name="avatarUrl"
-          value={formValues.avatar?.url || ''}
+          value={formValues?.avatar?.url || ''}
           onChange={(e) => onImageChange('avatar', 'url',  e.target.value)}
           variant="outlined"
           fullWidth
@@ -84,7 +84,7 @@ const EditProfileForm = ({
         <TextField
           label="Avatar Alt Text"
           name="avatarAlt"
-          value={formValues.avatar?.alt || ''}
+          value={formValues?.avatar?.alt || ''}
           onChange={(e) => onImageChange( 'avatar', 'alt', e.target.value)}
           variant="outlined"
           fullWidth

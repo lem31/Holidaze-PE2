@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import useMyStore from "../../Store/index";
 import DefaultImage from '../../assets/Images/DefaultBannerProfileImg.jpg';
+import EditProfileFormBox from "../EditProfileForm";
 
 
 
-const ProfileGlobal= ({setIsEditProfileVisible, setSelectedView, selectedView}) => { 
+const ProfileGlobal= () => { 
+  const [isEditProfileVisible, setIsEditProfileVisible] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
 const { userProfile } = useMyStore();
+
 const [refresh, setRefresh] = React.useState(false);
 React.useEffect(() => {
   console.log('profile updated, forcing refresh');
@@ -13,7 +17,7 @@ React.useEffect(() => {
   return (
     <div>
     
-    <h1>{selectedView}</h1>
+   
     <h2>{userProfile.name}</h2>
     <p>{userProfile.bio}</p>
     <img src={userProfile.banner?.url || DefaultImage } alt="banner" />
@@ -21,12 +25,22 @@ React.useEffect(() => {
     <div>
       <button
         onClick={() => {
-          setSelectedView("Edit Profile");
-          setIsEditProfileVisible(true); 
+         
+      setIsEditProfileVisible(true); 
         }}
       >
         Edit Profile
       </button>
+
+      {isEditProfileVisible && (
+          <EditProfileFormBox
+          toggleForm={() => setIsEditProfileVisible(false)}
+          setSuccessMessage={setSuccessMessage}
+          successMessage={successMessage}
+          isEditProfileVisible={isEditProfileVisible}
+          setIsEditProfileVisible={setIsEditProfileVisible}
+          />
+        )}
       </div>
     </div>
   );

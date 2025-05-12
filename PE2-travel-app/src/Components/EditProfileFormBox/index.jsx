@@ -34,7 +34,7 @@ const EditProfileFormBox = ({
   });
 
   useEffect(() => {
-    if (userProfile && !formValues.name) {
+    if (userProfile && userProfile.data) {
       setFormValues({
         name: userProfile.data.name || "",
         email: userProfile.data.email || "",
@@ -137,7 +137,7 @@ const EditProfileFormBox = ({
               }}
             >
               <EditProfileForm
-                formValues={formValues}
+                formValues={userProfile.data}
                 onInputChange={handleInputChange}
                 onImageChange={handleImageChange}
                 onAddImage={handleAddImageInput}
