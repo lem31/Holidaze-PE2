@@ -1,12 +1,25 @@
 const url = "https://v2.api.noroff.dev/holidaze/venues?_bookings=true";
 
-const fetchStays = async (set) => {
+const fetchStays = async () => {
 
   try {
     const response = await fetch(url); 
     const data = await response.json();
-    console.log("Fetched stays:", data);
-    return data.data;
+
+    console.log('API Response:', data); 
+
+    if(!data.data|| !Array.isArray(data.data)){
+      console.error("Invalid API response format:", data);
+      throw new Error("Invalid API response format");
+    }
+
+    const staysWithBookings = data.data.map(stay=>({
+      ...stay, bookings: stay.bookings || []
+    }));
+   
+
+  
+    return staysWithBookings;
   
   } catch (error) {
 

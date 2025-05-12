@@ -8,7 +8,7 @@ async function fetchCustomerBookings() {
     }
 
     try {
-        const response = await fetch(`https://v2.api.noroff.dev/holidaze/profiles/${userName}/bookings?_venues=true`, {
+        const response = await fetch(`https://v2.api.noroff.dev/holidaze/profiles/${userName}/bookings?_venue=true`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -22,8 +22,12 @@ async function fetchCustomerBookings() {
         }
 
         const bookingsData = await response.json();
+
+        console.log('Full API Response:', bookingsData);
+console.log('First Booking:', bookingsData.data[0]);
+console.log('Venue Data:', bookingsData.data[0]?.venue);
         console.log('Bookings Data:', bookingsData);
-        return bookingsData;
+        return bookingsData.data;
     } catch (error) {
         console.error('Error fetching user venues:', error);
         throw error;

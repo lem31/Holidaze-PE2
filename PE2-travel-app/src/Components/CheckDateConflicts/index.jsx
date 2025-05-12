@@ -1,24 +1,3 @@
-// function CheckDateConflicts(startDate, endDate, selectedStay) {
-//   if (!selectedStay || !selectedStay.bookings || !selectedStay.bookings.length === 0) {
-//     console.error("Selected stay is missing dates");
-//     return false;
-//   }
-
-//   return selectedStay.bookings.some((booking) => {
-//     const bookedStart = new Date(booking.dateFrom);
-//     const bookedEnd = new Date(booking.dateTo);
-
-//     return (
-//       (startDate >= bookedStart && startDate <= bookedEnd) ||
-//       (endDate >= bookedStart && endDate <= bookedEnd) ||
-//       (startDate <= bookedStart && endDate >= bookedEnd)
-//     );
-//   });
-
- 
-// }
-// export default CheckDateConflicts;
-
 function CheckDateConflicts(startDate, endDate, selectedStay) {
     if (!selectedStay || !selectedStay.bookings || selectedStay.bookings.length === 0) {
       console.error("Selected stay is missing booking data");

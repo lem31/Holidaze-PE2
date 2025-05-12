@@ -1,11 +1,12 @@
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import postBooking from "../../API/PostBooking";
 import useMyStore from "../../Store";
 import Guests from "../../assets/Images/guests.png";
 import CheckDateConflicts from "../CheckDateConflicts";
+import { useParams } from "react-router-dom";
 
 /**
  * BookingCalendar component allows users to make a booking for a selected stay.
@@ -26,11 +27,15 @@ import CheckDateConflicts from "../CheckDateConflicts";
 const BookingCalendar = ({bookingMessage, setBookingMessage}) => {
   const selectedStay = useMyStore((state) => state.selectedStay);
   const isLoggedIn = useMyStore((state) => state.isLoggedIn);
+   
+
+
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [numberOfGuests, setNumberOfGuests] = useState(1);
 
   const [guestWarning, setGuestWarning] = useState(null);
+
 
   const handleBooking = async () => {
    

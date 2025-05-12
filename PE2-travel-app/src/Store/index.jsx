@@ -13,11 +13,18 @@ const useMyStore = create(
   persist(
     (set, get) => ({
       stays: [],
+      bookings: [],
 
       setStays: (newStays) => {
         set({ stays: newStays });
         localStorage.setItem("stays", JSON.stringify(newStays));
         
+      },
+
+      setBookings: (newBookings) => {
+        set({ bookings: newBookings });
+        localStorage.setItem("bookings", JSON.stringify(newBookings));
+        console.log("Stored bookings:", JSON.parse(localStorage.getItem("bookings")));
       },
 
       vmBookings: [],
@@ -149,38 +156,62 @@ const useMyStore = create(
       fetchStays: async () => {
         try {
           set({ loading: true, error: false });
+      
           const fetchedStays = await fetchStays();
+      
+          console.log("Fetched stays:", fetchedStays); 
+      
+          if (!Array.isArray(fetchedStays)) {
+            throw new Error("Invalid API response format, expected an array.");
+          }
+      
+         
+          const extractedBookings = fetchedStays.flatMap(stay => stay.bookings || []);
+      
           set((state) => ({
-            stays: [...state.stays, ...fetchedStays.filter(stay => !state.stays.some(s => s.id === stay.id))],
-            loading: false
+            stays: fetchedStays,
+            bookings: extractedBookings,
+            loading: false,
           }));
-          localStorage.setItem("stays", JSON.stringify(get().stays));
-          return get().stays;
+      
+          console.log("Bookings extracted:", extractedBookings); 
+      
+          localStorage.setItem("stays", JSON.stringify(fetchedStays)); 
+          localStorage.setItem("bookings", JSON.stringify(extractedBookings)); 
+      
+          return fetchedStays;
         } catch (error) {
           set({ loading: false, error: true, errorMessage: error.message || "Failed to fetch stays" });
+          console.error("Error fetching stays:", error);
         }
       },
+      
+      
 
       fetchAndSetSelectedStay: async (stayId) => {
         const { stays, fetchStays } = get();
         let selectedStay = JSON.parse(localStorage.getItem("selectedStay"));
 
-        if (selectedStay?.id === stayId) {
+        if (selectedStay?.id === stayId && selectedStay.bookings) {
           set({ selectedStay });
-        } else if (stays.length > 0) {
-          selectedStay = stays.find((stay) => stay.id === stayId);
-          if (selectedStay) {
-            localStorage.setItem("selectedStay", JSON.stringify(selectedStay));
-            set({ selectedStay });
-          } else {
+          } else if (stays.length>0){
+            const freshStay = stays.find((stay) => stay.id ===stayId); 
+            console.log('fresh stay:', freshStay);
+            if (freshStay){
+              localStorage.setItem('selectedStay', JSON.stringify(freshStay));
+              set({selectedStay: freshStay});
+            }else {
             throw new Error("Stay not found");
           }
         } else {
           await fetchStays();
           const updatedStays = get().stays;
           selectedStay = updatedStays.find((stay) => stay.id === stayId);
+          console.log("Updated stays:", updatedStays);
+          console.log("Selected Stay before setting:", selectedStay);
           if (selectedStay) {
             localStorage.setItem("selectedStay", JSON.stringify(selectedStay));
+            
             set({ selectedStay });
           } else {
             throw new Error("Stay not found");

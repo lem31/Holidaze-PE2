@@ -32,7 +32,7 @@ const DisplayAStay = () => {
     const [bookingMessage, setBookingMessage] = useState(null);
     const [loading, setLoading] =useState(true);
 
-    console.log("Selected Stay:", selectedStay);
+    console.log("Selected Stay DisplayAStay:", selectedStay);
 
     const facilityIcons ={
       wifi: Wifi,
