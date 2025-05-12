@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Box, TextField, Button } from "@mui/material";
 
 /**
@@ -23,15 +23,18 @@ import { Box, TextField, Button } from "@mui/material";
  */
 
 const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {}, defaultBanner, defaultAvatar }) => {
+
+  useEffect(() => {
+    console.log("Form values state:", formValues);
+  }, [formValues]);
+  
   return (
+   
+
     <form
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(e);
-
-        useEffect(() => {
-          console.log("Form values state:", formValues);
-        }, [formValues]);
       }}
     >
       <TextField

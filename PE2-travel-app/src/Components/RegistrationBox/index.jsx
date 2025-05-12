@@ -3,6 +3,7 @@ import { Box, Tabs, Tab, Typography } from "@mui/material";
 import RegisterForm from "../RegisterForm";
 import onRegister from "../../API/OnRegister/index.js";
 import RegisterFormValidator from '../RegisterFormValidator';
+import { useNavigate } from "react-router-dom";
 
 /**
  * RegisterBox component handles user registration functionality.
@@ -41,6 +42,7 @@ const RegisterBox = () => {
   });
 
 
+  const navigate = useNavigate();
 
   const handleTabChange = ( event, newValue) => {
     setActiveTab(newValue);
@@ -102,6 +104,9 @@ const RegisterBox = () => {
       const response =  await onRegister(API_URL, formValues);
       console.log('Form submitted with values:', formValues);
       console.log("Registration successful:", response);
+
+      navigate("/Login", {state: {successMessage: 'Registration successful! Please log in.'}});
+
     } catch (validationError) {
       const errors = {};
       if (validationError.inner) {
