@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DisplayStays from '../../DisplayStays';
 import useMyStore from '../../../Store';
-import fetchStays from '../../../API/index.jsx';
+
 
 
 /**
@@ -13,27 +13,17 @@ import fetchStays from '../../../API/index.jsx';
 function Stays() {
 
 
-const [stays, setStays] = useState([]);
+const { fetchStays } = useMyStore();
+const [stays, setStays] = useState([]); 
 
 useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const data = await fetchStays();
-            setStays(data);
-        } catch (error) {
-            console.error('Error fetching stays:', error);
-        }
-    };
-
-    fetchData();
-}, []);
-
-
+    fetchStays(); 
+  }, []);
 
 
     return(
         <div>
-<DisplayStays stays={stays}/>
+<DisplayStays />
         </div>
     )
 }

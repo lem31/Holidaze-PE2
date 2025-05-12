@@ -5,6 +5,7 @@ import ViewAvailabilityButton from "../ViewAvailabilityButton";
 import useMyStore from "../../Store";
 import SelectionSearchBar from "../SelectionSearchBar";
 
+
 /**
  * DisplayStays component fetches and displays a list of stays.
  * It uses the useMyStore hook to access the store and fetch stays.
@@ -18,22 +19,23 @@ import SelectionSearchBar from "../SelectionSearchBar";
  */
 
 const DisplayStays = () => {
-  const { loading, error, stays, fetchStays, successMessage } = useMyStore();
+  const { error, fetchStays} = useMyStore();
   const [filteredStays, setFilteredStays] = useState([]);
+  const [stays, setStays] = useState([]); 
 
-//   useEffect(() => {
-//     fetchStays();
-//   }, [fetchStays, successMessage]);
-// console.log("Stays:", stays);
 
-useEffect(() => {
-  const storedStays = JSON.parse(localStorage.getItem("stays"));
-  if (storedStays) {
-    setFilteredStays(storedStays); 
-  } else {
-    fetchStays();
-  }
-}, [successMessage]);
+
+
+  useEffect(() => {
+    const storedStays = JSON.parse(localStorage.getItem("stays"));
+    if (storedStays) {
+      setStays(storedStays); 
+    } else {
+      fetchStays(); 
+    }
+  }, []);
+
+
 
 useEffect(() => {
   setFilteredStays(Array.isArray(stays) ? stays.filter(stay => stay !== null) : []);

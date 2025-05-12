@@ -17,7 +17,7 @@ const fetchStays = async () => {
       ...stay, bookings: stay.bookings || []
     }));
    
-
+console.log("Stays with bookings:", staysWithBookings);
   
     return staysWithBookings;
   

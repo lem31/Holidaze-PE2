@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import fetchStays from "../API/index.jsx";
+import fetchStays from "../API/FetchStays";
 import fetchUserProfile from "../API/FetchUserProfile/index.js";
 import fetchVMVenues from "../API/FetchVMVenues";
 import deleteVenue from "../API/DeleteVenue";
@@ -17,7 +17,13 @@ const useMyStore = create(
       setStays: (newStays) => {
         set({ stays: newStays });
         localStorage.setItem("stays", JSON.stringify(newStays));
+        console.log(
+          "Stored stays:",
+          JSON.parse(localStorage.getItem("stays"))
+        );
       },
+      
+
 
       setBookings: (newBookings) => {
         set({ bookings: newBookings });
@@ -154,43 +160,27 @@ const useMyStore = create(
         }
       },
 
-      fetchStays: async () => {
-        const token = get().token;
-        const userName = get().userName;
-        try {
-          set({ loading: true, error: false });
-          await fetchVMVenues(userName, token);
-          const apiStays = await fetchStays();
-          const storedStays = Array.isArray(get().stays) ? get().stays : [];
-          const vmVenues = Array.isArray(get().vmVenues) ? get().vmVenues : [];
-
-          const validStoredStays = storedStays.filter((s) => s && s.id);
-          const validVmVenues = vmVenues.filter((v) => v && v.id);
-
-          const mergedStays = [
-            ...validStoredStays,
-            ...apiStays.filter(
-              (stay) => !validStoredStays.some((s) => s.id === stay.id)
-            ),
-            ...validVmVenues.filter(
-              (venue) => !validStoredStays.some((s) => s.id === venue.id)
-            ),
-          ];
-
-          set({ stays: mergedStays, loading: false });
-          localStorage.setItem("stays", JSON.stringify(mergedStays));
-
-          console.log(" Updated Stays After Merge:", mergedStays);
-          return mergedStays;
-        } catch (error) {
-          set({
-            loading: false,
-            error: true,
-            errorMessage: "Failed to fetch stays",
-          });
-          console.error("Error fetching stays:", error);
-        }
-      },
+      
+       
+        fetchStays: async () => {
+          try {
+            set({ loading: true, error: false });
+        
+            const fetchedStays = await fetchStays(); 
+            console.log("Fetched stays from API:", fetchedStays); 
+        
+            if (!fetchedStays || !Array.isArray(fetchedStays)) {
+              throw new Error("Invalid stays format");
+            }
+        
+            set({ stays: fetchedStays, loading: false });
+          } catch (error) {
+            console.error("Error fetching stays:", error);
+            set({ loading: false, error: true });
+          }
+        },
+       
+      
 
       fetchAndSetSelectedStay: async (stayId) => {
         const { stays, fetchStays } = get();
