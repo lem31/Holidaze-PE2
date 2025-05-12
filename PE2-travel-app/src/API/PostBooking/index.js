@@ -3,6 +3,7 @@ import useMyStore from "../../Store/index";
 async function postBooking(bookingData) {
 
   const token = localStorage.getItem("token");
+  
 
   console.log("Token from localStorage:", token);
   if (!token) {

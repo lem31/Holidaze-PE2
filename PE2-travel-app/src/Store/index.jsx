@@ -50,7 +50,7 @@ const useMyStore = create(
         set({ vmVenues: newVMVenues });
         localStorage.setItem("vmVenues", JSON.stringify(newVMVenues));
       },
-  
+
       successMessage: "",
       venueData: null,
 
@@ -154,39 +154,43 @@ const useMyStore = create(
         }
       },
 
-   
       fetchStays: async () => {
         const token = get().token;
         const userName = get().userName;
         try {
           set({ loading: true, error: false });
-      await fetchVMVenues(userName, token);
+          await fetchVMVenues(userName, token);
           const apiStays = await fetchStays();
           const storedStays = Array.isArray(get().stays) ? get().stays : [];
           const vmVenues = Array.isArray(get().vmVenues) ? get().vmVenues : [];
-      
-     
-          const validStoredStays = storedStays.filter(s => s && s.id);
-          const validVmVenues = vmVenues.filter(v => v && v.id);
+
+          const validStoredStays = storedStays.filter((s) => s && s.id);
+          const validVmVenues = vmVenues.filter((v) => v && v.id);
 
           const mergedStays = [
             ...validStoredStays,
-            ...apiStays.filter(stay => !validStoredStays.some(s => s.id === stay.id)),
-            ...validVmVenues.filter(venue => !validStoredStays.some(s => s.id === venue.id))
+            ...apiStays.filter(
+              (stay) => !validStoredStays.some((s) => s.id === stay.id)
+            ),
+            ...validVmVenues.filter(
+              (venue) => !validStoredStays.some((s) => s.id === venue.id)
+            ),
           ];
-      
+
           set({ stays: mergedStays, loading: false });
           localStorage.setItem("stays", JSON.stringify(mergedStays));
-      
+
           console.log(" Updated Stays After Merge:", mergedStays);
           return mergedStays;
         } catch (error) {
-          set({ loading: false, error: true, errorMessage: "Failed to fetch stays" });
+          set({
+            loading: false,
+            error: true,
+            errorMessage: "Failed to fetch stays",
+          });
           console.error("Error fetching stays:", error);
         }
       },
-      
-      
 
       fetchAndSetSelectedStay: async (stayId) => {
         const { stays, fetchStays } = get();
@@ -233,25 +237,28 @@ const useMyStore = create(
       fetchVMVenues: async () => {
         const token = get().token;
         const userName = get().userName;
-      
+
         if (!token || !userName) {
           console.error("Missing token or username.");
           set({ vmVenues: [], loading: false, error: "Authentication error." });
           return;
         }
-      
+
         try {
           set({ loading: true });
           const userVenues = await fetchVMVenues(userName, token);
           console.log("🔍 API Response for vmVenues:", userVenues);
-      
- 
-          const venuesArray = Array.isArray(userVenues.data) ? userVenues.data : (Array.isArray(userVenues) ? userVenues : []);
-          
+
+          const venuesArray = Array.isArray(userVenues.data)
+            ? userVenues.data
+            : Array.isArray(userVenues)
+              ? userVenues
+              : [];
+
           if (venuesArray.length > 0) {
             set({ vmVenues: venuesArray, loading: false });
             localStorage.setItem("vmVenues", JSON.stringify(venuesArray));
-            
+
             console.log("✅ Stored vmVenues Correctly:", venuesArray);
             return venuesArray;
           } else {
@@ -259,38 +266,38 @@ const useMyStore = create(
           }
         } catch (error) {
           console.error("Error fetching venues:", error);
-          set({ vmVenues: [], loading: false, error: error.message || "Failed to fetch venues" });
+          set({
+            vmVenues: [],
+            loading: false,
+            error: error.message || "Failed to fetch venues",
+          });
         }
       },
-      
 
       createNewVenue: async (venueData) => {
         const token = get().token;
         const userName = get().userName;
         const response = await createVenue(token, venueData);
-      
+
         if (!response || !response.data) {
           throw new Error("Venue creation failed");
         }
-      
-        const currentVmVenues = Array.isArray(get().vmVenues) ? get().vmVenues : [];
+
+        const currentVmVenues = Array.isArray(get().vmVenues)
+          ? get().vmVenues
+          : [];
         const updatedVmVenues = [...currentVmVenues, response.data];
-      
+
         const currentStays = Array.isArray(get().stays) ? get().stays : [];
         const updatedStays = [...currentStays, response.data];
-      
+
         set({ vmVenues: updatedVmVenues, stays: updatedStays });
         localStorage.setItem("vmVenues", JSON.stringify(updatedVmVenues));
         localStorage.setItem("stays", JSON.stringify(updatedStays));
-      
+
         console.log("🔄 Updated vmVenues:", updatedVmVenues);
         console.log("🔄 Updated stays:", updatedStays);
       },
-      
-      
-        
-
-      
 
       editVenue: async (updatedVenueData) => {
         const token = get().token;
@@ -356,10 +363,13 @@ const useMyStore = create(
         const success = await deleteVenue(venueId, token);
         if (success) {
           set((state) => ({
-            vmVenues: Array.isArray(state.vmVenues) ? state.vmVenues.filter((venue) => venue.id !== venueId) : [],
-            stays: Array.isArray(state.stays) ? state.stays.filter((stay) => stay.id !== venueId) : [],
+            vmVenues: Array.isArray(state.vmVenues)
+              ? state.vmVenues.filter((venue) => venue.id !== venueId)
+              : [],
+            stays: Array.isArray(state.stays)
+              ? state.stays.filter((stay) => stay.id !== venueId)
+              : [],
           }));
-          
 
           set({ vmVenues: [...get().vmVenues] });
           set({ stays: [...get().stays] });
