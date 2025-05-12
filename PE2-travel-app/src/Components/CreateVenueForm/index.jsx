@@ -42,7 +42,14 @@ const CreateVenueForm = ({ toggleForm }) => {
     };
 
     try {
-      const response = await createNewVenue(venueData);
+      const newVenue = await createNewVenue(venueData);
+      useMyStore.setState((state) => ({
+        stays: [...state.stays, newVenue],
+      }));
+      console.log("New Venue Created:", newVenue);
+      console.log ('stays:', useMyStore.getState().stays);
+
+    
 
       setTimeout(() => {
         toggleForm();

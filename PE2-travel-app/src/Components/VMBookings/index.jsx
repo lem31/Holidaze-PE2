@@ -9,6 +9,8 @@ function VMBookings() {
       fetchVMVenues();
     }, [successMessage]);
   const venueBookings = vmVenues.flatMap(venue=> venue.bookings || []);
+
+  console.log("Venue Bookings:", venueBookings);
   
   
   return (

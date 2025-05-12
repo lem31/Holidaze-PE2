@@ -8,34 +8,35 @@ import updateProfile from "../API/UpdateProfile/index.js";
 import createVenue from "../API/CreateVenue";
 import editVenue from "../API/EditVenue";
 
-
 const useMyStore = create(
   persist(
     (set, get) => ({
       stays: [],
       bookings: [],
 
-      setStays: (newStays) => {
-        set({ stays: newStays });
-        localStorage.setItem("stays", JSON.stringify(newStays));
-        
-      },
+      // setStays: (newStays) => {
+      //   set({ stays: newStays });
+      //   localStorage.setItem("stays", JSON.stringify(newStays));
+      // },
 
       setBookings: (newBookings) => {
         set({ bookings: newBookings });
         localStorage.setItem("bookings", JSON.stringify(newBookings));
-        console.log("Stored bookings:", JSON.parse(localStorage.getItem("bookings")));
+        console.log(
+          "Stored bookings:",
+          JSON.parse(localStorage.getItem("bookings"))
+        );
       },
 
       vmBookings: [],
       setVmBookings: (newVMBookings) => {
-     
         set({ vmBookings: newVMBookings });
-       
-        
-        localStorage.setItem("vmBookings", JSON.stringify(newVMBookings));
-        console.log("Stored vmBookings:", JSON.parse(localStorage.getItem("vmBookings")));
 
+        localStorage.setItem("vmBookings", JSON.stringify(newVMBookings));
+        console.log(
+          "Stored vmBookings:",
+          JSON.parse(localStorage.getItem("vmBookings"))
+        );
       },
       selectedStay: null,
       token: null,
@@ -45,15 +46,14 @@ const useMyStore = create(
       loadingProfile: false,
       loginChecked: false,
       vmVenues: [],
-     setVmVenues: (newVMVenues) => {
+      setVmVenues: (newVMVenues) => {
         set({ vmVenues: newVMVenues });
         localStorage.setItem("vmVenues", JSON.stringify(newVMVenues));
       },
       successMessage: "",
       venueData: null,
 
-      setSuccessMessage: (message) => set({ successMessage: message }), 
-
+      setSuccessMessage: (message) => set({ successMessage: message }),
 
       login: (newToken, userName) => {
         if (newToken) {
@@ -156,37 +156,26 @@ const useMyStore = create(
       fetchStays: async () => {
         try {
           set({ loading: true, error: false });
-      
+
           const fetchedStays = await fetchStays();
-      
-          console.log("Fetched stays:", fetchedStays); 
-      
+   
+
+          console.log("Fetched stays:", fetchedStays);
+
           if (!Array.isArray(fetchedStays)) {
             throw new Error("Invalid API response format, expected an array.");
           }
-      
-         
-          const extractedBookings = fetchedStays.flatMap(stay => stay.bookings || []);
-      
-          set((state) => ({
-            stays: fetchedStays,
-            bookings: extractedBookings,
-            loading: false,
-          }));
-      
-          console.log("Bookings extracted:", extractedBookings); 
-      
-          localStorage.setItem("stays", JSON.stringify(fetchedStays)); 
-          localStorage.setItem("bookings", JSON.stringify(extractedBookings)); 
-      
+    
+          set({ stays: fetchedStays, loading: false });
+    
+          localStorage.setItem("stays", JSON.stringify(fetchedStays));
+          
           return fetchedStays;
         } catch (error) {
-          set({ loading: false, error: true, errorMessage: error.message || "Failed to fetch stays" });
+          set({ loading: false, error: true, errorMessage: "Failed to fetch stays" });
           console.error("Error fetching stays:", error);
         }
       },
-      
-      
 
       fetchAndSetSelectedStay: async (stayId) => {
         const { stays, fetchStays } = get();
@@ -194,13 +183,13 @@ const useMyStore = create(
 
         if (selectedStay?.id === stayId && selectedStay.bookings) {
           set({ selectedStay });
-          } else if (stays.length>0){
-            const freshStay = stays.find((stay) => stay.id ===stayId); 
-            console.log('fresh stay:', freshStay);
-            if (freshStay){
-              localStorage.setItem('selectedStay', JSON.stringify(freshStay));
-              set({selectedStay: freshStay});
-            }else {
+        } else if (stays.length > 0) {
+          const freshStay = stays.find((stay) => stay.id === stayId);
+          console.log("fresh stay:", freshStay);
+          if (freshStay) {
+            localStorage.setItem("selectedStay", JSON.stringify(freshStay));
+            set({ selectedStay: freshStay });
+          } else {
             throw new Error("Stay not found");
           }
         } else {
@@ -211,7 +200,7 @@ const useMyStore = create(
           console.log("Selected Stay before setting:", selectedStay);
           if (selectedStay) {
             localStorage.setItem("selectedStay", JSON.stringify(selectedStay));
-            
+
             set({ selectedStay });
           } else {
             throw new Error("Stay not found");
@@ -242,12 +231,12 @@ const useMyStore = create(
 
         try {
           set({ loading: true });
-          const userVenues = await fetchVMVenues(userName, token); 
+          const userVenues = await fetchVMVenues(userName, token);
 
-          if (userVenues && userVenues.data) {
-            set({ vmVenues: userVenues.data, loading: false });
+          if (userVenues && userVenues) {
+            set({ vmVenues: userVenues, loading: false });
 
-            console.log("✅ Profile-specific venues fetched:", userVenues.data);
+            console.log("Profile-specific venues fetched:", userVenues.data);
             return userVenues.data;
           } else {
             throw new Error("Failed to fetch profile venues.");
@@ -263,46 +252,32 @@ const useMyStore = create(
       },
 
       createNewVenue: async (venueData) => {
-        console.log("📡 Preparing to call API...");
-
         const token = get().token;
         const userName = get().userName;
-        console.log("🔍 Token value:", token);
-
-        if (!token) {
-          console.error("Token not found in local storage.");
+        const response = await createVenue(token, venueData);
+      
+        if (!response || !response.data) {
+          throw new Error("Venue creation failed");
         }
+      
+        console.log("Current vmVenues in Zustand:", get().vmVenues);
+      
+     
 
-        try {
-          console.log("📡 Sending API request with venue data:", venueData);
-
-          const response = await createVenue(token, venueData);
-          console.log("🚀 API call triggered with:", venueData);
-          console.log("API response:", response);
-
-          set({ successMessage: "Venue created successfully!" });
-          console.log("API response:", response);
-          console.log("createVenue function is running!");
-
-          if (!response || !response.data) {
-            throw new Error("Venue creation failed");
-          }
-          console.log("Venue created successfully:", response.data);
-
-          set((state) => {
-           const updatedStays = [...state.stays, response.data];
-           localStorage.setItem("stays", JSON.stringify(updatedStays));
-            return { stays: updatedStays };
-          });
-
-          await fetchVMVenues(userName, token);
-          await fetchStays();
-          return response;
-        } catch (error) {
-          console.error("Error creating venue:", error);
-          throw error;
-        }
+        set((state) => {
+          const updatedVmVenues = Array.isArray(state.vmVenues) ? [...state.vmVenues, response.data] : [response.data];
+          localStorage.setItem("vmVenues", JSON.stringify(updatedVmVenues));
+          console.log("Updated vmVenues:", updatedVmVenues);
+          return { vmVenues: updatedVmVenues };
+        });
+      
+        await fetchVMVenues(userName, token);
+        await fetchStays();
       },
+      
+        
+
+      
 
       editVenue: async (updatedVenueData) => {
         const token = get().token;
@@ -368,12 +343,13 @@ const useMyStore = create(
         const success = await deleteVenue(venueId, token);
         if (success) {
           set((state) => ({
-            vmVenues: state.vmVenues.filter((venue) => venue.id !== venueId),
-            stays: state.stays.filter((stay) => stay.id !== venueId),
+            vmVenues: Array.isArray(state.vmVenues) ? state.vmVenues.filter((venue) => venue.id !== venueId) : [],
+            stays: Array.isArray(state.stays) ? state.stays.filter((stay) => stay.id !== venueId) : [],
           }));
+          
 
-          set({ vmVenues: [...get().vmVenues] }); 
-          set({stays: [...get().stays]});
+          set({ vmVenues: [...get().vmVenues] });
+          set({ stays: [...get().stays] });
         }
 
         await fetchVMVenues(userName, token);
@@ -387,21 +363,26 @@ const useMyStore = create(
           const fetchedBookings = await fetchVMBookings();
           set((state) => {
             const updatedBookings = [
-              ...state.vmBookings, 
-              ...fetchedBookings.filter(booking => !state.vmBookings.some(existingBooking => existingBooking.id === booking.id))
+              ...state.vmBookings,
+              ...fetchedBookings.filter(
+                (booking) =>
+                  !state.vmBookings.some(
+                    (existingBooking) => existingBooking.id === booking.id
+                  )
+              ),
             ];
             localStorage.setItem("vmBookings", JSON.stringify(updatedBookings));
             return { vmBookings: updatedBookings, loading: false };
           });
         } catch (error) {
-          set({ loading: false, error: true, errorMessage: error.message || "Failed to fetch bookings" });
+          set({
+            loading: false,
+            error: true,
+            errorMessage: error.message || "Failed to fetch bookings",
+          });
         }
       },
-      
     }),
-
-
-    
 
     {
       name: "auth-storage",

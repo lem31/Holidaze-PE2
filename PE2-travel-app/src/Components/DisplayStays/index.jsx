@@ -25,6 +25,10 @@ const DisplayStays = () => {
     fetchStays();
   }, [fetchStays]);
 
+
+  useEffect(() => {
+    setFilteredStays(stays);
+  }, [stays]);
   if (loading) {
     return <p>Loading...</p>;
   }

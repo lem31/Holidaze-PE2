@@ -20,21 +20,23 @@ function Venues({ vmVenues}) {
     breakfast: Breakfast,
   };
 
-  const {fetchVMVenues, successMessage, setSuccessMessage} = useMyStore();
+  const {fetchVMVenues, successMessage, setSuccessMessage, selectedVenue, setSelectedVenue} = useMyStore();
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isEditFormVisible, setIsEditFormVisible] = useState(false);
-  const { selectedVenue, setSelectedVenue } = useMyStore();
   const [selectedVenueId, setSelectedVenueId] = useState(null);
   const [isBookingsVisible, setIsBookingsVisible] = useState(false);
 
 
 
 
+  
+
   useEffect(() => {
    
 
     fetchVMVenues();
   }, [successMessage]);
+
 
 
 
@@ -162,8 +164,8 @@ function Venues({ vmVenues}) {
         </div>
       )}
 
-      {Array.isArray(vmVenues) && vmVenues.length > 0 ? (
-        vmVenues.filter(venue=> venue).map((venue, index) => (
+      {Array.isArray(vmVenues.data) && vmVenues.data.length > 0 ? (
+        vmVenues.data.filter(venue=> venue).map((venue, index) => (
           <div key={`${venue.id || `fallback`}-${index}`}>
             <h2>{venue.name}</h2>
             <p>{venue.description}</p>
