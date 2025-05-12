@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 const CreateVenueForm = ({ toggleForm }) => {
-  const { createNewVenue, setSuccessMessage } = useMyStore();
+  const { createNewVenue, setSuccessMessage, fetchVMVenues } = useMyStore();
 
   const [metaValues, setMetaValues] = useState({
     wifi: false,
@@ -44,7 +44,7 @@ const CreateVenueForm = ({ toggleForm }) => {
     try {
       const newVenue = await createNewVenue(venueData);
       useMyStore.setState((state) => ({
-        stays: [...state.stays, newVenue],
+        stays: Array.isArray(state.stays)? [...state.stays, newVenue]: [newVenue], 
       }));
       console.log("New Venue Created:", newVenue);
       console.log ('stays:', useMyStore.getState().stays);
@@ -52,6 +52,7 @@ const CreateVenueForm = ({ toggleForm }) => {
     
 
       setTimeout(() => {
+        fetchVMVenues();
         toggleForm();
         setSuccessMessage("Venue created successfully!");
       }, 500);

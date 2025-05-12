@@ -23,18 +23,21 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
     const setSelectedStay = useMyStore((state) => state.setSelectedStay);
     const Navigate = useNavigate();
-    const countries = [...new Set(stays.map(stay => stay.location.country))];
+    const countries = [...new Set(stays.filter(stay => stay?.location?.country).map(stay => stay.location.country))];
+
     
 
     useEffect(() => {
-        if (!searchQuery && !selectedCountry) {
+        
+        if (stays && stays.length >0) {
           onFilter(stays); 
         } else {
-          const filteredStays = stays.filter((stay) => {
-            const matchesCountry = selectedCountry ? stay.location.country === selectedCountry : true;
-            const matchesSearch = searchQuery ? stay.name.toLowerCase().includes(searchQuery.toLowerCase()) : true;
-            return matchesCountry && matchesSearch;
-          });
+            const filteredStays = Array.isArray(stays) ? stays.filter((stay) => {
+                const matchesCountry = selectedCountry ? stay?.location?.country === selectedCountry : true;
+                const matchesSearch = searchQuery ? stay?.name?.toLowerCase().includes(searchQuery.toLowerCase()) : true;
+                return matchesCountry && matchesSearch;
+              }) : [];
+              
       
           onFilter(filteredStays);
         }
@@ -42,7 +45,7 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
     
         useEffect(() => {
             const suggestions = stays.filter((stay) =>
-                stay.name.toLowerCase().includes(searchQuery.toLowerCase())
+                stay?.name?.toLowerCase().includes(searchQuery.toLowerCase())
             );
             setFilteredSuggestions(suggestions);},
             [searchQuery, stays]);

@@ -18,20 +18,18 @@ import SelectionSearchBar from "../SelectionSearchBar";
  */
 
 const DisplayStays = () => {
-  const { loading, error, stays, fetchStays } = useMyStore();
+  const { loading, error, stays, fetchStays, successMessage } = useMyStore();
   const [filteredStays, setFilteredStays] = useState([]);
 
   useEffect(() => {
     fetchStays();
-  }, [fetchStays]);
+  }, [fetchStays, successMessage]);
+console.log("Stays:", stays);
 
+useEffect(() => {
+  setFilteredStays(Array.isArray(stays) ? stays.filter(stay => stay !== null) : []);
+}, [stays]);
 
-  useEffect(() => {
-    setFilteredStays(stays);
-  }, [stays]);
-  if (loading) {
-    return <p>Loading...</p>;
-  }
 
   if (error) {
     return <p>Error: Unable to fetch stays.</p>;
@@ -40,32 +38,33 @@ const DisplayStays = () => {
   if (!stays || stays.length === 0) {
     return <p>No stays available.</p>;
   }
+  console.log("🔍 Current stays before rendering:", stays);
+
 
   return (
     <div>
-      <SelectionSearchBar stays={stays} onFilter={setFilteredStays} />
+      <SelectionSearchBar stays={stays || []} onFilter={setFilteredStays} />
       {filteredStays.map((stay, index) => (
-        <div key={`${stay.id || index}`}>
+        <div key={`${stay?.id || index}`}>
           <h1>{stay?.name || "Unknown Stay"}</h1>
 
           <p>
-            <img src={Location} alt="Location icon" />
-            {stay?.location?.city || "Unknown City"},{" "}
-            {stay?.location?.country || "Unknown Country"}
-          </p>
+  <img src={Location} alt="Location icon" />
+  {stay?.location?.city || "Unknown City"}, {stay?.location?.country || "Unknown Country"}
+</p>
 
           <div>
             {stay?.media?.length > 0 ? (
               stay.media.map((media, index) => (
                 <img
                   key={`${stay.id}-${index}`}
-                  src={media.url}
-                  alt={media.name || stay.name}
+                  src={media?.url || ""}
+                  alt={media?.name || stay?.name || "Unknown Stay"}
                   loading="lazy"
                 />
               ))
             ) : (
-              <p>No images available for {stay.name || "this stay"}.</p>
+              <p>No images available for {stay?.name || "this stay"}.</p>
             )}
           </div>
 
