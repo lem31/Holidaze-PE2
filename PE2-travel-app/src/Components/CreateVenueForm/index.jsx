@@ -4,9 +4,11 @@ import CreateVenueFormValidator from "../CreateVenueFormValidator";
 import useMyStore from "../../Store/index";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import fetchStays from "../../API/FetchStays";
 
 const CreateVenueForm = ({ toggleForm }) => {
-  const { createNewVenue, setSuccessMessage, fetchVMVenues } = useMyStore();
+  const { createNewVenue, setSuccessMessage } = useMyStore();
+  const [stays, setStays] = useState([]);
 
   const [metaValues, setMetaValues] = useState({
     wifi: false,
@@ -42,17 +44,16 @@ const CreateVenueForm = ({ toggleForm }) => {
     };
 
     try {
-      const newVenue = await createNewVenue(venueData);
-      useMyStore.setState((state) => ({
-        stays: Array.isArray(state.stays)? [...state.stays, newVenue]: [newVenue], 
-      }));
-      console.log("New Venue Created:", newVenue);
-      console.log ('stays:', useMyStore.getState().stays);
+    await createNewVenue(venueData);
+   
+const fetchedStays = await fetchStays();
 
+      setStays(fetchedStays);
+      console.log("Fetched stays in create new venue:", fetchedStays);
     
 
       setTimeout(() => {
-        // fetchVMVenues();
+      
         toggleForm();
         setSuccessMessage("Venue created successfully!");
       }, 500);
