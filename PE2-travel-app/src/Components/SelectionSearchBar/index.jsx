@@ -22,7 +22,7 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
     const [selectedCountry, setSelectedCountry] = useState('');
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
     const setSelectedStay = useMyStore((state) => state.setSelectedStay);
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
     const countries = [...new Set(stays.filter(stay => stay?.location?.country).map(stay => stay.location.country))];
 
     
@@ -59,9 +59,15 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
         setSearchQuery(event.target.value);
       
     };
-    const handleSuggestionClick = (stay) => {
-        setSelectedStay(stay);
-        Navigate(`/Stay/${stay.id}`);
+    const handleSuggestionClick = (event, stay) => {
+        event.preventDefault();
+        if (stay && stay.id) {
+            setSelectedStay(stay);
+            console.log("Navigating to:", `/Stay/${stay.id}`);
+            navigate(`/Stay/${stay.id}`);
+        } else {
+            console.error('Invalid stay object or missing stay.id:', stay);
+        }
     };
 
     return (
@@ -76,7 +82,7 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
                     {searchQuery && (
                         <ul>
                             {filteredSuggestions.map((stay) =>(
-                            <li key={stay.id} onClick={() => handleSuggestionClick(stay)}>
+                            <li key={stay.id} onClick={(event) => handleSuggestionClick(event, stay)}>
                                 {stay.name}
 
                         

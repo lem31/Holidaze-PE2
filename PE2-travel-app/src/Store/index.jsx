@@ -182,36 +182,45 @@ const useMyStore = create(
        
       
 
-      fetchAndSetSelectedStay: async (stayId) => {
-        const { stays, fetchStays } = get();
-        let selectedStay = JSON.parse(localStorage.getItem("selectedStay"));
-
-        if (selectedStay?.id === stayId && selectedStay.bookings) {
-          set({ selectedStay });
-        } else if (stays.length > 0) {
-          const freshStay = stays.find((stay) => stay.id === stayId);
-          console.log("fresh stay:", freshStay);
-          if (freshStay) {
-            localStorage.setItem("selectedStay", JSON.stringify(freshStay));
-            set({ selectedStay: freshStay });
-          } else {
-            throw new Error("Stay not found");
+        fetchAndSetSelectedStay: async (stayId) => {
+          const { stays, fetchStays } = get();
+          let selectedStay = JSON.parse(localStorage.getItem("selectedStay"));
+      
+          console.log("🟢 Checking localStorage:", selectedStay);
+      
+          if (selectedStay?.id === stayId) {
+              set({ selectedStay });
+              console.log("✅ Retrieved stay from localStorage:", selectedStay);
+              return;
           }
-        } else {
-          await fetchStays();
+      
+          if (stays.length > 0) {
+              selectedStay = stays.find((stay) => stay.id === stayId);
+              if (selectedStay) {
+                  localStorage.setItem("selectedStay", JSON.stringify(selectedStay));
+                  set({ selectedStay });
+                  console.log("✅ Found stay in Zustand store:", selectedStay);
+                  return;
+              }
+          }
+      
+          console.log(" Fetching stays from API...");
+          await fetchStays(); 
+      
           const updatedStays = get().stays;
           selectedStay = updatedStays.find((stay) => stay.id === stayId);
-          console.log("Updated stays:", updatedStays);
-          console.log("Selected Stay before setting:", selectedStay);
+          console.log("🔍 API Fetched stays:", updatedStays);
+          
           if (selectedStay) {
-            localStorage.setItem("selectedStay", JSON.stringify(selectedStay));
-
-            set({ selectedStay });
+              localStorage.setItem("selectedStay", JSON.stringify(selectedStay));
+              set({ selectedStay });
+              console.log("✅ Successfully set selectedStay:", selectedStay);
           } else {
-            throw new Error("Stay not found");
+              console.error("Stay not found after fetching!");
+              throw new Error("Stay not found");
           }
-        }
-      },
+      } 
+      ,      
 
       setSelectedStay: (stay) => {
         localStorage.setItem("selectedStay", JSON.stringify(stay));

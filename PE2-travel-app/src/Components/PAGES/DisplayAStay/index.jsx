@@ -40,20 +40,25 @@ const DisplayAStay = () => {
       pets: Pets,
       breakfast: Breakfast,
     }
+    useEffect(() => {
+      console.log("Zustand Store selectedStay:", useMyStore.getState().selectedStay);
+  }, []);
   
     useEffect(() => {
 
    const fetchStayData = async () => {
 
     try{
+      console.log("Fetching stay data for ID:", id);
       await fetchAndSetSelectedStay(id);
       setLoading(false);
     } catch (error) {
+      console.error("Error fetching stay data:", error);
       navigate("/");
     }
    }
-    fetchStayData();
-      }, [id, fetchAndSetSelectedStay, navigate]);
+    fetchStayData(); 
+      }, [id]);
     if (loading) {
         return <div>Loading...</div>;
     }
