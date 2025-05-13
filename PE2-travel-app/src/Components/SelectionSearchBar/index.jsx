@@ -29,18 +29,16 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
 
     useEffect(() => {
         
-        if (stays && stays.length >0) {
-          onFilter(stays); 
-        } else {
-            const filteredStays = Array.isArray(stays) ? stays.filter((stay) => {
+       
+            const filteredStays = stays.filter((stay) => {
                 const matchesCountry = selectedCountry ? stay?.location?.country === selectedCountry : true;
                 const matchesSearch = searchQuery ? stay?.name?.toLowerCase().includes(searchQuery.toLowerCase()) : true;
                 return matchesCountry && matchesSearch;
-              }) : [];
+              }) 
               
       
           onFilter(filteredStays);
-        }
+        
       }, [stays, selectedCountry, searchQuery]);
     
         useEffect(() => {

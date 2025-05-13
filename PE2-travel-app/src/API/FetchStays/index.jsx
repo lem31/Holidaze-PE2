@@ -20,6 +20,7 @@ const fetchStays = async () => {
 console.log("Stays with bookings:", staysWithBookings);
   
     return staysWithBookings;
+
   
   } catch (error) {
 
