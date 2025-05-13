@@ -12,7 +12,7 @@ const EditProfileFormBox = ({
   setIsEditProfileVisible,
 
 }) => {
-  const [validationErrors, setValidationErrors] = useState({});
+
 
 
   const defaultBanner = {
@@ -25,65 +25,9 @@ const EditProfileFormBox = ({
   };
 
 
+
+  
  
-   
-
-
-
-
-  const handleInputChange = (name, value) => {
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
-
-
-
-  const handleAddImageInput = () => {
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      images: [...prevValues.images, { url: "", alt: "" }],
-    }));
-  };
-
-  const handleFormSubmit = async ( formValues) => {
-
-
-    const updatedFormValues = {
-      ...formValues,
-      banner: {
-        bannerUrl: formValues.banner.url?.trim() || defaultBanner.url,
-        bannerAlt: formValues.banner.alt?.trim() || defaultBanner.alt,
-      },
-      avatar: {
-        avatarUrl: formValues.avatar.url?.trim() || defaultAvatar.url,
-        avaterAlt: formValues.avatar.alt?.trim() || defaultAvatar.alt,
-      },
-    };
-
-    const userData = updatedFormValues;
-    try {
-      await EditProfileFormValidator.validate(updatedFormValues, {
-        abortEarly: false,
-      });
-      setValidationErrors({});
-      console.log("Form data being submitted:", formValues);
-
-      const success = await updateUserProfile(userData);
-      if (success) {
-        setSuccessMessage("Profile Updated successfully!");
-        setTimeout(() => {
-          toggleForm();
-        }, 500);
-      } else {
-        console.error("Failed to update profile");
-        setError("api", { message: "Failed to update profile" });
-      }
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
 
   return (
     <>
@@ -115,13 +59,15 @@ const EditProfileFormBox = ({
                 onInputChange={handleInputChange}
                 onImageChange={handleImageChange}
                 onAddImage={handleAddImageInput}
-                onSubmit={handleFormSubmit}
                 validationErrors={validationErrors}
                 defaultBanner={defaultBanner}
                 defaultAvatar={defaultAvatar}
            setIsEditProfileVisible={setIsEditProfileVisible}
            isEditProfileVisible={isEditProfileVisible}
            setValue = {setValue}
+           setValidationErrors={setValidationErrors}
+
+        
       
     
 

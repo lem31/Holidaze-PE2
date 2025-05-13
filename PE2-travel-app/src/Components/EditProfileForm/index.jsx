@@ -19,18 +19,20 @@ import useMyStore from "../../Store";
  * @component
  */
 const EditProfileForm = ({
-  handleFormSubmit,
-  validationErrors = {},
+
+  // validationErrors = {},
   setIsEditProfileVisible,
   isEditProfileVisible,
   defaultAvatar,
   defaultBanner,
+
  
 
 }) => {
 
 
   const { userProfile, updateUserProfile } = useMyStore();
+  const [validationErrors, setValidationErrors] = useState({});
  
 
   const { control, handleSubmit, reset } = useForm({
@@ -38,8 +40,8 @@ const EditProfileForm = ({
     mode: "onSubmit",
     defaultValues: {
       bio: "",
-      banner: { url: "", alt: "" },
-      avatar: { url: "", alt: "" },
+      banner: { bannerUrl: defaultBanner?.url || "", bannerAlt: defaultBanner?.alt || "" },
+      avatar: { avatarUrl: defaultAvatar?.url || "", avatarAlt: defaultAvatar?.alt || "" },
     },
   });
       
@@ -63,13 +65,54 @@ const EditProfileForm = ({
       });
     }
   }, [userProfile, reset]);
+
+
+
+  const handleFormSubmit = async ( data) => {
+  
+  
+      const updatedFormValues = {
+        ...data,
+        banner: {
+         bannerUrl: data.banner.url?.trim() || defaultBanner?.url,
+          bannerAlt: data.banner.alt?.trim() || defaultBanner?.alt,
+        },
+        avatar: {
+          avatarUrl: data.avatar.url?.trim() || defaultAvatar?.url,
+         avatarAlt: data.avatar.alt?.trim() || defaultAvatar?.alt,
+        },
+      };
+  
+      const userData = updatedFormValues;
+      try {
+        await EditProfileFormValidator.validate(updatedFormValues, {
+          abortEarly: false,
+        });
+        setValidationErrors({});
+        console.log("Form data being submitted:", data);
+  
+        const success = await updateUserProfile(userData);
+        if (success) {
+          setSuccessMessage("Profile Updated successfully!");
+          setTimeout(() => {
+            toggleForm();
+          }, 500);
+        } else {
+          console.error("Failed to update profile");
+          setError("api", { message: "Failed to update profile" });
+        }
+      } catch (error) {
+        console.error("Error updating profile:", error);
+      }
+    };
+  
   
   return (
     <form
-      onSubmit={handleSubmit(handleFormSubmit)
-      }
+      onSubmit={handleSubmit(handleFormSubmit)}
     >
       <Controller
+      label="Bio"
         name="bio"
         control={control}
         render={({ field }) => (
