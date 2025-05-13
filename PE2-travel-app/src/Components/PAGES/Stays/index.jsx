@@ -20,7 +20,6 @@ useEffect(() => {
     fetchStays(); 
   }, []);
 
-
     return(
         <div>
 <DisplayStays />

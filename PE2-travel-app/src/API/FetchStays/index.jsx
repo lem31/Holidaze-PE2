@@ -13,7 +13,7 @@ const fetchStays = async () => {
       throw new Error("Invalid API response format");
     }
 
-    const staysWithBookings = data.data.map(stay=>({
+    const staysWithBookings = data.data.filter((stay) => stay.id && typeof stay.id === 'string' && stay.id.trim() !== '').map(stay=>({
       ...stay, bookings: stay.bookings || []
     }));
    

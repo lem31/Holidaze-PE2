@@ -17,13 +17,8 @@ const useMyStore = create(
       setStays: (newStays) => {
         set({ stays: newStays });
         localStorage.setItem("stays", JSON.stringify(newStays));
-        console.log(
-          "Stored stays:",
-          JSON.parse(localStorage.getItem("stays"))
-        );
+        console.log("Stored stays:", newStays);
       },
-      
-
 
       setBookings: (newBookings) => {
         set({ bookings: newBookings });
@@ -133,41 +128,38 @@ const useMyStore = create(
         }
       },
 
-
       updateUserProfile: async (userData) => {
         const userName = get().userName;
         const token = get().token;
         const endpoint = `https://v2.api.noroff.dev/holidaze/profiles/${userName}`;
-      
+
         if (!token || !userName) {
           console.error("Token or username not found in local storage.");
           return;
         }
-      
+
         try {
           set({ loadingProfile: true });
-      
+
           const updatedProfile = await updateProfile(userData, endpoint, token);
           if (updatedProfile) {
             set({ userProfile: updatedProfile, loadingProfile: false });
             localStorage.setItem("userProfile", JSON.stringify(updatedProfile));
             console.log("Profile updated successfully:", updatedProfile);
-      
 
             const response = await fetch(endpoint, {
-              method: 'PUT',
+              method: "PUT",
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
                 "X-Noroff-API-Key": "f920c7be-b352-412a-bfe3-67cf36aebe41",
-              
               },
               body: JSON.stringify(userData),
             });
-      
+
             const refreshedProfile = await response.json();
             set({ userProfile: refreshedProfile, loadingProfile: false });
-      
+
             return refreshedProfile;
           } else {
             throw new Error("Failed to update profile");
@@ -179,71 +171,63 @@ const useMyStore = create(
         }
       },
 
-     
+      fetchStays: async () => {
+        try {
+          set({ loading: true, error: false });
 
-      
-      
-       
-        fetchStays: async () => {
-          try {
-            set({ loading: true, error: false });
-        
-            const fetchedStays = await fetchStays(); 
-            console.log("Fetched stays from API:", fetchedStays); 
-        
-            if (!fetchedStays || !Array.isArray(fetchedStays)) {
-              throw new Error("Invalid stays format");
-            }
-        
-            set({ stays: fetchedStays, loading: false });
-          } catch (error) {
-            console.error("Error fetching stays:", error);
-            set({ loading: false, error: true });
-          }
-        },
-       
-      
+          const fetchedStays = await fetchStays();
+          console.log("Fetched stays from API:", fetchedStays);
 
-        fetchAndSetSelectedStay: async (stayId) => {
-          const { stays, fetchStays } = get();
-          let selectedStay = JSON.parse(localStorage.getItem("selectedStay"));
-      
-          console.log("🟢 Checking localStorage:", selectedStay);
-      
-          if (selectedStay?.id === stayId) {
-              set({ selectedStay });
-              console.log("✅ Retrieved stay from localStorage:", selectedStay);
-              return;
+          if (!fetchedStays || !Array.isArray(fetchedStays)) {
+            throw new Error("Invalid stays format");
           }
-      
-          if (stays.length > 0) {
-              selectedStay = stays.find((stay) => stay.id === stayId);
-              if (selectedStay) {
-                  localStorage.setItem("selectedStay", JSON.stringify(selectedStay));
-                  set({ selectedStay });
-                  console.log("✅ Found stay in Zustand store:", selectedStay);
-                  return;
-              }
-          }
-      
-          console.log(" Fetching stays from API...");
-          await fetchStays(); 
-      
-          const updatedStays = get().stays;
-          selectedStay = updatedStays.find((stay) => stay.id === stayId);
-          console.log("🔍 API Fetched stays:", updatedStays);
-          
+          set({ stays: fetchedStays, loading: false });
+       
+        } catch (error) {
+          console.error("Error fetching stays:", error);
+          set({ loading: false, error: true });
+        }
+      },
+
+
+      fetchAndSetSelectedStay: async (stayId) => {
+        const { stays, fetchStays } = get();
+        let selectedStay = JSON.parse(localStorage.getItem("selectedStay"));
+
+        console.log("🟢 Checking localStorage:", selectedStay);
+
+        if (selectedStay?.id === stayId) {
+          set({ selectedStay });
+          console.log("✅ Retrieved stay from localStorage:", selectedStay);
+          return;
+        }
+
+        if (stays.length > 0) {
+          selectedStay = stays.find((stay) => stay.id === stayId);
           if (selectedStay) {
-              localStorage.setItem("selectedStay", JSON.stringify(selectedStay));
-              set({ selectedStay });
-              console.log("✅ Successfully set selectedStay:", selectedStay);
-          } else {
-              console.error("Stay not found after fetching!");
-              throw new Error("Stay not found");
+            localStorage.setItem("selectedStay", JSON.stringify(selectedStay));
+            set({ selectedStay });
+            console.log("✅ Found stay in Zustand store:", selectedStay);
+            return;
           }
-      } 
-      ,      
+        }
 
+        console.log(" Fetching stays from API...");
+        await fetchStays();
+
+        const updatedStays = get().stays;
+        selectedStay = updatedStays.find((stay) => stay.id === stayId);
+        console.log("🔍 API Fetched stays:", updatedStays);
+
+        if (selectedStay) {
+          localStorage.setItem("selectedStay", JSON.stringify(selectedStay));
+          set({ selectedStay });
+          console.log("✅ Successfully set selectedStay:", selectedStay);
+        } else {
+          console.error("Stay not found after fetching!");
+          throw new Error("Stay not found");
+        }
+      },
       setSelectedStay: (stay) => {
         localStorage.setItem("selectedStay", JSON.stringify(stay));
         set({ selectedStay: stay });
@@ -270,17 +254,21 @@ const useMyStore = create(
           const userVenues = await fetchVMVenues(userName, token);
           console.log("🔍 API Response for vmVenues:", userVenues);
 
-          const venuesArray = Array.isArray(userVenues.data)
+          const venuesArray = Array.isArray(userVenues?.data)
             ? userVenues.data
             : Array.isArray(userVenues)
-              ? userVenues
-              : [];
+            ? userVenues
+            : [];
+
+          if (!Array.isArray(venuesArray)) {
+            throw new Error("Invalid API response: expected an array.");
+          }
 
           if (venuesArray.length > 0) {
             set({ vmVenues: venuesArray, loading: false });
             localStorage.setItem("vmVenues", JSON.stringify(venuesArray));
 
-            console.log("✅ Stored vmVenues Correctly:", venuesArray);
+            console.log("Stored vmVenues Correctly:", venuesArray);
             return venuesArray;
           } else {
             throw new Error("Invalid API response: expected an array.");
@@ -314,10 +302,19 @@ const useMyStore = create(
 
         set({ vmVenues: updatedVmVenues, stays: updatedStays });
         localStorage.setItem("vmVenues", JSON.stringify(updatedVmVenues));
-        localStorage.setItem("stays", JSON.stringify(updatedStays));
+        try {
+          localStorage.setItem("stays", JSON.stringify(updatedStays));
+        } catch (error) {
+       if (error instanceof DOMException) {
+            console.error("LocalStorage is full. Cannot save stays.");
+            
+          } else {
+            console.error("Error saving stays to localStorage:", error);
+          }
+        }
 
-        console.log("🔄 Updated vmVenues:", updatedVmVenues);
-        console.log("🔄 Updated stays:", updatedStays);
+        console.log("Updated vmVenues:", updatedVmVenues);
+        console.log("Updated stays:", updatedStays);
       },
 
       editVenue: async (updatedVenueData) => {
