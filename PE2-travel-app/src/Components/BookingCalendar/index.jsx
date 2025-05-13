@@ -116,7 +116,7 @@ const BookingCalendar = ({bookingMessage, setBookingMessage}) => {
           label="Check-in"
           value={startDate}
           onChange={(newValue) => setStartDate(newValue)}
-          shouldDisableDate={(date) => unavailableDates.has(date.format("YYYY-MM-DD"))}
+          shouldDisableDate={(date) => unavailableDates.has(date.toISOString().split("T")[0])}
 
         />
 
@@ -124,7 +124,7 @@ const BookingCalendar = ({bookingMessage, setBookingMessage}) => {
           label="Check-out"
           value={endDate}
           onChange={(newValue) => setEndDate(newValue)}
-          shouldDisableDate={(date) => unavailableDates.has(date.format("YYYY-MM-DD"))}
+          shouldDisableDate={(date) => unavailableDates.has(date.toISOString().split("T")[0])}
 
         />
 
