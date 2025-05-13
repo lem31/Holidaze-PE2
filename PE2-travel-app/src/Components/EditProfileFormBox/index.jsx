@@ -3,18 +3,12 @@ import { Box, Typography } from "@mui/material";
 import EditProfileForm from "../EditProfileForm";
 import EditProfileFormValidator from "../EditProfileFormValidator";
 
-
-
 const EditProfileFormBox = ({
   toggleForm,
   setSuccessMessage,
   isEditProfileVisible,
   setIsEditProfileVisible,
-
 }) => {
-
-
-
   const defaultBanner = {
     url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
     alt: "Default Banner",
@@ -24,15 +18,10 @@ const EditProfileFormBox = ({
     alt: "Default Avatar",
   };
 
-
-
-  
- 
-
   return (
     <>
       {isEditProfileVisible && (
-        <Box sx={{ marginTop: 3,  }}>
+        <Box sx={{ marginTop: 3 }}>
           {!userProfile ? (
             <Typography>Loading Profile...</Typography>
           ) : (
@@ -54,7 +43,6 @@ const EditProfileFormBox = ({
               }}
             >
               <EditProfileForm
-     
                 formValues={formValues}
                 onInputChange={handleInputChange}
                 onImageChange={handleImageChange}
@@ -62,17 +50,13 @@ const EditProfileFormBox = ({
                 validationErrors={validationErrors}
                 defaultBanner={defaultBanner}
                 defaultAvatar={defaultAvatar}
-           setIsEditProfileVisible={setIsEditProfileVisible}
-           isEditProfileVisible={isEditProfileVisible}
-           setValue = {setValue}
-           setValidationErrors={setValidationErrors}
-           setSuccessMessage={setSuccessMessage}
-
-toggleForm={toggleForm}
-        
-      
-    
-
+                setIsEditProfileVisible={setIsEditProfileVisible}
+                isEditProfileVisible={isEditProfileVisible}
+                setValue={setValue}
+                setValidationErrors={setValidationErrors}
+                setSuccessMessage={setSuccessMessage}
+             
+                toggleForm={toggleForm}
               />
             </div>
           )}
