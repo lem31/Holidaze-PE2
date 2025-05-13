@@ -66,7 +66,9 @@ const EditProfileFormBox = ({
            isEditProfileVisible={isEditProfileVisible}
            setValue = {setValue}
            setValidationErrors={setValidationErrors}
+           setSuccessMessage={setSuccessMessage}
 
+toggleForm={toggleForm}
         
       
     

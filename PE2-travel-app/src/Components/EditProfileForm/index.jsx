@@ -20,11 +20,13 @@ import useMyStore from "../../Store";
  */
 const EditProfileForm = ({
 
-  // validationErrors = {},
+ 
   setIsEditProfileVisible,
   isEditProfileVisible,
   defaultAvatar,
   defaultBanner,
+  setSuccessMessage,
+  toggleForm,
 
  
 
@@ -40,8 +42,8 @@ const EditProfileForm = ({
     mode: "onSubmit",
     defaultValues: {
       bio: "",
-      banner: { bannerUrl: defaultBanner?.url || "", bannerAlt: defaultBanner?.alt || "" },
-      avatar: { avatarUrl: defaultAvatar?.url || "", avatarAlt: defaultAvatar?.alt || "" },
+      banner: { url: defaultBanner?.url || "", alt: defaultBanner?.alt || "" },
+      avatar: { url: defaultAvatar?.url || "", alt: defaultAvatar?.alt || "" },
     },
   });
       
@@ -55,12 +57,12 @@ const EditProfileForm = ({
       reset({
         bio: userProfile.data?.bio || "",
         banner: {
-          bannerUrl: userProfile.data?.banner?.url || defaultBanner?.url,
-          bannerAlt: userProfile.data?.banner?.alt || defaultBanner?.alt,
+         url: userProfile.data?.banner?.url || defaultBanner?.url,
+          alt: userProfile.data?.banner?.alt || defaultBanner?.alt,
         },
         avatar: {
-          avatarUrl: userProfile.data?.avatar?.url || defaultAvatar?.url,
-          avatarAlt: userProfile.data?.avatar?.alt || defaultAvatar?.alt,
+          url: userProfile.data?.avatar?.url || defaultAvatar?.url,
+          alt: userProfile.data?.avatar?.alt || defaultAvatar?.alt,
         },
       });
     }
@@ -74,12 +76,12 @@ const EditProfileForm = ({
       const updatedFormValues = {
         ...data,
         banner: {
-         bannerUrl: data.banner.url?.trim() || defaultBanner?.url,
-          bannerAlt: data.banner.alt?.trim() || defaultBanner?.alt,
+         url: data.banner?.url?.trim() || defaultBanner?.url,
+          alt: data.banner?.alt?.trim() || defaultBanner?.alt,
         },
         avatar: {
-          avatarUrl: data.avatar.url?.trim() || defaultAvatar?.url,
-         avatarAlt: data.avatar.alt?.trim() || defaultAvatar?.alt,
+          url: data.avatar?.url?.trim() || defaultAvatar?.url,
+         alt: data.avatar?.alt?.trim() || defaultAvatar?.alt,
         },
       };
   
@@ -131,7 +133,7 @@ const EditProfileForm = ({
       <Box sx={{ marginBottom: 2 }}>
         <Controller
         
-          name="bannerUrl"
+          name="banner.url"
           control={control}
           render={({ field }) => (
             <TextField
@@ -148,7 +150,7 @@ const EditProfileForm = ({
         {validationErrors.bannerUrl && <p>{validationErrors.bannerUrl}</p>}
         <Controller
          
-          name="bannerAlt"
+          name="banner.alt"
           control={control}
           render={({ field }) => (
             <TextField
@@ -164,7 +166,7 @@ const EditProfileForm = ({
       <Box sx={{ marginBottom: 2 }}>
         <Controller
     
-          name="avatarUrl"
+          name="avatar.url"
           control={control}
           render={({ field }) => (
             <TextField
@@ -179,7 +181,7 @@ const EditProfileForm = ({
         {validationErrors.avatarUrl && <p>{validationErrors.avatar.url}</p>}
         <Controller
      
-          name="avatarAlt"
+          name="avatar.alt"
           control={control}
           render={({ field }) => (
             <TextField
