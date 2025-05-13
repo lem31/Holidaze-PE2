@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import LoginBox from '../../LoginBox';
-import {useLocation} from 'react-router-dom';
+import {useLocation, Navigate} from 'react-router-dom';
 import {Snackbar, Alert} from '@mui/material';
+import useMyStore from '../../../Store';
 
 /**
  * Login component renders the login page.
@@ -18,6 +19,11 @@ function Login() {
   const location = useLocation();
 
   const [successMessage, setSuccessMessage] = useState(location.state?.successMessage || null);
+  const isLoggedIn = useMyStore((state) => state.isLoggedIn);
+
+if (isLoggedIn) {
+    return <Navigate to="/MyProfile" />;
+  };
   return (
     
     <div>
