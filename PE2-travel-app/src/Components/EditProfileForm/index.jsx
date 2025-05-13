@@ -1,5 +1,9 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Box, TextField, Button } from "@mui/material";
+import {useForm, Controller} from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import EditProfileFormValidator from "../EditProfileFormValidator";
+import useMyStore from "../../Store";
 
 /**
  * EditProfileForm component renders a form for editing user profile with fields for name, email, password, bio, and images.
@@ -15,82 +19,135 @@ import { Box, TextField, Button } from "@mui/material";
  * @component
  */
 const EditProfileForm = ({
-  formValues,
-  onInputChange,
-  onImageChange,
-  onSubmit,
+  handleFormSubmit,
   validationErrors = {},
   setIsEditProfileVisible,
   isEditProfileVisible,
+  defaultAvatar,
+  defaultBanner,
+ 
+
 }) => {
+
+
+  const { userProfile, updateUserProfile } = useMyStore();
+ 
+
+  const { control, handleSubmit, reset } = useForm({
+    resolver: yupResolver(EditProfileFormValidator),
+    mode: "onSubmit",
+    defaultValues: {
+      bio: "",
+      banner: { url: "", alt: "" },
+      avatar: { url: "", alt: "" },
+    },
+  });
+      
+    console.log("userProfile", userProfile);
+
+
+
+
+  useEffect(() => {
+    if (userProfile) {
+      reset({
+        bio: userProfile.data?.bio || "",
+        banner: {
+          bannerUrl: userProfile.data?.banner?.url || defaultBanner?.url,
+          bannerAlt: userProfile.data?.banner?.alt || defaultBanner?.alt,
+        },
+        avatar: {
+          avatarUrl: userProfile.data?.avatar?.url || defaultAvatar?.url,
+          avatarAlt: userProfile.data?.avatar?.alt || defaultAvatar?.alt,
+        },
+      });
+    }
+  }, [userProfile, reset]);
+  
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmit(e);
-      }}
+      onSubmit={handleSubmit(handleFormSubmit)
+      }
     >
-     
-    
-  
-      <TextField
-        label="Bio"
+      <Controller
         name="bio"
-        value={formValues?.bio || ""}
-        onChange={(e) => onInputChange(e.target.name, e.target.value)}
-        variant="outlined"
-        fullWidth
-        multiline
-        rows={3}
-        sx={{ marginBottom: 2 }}
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            variant="outlined"
+            fullWidth
+            multiline
+            rows={3}
+            sx={{ marginBottom: 2 }}
+          />
+        )}
       />
       {validationErrors.bio && <p>{validationErrors.bio}</p>}
 
       <Box sx={{ marginBottom: 2 }}>
-       
-        <TextField
-          label="Banner URL"
+        <Controller
+        
           name="bannerUrl"
-          value={formValues?.banner?.url || ''}
-          onChange={(e) => onImageChange('banner', 'url', e.target.value)}
-          variant="outlined"
-          fullWidth
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+             
+              variant="outlined"
+              fullWidth
+            />
+          )}
         />
         {validationErrors.bannerUrl && <p>{validationErrors.banner.url}</p>}
       </Box>
       <Box sx={{ marginBottom: 2 }}>
         {validationErrors.bannerUrl && <p>{validationErrors.bannerUrl}</p>}
-        <TextField
-          label="Banner Alt Text"
+        <Controller
+         
           name="bannerAlt"
-          value={formValues?.banner?.alt || ''}
-          onChange={(e) => onImageChange( 'banner', 'alt', e.target.value)}
-          variant="outlined"
-          fullWidth
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+            
+              variant="outlined"
+              fullWidth
+            />
+          )}
         />
         {validationErrors.bannerAlt && <p>{validationErrors.banner.alt}</p>}
       </Box>
       <Box sx={{ marginBottom: 2 }}>
-        <TextField
-          label="Avatar URL"
+        <Controller
+    
           name="avatarUrl"
-          value={formValues?.avatar?.url || ''}
-          onChange={(e) => onImageChange('avatar', 'url',  e.target.value)}
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 1 }}
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+         
+              variant="outlined"
+              fullWidth
+              sx={{ marginBottom: 1 }}
+            />
+          )}
         />
         {validationErrors.avatarUrl && <p>{validationErrors.avatar.url}</p>}
-        <TextField
-          label="Avatar Alt Text"
+        <Controller
+     
           name="avatarAlt"
-          value={formValues?.avatar?.alt || ''}
-          onChange={(e) => onImageChange( 'avatar', 'alt', e.target.value)}
-          variant="outlined"
-          fullWidth
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+           
+              variant="outlined"
+              fullWidth
+            />
+          )}
         />
         {validationErrors.avatarAlt && <p>{validationErrors.avatar.alt}</p>}
-     
       </Box>
       <Button type="submit" variant="contained" color="primary" fullWidth>
         Save Changes
