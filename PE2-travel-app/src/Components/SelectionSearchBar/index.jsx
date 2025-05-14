@@ -81,8 +81,8 @@ useEffect(() => {
 
     return (
         <div>
-            <select value={selectedCountry} onChange={handleCountryChange} name="" id="">
-                <option value="">All Countries</option>
+            <select  style={{ width: '100px' }} value={selectedCountry} onChange={handleCountryChange} name="" id="">
+                <option  value="">All Countries</option>
                 {countries.map((country) => ( <option key={country} value={country}>{country}</option>))}
                     </select>
 

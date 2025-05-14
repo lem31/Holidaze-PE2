@@ -351,15 +351,18 @@ const useMyStore = create(
             stays: Array.isArray(state.stays)
               ? state.stays.filter((stay) => stay.id !== venueId)
               : [],
+                 successMessage: "Venue deleted successfully!",
           }));
 
-          set({ vmVenues: [...get().vmVenues] });
-          set({ stays: [...get().stays] });
+      
+          await fetchVMVenues(userName, token);
+
+          // set({ vmVenues: [...get().vmVenues] });
+          // set({ stays: [...get().stays] });
         }
+else{ setSuccessMessage:"Failed to delete venue."; }
 
-        await fetchVMVenues(userName, token);
-
-        return;
+   
       },
 
       fetchVMBookings: async () => {
