@@ -231,7 +231,7 @@ const useMyStore = create(
       },
 
       setSelectedVenue: (venue) => {
-        localStorage.setItem("selectedVenue", JSON.stringify(venue));
+     
         set({ selectedVenue: venue });
         console.log("Selected venue:", venue);
       },
@@ -286,10 +286,10 @@ console.log("Stored vmVenues:", userVenues);
           : [];
         const updatedVmVenues = [...currentVmVenues, response.data];
 
-        const currentStays = Array.isArray(get().stays) ? get().stays : [];
-        const updatedStays = [...currentStays, response.data];
+       
+      
 
-        set({ vmVenues: updatedVmVenues, stays: updatedStays });
+        set({ vmVenues: updatedVmVenues });
        
        
         },

@@ -18,12 +18,17 @@ import SelectionSearchBar from "../SelectionSearchBar";
  */
 
 const DisplayStays = () => {
-  const { error, stays, loading } = useMyStore();
+  const { error, stays} = useMyStore();
+
   const [filteredStays, setFilteredStays] = useState([]);
+
+
+    
  
  useEffect(() => {
+
   setFilteredStays(stays);
-}, [stays]);
+}, []);
 
 
 
@@ -34,10 +39,10 @@ const DisplayStays = () => {
     return <p>Error: Unable to fetch stays.</p>;
   }
 
-  if (!stays|| stays.length === 0) {
+  if (!filteredStays || filteredStays.length === 0) {
     return <p>No stays available.</p>;
   }
-  console.log("🔍 Current stays before rendering:", filteredStays);
+
 
   return (
     <div>

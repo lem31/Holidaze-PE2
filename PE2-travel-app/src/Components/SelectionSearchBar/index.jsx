@@ -35,7 +35,7 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
     return matchesSearch && matchesCountry;
   });
 
-
+   console.log(" Filtered stays:", filteredStays);
 
   onFilter(filteredStays);
 }, [stays, searchQuery, selectedCountry]); 
