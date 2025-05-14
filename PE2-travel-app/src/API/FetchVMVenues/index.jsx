@@ -5,7 +5,7 @@ async function fetchVMVenues(userName, token) {
     }
 
     try {
-        const response = await fetch(`https://v2.api.noroff.dev/holidaze/profiles/${userName}/venues?_bookings=true`, {
+        const response = await fetch(`https://v2.api.noroff.dev/holidaze/profiles/${userName}/venues?_bookings=true&_owner=true`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`,

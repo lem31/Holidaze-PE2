@@ -29,7 +29,7 @@ async function onLogin(endpoint, userData, navigate) {
 
       const profileData = await fetchUserProfile(userName, accessToken);
       if (profileData) {
-        setUserProfile(profileData);
+        setUserProfile(profileData.data);
       } else {
         console.warn("Failed to fetch user profile data.");
       }

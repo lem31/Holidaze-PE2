@@ -5,7 +5,6 @@ import ViewAvailabilityButton from "../ViewAvailabilityButton";
 import useMyStore from "../../Store";
 import SelectionSearchBar from "../SelectionSearchBar";
 
-
 /**
  * DisplayStays component fetches and displays a list of stays.
  * It uses the useMyStore hook to access the store and fetch stays.
@@ -19,38 +18,29 @@ import SelectionSearchBar from "../SelectionSearchBar";
  */
 
 const DisplayStays = () => {
-  const { error, fetchStays} = useMyStore();
+  const { error, fetchStays } = useMyStore();
   const [filteredStays, setFilteredStays] = useState([]);
-  const [stays, setStays] = useState([]); 
-
-
-
-
-  useEffect(() => {
-    const storedStays = JSON.parse(localStorage.getItem("stays"));
-    if (storedStays) {
-      setStays(storedStays); 
-    } else {
-      fetchStays(); 
-    }
-  }, []);
-
+ 
 
 
 useEffect(() => {
-  setFilteredStays(Array.isArray(stays) ? stays.filter(stay => stay !== null) : []);
-}, [stays]);
-
+  const fetchAndFilterStays = async () => {
+    const stays = await fetchStays();
+    setFilteredStays(
+      Array.isArray(stays) ? stays.filter((stay) => stay !== null) : []
+    );
+  };
+  fetchAndFilterStays();
+}, [fetchStays]);
 
   if (error) {
     return <p>Error: Unable to fetch stays.</p>;
   }
 
-  if (!stays || stays.length === 0) {
+  if (!filteredStays || filteredStays.length === 0) {
     return <p>No stays available.</p>;
   }
-  console.log("🔍 Current stays before rendering:", stays);
-
+  console.log("🔍 Current stays before rendering:", filteredStays);
 
   return (
     <div>
@@ -60,9 +50,10 @@ useEffect(() => {
           <h1>{stay?.name || "Unknown Stay"}</h1>
 
           <p>
-  <img src={Location} alt="Location icon" />
-  {stay?.location?.city || "Unknown City"}, {stay?.location?.country || "Unknown Country"}
-</p>
+            <img src={Location} alt="Location icon" />
+            {stay?.location?.city || "Unknown City"},{" "}
+            {stay?.location?.country || "Unknown Country"}
+          </p>
 
           <div>
             {stay?.media?.length > 0 ? (

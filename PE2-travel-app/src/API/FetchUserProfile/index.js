@@ -22,7 +22,9 @@ async function fetchUserProfile(userName, token) {
 
     const profileData = await response.json();
 
-    return profileData;
+    console.log('PROFILE DATA:', profileData.data);
+
+    return profileData?.data ?? {};
   } catch (error) {
     throw error;
   }
