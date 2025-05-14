@@ -6,6 +6,7 @@ import useMyStore from "../../../Store";
 function Profile() {
   const { fetchUserProfile } = useMyStore();
   const [userProfile, setUserProfile] = useState(null);
+  const isLoggedIn = useMyStore((state) => state.isLoggedIn);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -25,7 +26,9 @@ function Profile() {
   if (
     !userProfile ||
     typeof userProfile.venueManager !== "boolean"
-  ) {
+  ) 
+  if (!isLoggedIn) {
+    return;} else {
     return <div>Invalid role</div>;
   }
 
