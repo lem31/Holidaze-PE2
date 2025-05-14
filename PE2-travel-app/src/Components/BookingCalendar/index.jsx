@@ -29,12 +29,13 @@ const BookingCalendar = ({bookingMessage, setBookingMessage}) => {
   const isLoggedIn = useMyStore((state) => state.isLoggedIn);
    
 
-
+const {fetchAndSetSelectedStay} = useMyStore();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [numberOfGuests, setNumberOfGuests] = useState(1);
 
   const [guestWarning, setGuestWarning] = useState(null);
+ 
 
 
   const unavailableDates = new Set();
@@ -91,6 +92,7 @@ const BookingCalendar = ({bookingMessage, setBookingMessage}) => {
       try {
         await postBooking(bookingData);
         setBookingMessage("Booking successful!");
+         await fetchAndSetSelectedStay(selectedStay.id);
         setTimeout(() => setBookingMessage(null), 5000);
       } catch (error) {
         setBookingMessage("Booking failed. Please try again.");
