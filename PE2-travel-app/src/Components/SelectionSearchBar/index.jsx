@@ -28,35 +28,46 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
     
 
     useEffect(() => {
-        
-       
-            const filteredStays = stays.filter((stay) => {
-                const matchesCountry = selectedCountry ? stay?.location?.country === selectedCountry : true;
-                const matchesSearch = searchQuery ? stay?.name?.toLowerCase().includes(searchQuery.toLowerCase()) : true;
-                return matchesCountry && matchesSearch;
-              }) 
-              
       
-          onFilter(filteredStays);
-        
-      }, [stays, selectedCountry, searchQuery]);
+  const filteredStays = stays.filter((stay) => {
+    const matchesSearch = searchQuery ? stay?.name?.toLowerCase().includes(searchQuery.toLowerCase()) : true;
+    const matchesCountry = selectedCountry ? stay?.location?.country?.toLowerCase() === selectedCountry.toLowerCase() : true;
+    return matchesSearch && matchesCountry;
+  });
+
+
+
+  onFilter(filteredStays);
+}, [stays, searchQuery, selectedCountry]); 
+
+useEffect(() => {
+  if (!searchQuery) {
+    setFilteredSuggestions([]); 
+    return;
+  }
+
+  const suggestions = stays.filter((stay) =>
+    stay?.name?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  setFilteredSuggestions(suggestions);
+}, [searchQuery, stays]);
+
     
-        useEffect(() => {
-            const suggestions = stays.filter((stay) =>
-                stay?.name?.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-            setFilteredSuggestions(suggestions);},
-            [searchQuery, stays]);
-
-    const handleCountryChange = (event) => {
-        setSelectedCountry(event.target.value);
       
-    };
 
-    const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value);
-      
-    };
+   const handleCountryChange = (event) => {
+
+  setSelectedCountry(event.target.value);
+
+};
+
+   const handleSearchChange = (event) => {
+
+  setSearchQuery(event.target.value);
+
+};
+    
     const handleSuggestionClick = (event, stay) => {
         event.preventDefault();
         if (stay && stay.id) {
@@ -77,7 +88,7 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
 
                     <input type='text' value={searchQuery} onChange={handleSearchChange} placeholder='Search stays' />
 
-                    {searchQuery && (
+                    {searchQuery && filteredSuggestions.length >0 && (
                         <ul>
                             {filteredSuggestions.map((stay) =>(
                             <li key={stay.id} onClick={(event) => handleSuggestionClick(event, stay)}>
