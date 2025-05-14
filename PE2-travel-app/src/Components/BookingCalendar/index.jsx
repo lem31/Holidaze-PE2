@@ -1,12 +1,12 @@
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { useState } from "react";
+import  { useState } from "react";
 import postBooking from "../../API/PostBooking";
 import useMyStore from "../../Store";
 import Guests from "../../assets/Images/guests.png";
 import CheckDateConflicts from "../CheckDateConflicts";
-import { useParams } from "react-router-dom";
+
 
 /**
  * BookingCalendar component allows users to make a booking for a selected stay.
