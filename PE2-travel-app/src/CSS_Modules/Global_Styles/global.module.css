@@ -66,8 +66,12 @@ box-shadow: inset 0 0 20px #320E3B;
  box-shadow: inset 0 0 20px #320E3B;
 }
 
-.button-font-size-desktop {
+.button-font-size-desktop-tablet {
     font-size: var(--font-size-small-3);
+}
+
+.button-font-size-mobile {
+    font-size: var(--font-size-tiny);
 }
 
 .h1-x-large-desktop-white {
