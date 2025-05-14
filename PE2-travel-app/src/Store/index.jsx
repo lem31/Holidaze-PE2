@@ -178,10 +178,10 @@ const useMyStore = create(
           set({ loading: true, error: false });
 
           const fetchedStays = await fetchStays();
-          console.log("Fetched stays from API:", fetchedStays);
+          console.log("RAW API RESPONSE:", fetchedStays);
 
           if (!fetchedStays || !Array.isArray(fetchedStays)) {
-            throw new Error("Invalid stays format");
+               set({ stays: [], loading: false });
           }
          
     

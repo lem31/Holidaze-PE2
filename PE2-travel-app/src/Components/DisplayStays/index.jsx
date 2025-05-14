@@ -18,26 +18,20 @@ import SelectionSearchBar from "../SelectionSearchBar";
  */
 
 const DisplayStays = () => {
-  const { error, fetchStays } = useMyStore();
+  const { error, stays, loading } = useMyStore();
   const [filteredStays, setFilteredStays] = useState([]);
+ 
  
 
 
-useEffect(() => {
-  const fetchAndFilterStays = async () => {
-    const stays = await fetchStays();
-    setFilteredStays(
-      Array.isArray(stays) ? stays.filter((stay) => stay !== null) : []
-    );
-  };
-  fetchAndFilterStays();
-}, [fetchStays]);
+
+
 
   if (error) {
     return <p>Error: Unable to fetch stays.</p>;
   }
 
-  if (!filteredStays || filteredStays.length === 0) {
+  if (!stays|| stays.length === 0) {
     return <p>No stays available.</p>;
   }
   console.log("🔍 Current stays before rendering:", filteredStays);
@@ -45,7 +39,7 @@ useEffect(() => {
   return (
     <div>
       <SelectionSearchBar stays={stays || []} onFilter={setFilteredStays} />
-      {filteredStays.map((stay, index) => (
+      {stays.map((stay, index) => (
         <div key={`${stay?.id || index}`}>
           <h1>{stay?.name || "Unknown Stay"}</h1>
 
