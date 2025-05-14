@@ -10,8 +10,13 @@ function Profile() {
   useEffect(() => {
     const getProfile = async () => {
       const profileData = await fetchUserProfile();
-      setUserProfile(profileData);
-      console.log("Fetched User Profile:", profileData);
+      console.log("🔍 Full Profile API Response:", profileData);
+      if (profileData) {
+        setUserProfile(profileData);
+        console.log("Fetched User Profile:", profileData);
+      } else {
+        console.error("Failed to fetch user profile: Profile data is undefined");
+      }
     };
     
     getProfile();
@@ -19,19 +24,18 @@ function Profile() {
 
   if (
     !userProfile ||
-    !userProfile.data ||
-    typeof userProfile.data.venueManager !== "boolean"
+    typeof userProfile.venueManager !== "boolean"
   ) {
     return <div>Invalid role</div>;
   }
 
-  console.log(userProfile.data.venueManager);
+  console.log(userProfile.venueManager);
   console.log(userProfile.data);
 
 
   return (
     <div>
-      {userProfile.data.venueManager ? (
+      {userProfile.venueManager ? (
         <ProfileVenueManager />
       ) : (
         <ProfileCustomer />

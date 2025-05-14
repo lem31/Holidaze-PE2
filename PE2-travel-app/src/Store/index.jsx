@@ -118,8 +118,8 @@ const useMyStore = create(
           if (profileData) {
             console.log("Profile data fetched:", profileData);
             set({ userProfile: profileData, loadingProfile: false });
-            console.log("Stored user profile:", profileData.data);
-            return profileData;
+            console.log("Stored user profile:", profileData);
+            return profileData.data;
           } else {
             throw new Error("Failed to fetch profile data.");
           }

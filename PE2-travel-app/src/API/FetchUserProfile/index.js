@@ -11,6 +11,7 @@ async function fetchUserProfile(userName, token) {
         headers: {
           Authorization: `Bearer ${token}`,
           "X-Noroff-API-Key": "f920c7be-b352-412a-bfe3-67cf36aebe41",
+          "Content-Type": "application/json",
         },
       }
     );
@@ -24,7 +25,7 @@ async function fetchUserProfile(userName, token) {
 
     console.log('PROFILE DATA:', profileData.data);
 
-    return profileData?.data ?? {};
+    return profileData
   } catch (error) {
     throw error;
   }

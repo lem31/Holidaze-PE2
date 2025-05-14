@@ -19,7 +19,7 @@ React.useEffect(() => {
     <div>
     
    
-    <h2>{userProfile.data.name}</h2>
+    <h2>{userProfile.name}</h2>
     <p>{userProfile.data.bio}</p>
     <img src={userProfile.data.banner?.url || DefaultImage } alt="banner" />
     <img src={userProfile.data.avatar?.url || DefaultImage } alt="avatar" />
