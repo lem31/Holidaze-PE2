@@ -46,7 +46,7 @@ const DisplayAStay = () => {
   
     useEffect(() => {
 
-   const fetchStayData = async () => {
+   const fetchStayData = async (id) => {
 
     try{
       console.log("Fetching stay data for ID:", id);
@@ -57,7 +57,7 @@ const DisplayAStay = () => {
       navigate("/");
     }
    }
-    fetchStayData(); 
+    fetchStayData(id); 
       }, [id]);
     if (loading) {
         return <div>Loading...</div>;

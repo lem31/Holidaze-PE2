@@ -13,13 +13,13 @@ const fetchStays = async () => {
       throw new Error("Invalid API response format");
     }
 
-    const staysWithBookings = data.data.filter((stay) => stay.id && typeof stay.id === 'string' && stay.id.trim() !== '').map(stay=>({
-      ...stay, bookings: stay.bookings || []
-    }));
-   
-console.log("Stays with bookings:", staysWithBookings);
   
-    return staysWithBookings;
+
+    const stays = data.data;
+   
+console.log("Stays with bookings:", stays);
+  
+    return stays;
 
   
   } catch (error) {

@@ -19,7 +19,8 @@ async function fetchVMVenues(userName, token) {
         }
 
         const vmVenuesData = await response.json();
-        return vmVenuesData;
+        console.log('VMVENUES:', vmVenuesData);
+        return vmVenuesData.data;
     } catch (error) {
         console.error('Error fetching user venues:', error);
         throw error;

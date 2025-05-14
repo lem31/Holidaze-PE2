@@ -8,6 +8,9 @@ export const createVenue = async (token, venueData) => {
     return;
   }
 
+  if (!venueData.name || !venueData.description || venueData.price === undefined || venueData.maxGuests === undefined) {
+  throw new Error("Missing required venue data! Ensure name, description, price, and maxGuests are provided.");
+}
   try {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -26,8 +29,7 @@ export const createVenue = async (token, venueData) => {
 
     const data = await response.json();
 
-
-   
+    console.log("Full API Response:", data);
 
     return data;
   } catch (error) {
