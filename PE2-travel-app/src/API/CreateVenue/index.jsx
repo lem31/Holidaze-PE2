@@ -1,5 +1,3 @@
-import fetchStays from "../FetchStays";
-
 export const createVenue = async (token, venueData) => {
   const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
 

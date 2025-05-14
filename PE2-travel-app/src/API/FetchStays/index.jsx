@@ -1,30 +1,32 @@
-const url = "https://v2.api.noroff.dev/holidaze/venues?_bookings=true";
-
 const fetchStays = async () => {
-
   try {
-    const response = await fetch(url); 
-    const data = await response.json();
+    let stays = [];
+    let page = 1;
+    const limit = 100;
+    let moreData = true;
 
-    console.log('API Response:', data); 
+    while (moreData) {
+      const response = await fetch(`https://v2.api.noroff.dev/holidaze/venues?_bookings=true&limit=${limit}&page=${page}&sort=created&sortOrder=desc`);
+      const data = await response.json();
 
-    if(!data.data|| !Array.isArray(data.data)){
-      console.error("Invalid API response format:", data);
-      throw new Error("Invalid API response format");
+      if (!data?.data || !Array.isArray(data.data)) {
+        console.error("Invalid API response format:", data);
+        throw new Error("Invalid API response format");
+      }
+
+      stays = [...stays, ...data.data]; 
+
+  
+      moreData = data.data.length === limit;  
+      page++; 
     }
 
-  
-
-    const stays = data.data;
-   
-console.log("Stays with bookings:", stays);
-  
+    console.log("Fetched all stays:", stays);
     return stays;
 
-  
   } catch (error) {
-
-  throw new Error(error.message || "Failed to fetch stays");
+    console.error("Error fetching all stays:", error);
+    throw new Error(error.message || "Failed to fetch all stays");
   }
 };
 

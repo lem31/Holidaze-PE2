@@ -181,11 +181,10 @@ const useMyStore = create(
           console.log("RAW API RESPONSE:", fetchedStays);
 
           if (!fetchedStays || !Array.isArray(fetchedStays)) {
-               set({ stays: [], loading: false });
+            set({ stays: [], loading: false });
           }
-         
-    
-           set({ stays: fetchedStays, loading: false });
+
+          set({ stays: fetchedStays, loading: false });
         } catch (error) {
           console.error("Error fetching stays:", error);
           set({ loading: false, error: true });
@@ -193,45 +192,40 @@ const useMyStore = create(
       },
 
       fetchAndSetSelectedStay: async (id) => {
-
-        try{console.log('Fetching stay data for ID:', id);
+        try {
+          console.log("Fetching stay data for ID:", id);
           if (!id) {
             console.error("Invalid stay ID:", id);
             return;
           }
-        
-        const data = await fetchStays();
-        const selectedStay = data.find((stay) => stay.id === id);
 
+          const data = await fetchStays();
+          const selectedStay = data.find((stay) => stay.id === id);
 
- const response =  await FetchSingleVenue(id)
-    if (!response){
-      throw new Error("Invalid stay data");
-    }
-      set({ selectedStay: response });
-        
-              console.log("Stored selectedStay:", selectedStay);
-              return response;;
-            
+          const response = await FetchSingleVenue(id);
+          if (!response) {
+            throw new Error("Invalid stay data");
+          }
+          set({ selectedStay: response });
+
+          console.log("Stored selectedStay:", selectedStay);
+          return response;
         } catch (error) {
           console.error("Error fetching stay data:", error);
-        throw error;
+          throw error;
         }
-         
       },
 
       setSelectedStay: (stay) => {
         const { stays } = get();
         const completeStay = stays.find((s) => s.id === stay.id) || stay;
 
-      
         set({ selectedStay: completeStay });
 
         console.log("Updated selectedStay with full data:", completeStay);
       },
 
       setSelectedVenue: (venue) => {
-     
         set({ selectedVenue: venue });
         console.log("Selected venue:", venue);
       },
@@ -251,13 +245,11 @@ const useMyStore = create(
           const userVenues = await fetchVMVenues(userName, token);
           console.log("🔍 API Response for vmVenues:", userVenues);
 
-        
-
-    if(userVenues && Array.isArray(userVenues)){
+          if (userVenues && Array.isArray(userVenues)) {
             set({ vmVenues: userVenues, loading: false });
-        
-console.log("Stored vmVenues:", userVenues);
-      
+
+            console.log("Stored vmVenues:", userVenues);
+
             return userVenues;
           } else {
             throw new Error("Invalid API response: expected an array.");
@@ -286,16 +278,8 @@ console.log("Stored vmVenues:", userVenues);
           : [];
         const updatedVmVenues = [...currentVmVenues, response.data];
 
-       
-      
-
         set({ vmVenues: updatedVmVenues });
-       
-       
-        },
-
-       
-      
+      },
 
       editVenue: async (updatedVenueData) => {
         const token = get().token;
