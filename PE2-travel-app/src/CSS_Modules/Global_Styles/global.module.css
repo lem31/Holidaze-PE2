@@ -1,0 +1,126 @@
+:root {
+  --primary-color-1: #ffffff;
+  --primary-color-2: #320e3b;
+  --secondary-color: #e56399;
+  --secondary-color-2: #7f96ff;
+  --tertiary-color-1: #a6cfd5;
+  --tertiary-color-2: #dbfcff;
+  --Button-Hover-color-1: #e58099;
+  --Button-Hover-color-2: #7fb0ff;
+  --Button-Active-color-1: #e55299;
+  --Button-Active-color-2: #7f80ff;
+  --font-size-x-large: 48px;
+  --font-size-large-2: 40px;
+  --font-size-large-3: 36px;
+  --font-size-medium: 32px;
+  --font-size-medium-2: 28px;
+  --font-size-medium-3: 24px;
+  --font-size-small: 16px;
+  --font-size-small-2: 15px;
+  --font-size-small-3: 14px;
+  --font-size-tiny: 12px;
+  --font-size-x-tiny: 10px;
+  --font-family-1: "Playfair Display", sans-serif;
+  --font-family-2: "Lato", sans-serif;
+}
+
+.button-primary {
+  background-color: var(--secondary-color-2);
+  color: var(--primary-color-1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 24px 12px;
+filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.button-primary:hover {
+  background-color: var(--Button-Hover-color-2);
+filter: drop-shadow(2px 4px 4px #ffffff);
+}
+
+.button-primary:active {
+  background-color: var(--Button-Active-color-2);
+box-shadow: inset 0 0 20px #320E3B;
+}
+
+.button-secondary {
+  background-color: var(--secondary-color-);
+  color: var(--primary-color-1);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 24px 12px;
+}
+
+.button-secondary:hover {
+  background-color: var(--Button-Hover-color-1);
+  filter: drop-shadow(2px 4px 4px #ffffff);
+  
+}
+.button-secondary:active {
+  background-color: var(--Button-Active-color-1);
+ box-shadow: inset 0 0 20px #320E3B;
+}
+
+.h1 {
+  font-size: var(--font-size-large);
+  color: var(--tertiary-color);
+  font-family: var(--font-family-2);
+  font-weight: bold;
+  text-align: center;
+}
+
+.h2 {
+  color: var(--tertiary-color);
+  font-size: var(--font-size-medium);
+  font-family: var(--font-family-2);
+  font-weight: bold;
+  text-align: center;
+}
+
+.h3 {
+  color: var(--tertiary-color);
+  font-size: var(--font-size-small);
+  font-family: var(--font-family-2);
+  font-weight: bold;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  background-color: rgba(6, 5, 5, 0.925);
+}
+html {
+  margin: 0;
+  max-height: 100vh;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+}
+
+@media (min-width: 487px) and (max-width: 768px) {
+  .h1 {
+    font-size: var(--font-size-medium);
+  }
+
+  .h2 {
+    font-size: var(--font-size-small);
+  }
+}
+
+@media (max-width: 486px) {
+  .h1 {
+    font-size: var(--font-size-medium);
+  }
+
+  .h2 {
+    font-size: var(--font-size-small);
+  }
+}
