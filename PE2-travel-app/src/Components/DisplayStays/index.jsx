@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Location from "../../assets/Images/Location-purple.png";
 import Price from "../../assets/Images/Price-tag-purple.png";
 import ViewAvailabilityButton from "../ViewAvailabilityButton";

@@ -1,4 +1,3 @@
-import React, { use } from 'react';
 import Logo from '../../assets/Images/Logo.png';
 import Stays from '../../assets/Images/Stays.png';
 import Register from '../../assets/Images/Register.png';
@@ -7,7 +6,7 @@ import Account from '../../assets/Images/Account.png';
 import Hamburger from '../../assets/Images/Hamburger.png';
 import UserDropDown from '../UserDropDown';
 import  useMyStore from '../../Store';
-import gStyles from '../../CSS_Modules/Global_Styles/global.module.css';
+// import gStyles from '../../CSS_Modules/Global_Styles/global.module.css';
 import hStyles from '../../CSS_Modules/Header/header.module.css';
 
 /**

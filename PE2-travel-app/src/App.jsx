@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Router from "./Components/Router";
 import useMyStore from "./Store";
 
@@ -16,11 +16,6 @@ function App() {
   const { checkLoginStatus, loginChecked, resetStore } = useMyStore();
   const isHydrated = useMemo(() => useMyStore.persist.hasHydrated(), []);
 
-  useEffect(() => {
-resetStore();
-
-
-}, []);
 
   useEffect(() => {
     if (isHydrated && !loginChecked) {
