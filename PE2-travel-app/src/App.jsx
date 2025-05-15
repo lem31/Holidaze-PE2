@@ -13,7 +13,7 @@ import useMyStore from "./Store";
  */
 
 function App() {
-  const { checkLoginStatus, loginChecked, resetStore } = useMyStore();
+  const { checkLoginStatus, loginChecked } = useMyStore();
   const isHydrated = useMemo(() => useMyStore.persist.hasHydrated(), []);
 
 
