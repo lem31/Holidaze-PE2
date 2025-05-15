@@ -30,12 +30,12 @@ function Header() {
 <img src={Hamburger} alt="Hamburger Menu Icon"  />
 </button>
 <ul className={hStyles.navUl}>
-<li>
-    <img src={Stays} alt="Stays Icon" /><a href="/">Stays</a></li>
+<li className={hStyles.navLi}>
+    <img className={hStyles.navIcons} src={Stays} alt="Stays Icon" /><a className={hStyles.navLink} href="/">Stays</a></li>
    {!isLoggedIn && (
     <>
-<li> <img src={Register} alt="Register Icon" /><a href="/Register">Register</a></li>
-<li> <img src={Login} alt="Login Icon" /><a href="/Login">Login</a></li> </>)}
+<li className={hStyles.navLi}> <img className={hStyles.navIcons} src={Register} alt="Register Icon" /><a className={hStyles.navLink}  href="/Register">Register</a></li>
+<li className={hStyles.navLi}> <img className={hStyles.navIcons}  src={Login} alt="Login Icon" /><a className={hStyles.navLink}  href="/Login">Login</a></li> </>)}
 
 </ul>
 </nav>
