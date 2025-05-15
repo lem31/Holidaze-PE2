@@ -62,7 +62,7 @@ const DisplayAStay = () => {
       setLoading(false);
     }
    };
-    fetchStayData(); 
+    fetchStayData(id); 
       }, [id]);
   
     

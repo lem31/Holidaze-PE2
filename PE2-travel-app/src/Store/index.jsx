@@ -25,11 +25,11 @@ const useMyStore = create(
       },
 
 
-  //  resetStore: () => {
-  //   useMyStore.persist.clearStorage(); 
-  //   set({ stays: [], loading: false, error: false }); 
-  //   window.location.reload(); 
-  // },
+   resetStore: () => {
+    useMyStore.persist.clearStorage(); 
+    set({ stays: [], loading: false, error: false }); 
+    window.location.reload(); 
+  },
 
       setBookings: (newBookings) => {
         set({ bookings: newBookings });
