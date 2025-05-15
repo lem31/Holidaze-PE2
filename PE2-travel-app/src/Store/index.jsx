@@ -8,6 +8,7 @@ import updateProfile from "../API/UpdateProfile/index.js";
 import createVenue from "../API/CreateVenue";
 import editVenue from "../API/EditVenue";
 import FetchSingleVenue from "../API/FetchSingleVenue";
+import { createJSONStorage } from "zustand/middleware";
 
 const useMyStore = create(
 
@@ -26,7 +27,8 @@ const useMyStore = create(
 
 
    resetStore: () => {
-    useMyStore.persist.clearStorage(); 
+get().persist.clearStorage();
+
     set({ stays: [], loading: false, error: false }); 
     window.location.reload(); 
   },
@@ -232,10 +234,6 @@ const useMyStore = create(
         console.log("Updated selectedStay with full data:", completeStay);
       },
 
-      setSelectedVenue: (venue) => {
-        set({ selectedVenue: venue });
-        console.log("Selected venue:", venue);
-      },
 
       fetchVMVenues: async () => {
         const token = get().token;
@@ -269,6 +267,12 @@ const useMyStore = create(
             error: error.message || "Failed to fetch venues",
           });
         }
+      },
+
+
+      setSelectedVenue: (venue) => {
+        set({ selectedVenue: venue });
+        console.log("Selected venue:", venue);
       },
 
       createNewVenue: async (venueData) => {
@@ -396,22 +400,13 @@ const useMyStore = create(
         }
       },
     }),
-
-    {
-      name: "auth-storage",
-
-      storage: {
-        getItem: (key) => JSON.parse(localStorage.getItem(key)),
-        setItem: (key, value) =>
-          localStorage.setItem(key, JSON.stringify(value)),
-        removeItem: (key) => localStorage.removeItem(key),
-      },
-
-      
-    }
-    
+{
+    name: "auth-storage",
+    storage: createJSONStorage(() => localStorage),
+  },
+   
   )
-
+  
   
 );
 

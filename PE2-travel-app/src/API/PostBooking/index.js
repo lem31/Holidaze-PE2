@@ -1,4 +1,3 @@
-import React from "react";
 import useMyStore from "../../Store/index";
 async function postBooking(bookingData) {
 

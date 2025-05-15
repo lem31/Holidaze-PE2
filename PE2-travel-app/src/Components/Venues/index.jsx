@@ -39,13 +39,10 @@ function Venues({ vmVenues }) {
   const [openDialog, setOpenDialog] = useState(false);
   const { deleteVenue } = useMyStore();
 
-  useEffect(() => {
-    fetchVMVenues();
-  }, [fetchVMVenues]);
 
   useEffect(() => {
     fetchVMVenues();
-  }, [successMessage]);
+  }, [fetchVMVenues, successMessage]);
 
   const handleDeleteClick = (venueId) => {
     setSelectedVenueId(venueId);
@@ -162,8 +159,7 @@ function Venues({ vmVenues }) {
       )}
 
       {Array.isArray(vmVenues) && vmVenues.length > 0 ? (
-        vmVenues
-          .filter((venue) => venue)
+        vmVenues.filter((venue) => venue)
           .map((venue, index) => (
             <div key={`${venue.id || `fallback`}-${index}`}>
               <h2>{venue.name}</h2>

@@ -1,4 +1,3 @@
-import React from 'react';
 import Profile from '../../assets/Images/Profile.png';
 import Logout from '../../assets/Images/Logout.png';
 import useMyStore from '../../Store';

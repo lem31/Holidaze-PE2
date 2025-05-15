@@ -8,6 +8,7 @@ import Profile from '../PAGES/Profile';
 
 
 
+
 /**
  * Router component that defines the application's routing structure using React Router.
  *
@@ -22,7 +23,7 @@ import Profile from '../PAGES/Profile';
 function Router() {
   return(
     <>
-    <BrowserRouter>
+    <BrowserRouter >
     <Routes >
       <Route path="/" element={<Layout/>}>
        <Route index element={<Stays/>}/>

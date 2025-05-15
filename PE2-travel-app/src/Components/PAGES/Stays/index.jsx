@@ -1,5 +1,5 @@
 import { useEffect} from 'react';
-// import DisplayStays from '../../DisplayStays';
+import DisplayStays from '../../DisplayStays';
 import useMyStore from '../../../Store/index';
 
 
@@ -13,17 +13,17 @@ import useMyStore from '../../../Store/index';
 function Stays() {
 
 
-// const { fetchStays } = useMyStore();
+const { fetchStays } = useMyStore();
 
 
-// useEffect(() => {
-//     fetchStays(); 
-//   }, []);
+useEffect(() => {
+    fetchStays(); 
+  }, []);
 
     return(
         <div>
             <h1>Stays</h1>
-{/* <DisplayStays /> */}
+<DisplayStays />
         </div>
     )
 }

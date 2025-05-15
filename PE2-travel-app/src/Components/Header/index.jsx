@@ -24,7 +24,7 @@ function Header() {
   return(
     <div>
 
-   <Header className={hStyles.header}>
+   <header className={hStyles.header}>
 <img src={Logo} alt="Logo" className="logo"/>
 <nav>
   <button>
@@ -52,7 +52,7 @@ function Header() {
 
 )}
 
-   </Header>
+   </header>
 
    </div>
 

@@ -8,6 +8,7 @@ import Guests from "../../assets/Images/guests.png";
 import CheckDateConflicts from "../CheckDateConflicts";
 
 
+
 /**
  * BookingCalendar component allows users to make a booking for a selected stay.
  * It includes date pickers for check-in and check-out dates,

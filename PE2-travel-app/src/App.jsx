@@ -25,7 +25,8 @@ function App() {
     }
   }, [isHydrated, checkLoginStatus]);
 
-  return <Router />;
+  return ( <Router />
+  );
 }
 
 export default App;
