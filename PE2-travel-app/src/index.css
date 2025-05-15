@@ -25,3 +25,8 @@
   --font-family-2: "Lato", sans-serif;
   --font-family-3: "Raleway", sans-serif;
 }
+
+*{
+  margin:0;
+  padding:0;
+}

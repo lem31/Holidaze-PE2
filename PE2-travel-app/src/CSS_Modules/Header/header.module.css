@@ -4,19 +4,38 @@
 }
 
 .logo{
-  width: 150px;
-  height: 150px;
+  width: 85px;
+  height: 85px;
   border-radius: 20px;
   border: 2px solid var(--secondary-color);
 
 }
 .header {
   display: flex;
-  width: 80%;
-  height: 80px;
-  background-color: var(--primary-color-2);
-  flex: 1;
-  justify-content: center;
+  width: 90vw;
+  height: 15vh;
+  justify-content: space-evenly;
   align-items: center;
   position: relative;
+   background-color: var(--primary-color-2);
+  border-radius: 20px;
+
 }
+
+.headerDiv {
+  display: flex;
+justify-content: space-between;
+  width: 90vw;
+   justify-self: center;
+}
+
+.navUl{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+
+}
+
+

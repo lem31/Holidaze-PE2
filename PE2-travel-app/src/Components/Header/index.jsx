@@ -21,7 +21,7 @@ function Header() {
     const isLoggedIn = useMyStore((state) => state.isLoggedIn);
 
   return(
-    <div  >
+    <div className={hStyles.headerDiv} >
 
    <header className={hStyles.header}>
 <img src={Logo} alt="Logo" className={hStyles.logo}/>
@@ -29,7 +29,7 @@ function Header() {
   <button className={hStyles.hamburgerButton}>
 <img src={Hamburger} alt="Hamburger Menu Icon"  />
 </button>
-<ul>
+<ul className={hStyles.navUl}>
 <li>
     <img src={Stays} alt="Stays Icon" /><a href="/">Stays</a></li>
    {!isLoggedIn && (
