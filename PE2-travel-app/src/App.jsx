@@ -13,8 +13,14 @@ import useMyStore from "./Store";
  */
 
 function App() {
-  const { checkLoginStatus, loginChecked } = useMyStore();
+  const { checkLoginStatus, loginChecked, resetStore } = useMyStore();
   const isHydrated = useMemo(() => useMyStore.persist.hasHydrated(), []);
+
+  useEffect(() => {
+resetStore();
+
+
+}, []);
 
   useEffect(() => {
     if (isHydrated && !loginChecked) {

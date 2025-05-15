@@ -10,7 +10,10 @@ import editVenue from "../API/EditVenue";
 import FetchSingleVenue from "../API/FetchSingleVenue";
 
 const useMyStore = create(
+
   persist(
+
+    
     (set, get) => ({
       stays: [],
       bookings: [],
@@ -20,6 +23,13 @@ const useMyStore = create(
         localStorage.setItem("stays", JSON.stringify(newStays));
         console.log("Stored stays:", newStays);
       },
+
+
+   resetStore: () => {
+    useMyStore.persist.clearStorage(); 
+    set({ stays: [], loading: false, error: false }); 
+    window.location.reload(); 
+  },
 
       setBookings: (newBookings) => {
         set({ bookings: newBookings });
@@ -176,14 +186,11 @@ const useMyStore = create(
       fetchStays: async () => {
         try {
           set({ loading: true, error: false });
-
           const fetchedStays = await fetchStays();
           console.log("RAW API RESPONSE:", fetchedStays);
-
           if (!fetchedStays || !Array.isArray(fetchedStays)) {
             set({ stays: [], loading: false });
           }
-
           set({ stays: fetchedStays, loading: false });
         } catch (error) {
           console.error("Error fetching stays:", error);
@@ -351,18 +358,16 @@ const useMyStore = create(
             stays: Array.isArray(state.stays)
               ? state.stays.filter((stay) => stay.id !== venueId)
               : [],
-                 successMessage: "Venue deleted successfully!",
+            successMessage: "Venue deleted successfully!",
           }));
 
-      
           await fetchVMVenues(userName, token);
 
           // set({ vmVenues: [...get().vmVenues] });
           // set({ stays: [...get().stays] });
+        } else {
+          setSuccessMessage: "Failed to delete venue.";
         }
-else{ setSuccessMessage:"Failed to delete venue."; }
-
-   
       },
 
       fetchVMBookings: async () => {
@@ -401,8 +406,13 @@ else{ setSuccessMessage:"Failed to delete venue."; }
           localStorage.setItem(key, JSON.stringify(value)),
         removeItem: (key) => localStorage.removeItem(key),
       },
+
+      
     }
+    
   )
+
+  
 );
 
 export default useMyStore;

@@ -7,6 +7,8 @@ import Account from '../../assets/Images/Account.png';
 import Hamburger from '../../assets/Images/Hamburger.png';
 import UserDropDown from '../UserDropDown';
 import  useMyStore from '../../Store';
+import gStyles from '../../CSS_Modules/Global_Styles/global.module.css';
+import hStyles from '../../CSS_Modules/Header/header.module.css';
 
 /**
  *
@@ -23,7 +25,7 @@ function Header() {
   return(
     <div>
 
-   <Header>
+   <Header className={hStyles.header}>
 <img src={Logo} alt="Logo" className="logo"/>
 <nav>
   <button>

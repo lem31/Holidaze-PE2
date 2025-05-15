@@ -41,7 +41,10 @@ const DisplayAStay = () => {
       breakfast: Breakfast,
     }
     useEffect(() => {
-      console.log("Zustand Store selectedStay:", useMyStore.getState().selectedStay);
+      if(!loading && !selectedStay && id){
+        console.log("No stay data found, redirecting to home page");
+        navigate("/");
+      }
   }, []);
   
     useEffect(() => {
@@ -55,16 +58,13 @@ const DisplayAStay = () => {
     } catch (error) {
       console.error("Error fetching stay data:", error);
       navigate("/");
+    } finally{
+      setLoading(false);
     }
-   }
-    fetchStayData(id); 
+   };
+    fetchStayData(); 
       }, [id]);
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-    if (!selectedStay) {
-        return <div>Stay not found</div>;
-    }
+  
     
     const availableFacilities = selectedStay?.meta? Object.entries(selectedStay.meta).filter(([key, value]) => value === true): [];
     return (

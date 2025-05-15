@@ -18,22 +18,13 @@ import SelectionSearchBar from "../SelectionSearchBar";
  */
 
 const DisplayStays = () => {
-  const { error, stays} = useMyStore();
+  const { error, stays } = useMyStore();
 
   const [filteredStays, setFilteredStays] = useState([]);
 
-
-    
- 
- useEffect(() => {
-
-  setFilteredStays(stays);
-}, []);
-
-
-
-
-
+  useEffect(() => {
+    setFilteredStays(stays);
+  }, [stays]);
 
   if (error) {
     return <p>Error: Unable to fetch stays.</p>;
@@ -43,47 +34,45 @@ const DisplayStays = () => {
     return <p>No stays available.</p>;
   }
 
-
   return (
     <div>
       <SelectionSearchBar stays={stays || []} onFilter={setFilteredStays} />
-    {filteredStays.length > 0 ? (
-  filteredStays.map((stay, index) => (
-    <div key={`${stay?.id || index}`}>
-      <h1>{stay?.name || "Unknown Stay"}</h1>
-      <p>
-        <img src={Location} alt="Location icon" />
-        {stay?.location?.city || "Unknown City"},{" "}
-        {stay?.location?.country || "Unknown Country"}
-      </p>
+      {filteredStays.length > 0 ? (
+        filteredStays.map((stay, index) => (
+          <div key={`${stay?.id || index}`}>
+            <h1>{stay?.name || "Unknown Stay"}</h1>
+            <p>
+              <img src={Location} alt="Location icon" />
+              {stay?.location?.city || "Unknown City"},{" "}
+              {stay?.location?.country || "Unknown Country"}
+            </p>
 
-      <div>
-        {stay?.media?.length > 0 ? (
-          stay.media.map((media, index) => (
-            <img
-              key={`${stay.id}-${index}`}
-              src={media?.url || ""}
-              alt={media?.name || stay?.name || "Unknown Stay"}
-              loading="lazy"
-            />
-          ))
-        ) : (
-          <p>No images available for {stay?.name || "this stay"}.</p>
-        )}
-      </div>
+            <div>
+              {stay?.media?.length > 0 ? (
+                stay.media.map((media, index) => (
+                  <img
+                    key={`${stay.id}-${index}`}
+                    src={media?.url || ""}
+                    alt={media?.name || stay?.name || "Unknown Stay"}
+                  />
+                ))
+              ) : (
+                <p>No images available for {stay?.name || "this stay"}.</p>
+              )}
+            </div>
 
-      <p>{stay?.description || "No description available"}</p>
-      <p>
-        <img src={Price} alt="Price tag icon" />
-        {stay?.price || "N/A"} NOK/night
-      </p>
+            <p>{stay?.description || "No description available"}</p>
+            <p>
+              <img src={Price} alt="Price tag icon" />
+              {stay?.price || "N/A"} NOK/night
+            </p>
 
-      <ViewAvailabilityButton stay={stay} />
-    </div>
-  ))
-) : (
-  <p>No stays found matching your search.</p>
-)}
+            <ViewAvailabilityButton stay={stay} />
+          </div>
+        ))
+      ) : (
+        <p>No stays found matching your search.</p>
+      )}
     </div>
   );
 };
