@@ -1,6 +1,9 @@
 const fetchStays = async () => {
   try {
-   
+    let stays = [];
+    let page = 1;
+    const limit = 100;
+    let moreData = true;
 
     while (moreData) {
       const response = await fetch(`https://v2.api.noroff.dev/holidaze/venues?_bookings=true&limit=${limit}&page=${page}&sort=created&sortOrder=desc`);
