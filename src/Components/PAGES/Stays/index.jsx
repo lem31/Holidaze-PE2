@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import DisplayStays from '../../DisplayStays';
 import useMyStore from '../../../Store';
 

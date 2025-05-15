@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useMyStore from "../../Store/index";
-import EditProfileFormBox from "../EditProfileFormBox";
 import Venues from "../Venues";
 import VMBookings from "../VMBookings";
 import { Snackbar, Alert } from "@mui/material";
@@ -26,16 +25,16 @@ const ProfileVenueManager = () => {
     }
   }, [successMessage]);
 
-  useEffect(() => {
-    fetchVMBookings();
+  // useEffect(() => {
+  //   fetchVMBookings();
 
-    setVMBookings(vmBookings);
-    localStorage.setItem("bookings", JSON.stringify(bookings));
-  }, [successMessage, vmBookings]);
+  //   setVMBookings(vmBookings);
+  //   localStorage.setItem("bookings", JSON.stringify(bookings));
+  // }, [successMessage, vmBookings]);
 
-  if (!userProfile) {
-    return <p>No profile data available, please log in again.</p>;
-  }
+  // if (!userProfile) {
+  //   return <p>No profile data available, please log in again.</p>;
+  // }
 
   return (
     <div>
@@ -58,7 +57,7 @@ const ProfileVenueManager = () => {
         <button
           onClick={() => {
             setSelectedView("Bookings");
-            fetchVMBookings();
+            // fetchVMBookings();
           }}
         >
           Bookings

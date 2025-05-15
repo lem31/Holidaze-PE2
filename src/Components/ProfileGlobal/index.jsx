@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import useMyStore from "../../Store/index";
 import DefaultImage from '../../assets/Images/DefaultBannerProfileImg.jpg';
 import EditProfileFormBox from "../EditProfileForm";
@@ -11,10 +11,10 @@ const ProfileGlobal= () => {
     const [successMessage, setSuccessMessage] = useState("");
 const { userProfile } = useMyStore();
 
-const [refresh, setRefresh] = React.useState(false);
+/* const [refresh, setRefresh] = React.useState(false);
 React.useEffect(() => {
   console.log('profile updated, forcing refresh');
-}, [refresh]);
+}, [refresh]); */
   return (
     <div>
     

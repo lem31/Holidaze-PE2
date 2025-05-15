@@ -1,4 +1,3 @@
-import React from 'react';
 import Register from '../../assets/Images/Register.png';
 import Login from '../../assets/Images/Login.png';
 import Facebook from '../../assets/Images/Facebook.png';

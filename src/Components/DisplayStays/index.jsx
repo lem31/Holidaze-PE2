@@ -18,13 +18,16 @@ import SelectionSearchBar from "../SelectionSearchBar";
  */
 
 const DisplayStays = () => {
-  const { error, stays } = useMyStore();
+  const { error, fetchStays } = useMyStore();
 
   const [filteredStays, setFilteredStays] = useState([]);
 
+ const stays = fetchStays();
+
+
   useEffect(() => {
     setFilteredStays(stays);
-  }, [stays]);
+  }, []);
 
   if (error) {
     return <p>Error: Unable to fetch stays.</p>;
@@ -38,7 +41,7 @@ const DisplayStays = () => {
     <div>
       <SelectionSearchBar stays={stays || []} onFilter={setFilteredStays} />
       {filteredStays.length > 0 ? (
-        filteredStays.map((stay, index) => (
+       filteredStays.map((stay, index) => (
           <div key={`${stay?.id || index}`}>
             <h1>{stay?.name || "Unknown Stay"}</h1>
             <p>

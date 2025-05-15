@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create} from "zustand";
 import { persist } from "zustand/middleware";
 import fetchStays from "../API/FetchStays";
 import fetchUserProfile from "../API/FetchUserProfile/index.js";
@@ -9,27 +9,23 @@ import createVenue from "../API/CreateVenue";
 import editVenue from "../API/EditVenue";
 import FetchSingleVenue from "../API/FetchSingleVenue";
 
+
 const useMyStore = create(
 
   persist(
 
-    
     (set, get) => ({
-      stays: [],
+     /*  stays: [], */
       bookings: [],
 
-      setStays: (newStays) => {
+     /*  setStays: (newStays) => {
         set({ stays: newStays });
         localStorage.setItem("stays", JSON.stringify(newStays));
         console.log("Stored stays:", newStays);
-      },
+      }, */
 
 
-   resetStore: () => {
-    useMyStore.persist.clearStorage(); 
-    set({ stays: [], loading: false, error: false }); 
-    window.location.reload(); 
-  },
+ 
 
       setBookings: (newBookings) => {
         set({ bookings: newBookings });
@@ -191,7 +187,8 @@ const useMyStore = create(
           if (!fetchedStays || !Array.isArray(fetchedStays)) {
             set({ stays: [], loading: false });
           }
-          set({ stays: fetchedStays, loading: false });
+          return fetchedStays;
+        /*   set({ stays: fetchedStays, loading: false }); */
         } catch (error) {
           console.error("Error fetching stays:", error);
           set({ loading: false, error: true });
@@ -273,7 +270,7 @@ const useMyStore = create(
 
       createNewVenue: async (venueData) => {
         const token = get().token;
-        const userName = get().userName;
+       
         const response = await createVenue(token, venueData);
 
         if (!response || !response.data) {
@@ -365,36 +362,34 @@ const useMyStore = create(
 
           // set({ vmVenues: [...get().vmVenues] });
           // set({ stays: [...get().stays] });
-        } else {
-          setSuccessMessage: "Failed to delete venue.";
-        }
+        } 
       },
 
-      fetchVMBookings: async () => {
-        try {
-          set({ loading: true, error: false });
-          const fetchedBookings = await fetchVMBookings();
-          set((state) => {
-            const updatedBookings = [
-              ...state.vmBookings,
-              ...fetchedBookings.filter(
-                (booking) =>
-                  !state.vmBookings.some(
-                    (existingBooking) => existingBooking.id === booking.id
-                  )
-              ),
-            ];
-            localStorage.setItem("vmBookings", JSON.stringify(updatedBookings));
-            return { vmBookings: updatedBookings, loading: false };
-          });
-        } catch (error) {
-          set({
-            loading: false,
-            error: true,
-            errorMessage: error.message || "Failed to fetch bookings",
-          });
-        }
-      },
+      // fetchVMBookings: async () => {
+      //   try {
+      //     set({ loading: true, error: false });
+      //     const fetchedBookings = await fetchVMBookings();
+      //     set((state) => {
+      //       const updatedBookings = [
+      //         ...state.vmBookings,
+      //         ...fetchedBookings.filter(
+      //           (booking) =>
+      //             !state.vmBookings.some(
+      //               (existingBooking) => existingBooking.id === booking.id
+      //             )
+      //         ),
+      //       ];
+      //       localStorage.setItem("vmBookings", JSON.stringify(updatedBookings));
+      //       return { vmBookings: updatedBookings, loading: false };
+      //     });
+      //   } catch (error) {
+      //     set({
+      //       loading: false,
+      //       error: true,
+      //       errorMessage: error.message || "Failed to fetch bookings",
+      //     });
+      //   }
+      // },
     }),
 
     {

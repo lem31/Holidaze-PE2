@@ -7,7 +7,7 @@ import Hamburger from '../../assets/Images/Hamburger.png';
 import UserDropDown from '../UserDropDown';
 import  useMyStore from '../../Store';
 // import gStyles from '../../CSS_Modules/Global_Styles/global.module.css';
-import hStyles from '../../CSS_Modules/Header/header.module.css';
+/* import hStyles from '../../CSS_Modules/Header/header.module.css'; */
 
 /**
  *
@@ -24,11 +24,11 @@ function Header() {
   return(
     <div>
 
-   <Header className={hStyles.header}>
-<img src={Logo} alt="Logo" className="logo"/>
+   <Header>
+<img src={Logo} alt="Logo" />
 <nav>
   <button>
-<img src={Hamburger} alt="Hamburger Menu Icon" className="hamburger" />
+<img src={Hamburger} alt="Hamburger Menu Icon"  />
 </button>
 <ul>
 <li>

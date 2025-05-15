@@ -1,4 +1,3 @@
-import React from "react";
 import ProfileGlobal from "../ProfileGlobal";
 import DisplayCustomerBookings from "../DisplayCustomerBookings";
 

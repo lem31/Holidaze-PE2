@@ -1,6 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import useMyStore from '../../Store';
-import React from 'react';
+
 
 /**
  * ViewAvailabilityButton component renders a button to navigate to an individual stay and 

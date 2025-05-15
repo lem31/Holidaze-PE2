@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
 import RegisterForm from "../RegisterForm";
 import onRegister from "../../API/OnRegister/index.js";
