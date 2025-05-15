@@ -14,7 +14,7 @@ const fetchStays = async () => {
         throw new Error("Invalid API response format");
       }
 
-      stays = [...stays, ...data.data]; 
+      stays.push(...data.data);
 
   
       moreData = data.data.length === limit && page < 10;;  
