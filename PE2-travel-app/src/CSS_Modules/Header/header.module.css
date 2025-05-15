@@ -1,9 +1,20 @@
-.hamburger-button {
+
+.hamburgerButton {
     display: none;
 }
 
+.logo{
+  width: 150px;
+  height: 150px;
+  border-radius: 20px;
+  border: 2px solid var(--secondary-color);
+
+}
 .header {
   display: flex;
+  width: 80%;
+  height: 80px;
+  background-color: var(--primary-color-2);
   flex: 1;
   justify-content: center;
   align-items: center;

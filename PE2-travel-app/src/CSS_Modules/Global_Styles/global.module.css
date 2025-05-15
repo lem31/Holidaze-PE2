@@ -1,30 +1,5 @@
-:root {
-  --primary-color-1: #ffffff;
-  --primary-color-2: #320e3b;
-    --primary-color-3: #000000;
-  --secondary-color: #e56399;
-  --secondary-color-2: #7f96ff;
-  --tertiary-color-1: #a6cfd5;
-  --tertiary-color-2: #dbfcff;
-  --Button-Hover-color-1: #e58099;
-  --Button-Hover-color-2: #7fb0ff;
-  --Button-Active-color-1: #e55299;
-  --Button-Active-color-2: #7f80ff;
-  --font-size-x-large: 48px;
-  --font-size-large: 40px;
-  --font-size-large-2: 36px;
-  --font-size-medium: 32px;
-  --font-size-medium-2: 28px;
-  --font-size-medium-3: 24px;
-  --font-size-small: 16px;
-  --font-size-small-2: 15px;
-  --font-size-small-3: 14px;
-  --font-size-tiny: 12px;
-  --font-size-x-tiny: 10px;
-  --font-family-1: "Playfair Display", sans-serif;
-  --font-family-2: "Lato", sans-serif;
-  --font-family-3: "Raleway", sans-serif;
-}
+
+
 
 
 .button-primary {

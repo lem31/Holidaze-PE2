@@ -1,6 +1,7 @@
 import {Outlet} from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
+import hStyles from "../../CSS_Modules/Header/header.module.css";
 
 /**
  * Layout component is a wrapper for the application's layout structure.
@@ -12,7 +13,7 @@ import Footer from "../Footer";
 
 function Layout() {
 return(
-  <div>
+  <div >
 
   <Header/>
 
