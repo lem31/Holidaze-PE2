@@ -2,6 +2,7 @@ import Profile from '../../assets/Images/Profile.png';
 import Logout from '../../assets/Images/Logout.png';
 import useMyStore from '../../Store';
 import {useNavigate} from 'react-router-dom';
+import hStyles from '../../CSS_Modules/Header/header.module.css';
 
 /**
  * UserDropDown component renders a dropdown menu for user profile and logout options.
@@ -29,10 +30,10 @@ function UserDropDown() {
 <p>Name</p>
 <p>Username</p>
 
-<img src={Profile} alt="Profile Image" />
+<img className={hStyles.navIcons} src={Profile} alt="Profile Image" />
 <a href="/MyProfile">Profile</a>
 <a href='' onClick= {handleLogout}>
-<img src={Logout} alt="Logout Icon" />Logout</a>
+<img className={hStyles.navIcons} src={Logout} alt="Logout Icon" />Logout</a>
 
 </div>
     )

@@ -44,7 +44,7 @@ function Header() {
 
     <div>
 
-<img src={Account} alt="Account Dropdown Options Icon" />
+<img className={hStyles.navIcons} src={Account} alt="Account Dropdown Options Icon" />
 <UserDropDown/>
 
 </div>
