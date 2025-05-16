@@ -4,8 +4,9 @@
 }
 
 .nav{
-   margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .logo{
@@ -17,12 +18,12 @@
 }
 
 .logoDiv{
-   margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  left: 20px;
 }
 .header {
   display: flex;
- justify-content: space-between;
+ justify-content: center;
   width: 90vw;
   height: 100px;
   
@@ -102,6 +103,7 @@ margin-top: 20px;
   height: 166px;
 background-color: var(--primary-color-2);
 margin-top: 18px;
+right: 0;
 }
 
 .accountIcon{
@@ -148,11 +150,11 @@ width: 150px;
 .profileLinkWrapper{
   display: flex;
   flex-direction: row;
- align-items: center;;
+ align-items: center;
 gap: 10px;
 }
 
 .accountDiv{
-   margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  right: 20px;
 }
