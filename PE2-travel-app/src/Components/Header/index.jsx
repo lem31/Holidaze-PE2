@@ -6,6 +6,7 @@ import Account from '../../assets/Images/Account.png';
 import Hamburger from '../../assets/Images/Hamburger.png';
 import UserDropDown from '../UserDropDown';
 import  useMyStore from '../../Store';
+import {useState} from 'react';
 import hStyles from '../../CSS_Modules/Header/header.module.css';
 
 
@@ -20,6 +21,7 @@ import hStyles from '../../CSS_Modules/Header/header.module.css';
 
 function Header() {
     const isLoggedIn = useMyStore((state) => state.isLoggedIn);
+const  [isDropDownOpen, setIsDropDownOpen] = useState(false);
 
   return(
     <div className={hStyles.headerDiv} >
@@ -46,11 +48,15 @@ function Header() {
 
     <div className={hStyles.accountDiv} >
 <div className={hStyles.accountBox}>
-  <button className={hStyles.accountIcon}>
+  <button className={hStyles.accountIcon}    onClick={() => {
+         
+      setIsDropDownOpen(prevState => !prevState); 
+        }}>
 <img className={hStyles.navIcons} src={Account} alt="Account Dropdown Options Icon" />
 </button>
 </div>
-<UserDropDown/>
+      {isDropDownOpen && (
+<UserDropDown/>)}
 
 </div>
 
