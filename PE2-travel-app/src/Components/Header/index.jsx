@@ -6,7 +6,7 @@ import Account from '../../assets/Images/Account.png';
 import Hamburger from '../../assets/Images/Hamburger.png';
 import UserDropDown from '../UserDropDown';
 import  useMyStore from '../../Store';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import hStyles from '../../CSS_Modules/Header/header.module.css';
 
 
@@ -22,18 +22,44 @@ import hStyles from '../../CSS_Modules/Header/header.module.css';
 function Header() {
     const isLoggedIn = useMyStore((state) => state.isLoggedIn);
 const  [isDropDownOpen, setIsDropDownOpen] = useState(false);
+const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
+useEffect(() => {
+  const closeMenu = (event) => {
+    if (!event.target.closest(`.${hStyles.nav}`) && !event.target.closest(`.${hStyles.hamburgerButton}`)) {
+      setIsMobileNavOpen(false);
+    }
+  };
+  document.addEventListener("click", closeMenu);
+  return () => document.removeEventListener("click", closeMenu);
+}, []);
   return(
     <div className={hStyles.headerDiv} >
    <header className={hStyles.header}>
+    <div className={hStyles.logoMenuDiv}>
     <div className={hStyles.logoDiv}>
 <img src={Logo} alt="Logo" className={hStyles.logo}/>
 </div>
-<nav className={hStyles.nav}>
-  <button className={hStyles.hamburgerButton}>
+<div>
+ <button className={hStyles.hamburgerButton}     onClick={() => setIsMobileNavOpen(prevState => !prevState)}>
 <img src={Hamburger} alt="Hamburger Menu Icon"  />
 </button>
-<ul className={hStyles.navUl}>
+</div>
+</div>
+<nav className={hStyles.nav}>
+    <ul className={hStyles.navUl}>
+    <li className={hStyles.navLi}><img className={hStyles.navIcons} src={Stays} alt="Stays Icon" /><a className={hStyles.navLink} href="/">Stays</a></li>
+    {!isLoggedIn && (
+      <>
+        <li className={hStyles.navLi}><img className={hStyles.navIcons} src={Register} alt="Register Icon" /><a className={hStyles.navLink} href="/Register">Register</a></li>
+        <li className={hStyles.navLi}><img className={hStyles.navIcons} src={Login} alt="Login Icon" /><a className={hStyles.navLink} href="/Login">Login</a></li>
+      </>
+    )}
+  </ul>
+ 
+{isMobileNavOpen && (
+<div className={`${hStyles.mobileNavBox} ${isMobileNavOpen ? hStyles.active : ''}`}>
+<ul className={hStyles.mobileNavUl} >
 <li className={hStyles.navLi}>
     <img className={hStyles.navIcons} src={Stays} alt="Stays Icon" /><a className={hStyles.navLink} href="/">Stays</a></li>
    {!isLoggedIn && (
@@ -42,6 +68,8 @@ const  [isDropDownOpen, setIsDropDownOpen] = useState(false);
 <li className={hStyles.navLi}> <img className={hStyles.navIcons}  src={Login} alt="Login Icon" /><a className={hStyles.navLink}  href="/Login">Login</a></li> </>)}
 
 </ul>
+</div>
+)}
 </nav>
 
 {isLoggedIn &&(

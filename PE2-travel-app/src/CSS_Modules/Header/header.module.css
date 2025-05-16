@@ -1,12 +1,25 @@
 
 .hamburgerButton {
     display: none;
+    background: none;
+  border: none;
 }
 
 .nav{
   display: flex;
   justify-content: center;
   margin: 0 auto;
+  width: 100%
+  
+}
+
+
+.logoMenuDiv {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: absolute;
+  left: 20px;
 }
 
 .logo{
@@ -21,6 +34,8 @@
   position: absolute;
   left: 20px;
 }
+
+
 .header {
   display: flex;
  justify-content: center;
@@ -157,4 +172,128 @@ gap: 10px;
 .accountDiv{
   position: absolute;
   right: 20px;
+}
+
+
+
+@media (max-width: 486px){
+
+
+
+
+.mobileMenu{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 80px;
+  width: 126px;
+  height: auto;
+  background-color: var(--primary-color-2);
+  align-items: center;
+  padding: 10px;
+
+}
+
+  .hamburgerButton {
+    display: block; 
+    cursor: pointer;
+    background: none;
+   
+  }
+
+
+  .mobileNavBox{
+    position: absolute;
+    top: 20px; 
+    left: 20px; 
+    width: 250px; 
+    background-color: var(--primary-color-2);
+    border-radius: 10px; 
+    padding: 10px;
+    display: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+   
+  }
+
+  .mobileNavBox.active {
+    display: flex;
+    flex-direction: column;
+ 
+  }
+ 
+
+  .navUl{
+  display: none;
+}
+  
+}
+
+@media (min-width: 487px) and (max-width: 768px) {
+
+.navUl{
+  display: none;
+}
+
+.mobileNavUl{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+  
+
+.mobileMenu{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 80px;
+  width: 126px;
+  height: auto;
+  background-color: var(--primary-color-2);
+  align-items: center;
+  padding: 10px;
+
+}
+
+  .hamburgerButton {
+    display: block; 
+    cursor: pointer;
+    background: none;
+   
+  }
+
+  .logoMenuDiv{
+    display: flex;
+    position: relative;
+
+ left: 20px;
+
+    align-items: center;
+    gap: 15px;
+  }
+
+  .mobileNavBox{
+    position: absolute;
+    top: 100px; 
+    left: 120px; 
+    width: 126px; 
+    height: auto;
+    background-color: var(--primary-color-2);
+
+    padding: 10px;
+    display: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .mobileNavBox.active {
+    display: flex;
+    flex-direction: column;
+ 
+  }
+
+  .logoDiv{
+  position: static;
+  left: 20px;
+}
 }

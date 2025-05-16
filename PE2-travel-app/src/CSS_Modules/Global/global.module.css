@@ -195,8 +195,7 @@ html {
 
 /* Media Queries */
 
-@media (max-width: 768px) {
-}
+
 
 @media (min-width: 487px) and (max-width: 768px) {
   .h1-white {
