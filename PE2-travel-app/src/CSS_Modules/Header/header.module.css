@@ -59,6 +59,7 @@ margin-top: 20px;
  display: flex;
  flex-direction: row;
  align-items: center;
+ gap: 10px;
 
 
 }
@@ -66,7 +67,17 @@ margin-top: 20px;
 .navLink{
   color: var(--secondary-color-2);
   font-family: var(--font-family-2);
+  cursor: pointer;
+  text-decoration: none;
 }
+
+.navLinkWhite{
+  color: var(--primary-color-1);
+  font-family: var(--font-family-2);
+    cursor: pointer;
+  text-decoration: none;
+}
+
 
 
 .labelWhite {
@@ -93,16 +104,52 @@ background-color: var(--primary-color-2);
 margin-top: 18px;
 }
 
+.accountIcon{
+  cursor: pointer;
+background: none;
+border: none;
+}
+
 .profileInfoBox{
   display: flex;
   flex-direction: row;
  margin-bottom: 10px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+
+
+}
+
+.avatarBox{
+ margin-left:auto;
+ margin-right:auto;
+}
+
+.userNameBox{
+  margin-left:auto;
+ margin-right:auto;
 }
 
 .accountBox{
 
   display: flex;
   flex: 1;
+}
+.profileLinkBox{
+  display: flex;
+  flex-direction: column;
+width: 150px;
+  align-items: start;
+  gap: 10px;
+}
+
+.profileLinkWrapper{
+  display: flex;
+  flex-direction: row;
+ align-items: center;;
+gap: 10px;
 }
 
 .accountDiv{
