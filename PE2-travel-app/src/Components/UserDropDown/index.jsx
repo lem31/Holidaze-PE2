@@ -1,8 +1,10 @@
 import Profile from '../../assets/Images/Profile.png';
 import Logout from '../../assets/Images/Logout.png';
 import useMyStore from '../../Store';
-import {useNavigate} from 'react-router-dom';
+// import {useNavigate} from 'react-router-dom';
 import hStyles from '../../CSS_Modules/Header/header.module.css';
+
+
 
 /**
  * UserDropDown component renders a dropdown menu for user profile and logout options.
@@ -16,6 +18,7 @@ import hStyles from '../../CSS_Modules/Header/header.module.css';
 
 function UserDropDown() {
 
+const {userProfile} = useMyStore((state) => state);
     const logout = useMyStore((state) => state.logout);
 
     const handleLogout = () => {
@@ -24,15 +27,17 @@ function UserDropDown() {
     };
 
     return(
-<div>
+<div className={hStyles.dropDownBox}>
 {/* <img src="
 " alt="" /> */}
-<p>Name</p>
-<p>Username</p>
+<div className={hStyles.profileInfoBox}>
+<img src={userProfile.data.avatar.url} ></img>
+<p className= {hStyles.labelWhite}>{userProfile.data.name}</p>
+</div>
 
 <img className={hStyles.navIcons} src={Profile} alt="Profile Image" />
-<a href="/MyProfile">Profile</a>
-<a href='' onClick= {handleLogout}>
+<a className={hStyles.navLink} href="/MyProfile">Profile</a>
+<a className={hStyles.navLink} href='' onClick= {handleLogout}>
 <img className={hStyles.navIcons} src={Logout} alt="Logout Icon" />Logout</a>
 
 </div>

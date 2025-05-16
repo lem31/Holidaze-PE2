@@ -8,6 +8,7 @@ import UserDropDown from '../UserDropDown';
 import  useMyStore from '../../Store';
 import hStyles from '../../CSS_Modules/Header/header.module.css';
 
+
 /**
  *
  * @returns {JSX.Element} The Header component containing the logo, navigation links, and user account options.
@@ -22,7 +23,6 @@ function Header() {
 
   return(
     <div className={hStyles.headerDiv} >
-
    <header className={hStyles.header}>
 <img src={Logo} alt="Logo" className={hStyles.logo}/>
 <nav>
