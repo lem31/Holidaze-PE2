@@ -24,8 +24,10 @@ function Header() {
   return(
     <div className={hStyles.headerDiv} >
    <header className={hStyles.header}>
+    <div className={hStyles.logoDiv}>
 <img src={Logo} alt="Logo" className={hStyles.logo}/>
-<nav>
+</div>
+<nav className={hStyles.nav}>
   <button className={hStyles.hamburgerButton}>
 <img src={Hamburger} alt="Hamburger Menu Icon"  />
 </button>
@@ -42,9 +44,10 @@ function Header() {
 
 {isLoggedIn &&(
 
-    <div>
-
+    <div className={hStyles.accountDiv} >
+<div className={hStyles.accountBox}>
 <img className={hStyles.navIcons} src={Account} alt="Account Dropdown Options Icon" />
+</div>
 <UserDropDown/>
 
 </div>

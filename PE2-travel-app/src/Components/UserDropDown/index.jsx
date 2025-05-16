@@ -31,14 +31,18 @@ const {userProfile} = useMyStore((state) => state);
 {/* <img src="
 " alt="" /> */}
 <div className={hStyles.profileInfoBox}>
-<img src={userProfile.data.avatar.url} ></img>
+<img className={hStyles.navIcons} src={userProfile.data.avatar.url} alt='User Avatar' ></img>
 <p className= {hStyles.labelWhite}>{userProfile.data.name}</p>
 </div>
-
-<img className={hStyles.navIcons} src={Profile} alt="Profile Image" />
+<div >
+<img className={hStyles.navIcons} src={Profile} alt="Profile" />
 <a className={hStyles.navLink} href="/MyProfile">Profile</a>
+</div>
+<div>
 <a className={hStyles.navLink} href='' onClick= {handleLogout}>
 <img className={hStyles.navIcons} src={Logout} alt="Logout Icon" />Logout</a>
+</div>
+
 
 </div>
     )
