@@ -27,7 +27,8 @@ function Footer() {
 <p className={footerStyles.copyRight}>© 2025 Holidaze  </p>
 </div >
   {!isLoggedIn && (
-    <div className={footerStyles.registerLoginDiv}>
+    <nav className={footerStyles.registerLoginNav}>
+        <div  className={footerStyles.Ul}>
 <a className={footerStyles.footerA} href="/Register">
 <img src={Register} alt="Register icon" />
 Register
@@ -36,7 +37,9 @@ Register
 <img src={Login} alt="Login icon" />
 Login
 </a>
-</div>
+        </div>
+
+</nav>
     )}
     
 
