@@ -2,6 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import useMyStore from '../../Store';
+import homeStyles from '../../CSS_Modules/Home/home.module.css';
 
 /**
  * SelectionSearchBar component provides a search bar and country filter
@@ -80,13 +81,19 @@ useEffect(() => {
     };
 
     return (
-        <div>
-            <select  style={{ width: '100px' }} value={selectedCountry} onChange={handleCountryChange} name="" id="">
+        <div >
+          <div className={homeStyles.searchSelectBar}>
+            <div className={homeStyles.selectWrapper}>
+          <div className={homeStyles.select} >
+            <select style={{ width: '100px' }} value={selectedCountry} onChange={handleCountryChange} name="" id="">
                 <option  value="">All Countries</option>
                 {countries.map((country) => ( <option key={country} value={country}>{country}</option>))}
                     </select>
 
                     <input type='text' value={searchQuery} onChange={handleSearchChange} placeholder='Search stays' />
+                    </div>
+                    </div>
+                    </div>
 
                     {searchQuery && filteredSuggestions.length >0 && (
                         <ul>
