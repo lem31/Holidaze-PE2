@@ -1,0 +1,25 @@
+.footer{
+   display: flex;
+ justify-content: center;
+  width: 100vw;
+  height: 82px;
+  
+  align-items: center;
+  position: relative;
+   background-color: var(--primary-color-2);
+  border-radius: 20px;
+margin-top: 20px;
+}
+
+.crDiv{
+     left: 20px;
+}
+
+.registerLoginDiv{ display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%}
+
+  .smIconsDiv{
+      right: 20px;
+  }

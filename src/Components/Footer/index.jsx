@@ -1,10 +1,11 @@
-import React from 'react';
+
 import Register from '../../assets/Images/Register.png';
 import Login from '../../assets/Images/Login.png';
 import Facebook from '../../assets/Images/Facebook.png';
 import Twitter from '../../assets/Images/Twitter.png';
 import Instagram from '../../assets/Images/Instagram.png';
 import useMyStore from '../../Store';
+import footerStyles from '../../CSS_Modules/Footer/footer.module.css';
 
 /**
  * Footer component renders the footer section of the application.
@@ -21,11 +22,13 @@ import useMyStore from '../../Store';
 function Footer() {
      const isLoggedIn = useMyStore((state) => state.isLoggedIn);
     return(
-    <div>
-        <footer>
+    <div className={footerStyles.footerDiv}>
+        <footer className={footerStyles.footer}> 
+            <div className={footerStyles.crDiv}>
 <p>© 2025 Holidaze  </p>
+</div >
   {!isLoggedIn && (
-    <div>
+    <div className={footerStyles.registerLoginDiv}>
 <a href="/Register">
 <img src={Register} alt="Register icon" />
 Register
@@ -38,7 +41,7 @@ Login
     )}
     
 
-<div>
+<div className={footerStyles.smIconsDiv}>
 <img src={Facebook} alt="Facebook icon" />
 <img src={Instagram} alt="Instagram icon" />
 <img src={Twitter} alt="Twitter icon" />
