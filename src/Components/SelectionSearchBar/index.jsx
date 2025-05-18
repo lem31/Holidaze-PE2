@@ -84,12 +84,14 @@ useEffect(() => {
         <div >
           <div className={homeStyles.searchSelectBar}>
             <div className={homeStyles.selectWrapper}>
-          <div className={homeStyles.select} >
-            <select className={`${homeStyles.optionAndInput} ${homeStyles.option}`} value={selectedCountry} onChange={handleCountryChange} name="" id="">
+          <div className={homeStyles.selectDiv} >
+            <select className={homeStyles.optionAndInput} value={selectedCountry} onChange={handleCountryChange} name="" id="">
                 <option  value="">All Countries</option>
                 {countries.map((country) => ( <option  key={country} value={country}>{country}</option>))}
                     </select>
-
+                    <div className={homeStyles.orDiv}>
+<p className={homeStyles.orP}>OR</p>
+</div>
                     <input className={homeStyles.optionAndInput}  type='text' value={searchQuery} onChange={handleSearchChange} placeholder='Search stays' />
                     </div>
                     </div>
