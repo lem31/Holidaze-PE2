@@ -3,6 +3,7 @@ import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import useMyStore from '../../Store';
 import homeStyles from '../../CSS_Modules/Home/home.module.css';
+import Search from '../../assets/Images/search.png';
 
 /**
  * SelectionSearchBar component provides a search bar and country filter
@@ -94,6 +95,7 @@ useEffect(() => {
 </div>
                     <input className={homeStyles.optionAndInput}  type='text' value={searchQuery} onChange={handleSearchChange} placeholder='Search stays' />
                     </div>
+                    <img className={homeStyles.searchIcon}src={Search} alt="" />
                     </div>
                     </div>
 

@@ -48,6 +48,12 @@
   letter-spacing: 0.5%;
 }
 
+.searchIcon{
+  width: 32px;
+  height: 32px;
+  padding-left: 10px;
+}
+
 @media (max-width: 486px) {
   .orP {
     font-size: var(--font-size-small-3);
@@ -62,6 +68,10 @@
     line-height: 160%;
     letter-spacing: 0.5%;
   }
+  .searchIcon{
+  width: 24px;
+  height: 24px;
+}
 }
 
 @media (min-width: 487px) and (max-width: 768px) {
