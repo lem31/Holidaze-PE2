@@ -21,6 +21,7 @@
 
 .logoMenuDiv {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 15px;
   position: absolute;
@@ -89,6 +90,7 @@ margin-top: 20px;
 .navLink{
   color: var(--secondary-color-2);
   font-family: var(--font-family-2);
+    font-size: var(--font-size-small-3);
   cursor: pointer;
   text-decoration: none;
 }
@@ -96,6 +98,7 @@ margin-top: 20px;
 .navLinkWhite{
   color: var(--primary-color-1);
   font-family: var(--font-family-2);
+    font-size: var(--font-size-small-3);
     cursor: pointer;
   text-decoration: none;
 }
@@ -204,6 +207,7 @@ gap: 10px;
     display: block; 
     cursor: pointer;
     background: none;
+
    
   }
 
@@ -237,6 +241,24 @@ gap: 10px;
   flex-direction: column;
   gap: 10px;
 }
+
+ .logoDiv{
+  position: static;
+  left: 20px;
+}
+
+
+  .mobileNavBox{
+    position: absolute;
+    top: 90px; 
+    left: 120px; 
+    width: 126px; 
+    height: auto;
+    background-color: var(--primary-color-2);
+    padding: 10px;
+    display: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
   
 }
 
@@ -256,7 +278,7 @@ gap: 10px;
 
   
 
-.mobileMenu{
+/* .mobileMenu{
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -267,7 +289,7 @@ gap: 10px;
   align-items: center;
   padding: 10px;
 
-}
+} */
 
   .hamburgerButton {
     display: block; 
@@ -277,13 +299,13 @@ gap: 10px;
   }
 
   .logoMenuDiv{
-    display: flex;
+  
     position: relative;
 
- left: 20px;
 
-    align-items: center;
-    gap: 15px;
+
+
+   
   }
 
   .mobileNavBox{
@@ -306,6 +328,14 @@ gap: 10px;
 
   .logoDiv{
   position: static;
-  left: 20px;
+
 }
+
+
+.navLink, .navLinkWhite{
+  
+    font-size: var(--font-size-tiny);
+
+}
+
 }
