@@ -34,7 +34,7 @@ gap: 12px;
     justify-content: center;
     align-items: center;
     gap: 12px;
-    color: var(--primary-color-1);
+ color: var(--secondary-color-2);
     font-family: var(--font-family-2);
     font-size: var(--font-size-small-3);
     text-decoration: none;
