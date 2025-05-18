@@ -1,5 +1,3 @@
-
-
 .selectWrapper {
   background-color: var(--primary-color-2);
 
@@ -18,27 +16,31 @@
   align-items: center;
 }
 
-.optionAndInput{
-    width: 200px;
-    height: 30px;
-    border-radius: 3px;
-    box-sizing: border-box;
-    padding: 5px;
+.optionAndInput {
+  width: 200px;
+  height: 30px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  padding: 5px;
+  font-family: var(--font-family-2);
+  font-size: var(--font-size-small);
+  color: var(--primary-color-3);
+  line-height: 150%;
+  letter-spacing: 0.5%;
 }
 
-.selectDiv{
+.selectDiv {
   display: flex;
   gap: 30px;
 }
 
-.orDiv{
+.orDiv {
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
-.orP{
+.orP {
   font-size: var(--font-size-small);
   color: var(--primary-color-1);
   font-family: var(--font-family-2);
@@ -46,25 +48,34 @@
   letter-spacing: 0.5%;
 }
 
+@media (max-width: 486px) {
+  .orP {
+    font-size: var(--font-size-small-3);
 
-
-  @media (max-width: 486px){
-.orP{
-  font-size: var(--font-size-small-3);
-
-  line-height: 160%;
-  letter-spacing: 0.5%;
-}
-
+    line-height: 160%;
+    letter-spacing: 0.5%;
   }
 
+  .optionAndInput {
+    font-size: var(--font-size-small-3);
+
+    line-height: 160%;
+    letter-spacing: 0.5%;
+  }
+}
 
 @media (min-width: 487px) and (max-width: 768px) {
+  .orP {
+    font-size: var(--font-size-small-2);
 
-  .orP{
-  font-size: var(--font-size-small-2);
+    line-height: 160%;
+    letter-spacing: 0.5%;
+  }
 
-  line-height: 160%;
-  letter-spacing: 0.5%;
-}
+  .optionAndInput {
+    font-size: var(--font-size-small-2);
+
+    line-height: 160%;
+    letter-spacing: 0.5%;
+  }
 }
