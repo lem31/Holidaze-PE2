@@ -30,11 +30,11 @@ function Footer() {
     <nav className={footerStyles.registerLoginNav}>
         <div  className={footerStyles.Ul}>
 <a className={footerStyles.footerA} href="/Register">
-<img src={Register} alt="Register icon" />
+<img className={footerStyles.navIcons} src={Register} alt="Register icon" />
 Register
 </a>
 <a href="/Login"  className={footerStyles.footerA} >
-<img src={Login} alt="Login icon" />
+<img className={footerStyles.navIcons} src={Login} alt="Login icon" />
 Login
 </a>
         </div>
@@ -44,9 +44,9 @@ Login
     
 
 <div className={footerStyles.smIconsDiv}>
-<img src={Facebook} alt="Facebook icon" />
-<img src={Instagram} alt="Instagram icon" />
-<img src={Twitter} alt="Twitter icon" />
+<img className={footerStyles.smIcons} src={Facebook} alt="Facebook icon" />
+<img className={footerStyles.smIcons} src={Instagram} alt="Instagram icon" />
+<img className={footerStyles.smIcons} src={Twitter} alt="Twitter icon" />
 </div>
         </footer>
     </div> ) }

@@ -26,6 +26,7 @@
 }
 
 .registerLoginNav{ display: flex;
+    flex-direction: row;
   justify-content: center;
 gap: 12px;
   margin: 0 auto;
@@ -57,19 +58,70 @@ gap: 12px;
   .smIconsDiv{
 right: 20px;
     display: flex;
+    flex-direction: row;
  position: absolute;
- 
-    
+
+  }
+
+  .smIcons{
+    width: 32px;
+    height: 32px;
+  }
+
+  .navIcons{
+    width: 32px;
+    height: 32px;
   }
 
 
   @media (max-width: 486px){
 .copyRight, .footerA{
     font-size: var(--font-size-tiny);
-
-
-
-    
 }
 
+ .smIcons{
+    width: 24px;
+    height: 24px;
   }
+
+  .navIcons{
+    width: 24px;
+    height: 24px;
+  }
+
+.registerLoginNav{ display: flex;
+    flex-direction: column;
+}
+
+ .Ul{ display: flex;
+    flex-direction: column;
+}
+
+.crDiv{
+    position: absolute;
+  left: 0;
+padding-left: 5px;
+
+}
+
+ .smIconsDiv{
+right: 5px;
+    
+
+  }
+
+}
+
+@media (min-width: 487px) and (max-width: 768px) {
+
+    .Ul{ display: flex;
+    flex-direction: column;
+}
+
+ .smIcons{
+    width: 24px;
+    height: 24px;
+  }
+
+  
+}
