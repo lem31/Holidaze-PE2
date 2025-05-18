@@ -1,4 +1,3 @@
-
 import Register from '../../assets/Images/Register.png';
 import Login from '../../assets/Images/Login.png';
 import Facebook from '../../assets/Images/Facebook.png';
@@ -25,15 +24,15 @@ function Footer() {
     <div className={footerStyles.footerDiv}>
         <footer className={footerStyles.footer}> 
             <div className={footerStyles.crDiv}>
-<p>© 2025 Holidaze  </p>
+<p className={footerStyles.copyRight}>© 2025 Holidaze  </p>
 </div >
   {!isLoggedIn && (
     <div className={footerStyles.registerLoginDiv}>
-<a href="/Register">
+<a className={footerStyles.footerA} href="/Register">
 <img src={Register} alt="Register icon" />
 Register
 </a>
-<a href="/Login">
+<a href="/Login"  className={footerStyles.footerA} >
 <img src={Login} alt="Login icon" />
 Login
 </a>

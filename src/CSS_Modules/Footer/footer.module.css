@@ -7,19 +7,54 @@
   align-items: center;
   position: relative;
    background-color: var(--primary-color-2);
-  border-radius: 20px;
-margin-top: 20px;
+
+
 }
 
 .crDiv{
-     left: 20px;
+     padding-left: 20px;
+}
+
+.copyRight{
+    font-size: var(--font-size-small-3);
+    color: var(--primary-color-1);
+
+    white-space: nowrap;
+    font-family: var(--font-family-3)
 }
 
 .registerLoginDiv{ display: flex;
   justify-content: center;
+gap: 12px;
   margin: 0 auto;
   width: 100%}
 
+  .footerA{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    color: var(--primary-color-1);
+    font-family: var(--font-family-2);
+    font-size: var(--font-size-small-3);
+    text-decoration: none;
+  }
+
+ 
+
   .smIconsDiv{
-      right: 20px;
+padding-right: 20px;
+    display: flex;
+  }
+
+
+  @media (max-width: 486px){
+.copyRight, .footerA{
+    font-size: var(--font-size-tiny);
+
+
+
+    
+}
+
   }
