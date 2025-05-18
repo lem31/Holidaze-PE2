@@ -29,6 +29,18 @@
   letter-spacing: 0.5%;
 }
 
+.selectOption{
+  appearance: none;
+     
+  font-family: var(--font-family-2);
+  font-size: var(--font-size-small);
+      line-height: 160%;
+    letter-spacing: 0.5%;
+     width: 200px;
+  height: 30px;
+  background-color: var(--primary-color-2);
+  }
+
 .selectDiv {
   display: flex;
   gap: 30px;
@@ -63,11 +75,15 @@
   }
 
   .optionAndInput {
+    appearance: none;
+    background-color: var(--primary-color-2);
     font-size: var(--font-size-small-3);
-
+width: 200px;
     line-height: 160%;
     letter-spacing: 0.5%;
   }
+
+  
   .searchIcon{
   width: 24px;
   height: 24px;

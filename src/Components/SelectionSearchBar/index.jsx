@@ -87,7 +87,7 @@ useEffect(() => {
             <div className={homeStyles.selectWrapper}>
           <div className={homeStyles.selectDiv} >
             <select className={homeStyles.optionAndInput} value={selectedCountry} onChange={handleCountryChange} name="" id="">
-                <option  value="">All Countries</option>
+                <option className={homeStyles.selectOption}  value="">All Countries</option>
                 {countries.map((country) => ( <option  key={country} value={country}>{country}</option>))}
                     </select>
                     <div className={homeStyles.orDiv}>
