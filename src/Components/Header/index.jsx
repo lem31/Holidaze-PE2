@@ -47,28 +47,28 @@ useEffect(() => {
 </div>
 </div>
 <nav className={hStyles.nav}>
-    <ul className={hStyles.navUl}>
-    <li className={hStyles.navLi}><img className={hStyles.navIcons} src={Stays} alt="Stays Icon" /><a className={hStyles.navLink} href="/">Stays</a></li>
+    <div className={hStyles.navDiv}>
+  <a className={hStyles.navLink} href="/"> <img className={hStyles.navIcons} src={Stays} alt="Stays Icon" />Stays</a>
     {!isLoggedIn && (
       <>
-        <li className={hStyles.navLi}><img className={hStyles.navIcons} src={Register} alt="Register Icon" /><a className={hStyles.navLink} href="/Register">Register</a></li>
-        <li className={hStyles.navLi}><img className={hStyles.navIcons} src={Login} alt="Login Icon" /><a className={hStyles.navLink} href="/Login">Login</a></li>
+    <a className={hStyles.navLink} href="/Register"><img className={hStyles.navIcons} src={Register} alt="Register Icon" />Register</a>
+      <a className={hStyles.navLink} href="/Login"> <img className={hStyles.navIcons} src={Login} alt="Login Icon" />Login</a>
       </>
     )}
-  </ul>
+  </div>
  
 {isMobileNavOpen && (
-<div className={`${hStyles.mobileNavBox} ${isMobileNavOpen ? hStyles.active : ''}`}>
-<ul className={hStyles.mobileNavUl} >
-<li className={hStyles.navLi}>
-    <img className={hStyles.navIcons} src={Stays} alt="Stays Icon" /><a className={hStyles.navLink} href="/">Stays</a></li>
+
+<div className={`${hStyles.mobileNavDiv} ${isMobileNavOpen ? hStyles.active : ''}`}>
+<a className={hStyles.navLink} href="/">
+    <img className={hStyles.navIcons} src={Stays} alt="Stays Icon" />Stays</a>
    {!isLoggedIn && (
     <>
-<li className={hStyles.navLi}> <img className={hStyles.navIcons} src={Register} alt="Register Icon" /><a className={hStyles.navLink}  href="/Register">Register</a></li>
-<li className={hStyles.navLi}> <img className={hStyles.navIcons}  src={Login} alt="Login Icon" /><a className={hStyles.navLink}  href="/Login">Login</a></li> </>)}
+<a className={hStyles.navLink}  href="/Register"> <img className={hStyles.navIcons} src={Register} alt="Register Icon" />Register</a>
+<a className={hStyles.navLink}  href="/Login"> <img className={hStyles.navIcons}  src={Login} alt="Login Icon" />Login</a> </>)}
 
-</ul>
 </div>
+
 )}
 </nav>
 
