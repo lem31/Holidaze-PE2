@@ -4,6 +4,8 @@ import Price from "../../assets/Images/Price-tag-purple.png";
 import ViewAvailabilityButton from "../ViewAvailabilityButton";
 import useMyStore from "../../Store";
 import SelectionSearchBar from "../SelectionSearchBar";
+import Carousel from 'react-material-ui-carousel';
+import homeStyles from '../../CSS_Modules/Home/home.module.css';
 
 /**
  * DisplayStays component fetches and displays a list of stays.
@@ -23,7 +25,9 @@ const DisplayStays = () => {
   const [filteredStays, setFilteredStays] = useState([]);
 
   useEffect(() => {
+ if (stays.length !== filteredStays.length) {
     setFilteredStays(stays);
+  }
   }, [stays]);
 
   if (error) {
@@ -47,13 +51,22 @@ const DisplayStays = () => {
 
             <div>
               {stay?.media?.length > 0 ? (
-                stay.media.map((media, index) => (
+                <div className={homeStyles.carouselContainer}> 
+                  <Carousel className={homeStyles.carousel} autoPlay={false} indicators={true}>
+                {stay.media.map((media, index) => (
+                 <div>
                   <img
+                  className={homeStyles.stayImage}
                     key={`${stay.id}-${index}`}
                     src={media?.url || ""}
                     alt={media?.name || stay?.name || "Unknown Stay"}
+                    loading="lazy"
                   />
-                ))
+                  </div>
+                   
+                ))}
+               </Carousel>
+               </div>
               ) : (
                 <p>No images available for {stay?.name || "this stay"}.</p>
               )}

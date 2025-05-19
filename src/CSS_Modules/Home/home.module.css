@@ -1,3 +1,5 @@
+/* Select and Search Bar Styles */
+
 .selectWrapper {
   background-color: var(--primary-color-2);
   border-radius: 18px;
@@ -155,6 +157,32 @@ padding-right: 10px;
 .closeButton:hover {
   color: var(--secondary-color);
 }
+
+
+/* Stay Card Styles */
+
+.stayImg{
+display: block;
+  max-width: 250px;
+  max-height: 250px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.carousel{
+display: block;
+  width: 250px;
+  height: 250px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+
+
 
 @media (max-width: 486px) {
 
