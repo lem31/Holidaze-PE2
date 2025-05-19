@@ -162,23 +162,30 @@ padding-right: 10px;
 /* Stay Card Styles */
 
 .stayImg{
-display: block;
+
   max-width: 250px;
   max-height: 250px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  object-fit: contain;
+
+
+}
+
+.imgContainer{
+  display: flex;
+ justify-content: center;
+align-items: center;
+width: 250px;
+height: 250px;
+overflow: hidden;
+object-fit: contain;
+
 }
 
 .carousel{
-display: block;
-  width: 250px;
-  height: 250px;
 
-  position: relative;
-  overflow: hidden;
+
+ width: 250px;
+ height: 250px;
 }
 
 

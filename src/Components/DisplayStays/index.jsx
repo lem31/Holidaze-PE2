@@ -42,43 +42,70 @@ const DisplayStays = () => {
       {filteredStays.length > 0 ? (
         filteredStays.map((stay, index) => (
           <div key={`${stay?.id || index}`}>
-            <h1>{stay?.name || "Unknown Stay"}</h1>
-            <p>
-              <img src={Location} alt="Location icon" />
-              {stay?.location?.city || "Unknown City"},{" "}
-              {stay?.location?.country || "Unknown Country"}
-            </p>
-
-            <div>
+            <div className= {homeStyles.stayCardOuterWrapper}>
+<div className= {homeStyles.stayCardWrapper}>
+            <div className = {homeStyles.stayImageContainer}>
               {stay?.media?.length > 0 ? (
                 <div className={homeStyles.carouselContainer}> 
                   <Carousel className={homeStyles.carousel} autoPlay={false} indicators={true}>
-                {stay.media.map((media, index) => (
-                 <div>
-                  <img
-                  className={homeStyles.stayImage}
-                    key={`${stay.id}-${index}`}
-                    src={media?.url || ""}
-                    alt={media?.name || stay?.name || "Unknown Stay"}
-                    loading="lazy"
-                  />
-                  </div>
-                   
-                ))}
-               </Carousel>
-               </div>
+                    {stay.media.map((media, index) => (
+                      <div className={homeStyles.imgContainer} key={`${stay.id}-${index}`}>
+                        <img
+                          className={homeStyles.stayImage}
+                          src={media?.url || ""}
+                          alt={media?.name || stay?.name || "Unknown Stay"}
+                          loading="lazy"
+                        />
+                      </div>
+                    ))}
+                  </Carousel>
+                </div>
               ) : (
                 <p>No images available for {stay?.name || "this stay"}.</p>
               )}
             </div>
-
-            <p>{stay?.description || "No description available"}</p>
+            <div className={homeStyles.stayDetails}>
+              <div className={homeStyles.nameRatingDiv}>
+              <h1>{stay?.name || "Unknown Stay"}</h1>
+              <p>
+                {stay?.rating && stay.rating > 0 ? (
+                  <>
+                    {Array.from({ length: Math.round(stay.rating) }).map((_, i) => (
+                      <span key={i} role="img" aria-label="star">⭐</span>
+                    ))}
+                  </>
+                ) : (
+                  "No rating"
+                )}
+              </p>
+              </div>
+              <p>
+                <img src={Location} alt="Location icon" />
+                {stay?.location?.city || "Unknown City"},{" "}
+                {stay?.location?.country || "Unknown Country"}
+              </p>
+              <p>{stay?.description || "No description available"}</p>
+              <p>
+                <img src={Price} alt="Price tag icon" />
+                {stay?.price || "N/A"} NOK/night
+              </p>
+            </div>
+            <div className = {homeStyles.ratingAvailabilityBtnDiv}>
             <p>
-              <img src={Price} alt="Price tag icon" />
-              {stay?.price || "N/A"} NOK/night
+              {(() => {
+                const rating = Math.round(stay?.rating);
+                if (!rating) return "No rating";
+                if (rating === 1) return "Poor quality";
+                if (rating === 2) return "Not bad quality";
+                if (rating === 3 || rating === 4) return "Good quality";
+                if (rating === 5) return "Excellent quality";
+                return "";
+              })()}
             </p>
-
             <ViewAvailabilityButton stay={stay} />
+            </div>
+            </div>
+            </div>
           </div>
         ))
       ) : (
