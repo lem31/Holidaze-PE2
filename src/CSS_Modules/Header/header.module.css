@@ -120,16 +120,11 @@ margin-top: 20px;
   flex-direction: column;
   align-items: center;
   position: absolute;
-  z-index: 100;
   width: 200px;
-  min-height: 166px;
-  top: 90px;
-  right: 50px;
+  height: 166px;
 background-color: var(--primary-color-2);
 margin-top: 18px;
-
-opacity: 1;
-
+right: 0;
 }
 
 .accountIcon{
@@ -153,20 +148,17 @@ border: none;
 .avatarBox{
  margin-left:auto;
  margin-right:auto;
-
 }
 
 .userNameBox{
   margin-left:auto;
  margin-right:auto;
-
 }
 
 .accountBox{
 
   display: flex;
   flex: 1;
-
 }
 .profileLinkBox{
   display: flex;
