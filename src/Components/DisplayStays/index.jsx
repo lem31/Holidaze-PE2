@@ -30,9 +30,7 @@ const DisplayStays = () => {
     return <p>Error: Unable to fetch stays.</p>;
   }
 
-  if (!filteredStays || filteredStays.length === 0) {
-    return <p>No stays available.</p>;
-  }
+ 
 
   return (
     <div>

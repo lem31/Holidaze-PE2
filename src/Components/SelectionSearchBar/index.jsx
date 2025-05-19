@@ -1,5 +1,4 @@
-import  { useEffect } from 'react';
-import { useState} from 'react';
+import  { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useMyStore from '../../Store';
 import homeStyles from '../../CSS_Modules/Home/home.module.css';
@@ -27,6 +26,8 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
     const setSelectedStay = useMyStore((state) => state.setSelectedStay);
     const navigate = useNavigate();
     const countries = [...new Set(stays.filter(stay => stay?.location?.country).map(stay => stay.location.country))];
+    const suggestionRef = useRef(null);
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
     
 
@@ -46,6 +47,7 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
 useEffect(() => {
   if (!searchQuery) {
     setFilteredSuggestions([]); 
+    setShowSuggestions(false);
     return;
   }
 
@@ -54,9 +56,20 @@ useEffect(() => {
   );
 
   setFilteredSuggestions(suggestions);
+  setShowSuggestions(true);
 }, [searchQuery, stays]);
 
-    
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (suggestionRef.current && !suggestionRef.current.contains(event.target)) {
+      setShowSuggestions(false);
+    }
+  };
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => document.removeEventListener('mousedown', handleClickOutside);
+}, [])
+
+  
       
 
    const handleCountryChange = (event) => {
@@ -64,6 +77,10 @@ useEffect(() => {
   setSelectedCountry(event.target.value);
 
 };
+
+ const handleCloseSuggestions = () => {
+        setShowSuggestions(false);
+    };
 
    const handleSearchChange = (event) => {
 
@@ -112,7 +129,10 @@ useEffect(() => {
                     </div>
                     </div>
 
-                    {searchQuery && filteredSuggestions.length >0 && (
+                    {showSuggestions && filteredSuggestions.length >0 && (
+                       <div ref={suggestionRef} className={homeStyles.suggestionContainer}>
+                    <button className={homeStyles.closeButton} onClick={handleCloseSuggestions}>✖ Close</button>
+                      
                         <ul className={homeStyles.suggestionList}>
                             {filteredSuggestions.map((stay) =>(
                             <li key={stay.id} onClick={(event) => handleSuggestionClick(event, stay)}>
@@ -121,7 +141,11 @@ useEffect(() => {
                         
 
                             </li> ))}
-                        </ul>)}
+                        </ul>
+                    </div>
+                    )}
+                        
         </div> )};
+        
 
 export default SelectionSearchBar;

@@ -127,6 +127,19 @@ overflow-y: auto;
   padding-left: 10px;
 }
 
+.closeButton {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: var(--secondary-color-2);
+    cursor: pointer;
+    float: right;
+}
+
+.closeButton:hover {
+    color: var(--secondary-color);
+}
+
 @media (max-width: 486px) {
   .orP {
     font-size: var(--font-size-small-3);
