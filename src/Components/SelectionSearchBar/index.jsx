@@ -1,9 +1,10 @@
-import React, { useEffect, useCallback } from 'react';
+import  { useEffect } from 'react';
 import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import useMyStore from '../../Store';
 import homeStyles from '../../CSS_Modules/Home/home.module.css';
 import Search from '../../assets/Images/search.png';
+import {Select, MenuItem, FormControl, InputLabel} from '@mui/material';
 
 /**
  * SelectionSearchBar component provides a search bar and country filter
@@ -86,10 +87,22 @@ useEffect(() => {
           <div className={homeStyles.searchSelectBar}>
             <div className={homeStyles.selectWrapper}>
           <div className={homeStyles.selectDiv} >
-            <select className={homeStyles.optionAndInput} value={selectedCountry} onChange={handleCountryChange} name="" id="">
-                <option className={homeStyles.selectOption}  value="">All Countries</option>
-                {countries.map((country) => ( <option  key={country} value={country}>{country}</option>))}
-                    </select>
+               <FormControl sx={{ width: 200 }}>
+                            <InputLabel  className={homeStyles.selectLabel}id="country-select-label">Select Country</InputLabel>
+                            <Select
+                                labelId="country-select-label"
+                                value={selectedCountry}
+                                onChange={handleCountryChange}
+                                className={homeStyles.selectOption}
+                                
+                                MenuProps={{ classes: { paper: homeStyles.customMenu } }}
+                            >
+                                <MenuItem value="">All Countries</MenuItem>
+                                {countries.map((country) => (
+                                    <MenuItem key={country} value={country}>{country}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
                     <div className={homeStyles.orDiv}>
 <p className={homeStyles.orP}>OR</p>
 </div>

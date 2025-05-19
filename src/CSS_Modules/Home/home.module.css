@@ -29,17 +29,46 @@
   letter-spacing: 0.5%;
 }
 
-.selectOption{
-  appearance: none;
-     
-  font-family: var(--font-family-2);
-  font-size: var(--font-size-small);
-      line-height: 160%;
-    letter-spacing: 0.5%;
-     width: 200px;
+.customMenu {
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.selectOption {
+  background-color: var(--primary-color-1);
+
+
+  line-height: 160%;
+  letter-spacing: 0.5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 200px;
   height: 30px;
-  background-color: var(--primary-color-2);
-  }
+}
+
+.selectLabel {
+  position: absolute;
+  margin-top: -10px;
+  margin-left: -10px;
+  color: var(--primary-color-3);
+    font-family: var(--font-family-2);
+  font-size: var(--font-size-small);
+  transform: translate(-20%, -30%);
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.selectOption .MuiSelect-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .selectDiv {
   display: flex;
@@ -60,7 +89,7 @@
   letter-spacing: 0.5%;
 }
 
-.searchIcon{
+.searchIcon {
   width: 32px;
   height: 32px;
   padding-left: 10px;
@@ -78,16 +107,15 @@
     appearance: none;
     background-color: var(--primary-color-2);
     font-size: var(--font-size-small-3);
-width: 200px;
+    width: 200px;
     line-height: 160%;
     letter-spacing: 0.5%;
   }
 
-  
-  .searchIcon{
-  width: 24px;
-  height: 24px;
-}
+  .searchIcon {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 @media (min-width: 487px) and (max-width: 768px) {
