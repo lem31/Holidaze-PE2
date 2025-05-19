@@ -87,7 +87,7 @@
   box-shadow: inset 5px 11px 0px rgba(0, 0, 0, 0.38);
 }
 
-.h1-white-x-large-desktop {
+.h1WhiteXLargeDesktop {
   font-size: var(--font-size-x-large);
   color: var(--primary-color-1);
   font-family: var(--font-family-1);
@@ -97,7 +97,7 @@
   letter-spacing: 2%;
 }
 
-.h1-black-x-large-desktop {
+.h1BlackXLargeDesktop {
   font-size: var(--font-size-x-large);
   color: var(--primary-color-3);
   font-family: var(--font-family-1);
@@ -117,12 +117,11 @@
   letter-spacing: 2%;
 }
 
-.h1-black {
+.h1Black {
   font-size: var(--font-size-large);
   color: var(--primary-color-3);
   font-family: var(--font-family-1);
   font-weight: bold;
-  text-align: center;
   line-height: 130%;
   letter-spacing: 2%;
 }
@@ -207,12 +206,11 @@ html {
     line-height: 130%;
     letter-spacing: 2%;
   }
-  .h1-black {
+  .h1Black {
     font-size: var(--font-size-large);
     color: var(--primary-color-3);
     font-family: var(--font-family-1);
     font-weight: bold;
-    text-align: center;
     line-height: 130%;
     letter-spacing: 2%;
   }

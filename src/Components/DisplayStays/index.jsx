@@ -6,6 +6,8 @@ import useMyStore from "../../Store";
 import SelectionSearchBar from "../SelectionSearchBar";
 import Carousel from 'react-material-ui-carousel';
 import homeStyles from '../../CSS_Modules/Home/home.module.css';
+import gStyles from '../../CSS_Modules/Global/global.module.css';
+import StarIcon from '@mui/icons-material/Star';
 
 /**
  * DisplayStays component fetches and displays a list of stays.
@@ -41,7 +43,7 @@ const DisplayStays = () => {
       <SelectionSearchBar stays={stays || []} onFilter={setFilteredStays} />
       {filteredStays.length > 0 ? (
         filteredStays.map((stay, index) => (
-          <div key={`${stay?.id || index}`}>
+          <div className= {homeStyles.stayCardLayoutBox} key={`${stay?.id || index}`}>
             <div className= {homeStyles.stayCardOuterWrapper}>
 <div className= {homeStyles.stayCardWrapper}>
             <div className = {homeStyles.stayImageContainer}>
@@ -66,31 +68,34 @@ const DisplayStays = () => {
             </div>
             <div className={homeStyles.stayDetails}>
               <div className={homeStyles.nameRatingDiv}>
-              <h1>{stay?.name || "Unknown Stay"}</h1>
-              <p>
+                  <p>
                 {stay?.rating && stay.rating > 0 ? (
                   <>
                     {Array.from({ length: Math.round(stay.rating) }).map((_, i) => (
-                      <span key={i} role="img" aria-label="star">⭐</span>
+                      <StarIcon className={homeStyles.star} key={i}/>
                     ))}
                   </>
                 ) : (
                   "No rating"
                 )}
               </p>
+              <h1 className={`${homeStyles.h1Home} ${gStyles.h1Black}`}>{stay?.name || "Unknown Stay"}</h1>
+            
               </div>
-              <p>
-                <img src={Location} alt="Location icon" />
+              <p className={homeStyles.location}>
+                <img className={homeStyles.stayCardIcons}src={Location} alt="Location icon" />
                 {stay?.location?.city || "Unknown City"},{" "}
                 {stay?.location?.country || "Unknown Country"}
               </p>
-              <p>{stay?.description || "No description available"}</p>
-              <p>
-                <img src={Price} alt="Price tag icon" />
+              <p className={homeStyles.description}>{stay?.description || "No description available"}</p>
+              <p className ={homeStyles.stayCardPrice}>
+                <img className={homeStyles.stayCardIcons} src={Price} alt="Price tag icon" />
                 {stay?.price || "N/A"} NOK/night
               </p>
             </div>
             <div className = {homeStyles.ratingAvailabilityBtnDiv}>
+<div className={homeStyles.ratingBox}>
+              <p>{stay?.rating}</p>
             <p>
               {(() => {
                 const rating = Math.round(stay?.rating);
@@ -102,6 +107,7 @@ const DisplayStays = () => {
                 return "";
               })()}
             </p>
+            </div>
             <ViewAvailabilityButton stay={stay} />
             </div>
             </div>
