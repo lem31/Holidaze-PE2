@@ -14,7 +14,7 @@ import hStyles from "../../CSS_Modules/Header/header.module.css";
  * and log out. It uses images for the profile and logout icons.
  */
 
-function UserDropDown() {
+function UserDropDown({isOpen}) {
   const { userProfile } = useMyStore((state) => state);
   const logout = useMyStore((state) => state.logout);
 
@@ -23,10 +23,9 @@ function UserDropDown() {
     navigate("/");
   };
 
-  return (
+  return isOpen ? (
     <div className={hStyles.dropDownBox}>
-      {/* <img src="
-" alt="" /> */}
+  
       <div className={hStyles.profileInfoBox}>
         <div className={hStyles.avatarBox}>
           <img
@@ -55,7 +54,7 @@ function UserDropDown() {
         </div>
       </div>
     </div>
-  );
+  ): null;
 }
 
 export default UserDropDown;
