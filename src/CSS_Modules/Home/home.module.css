@@ -76,6 +76,26 @@
 
 }
 
+.suggestionList{
+  background-color: var(--primary-color-2);
+  color: var(--secondary-color-2);
+position: relative;
+  border-radius: 10px;
+  width: 100vw;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  gap: 12px;
+    font-family: var(--font-family-2);
+  font-size: var(--font-size-small);
+    line-height: 150%;
+  letter-spacing: 0.5%;
+overflow-y: auto;
+
+}
+
 .selectDiv {
   display: flex;
   gap: 30px;

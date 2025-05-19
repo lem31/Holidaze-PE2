@@ -113,7 +113,7 @@ useEffect(() => {
                     </div>
 
                     {searchQuery && filteredSuggestions.length >0 && (
-                        <ul>
+                        <ul className={homeStyles.suggestionList}>
                             {filteredSuggestions.map((stay) =>(
                             <li key={stay.id} onClick={(event) => handleSuggestionClick(event, stay)}>
                                 {stay.name}
