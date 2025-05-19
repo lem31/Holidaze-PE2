@@ -40,9 +40,11 @@ useEffect(() => {
       setIsMobileNavOpen(false);
     }
   };
-  document.addEventListener("click", closeMenu, closeAccountMenu);
-  return () => document.removeEventListener("click", closeMenu);
-}, []);
+ document.addEventListener("click", closeMenu);
+  document.addEventListener("click", closeAccountMenu);
+  return () => {document.removeEventListener("click", closeMenu);
+    document.removeEventListener("click", closeAccountMenu);
+  }; }, []);
 
 
 
@@ -54,7 +56,10 @@ useEffect(() => {
 <img src={Logo} alt="Logo" className={hStyles.logo}/>
 </div>
 <div>
- <button className={hStyles.hamburgerButton}     onClick={() => setIsMobileNavOpen(prevState => !prevState)}>
+ <button className={hStyles.hamburgerButton}    onClick={() => {
+    setIsMobileNavOpen(prevState => !prevState);
+    console.log("Mobile Nav Toggled:", !isMobileNavOpen);
+  }}>
 <img src={Hamburger} alt="Hamburger Menu Icon"  />
 </button>
 </div>
@@ -70,20 +75,10 @@ useEffect(() => {
     )}
   </div>
  
-{isMobileNavOpen && (
 
-<div className={`${hStyles.mobileNavDiv} ${isMobileNavOpen ? hStyles.active : ''}`}>
-<a className={hStyles.navLink} href="/">
-    <img className={hStyles.navIcons} src={Stays} alt="Stays Icon" />Stays</a>
-   {!isLoggedIn && (
-    <>
-<a className={hStyles.navLink}  href="/Register"> <img className={hStyles.navIcons} src={Register} alt="Register Icon" />Register</a>
-<a className={hStyles.navLink}  href="/Login"> <img className={hStyles.navIcons}  src={Login} alt="Login Icon" />Login</a> </>)}
-
-</div>
-
-)}
 </nav>
+
+
 
 {isLoggedIn &&(
 
@@ -104,6 +99,20 @@ useEffect(() => {
 )}
 
    </header>
+
+   {isMobileNavOpen && (
+
+<div className={`${hStyles.mobileNavDiv} ${isMobileNavOpen ? hStyles.active : ''}`}>
+<a className={hStyles.navLink} href="/">
+    <img className={hStyles.navIcons} src={Stays} alt="Stays Icon" />Stays</a>
+   {!isLoggedIn && (
+    <>
+<a className={hStyles.navLink}  href="/Register"> <img className={hStyles.navIcons} src={Register} alt="Register Icon" />Register</a>
+<a className={hStyles.navLink}  href="/Login"> <img className={hStyles.navIcons}  src={Login} alt="Login Icon" />Login</a> </>)}
+
+</div>
+
+)}
 {isDropDownOpen &&
  
     <UserDropDown isOpen={isDropDownOpen}  />
