@@ -1,12 +1,19 @@
 .selectWrapper {
   background-color: var(--primary-color-2);
-
   border-radius: 18px;
   width: 550px;
   height: 45px;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+
+.suggestionContainer{
+
+margin-top: -18px;
+
 }
 
 .searchSelectBar {
@@ -16,21 +23,30 @@
   align-items: center;
 }
 
+.searchInputIconDiv{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+
+  align-items: center;
+}
+
+
 .optionAndInput {
   width: 200px;
   height: 30px;
   border-radius: 3px;
   box-sizing: border-box;
   padding: 5px;
-  font-family: var(--font-family-2);
   font-size: var(--font-size-small);
+      font-family: var(--font-family-4);
   color: var(--primary-color-3);
   line-height: 150%;
   letter-spacing: 0.5%;
 }
 
 .customMenu {
- background-color: var(--primary-color-2) !important;
+  background-color: var(--primary-color-2) !important;
   color: var(--secondary-color-2) !important;
   border: 1px solid #ccc;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -39,15 +55,10 @@
 
 .selectOption {
   background-color: var(--primary-color-1);
-  
-
-  line-height: 160%;
-  letter-spacing: 0.5%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
   width: 200px;
   height: 30px;
 }
@@ -57,29 +68,27 @@
   margin-top: -10px;
   margin-left: -10px;
   color: var(--primary-color-3);
-    font-family: var(--font-family-2);
+  font-family: var(--font-family-4);
   font-size: var(--font-size-small);
+  line-height: 160%;
+  letter-spacing: 0.5%;
   transform: translate(-20%, -30%);
   text-align: center;
   justify-content: center;
   align-items: center;
   width: 100%;
- 
 }
-
-
 
 .selectOption .MuiSelect-select {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
-.suggestionList{
+.suggestionList {
   background-color: var(--primary-color-2);
   color: var(--secondary-color-2);
-position: relative;
+  position: relative;
   border-radius: 10px;
   width: 100vw;
   height: 300px;
@@ -88,23 +97,22 @@ position: relative;
   justify-content: center;
   align-items: left;
   gap: 12px;
-    font-family: var(--font-family-2);
+  font-family: var(--font-family-2);
   font-size: var(--font-size-small);
-    line-height: 150%;
+  line-height: 150%;
   letter-spacing: 0.5%;
-overflow-y: auto;
-
+  overflow-y: auto;
 }
 
 .selectDiv {
   display: flex;
-  gap: 30px;
+  flex-direction: row;
+  gap: 20px;
 }
 
-.selectDropDown{
+.selectDropDown {
   width: 200px;
   height: auto;
-
 }
 
 .orDiv {
@@ -124,33 +132,158 @@ overflow-y: auto;
 .searchIcon {
   width: 32px;
   height: 32px;
-  padding-left: 10px;
+padding-right: 10px;
+  color: var(--primary-color-3);
+  font-family: var(--font-family-4);
+  font-size: var(--font-size-small);
+  line-height: 150%;
+  letter-spacing: 0.5%;
 }
 
 .closeButton {
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    color: var(--secondary-color-2);
-    cursor: pointer;
-    float: right;
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-small-3);
+  color: var(--secondary-color-2);
+  font-family: var(--font-family-3);
+  cursor: pointer;
+  float: right;
+  line-height: 130%;
+  letter-spacing: 2%;
 }
 
 .closeButton:hover {
-    color: var(--secondary-color);
+  color: var(--secondary-color);
 }
 
 @media (max-width: 486px) {
+
+
+
+.customMenu {
+
+  margin-top: 155px;
+  width: 200px;
+}
+
+  .searchDiv{
+ display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color-2);
+    width: 295px;
+    height: 50px;
+    border-radius: 18px;
+  }
+
+
+
+.selectOption{
+  height: 40px;
+
+}
+
+.optionAndInput{
+  height: 40px;
+}
+
+.selectLabel {
+
+position: relative;
+display: flex;
+  transform: translate(-50%, -50%);
+  margin-top: 0.5px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+
+  .selectBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color-2);
+    width: 295px;
+    height: 50px;
+    border-radius: 18px;
+  }
+
+.selectDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+align-items: center;
+}
+
+.searchIcon {
+  width: 24px;
+  height: 24px;
+  padding-right: 0;
+
+}
+
+.searchInputIconDiv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-self: center;
+  width: 200px;
+}
+
+
+.selectWrapper {
+  background: none;
+  border-radius: 18px;
+  width: 290px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+
+
+
+}
+
+.closeButtonDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  width: 90vw;
+}
+
+.suggestionContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+margin-top: -45.8px;
+  gap: 0;
+}
+
+   .suggestionList {
+ 
+  font-family: var(--font-family-2);
+  font-size: var(--font-size-small-3);
+  line-height: 160%;
+  letter-spacing: 0%;
+
+}
+
+
   .orP {
     font-size: var(--font-size-small-3);
-
     line-height: 160%;
     letter-spacing: 0.5%;
   }
 
   .optionAndInput {
-    appearance: none;
-    background-color: var(--primary-color-2);
+  
     font-size: var(--font-size-small-3);
     width: 200px;
     line-height: 160%;
@@ -161,9 +294,133 @@ overflow-y: auto;
     width: 24px;
     height: 24px;
   }
+
+  .closeButton {
+    font-size: var(--font-size-tiny);
+    line-height: 130%;
+    letter-spacing: 2%;
+  }
+
+
 }
 
 @media (min-width: 487px) and (max-width: 768px) {
+
+
+.customMenu {
+
+  margin-top: 155px;
+  width: 200px;
+}
+
+  .searchDiv{
+ display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color-2);
+    width: 295px;
+    height: 50px;
+    border-radius: 18px;
+  }
+
+
+
+.selectOption{
+  height: 40px;
+
+}
+
+.optionAndInput{
+  height: 40px;
+}
+
+.selectLabel {
+
+position: relative;
+display: flex;
+  transform: translate(-50%, -50%);
+  margin-top: 0.5px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+
+  .selectBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color-2);
+    width: 295px;
+    height: 50px;
+    border-radius: 18px;
+  }
+
+.selectDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+align-items: center;
+}
+
+.searchIcon {
+  width: 24px;
+  height: 24px;
+  padding-right: 0;
+
+}
+
+.searchInputIconDiv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-self: center;
+  width: 200px;
+}
+
+
+.selectWrapper {
+  background: none;
+  border-radius: 18px;
+  width: 290px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+
+
+
+}
+
+.closeButtonDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  width: 90vw;
+}
+
+.suggestionContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+margin-top: -45.8px;
+  gap: 0;
+}
+
+   .suggestionList {
+ 
+  font-family: var(--font-family-2);
+  font-size: var(--font-size-small-2);
+  line-height: 160%;
+  letter-spacing: 0.5%;
+
+}
   .orP {
     font-size: var(--font-size-small-2);
 

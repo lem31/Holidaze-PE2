@@ -104,8 +104,8 @@ useEffect(() => {
           <div className={homeStyles.searchSelectBar}>
             <div className={homeStyles.selectWrapper}>
           <div className={homeStyles.selectDiv} >
-               <FormControl sx={{ width: 200 }}>
-                            <InputLabel  className={homeStyles.selectLabel}id="country-select-label">Select Country</InputLabel>
+               <FormControl className={homeStyles.selectBox} variant="outlined">
+                            <InputLabel className={homeStyles.selectLabel}id="country-select-label">Select Country</InputLabel>
                             <Select
                                 labelId="country-select-label"
                                 value={selectedCountry}
@@ -123,16 +123,23 @@ useEffect(() => {
                     <div className={homeStyles.orDiv}>
 <p className={homeStyles.orP}>OR</p>
 </div>
+<div className={homeStyles.searchDiv}>
+<div className={homeStyles.searchInputIconDiv}> 
+  <div>
                     <input className={homeStyles.optionAndInput}  type='text' value={searchQuery} onChange={handleSearchChange} placeholder='Search stays' />
                     </div>
                     <img className={homeStyles.searchIcon}src={Search} alt="" />
                     </div>
                     </div>
+                    </div>
+                    </div>
+                    </div>
 
                     {showSuggestions && filteredSuggestions.length >0 && (
                        <div ref={suggestionRef} className={homeStyles.suggestionContainer}>
+                        <div className={homeStyles.closeButtonDiv}>
                     <button className={homeStyles.closeButton} onClick={handleCloseSuggestions}>✖ Close</button>
-                      
+                      </div>
                         <ul className={homeStyles.suggestionList}>
                             {filteredSuggestions.map((stay) =>(
                             <li key={stay.id} onClick={(event) => handleSuggestionClick(event, stay)}>
