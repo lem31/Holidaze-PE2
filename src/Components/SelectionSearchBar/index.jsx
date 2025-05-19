@@ -97,9 +97,9 @@ useEffect(() => {
                                 
                                 MenuProps={{ classes: { paper: homeStyles.customMenu } }}
                             >
-                                <MenuItem value="">All Countries</MenuItem>
+                                <MenuItem  value="">All Countries</MenuItem>
                                 {countries.map((country) => (
-                                    <MenuItem key={country} value={country}>{country}</MenuItem>
+                                    <MenuItem className={homeStyles.selectDropDown} key={country} value={country}>{country}</MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
