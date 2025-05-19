@@ -25,27 +25,14 @@ const  [isDropDownOpen, setIsDropDownOpen] = useState(false);
 const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
 useEffect(() => {
-
-  const closeAccountMenu = (event) => {
-    if (
-      !event.target.closest(`.${hStyles.accountDiv}`) &&
-      !event.target.closest(`.${hStyles.dropDownBox}`)
-    ) {
-      setIsDropDownOpen(false);
-    }
-  };
-  
   const closeMenu = (event) => {
     if (!event.target.closest(`.${hStyles.nav}`) && !event.target.closest(`.${hStyles.hamburgerButton}`)) {
       setIsMobileNavOpen(false);
     }
   };
-  document.addEventListener("click", closeMenu, closeAccountMenu);
+  document.addEventListener("click", closeMenu);
   return () => document.removeEventListener("click", closeMenu);
 }, []);
-
-
-
   return(
     <div className={hStyles.headerDiv} >
    <header className={hStyles.header}>
@@ -89,26 +76,22 @@ useEffect(() => {
 
     <div className={hStyles.accountDiv} >
 <div className={hStyles.accountBox}>
-  <button className={hStyles.accountIcon} onClick={() => {
+  <button className={hStyles.accountIcon}    onClick={() => {
+         
       setIsDropDownOpen(prevState => !prevState); 
-      console.log('Dropdown Toggled', !isDropDownOpen);
         }}>
 <img className={hStyles.navIcons} src={Account} alt="Account Dropdown Options Icon" />
 </button>
 </div>
-
-
+      {isDropDownOpen && (
+<UserDropDown/>)}
 
 </div>
 
 )}
 
    </header>
-{isDropDownOpen &&
- 
-    <UserDropDown isOpen={isDropDownOpen}  />
- 
-}
+
    </div>
 
   )
