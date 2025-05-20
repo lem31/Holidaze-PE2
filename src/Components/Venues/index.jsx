@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Wifi from "../../assets/Images/Wifi.png";
-import Parking from "../../assets/Images/parking.png";
-import Pets from "../../assets/Images/pets.png";
-import Breakfast from "../../assets/Images/breakfast.png";
+import Parking from "../../assets/Images/Parking.png";
+import Pets from "../../assets/Images/Pets.png";
+import Breakfast from "../../assets/Images/Breakfast.png";
 import {
   Snackbar,
   Alert,
