@@ -22,7 +22,7 @@ useEffect(() => {
 
     return(
         <div>
-            <h1>Stays</h1>
+           
 <DisplayStays />
         </div>
     )
