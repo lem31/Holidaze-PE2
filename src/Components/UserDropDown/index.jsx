@@ -35,7 +35,7 @@ function UserDropDown({isOpen}) {
           ></img>
         </div>
         <div className={hStyles.userNameBox}>
-          <p className={hStyles.labelWhite}>{userProfile.data.name}</p>
+          <p className={hStyles.labelWhite}>{userProfile.name}</p>
         </div>
       </div>
       <div className={hStyles.profileLinkBox}>
