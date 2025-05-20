@@ -129,7 +129,7 @@ get().persist.clearStorage();
           const profileData = await fetchUserProfile(userName, token);
           if (profileData) {
             console.log("Profile data fetched:", profileData);
-            set({ userProfile: profileData, loadingProfile: false });
+            set({ userProfile: profileData.data, loadingProfile: false });
             console.log("Stored user profile:", profileData);
             return profileData.data;
           } else {
