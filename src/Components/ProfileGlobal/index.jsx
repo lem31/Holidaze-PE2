@@ -21,8 +21,8 @@ React.useEffect(() => {
    
     <h2>{userProfile.name}</h2>
     <p>{userProfile.bio}</p>
-    <img src={userProfile.data.banner?.url || DefaultImage } alt="banner" />
-    <img src={userProfile.data.avatar?.url || DefaultImage } alt="avatar" />
+    <img src={userProfile.banner?.url || DefaultImage } alt="banner" />
+    <img src={userProfile.avatar?.url || DefaultImage } alt="avatar" />
  
       <button
         onClick={() => {
