@@ -56,7 +56,7 @@ const DisplayStays = () => {
 
       <div className={homeStyles.nameRatingDivMobile}>
 
-         <h1 className={`${homeStyles.h1Home} ${gStyles.h1Black}`}>{stay?.name || "Unknown Stay"}</h1>
+         <h1 className={`${homeStyles.h1HomeMobile} ${gStyles.h1Black}`}>{stay?.name || "Unknown Stay"}</h1>
                   <p>
                 {stay?.rating && stay.rating > 0 ? (
                   <>

@@ -444,6 +444,100 @@ margin-top: -45.8px;
   }
 
 
+
+  .nameRatingDiv{
+   display:none;
+  }
+
+  .ratingBox{
+    display: none;
+  }
+
+  .mobileView{
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .stayCardWrapper{
+    width: 220px;
+    height: auto;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+
+  .stayCardOuterWrapper{
+  width: 300px;
+  min-height: 550px;
+  height: auto;
+
+}
+
+.ratingBoxMobile{
+ display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.ratingNumberBg{
+  width: 24px;
+  height: 24px;
+}
+
+.nameRatingDivMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+}
+.stayImageContainer{
+ 
+
+  justify-content: center;
+ padding-left: 0;
+}
+
+.carousel{
+
+
+ width: 200px;
+ height: 200px;
+}
+
+.h1HomeMobile{
+  max-width: 200px;
+  text-wrap: wrap;
+  text-align: center;
+    overflow-y: hidden;
+}
+
+
+.h1Home{
+  display: none;
+}
+
+.ratingAvailabilityBtnDiv{
+  padding-bottom: 18px;
+}
+
+.stayDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  width: 220px;
+}
+
+.location{
+  max-width: 200px;
+}
+
 }
 
 @media (min-width: 487px) and (max-width: 768px) {
@@ -588,19 +682,23 @@ margin-top: -45.8px;
   .mobileView{
     display: flex;
     flex-direction: column;
+   
   }
 
   .stayCardWrapper{
     width: 220px;
-    height: auto;
+  height: 700px;
+  height: auto;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
 
   .stayCardOuterWrapper{
   width: 300px;
-  height: 689px;
+  height: auto;
 
 }
 .ratingBoxMobile{
@@ -639,13 +737,31 @@ margin-top: -45.8px;
  height: 200px;
 }
 
-.h1Home{
+.h1HomeMobile{
   max-width: 200px;
   text-wrap: wrap;
   text-align: center;
+  overflow-y: hidden;
+}
+
+.h1Home{
+  display: none;
 }
 
 .ratingAvailabilityBtnDiv{
   padding-bottom: 18px;
+}
+
+.stayDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  width: 220px;
+}
+
+.location{
+  max-width: 200px;
 }
 }
