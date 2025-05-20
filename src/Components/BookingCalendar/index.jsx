@@ -3,7 +3,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
 import useMyStore from "../../Store";
-import Guests from "../../assets/Images/guests.png";
+import Guests from "../../assets/Images/Guests.png";
 import gStyles from "../../CSS_Modules/Global/global.module.css";
 import stayStyles from "../../CSS_Modules/Stay/stay.module.css";
 
