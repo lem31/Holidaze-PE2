@@ -12,7 +12,7 @@ import ImageListItem from "@mui/material/ImageListItem";
 import stayStyles from "../../../CSS_Modules/Stay/stay.module.css";
 import StarIcon from "@mui/icons-material/Star";
 import CheckDateConflicts from "../../CheckDateConflicts";
-import postBooking from "../../../API/postBooking";
+import postBooking from "../../../API/PostBooking/index";
 import gStyles from "../../../CSS_Modules/Global/global.module.css";
 
 /**
