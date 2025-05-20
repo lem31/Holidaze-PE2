@@ -13,7 +13,7 @@ function Profile() {
       const profileData = await fetchUserProfile();
       console.log("🔍 Full Profile API Response:", profileData);
       if (profileData) {
-        setUserProfile(profileData);
+        setUserProfile(profileData.data);
         console.log("Fetched User Profile:", profileData);
       } else {
         console.error("Failed to fetch user profile: Profile data is undefined");
@@ -32,8 +32,7 @@ function Profile() {
     return <div>Invalid role</div>;
   }
 
-  console.log(userProfile.venueManager);
-  console.log(userProfile.data);
+ 
 
 
   return (
