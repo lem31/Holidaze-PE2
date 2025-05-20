@@ -2,7 +2,7 @@ import  { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useMyStore from '../../Store';
 import homeStyles from '../../CSS_Modules/Home/home.module.css';
-import Search from '../../assets/Images/search.png';
+import Search from '../../assets/Images/Search.png';
 import {Select, MenuItem, FormControl, InputLabel} from '@mui/material';
 
 /**
