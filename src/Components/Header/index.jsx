@@ -49,6 +49,7 @@ useEffect(() => {
 
 
   return(
+    <div> 
     <div className={hStyles.headerDiv} >
    <header className={hStyles.header}>
     <div className={hStyles.logoMenuDiv}>
@@ -96,29 +97,43 @@ useEffect(() => {
 
 </div>
 
+
 )}
+
+
 
    </header>
 
+   
+
+  
+
+   </div>
+
+
    {isMobileNavOpen && (
 
+
 <div className={`${hStyles.mobileNavDiv} ${isMobileNavOpen ? hStyles.active : ''}`}>
+  <nav className={hStyles.mobileNav}>
 <a className={hStyles.navLink} href="/">
     <img className={hStyles.navIcons} src={Stays} alt="Stays Icon" />Stays</a>
    {!isLoggedIn && (
     <>
 <a className={hStyles.navLink}  href="/Register"> <img className={hStyles.navIcons} src={Register} alt="Register Icon" />Register</a>
 <a className={hStyles.navLink}  href="/Login"> <img className={hStyles.navIcons}  src={Login} alt="Login Icon" />Login</a> </>)}
-
+</nav>
 </div>
 
+
 )}
-{isDropDownOpen &&
+   {isDropDownOpen &&
  
     <UserDropDown isOpen={isDropDownOpen}  />
  
 }
    </div>
+ 
 
   )
 }
