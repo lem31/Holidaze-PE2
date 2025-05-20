@@ -4,7 +4,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  padding: 24px 12px;
+  padding: 12px 24px;
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
   font-family: var(--font-family-3);
 }

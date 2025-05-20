@@ -281,6 +281,17 @@ width: 200px;
  white-space: none;
 }
 
+.ratingNumberBg{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-color-2);
+  width: 54px;
+  height: 48px;
+  border-radius: 5px;
+}
+
 
 @media (max-width: 486px) {
 

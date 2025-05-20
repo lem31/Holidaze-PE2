@@ -26,7 +26,7 @@ const handleClick = () => {
 };
 
 return (
-  < button className={gStyles.buttonPrimary} onClick={handleClick} >
+  < button className={`${gStyles.buttonPrimary} ${gStyles.buttonsFonts}`} onClick={handleClick} >
     View Availability
   </button>
 )

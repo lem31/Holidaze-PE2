@@ -95,7 +95,7 @@ const DisplayStays = () => {
             </div>
             <div className = {homeStyles.ratingAvailabilityBtnDiv}>
 <div className={homeStyles.ratingBox}>
-              <p className={gStyles.bodyBlack}>{stay?.rating}</p>
+              <p className={`${gStyles.bodyWhite} ${homeStyles.ratingNumberBg}`}>{stay?.rating}</p>
             <p className={gStyles.bodyBlack}>
               {(() => {
                 const rating = Math.round(stay?.rating);
