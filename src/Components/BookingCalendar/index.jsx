@@ -4,6 +4,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
 import useMyStore from "../../Store";
 import Guests from "../../assets/Images/guests.png";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
+import stayStyles from "../../CSS_Modules/Stay/stay.module.css";
 
 /**
  * BookingCalendar component allows users to make a booking for a selected stay.
@@ -54,10 +56,17 @@ const BookingCalendar = ({
   };
 
   return (
+    <div>
+       <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>Make a Booking</h2>
+ 
+    
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div>
-        <h1>Make a Booking</h1>
+      <div >
+
+        <div className={stayStyles.checkInOutDiv}>
+       
         <DatePicker
+        className={stayStyles.datePicker}
           label="Check-in"
           value={startDate}
           onChange={(newValue) => setStartDate(newValue)}
@@ -67,6 +76,7 @@ const BookingCalendar = ({
         />
 
         <DatePicker
+         className={stayStyles.datePicker}
           label="Check-out"
           value={endDate}
           onChange={(newValue) => setEndDate(newValue)}
@@ -74,10 +84,11 @@ const BookingCalendar = ({
             unavailableDates.has(date.toISOString().split("T")[0])
           }
         />
+        </div>
 
         <div>
-          <label htmlFor="guests">Number of Guests:</label>
-          <img src={Guests} alt="Guests" />
+          <label className={gStyles.bodyWhite} htmlFor="guests">Number of Guests:</label>
+          <img className={stayStyles.guestIcon} src={Guests} alt="Guests" />
           <select
             id="guests"
             value={numberOfGuests}
@@ -96,6 +107,7 @@ const BookingCalendar = ({
         {bookingMessage && <p>{bookingMessage}</p>} */}
       </div>
     </LocalizationProvider>
+    </div>
   );
 };
 

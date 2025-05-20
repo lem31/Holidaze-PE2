@@ -101,7 +101,7 @@
   letter-spacing: 2%;
 }
 
-.h2-white {
+.h2White {
   font-size: var(--font-size-large-2);
   color: var(--primary-color-1);
   font-family: var(--font-family-1);
@@ -111,7 +111,7 @@
   letter-spacing: 1.5%;
 }
 
-.h2-black {
+.h2Black {
   font-size: var(--font-size-large-2);
   color: var(--primary-color-3);
   font-family: var(--font-family-1);
@@ -190,7 +190,7 @@
     letter-spacing: 2%;
   }
 
-  .h2-white {
+  .h2White {
     font-size: var(--font-size-medium);
     color: var(--primary-color-1);
     font-family: var(--font-family-1);
@@ -200,7 +200,7 @@
     letter-spacing: 1.5%;
   }
 
-  .h2-black {
+  .h2Black {
     font-size: var(--font-size-medium);
     color: var(--primary-color-3);
     font-family: var(--font-family-1);
@@ -267,7 +267,7 @@
     letter-spacing: 2%;
   }
 
-  .h2Wwhite {
+  .h2White {
     font-size: var(--font-size-medium-2);
     color: var(--primary-color-1);
     font-family: var(--font-family-1);

@@ -9,7 +9,6 @@
 }
 
 
-
 .imageItem {
   width: 50%;
   object-fit: cover;
@@ -87,7 +86,26 @@ overflow-y: scroll;
 
 }
 
-.starIcon{
+
+
+.starIcon, .guestIcon{
     width: 32px;
     height: 32px;}
 
+.h2Stay{
+    padding-bottom: 24px;
+}
+
+.checkInOutDiv{
+    display: flex;
+    flex-direction: row;
+    border: 3px solid var(--tertiary-color-1);
+    border-radius: 5px;
+    gap: 8px;
+padding: 4px;
+}
+
+.datePicker{
+    background-color: var(--primary-color-1);
+
+}
