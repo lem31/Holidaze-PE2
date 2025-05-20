@@ -82,21 +82,21 @@ const DisplayStays = () => {
               <h1 className={`${homeStyles.h1Home} ${gStyles.h1Black}`}>{stay?.name || "Unknown Stay"}</h1>
             
               </div>
-              <p className={homeStyles.location}>
+              <p className={`${homeStyles.location} ${gStyles.bodyBlack}`}>
                 <img className={homeStyles.stayCardIcons}src={Location} alt="Location icon" />
                 {stay?.location?.city || "Unknown City"},{" "}
                 {stay?.location?.country || "Unknown Country"}
               </p>
-              <p className={homeStyles.description}>{stay?.description || "No description available"}</p>
-              <p className ={homeStyles.stayCardPrice}>
+              <p className={`${homeStyles.description} ${gStyles.bodyBlack}`}>{stay?.description || "No description available"}</p>
+              <p className ={`${homeStyles.stayCardPrice} ${gStyles.bodyBlack}`}>
                 <img className={homeStyles.stayCardIcons} src={Price} alt="Price tag icon" />
                 {stay?.price || "N/A"} NOK/night
               </p>
             </div>
             <div className = {homeStyles.ratingAvailabilityBtnDiv}>
 <div className={homeStyles.ratingBox}>
-              <p>{stay?.rating}</p>
-            <p>
+              <p className={gStyles.bodyBlack}>{stay?.rating}</p>
+            <p className={gStyles.bodyBlack}>
               {(() => {
                 const rating = Math.round(stay?.rating);
                 if (!rating) return "No rating";
