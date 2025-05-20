@@ -82,7 +82,7 @@
   letter-spacing: 2%;
 }
 
-.h1-white {
+.h1White {
   font-size: var(--font-size-large);
   color: var(--primary-color-1);
   font-family: var(--font-family-1);
@@ -172,7 +172,7 @@
 /* Media Queries */
 
 @media (min-width: 487px) and (max-width: 768px) {
-  .h1-white {
+  .h1White {
     font-size: var(--font-size-large);
     color: var(--primary-color-1);
     font-family: var(--font-family-1);

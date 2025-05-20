@@ -36,6 +36,7 @@
     flex-direction: row;
    align-items: center;
    gap: 12px;
+   margin-bottom: 28px;
 }
 
 .nameRatingImages{
@@ -78,5 +79,15 @@ overflow-y: scroll;
     height: 800px;
     align-items: left;
     gap: 20px;
+    margin-top: 80px;
 }
+
+.stayStar{
+      color: var(--secondary-color);
+
+}
+
+.starIcon{
+    width: 32px;
+    height: 32px;}
 

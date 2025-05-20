@@ -13,6 +13,7 @@ import stayStyles from "../../../CSS_Modules/Stay/stay.module.css";
 import StarIcon from "@mui/icons-material/Star";
 import CheckDateConflicts from "../../CheckDateConflicts";
 import postBooking from "../../../API/postBooking";
+import gStyles from "../../../CSS_Modules/Global/global.module.css";
 
 /**
  * DisplayAStay component fetches and displays details of a selected stay.
@@ -149,13 +150,13 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
       <div className={stayStyles.stayContainer}>
         <div className={stayStyles.nameRatingImages}>
           <div className={stayStyles.stayNameRatingDiv}>
-            <h1>{selectedStay.name}</h1>
-            <p>
+            <h1 className={gStyles.h1White}>{selectedStay.name}</h1>
+            <p className={stayStyles.stayStar}>
               {selectedStay?.rating && selectedStay.rating > 0 ? (
                 <>
                   {Array.from({ length: Math.round(selectedStay.rating) }).map(
                     (_, i) => (
-                      <StarIcon className={homeStyles.star} key={i} />
+                      <StarIcon className={stayStyles.starIcon} key={i} />
                     )
                   )}
                 </>
