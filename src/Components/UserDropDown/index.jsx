@@ -28,11 +28,12 @@ function UserDropDown({isOpen}) {
   
       <div className={hStyles.profileInfoBox}>
         <div className={hStyles.avatarBox}>
-          <img
-            className={hStyles.navIcons}
-            src={userProfile.avatar.url}
-            alt="User Avatar"
-          ></img>
+
+          {userProfile?.avatar?.url && (
+  <img className={hStyles.navIcons} src={userProfile.avatar.url} alt="User Avatar" />
+)}
+
+          
         </div>
         <div className={hStyles.userNameBox}>
           <p className={hStyles.labelWhite}>{userProfile.name}</p>
