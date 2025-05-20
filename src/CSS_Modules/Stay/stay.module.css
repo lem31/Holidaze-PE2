@@ -1,0 +1,82 @@
+.imageListContainer {
+ width: 483px;
+  height: 459px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, 1fr); 
+  border: 3px solid var(--tertiary-color-1);
+  border-radius: 10px;
+}
+
+
+
+.imageItem {
+  width: 50%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.imageItem:nth-child(1) {
+  grid-column: span 2;
+  height: 200px;
+}
+
+
+.imageItem:nth-child(2),
+.imageItem:nth-child(3) {
+  height: 150px;
+}
+
+.imageItem:nth-child(4) {
+  height: 100px;
+}
+
+.stayNameRatingDiv{
+    display: flex;
+    flex-direction: row;
+   align-items: center;
+   gap: 12px;
+}
+
+.nameRatingImages{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stayCardPosition{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+   
+}
+
+.stayContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+width: 1200px;
+height: 549px;
+background-color: var(--primary-color-2);
+}
+    
+    .description{
+max-width: 435px;
+max-height: 100px;
+overflow-y: scroll;
+}
+
+.bookingSection{
+    display: flex;
+    flex-direction: column; 
+
+    height: 800px;
+    align-items: left;
+    gap: 20px;
+}
+

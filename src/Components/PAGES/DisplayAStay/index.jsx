@@ -1,13 +1,18 @@
-import {useEffect, useState} from "react";
-import useMyStore from '../../../Store';
-import {useParams, useNavigate} from 'react-router-dom';
+import { useEffect, useState } from "react";
+import useMyStore from "../../../Store";
+import { useParams, useNavigate } from "react-router-dom";
 import BookingCalendar from "../../BookingCalendar";
-import Wifi from '../../../assets/Images/wifi.png';
-import Parking from '../../../assets/Images/parking.png';
-import Pets from '../../../assets/Images/pets.png';
-import Breakfast from '../../../assets/Images/breakfast.png';
+import Wifi from "../../../assets/Images/wifi.png";
+import Parking from "../../../assets/Images/parking.png";
+import Pets from "../../../assets/Images/pets.png";
+import Breakfast from "../../../assets/Images/breakfast.png";
 import { Snackbar, Alert } from "@mui/material";
-
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import stayStyles from "../../../CSS_Modules/Stay/stay.module.css";
+import StarIcon from "@mui/icons-material/Star";
+import CheckDateConflicts from "../../CheckDateConflicts";
+import postBooking from "../../../API/postBooking";
 
 /**
  * DisplayAStay component fetches and displays details of a selected stay.
@@ -26,140 +31,242 @@ import { Snackbar, Alert } from "@mui/material";
  */
 
 const DisplayAStay = () => {
-    const {id} = useParams();
-    const navigate = useNavigate();
-    const fetchAndSetSelectedStay = useMyStore((state) => state.fetchAndSetSelectedStay);
-    const selectedStay = useMyStore((state) => state.selectedStay);
-    const [bookingMessage, setBookingMessage] = useState(null);
-    const [loading, setLoading] =useState(true);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const fetchAndSetSelectedStay = useMyStore(
+    (state) => state.fetchAndSetSelectedStay
+  );
+  const selectedStay = useMyStore((state) => state.selectedStay);
+  const [bookingMessage, setBookingMessage] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const isLoggedIn = useMyStore((state) => state.isLoggedIn);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+   const [numberOfGuests, setNumberOfGuests] = useState(1);
+   const [alertSeverity, setAlertSeverity] = useState("success");
 
-    console.log("Selected Stay DisplayAStay:", selectedStay);
+  console.log("Selected Stay DisplayAStay:", selectedStay);
+console.log("Booking Message:", bookingMessage);
+console.log("Snackbar should open:", Boolean(bookingMessage));
 
-    const facilityIcons ={
-      wifi: Wifi,
-      parking: Parking,
-      pets: Pets,
-      breakfast: Breakfast,
-    }
-    useEffect(() => {
-      if(!loading && !selectedStay && id){
-        console.log("No stay data found, redirecting to home page");
-        navigate("/");
-      }
-  }, []);
-  
-    useEffect(() => {
-
-   const fetchStayData = async (id) => {
-
-    try{
-      console.log("Fetching stay data for ID:", id);
-      await fetchAndSetSelectedStay(id);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching stay data:", error);
+  const facilityIcons = {
+    wifi: Wifi,
+    parking: Parking,
+    pets: Pets,
+    breakfast: Breakfast,
+  };
+  useEffect(() => {
+    if (!loading && !selectedStay && id) {
+      console.log("No stay data found, redirecting to home page");
       navigate("/");
-    } finally{
-      setLoading(false);
     }
-   };
-    fetchStayData(id); 
-      }, [id]);
-  
-    
-    const availableFacilities = selectedStay?.meta? Object.entries(selectedStay.meta).filter(([key, value]) => value === true): [];
-    return (
-        <div>
+  }, []);
 
-<h1>{selectedStay.name}</h1>
-           
-           <div>
-           {selectedStay.media.map((image, index) => (
-                <img 
-                    key={index} 
-                    src={image.url} 
-                    alt={`${selectedStay.name} image ${index + 1}`} 
+  useEffect(() => {
+    const fetchStayData = async (id) => {
+      try {
+        console.log("Fetching stay data for ID:", id);
+        await fetchAndSetSelectedStay(id);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching stay data:", error);
+        navigate("/");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchStayData(id);
+  }, [id]);
+
+  const availableFacilities = selectedStay?.meta
+    ? Object.entries(selectedStay.meta).filter(([key, value]) => value === true)
+    : [];
+
+  const handleBooking = async () => {
+    setBookingMessage('Processing your booking...');
+    setAlertSeverity("info");
+    if (!isLoggedIn) {
+       setAlertSeverity("warning");
+      setBookingMessage("Please log in to make a booking.");
+      return;
+    }
+    if (!startDate || !endDate) {
+      setAlertSeverity("warning");
+      setBookingMessage("Please select both check-in and check-out dates.");
+      return;
+    }
+    if (!selectedStay) {
+       setAlertSeverity("warning");
+      setBookingMessage("No stay selected.");
+      return;
+    }
+    if (numberOfGuests < 1) {
+       setAlertSeverity("warning");
+      setBookingMessage("Please select at least one guest.");
+      return;
+    }
+    if (selectedStay.maxGuests < numberOfGuests) {
+       setAlertSeverity("warning");
+      setBookingMessage(
+        `The maximum number of guests for this stay is ${selectedStay.maxGuests}.`
+      );
+      return;
+    }
+
+    if (selectedStay.bookings && selectedStay.bookings.length > 0) {
+      if (
+        CheckDateConflicts(new Date(startDate), new Date(endDate), selectedStay)
+      ) {
+        setBookingMessage(
+          "Selected dates are already booked. Please choose different dates."
+        );
+        return;
+      }
+    }
+
+    const bookingData = {
+      dateFrom: new Date(startDate).toISOString(),
+      dateTo: new Date(endDate).toISOString(),
+      guests: numberOfGuests,
+      venueId: selectedStay.id,
+    };
+
+    try {
+      await postBooking(bookingData);
+      setAlertSeverity("success");
+      setTimeout(()=> setBookingMessage("Booking successful!"), 500);
+      await fetchAndSetSelectedStay(selectedStay.id);
+      setTimeout(() => setBookingMessage(null), 5000);
+    } catch (error) {
+      setAlertSeverity("error");
+     setTimeout(()=> setBookingMessage("Booking failed. Please try again."), 500);
+      console.error("Booking error:", error);
+    }
+  };
+
+  return (
+    <div className={stayStyles.stayCardPosition}>
+      <div className={stayStyles.stayContainer}>
+        <div className={stayStyles.nameRatingImages}>
+          <div className={stayStyles.stayNameRatingDiv}>
+            <h1>{selectedStay.name}</h1>
+            <p>
+              {selectedStay?.rating && selectedStay.rating > 0 ? (
+                <>
+                  {Array.from({ length: Math.round(selectedStay.rating) }).map(
+                    (_, i) => (
+                      <StarIcon className={homeStyles.star} key={i} />
+                    )
+                  )}
+                </>
+              ) : (
+                "No rating available"
+              )}
+            </p>
+          </div>
+
+          <div className={stayStyles.imageListWrapper}>
+            <ImageList className={stayStyles.imageListContainer} cols={2}>
+              {selectedStay.media.slice(0, 4).map((image, index) => (
+                <ImageListItem key={index}>
+                  <img
+                    className={stayStyles.imageItem}
+                    src={image.url}
+                    alt={`${selectedStay.name} image ${index + 1}`}
                     loading="lazy"
-                />
-            ))}
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          </div>
+        </div>
+        <div className={stayStyles.bookingSection}>
+          <BookingCalendar
+            setStartDate={setStartDate}
+            startDate={startDate}
+            endDate={endDate}
+            setEndDate={setEndDate}
+            numberOfGuests={numberOfGuests}
+            setNumberOfGuests={setNumberOfGuests}
+           
+          />
+         
+          <p>
+            Location: {selectedStay.location.city},{" "}
+            {selectedStay.location.country}
+          </p>
+          <p className={stayStyles.description}>{selectedStay.description}</p>
+          <p>Price: {selectedStay.price}</p>
 
-
-            <p>{selectedStay.description}</p>
-            <p>Price: {selectedStay.price}</p>
-            <p>Location: {selectedStay.location.city}, {selectedStay.location.country}</p>
-       
-            <h2>Available Facilities</h2>
-            {availableFacilities.length > 0 ? (
-                  <ul>
-            {availableFacilities.map(([facility])=>(
-                <li key={facility}>
-                    <img src={facilityIcons[facility]} alt={`${facility} icon`} />
+          <h2>Available Facilities</h2>
+          {availableFacilities.length > 0 ? (
+            <ul>
+              {availableFacilities.map(([facility]) => (
+                <button>
+                  <li key={facility}>
+                    <img
+                      src={facilityIcons[facility]}
+                      alt={`${facility} icon`}
+                    />
                     {facility.charAt(0).toUpperCase() + facility.slice(1)}
-                </li>
-            ))}
-           </ul>
-           ) : (
-             <p>No Facilities Available</p>
-           )}
+                  </li>
+                </button>
+              ))}
+            </ul>
+          ) : (
+            <p>No Facilities Available</p>
+          )}
 
-<BookingCalendar setBookingMessage={setBookingMessage} bookingMessage={bookingMessage}/>
-  <div
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "auto",
-            height: "auto",
-          }}
-        >
-          <Snackbar
-            open={Boolean(bookingMessage)}
-            autoHideDuration={3000}
-            onClose={() => setBookingMessage(null)}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-
-              position: "fixed",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: 1500,
-              width: "400px",
-              height: "auto",
-              backgroundColor: "transparent",
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <Alert
-              severity="success"
+          <button type="submit" onClick={handleBooking}>
+            Book Now
+          </button>
+         
+            <Snackbar
+              open={Boolean(bookingMessage)}
+              autoHideDuration={3000}
               onClose={() => setBookingMessage(null)}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
               sx={{
-                fontSize: "20px",
-                padding: "20px",
-
-                textAlign: "center",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "absolute",
+                top: "20px",
+                left: "50%",
+                transform: "translate(-50%)",
+                zIndex: 100,
+                width: "800px",
+                height: "auto",
+                backgroundColor: "transparent",
+                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
               }}
             >
-              {bookingMessage}
-            </Alert>
-          </Snackbar>
+              <Alert
+               severity={alertSeverity}
+               
+                onClose={() => setBookingMessage(null)}
+                sx={{
+                  fontSize: "20px",
+                  padding: "20px",
+
+                  textAlign: "center",
+                }}
+               
+              >
+                {bookingMessage}
+              </Alert>
+            </Snackbar>
+      
+          {bookingMessage && <p>{bookingMessage}</p>}
         </div>
+      </div>
 
-        {bookingMessage && <p style={{ color: "red" }}>{bookingMessage}</p>}
+       
+
+    </div>
 
 
-           </div>
-
-           
-        </div>
-    );
+  );
 };
 
 export default DisplayAStay;
