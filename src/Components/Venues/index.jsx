@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Wifi from "../../assets/Images/wifi.png";
+import Wifi from "../../assets/Images/Wifi.png";
 import Parking from "../../assets/Images/parking.png";
 import Pets from "../../assets/Images/pets.png";
 import Breakfast from "../../assets/Images/breakfast.png";
