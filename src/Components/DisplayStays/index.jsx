@@ -39,13 +39,54 @@ const DisplayStays = () => {
  
 
   return (
-    <div>
+
+<div>
+
+  
+    
       <SelectionSearchBar stays={stays || []} onFilter={setFilteredStays} />
       {filteredStays.length > 0 ? (
         filteredStays.map((stay, index) => (
           <div className= {homeStyles.stayCardLayoutBox} key={`${stay?.id || index}`}>
             <div className= {homeStyles.stayCardOuterWrapper}>
 <div className= {homeStyles.stayCardWrapper}>
+
+  <div className={homeStyles.mobileView}>
+
+
+      <div className={homeStyles.nameRatingDivMobile}>
+
+         <h1 className={`${homeStyles.h1Home} ${gStyles.h1Black}`}>{stay?.name || "Unknown Stay"}</h1>
+                  <p>
+                {stay?.rating && stay.rating > 0 ? (
+                  <>
+                    {Array.from({ length: Math.round(stay.rating) }).map((_, i) => (
+                      <StarIcon className={homeStyles.star} key={i}/>
+                    ))}
+                  </>
+                ) : (
+                  ""
+                )}
+              </p>
+             
+            
+              </div>
+      <div className={homeStyles.ratingBoxMobile}>
+              <p className={`${gStyles.bodyWhite} ${homeStyles.ratingNumberBg}`}>{stay?.rating}</p>
+            <p className={gStyles.bodyBlack}>
+              {(() => {
+                const rating = Math.round(stay?.rating);
+                if (!rating) return "No rating";
+                if (rating === 1) return "Poor quality";
+                if (rating === 2) return "Not bad quality";
+                if (rating === 3 || rating === 4) return "Good quality";
+                if (rating === 5) return "Excellent quality";
+                return "";
+              })()}
+            </p>
+    
+</div>
+            </div>
             <div className = {homeStyles.stayImageContainer}>
               {stay?.media?.length > 0 ? (
                 <div className={homeStyles.carouselContainer}> 
