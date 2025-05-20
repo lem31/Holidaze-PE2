@@ -30,7 +30,7 @@ function UserDropDown({isOpen}) {
         <div className={hStyles.avatarBox}>
           <img
             className={hStyles.navIcons}
-            src={userProfile.data.avatar.url}
+            src={userProfile.avatar.url}
             alt="User Avatar"
           ></img>
         </div>
