@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Box, TextField, Button } from "@mui/material";
-import {useForm, Controller} from "react-hook-form";
+import {useForm, Controller, set} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EditProfileFormValidator from "../EditProfileFormValidator";
 import useMyStore from "../../Store";
@@ -35,6 +35,7 @@ const EditProfileForm = ({
 
 
   const { userProfile, updateUserProfile } = useMyStore();
+  const {fetchUserProfile} = useMyStore();
   const [validationErrors, setValidationErrors] = useState({});
  
 
@@ -56,14 +57,14 @@ const EditProfileForm = ({
   useEffect(() => {
     if (userProfile) {
       reset({
-        bio: userProfile.data?.bio || "",
+        bio: userProfile?.bio || "",
         banner: {
-         url: userProfile.data?.banner?.url || defaultBanner?.url,
-          alt: userProfile.data?.banner?.alt || defaultBanner?.alt,
+         url: userProfile?.banner?.url || defaultBanner?.url,
+          alt: userProfile?.banner?.alt || defaultBanner?.alt,
         },
         avatar: {
-          url: userProfile.data?.avatar?.url || defaultAvatar?.url,
-          alt: userProfile.data?.avatar?.alt || defaultAvatar?.alt,
+          url: userProfile?.avatar?.url || defaultAvatar?.url,
+          alt: userProfile?.avatar?.alt || defaultAvatar?.alt,
         },
       });
     }
@@ -96,10 +97,12 @@ const EditProfileForm = ({
   
         const success = await updateUserProfile(userData);
         if (success) {
+         
           setSuccessMessage("Profile Updated successfully!");
           setTimeout(() => {
             toggleForm();
           }, 500);
+          fetchUserProfile();
         } else {
           console.error("Failed to update profile");
           setError("api", { message: "Failed to update profile" });
