@@ -29,7 +29,7 @@ const CreateVenueFormValidator = Yup.object().shape({
     continent: Yup.string().optional(),
     lat: Yup.number().optional(),
     lng: Yup.number().optional(),
-  }).optional(),
+  }).default(undefined),
 });
 
 export default CreateVenueFormValidator;
