@@ -1,0 +1,92 @@
+.bannerAvatarDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    margin-top: 20px;
+    position: relative;
+}
+
+.bannerDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90vw;
+   
+    height: 200px;
+}
+
+.bannerDiv img{
+  height: 200px;
+width: 100%;
+    object-fit: cover;
+    
+ border-radius: 5px;
+}
+
+.avatar{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 130px;
+    border: 3px solid var(--tertiary-color-1);
+}
+
+.profileInfoDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    margin-top: 50px;
+    gap: 12px;
+}
+
+.editProfileForm{
+    display: flex;
+
+    flex-direction: column;
+   width: 400px;
+padding: 20px;
+    gap: 12px;
+    background-color: var(--primary-color-2)
+}
+
+.inputBg .MuiInputBase-root {
+    background-color: var(--primary-color-1) !important;
+   
+}
+.buttonDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+}
+
+.editProfileFormDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+  margin-top: 12px;
+}
+
+@media (max-width: 486px) {
+.buttonDiv{
+    flex-direction: column;
+
+ 
+   
+}
+
+   .editProfileForm{
+   
+   width: 200px;
+
+}
+}
+

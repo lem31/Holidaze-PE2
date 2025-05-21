@@ -1,41 +1,41 @@
 .buttonPrimary {
-  background-color: var(--secondary-color-2);
-  color: var(--primary-color-1);
+  background-color: var(--secondary-color-2) !important;
+  color: var(--primary-color-1) !important;
   border: none;
-  border-radius: 5px;
+  border-radius: 5px !important;
   cursor: pointer;
-  padding: 12px 24px;
-  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
-  font-family: var(--font-family-3);
+  padding: 12px 24px !important;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25)) !important;
+  font-family: var(--font-family-3) !important;
 }
 
 .buttonPrimary:hover {
-  background-color: var(--Button-Hover-color-2);
-  filter: drop-shadow(2px 4px 4px #ffffff);
+  background-color: var(--Button-Hover-color-2) !important;
+  filter: drop-shadow(2px 4px 4px #ffffff) !important;
 }
 
 .buttonPrimary:active {
-  background-color: var(--Button-Active-color-2);
-  box-shadow: inset 0 0 20px #320e3b;
+  background-color: var(--Button-Active-color-2) !important;
+  box-shadow: inset 0 0 20px #320e3b !important;
 }
 
 .buttonSecondary {
-  background-color: var(--secondary-color);
-  color: var(--primary-color-1);
+  background-color: var(--secondary-color) !important;
+  color: var(--primary-color-1) !important;
   border: none;
-  border-radius: 5px;
+  border-radius: 5px !important;
   cursor: pointer;
-  padding: 24px 12px;
-  font-family: var(--font-family-3);
+  padding: 12px 24px  !important;
+  font-family: var(--font-family-3) !important;
 }
 
 .buttonSecondary:hover {
-  background-color: var(--Button-Hover-color-1);
-  filter: drop-shadow(2px 4px 4px #ffffff);
+  background-color: var(--Button-Hover-color-1) !important;
+  filter: drop-shadow(2px 4px 4px #ffffff) !important;
 }
 .buttonSecondary:active {
-  background-color: var(--Button-Active-color-1);
-  box-shadow: inset 0 0 20px #320e3b;
+  background-color: var(--Button-Active-color-1) !important;
+  box-shadow: inset 0 0 20px #320e3b !important;
   
 }
 
@@ -141,7 +141,7 @@
   letter-spacing: 1.5%;
 }
 
-.labelWhite {
+.labelWhite .MuiInputLabel-root {
   font-size: var(--font-size-small);
   color: var(--primary-color-1);
   font-family: var(--font-family-2);
@@ -358,4 +358,27 @@
     font-size: var(--font-size-tiny);
     font-family: var(--font-family-3);
   }
+
+  .buttonPrimary {
+  padding: 16px 32px !important;
+font-size: var(--font-size-tiny) !important;
+  }
+
+  .buttonSecondary {
+    padding: 16px 32px !important;
+    font-size: var(--font-size-tiny) !important;
+  }
+
+  .labelWhite .MuiInputLabel-root {
+    font-size: var(--font-size-tiny);
+    color: var(--primary-color-1);
+    font-family: var(--font-family-2);
+  }
+
+  .labelWhiteBold {
+    font-size: var(--font-size-tiny);
+    color: var(--primary-color-1);
+    font-family: var(--font-family-2);
+    font-weight: bold;
+}
 }
