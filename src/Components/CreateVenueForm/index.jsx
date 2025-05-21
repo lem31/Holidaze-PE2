@@ -203,28 +203,40 @@ const fetchedStays = await fetchStays();
         >
           <Button
             variant={metaValues.parking ? "contained" : "outlined"}
-            onClick={() => setValue("meta.parking", !metaValues.parking)}
+           onClick={() => {
+  setValue("meta", { ...metaValues, parking: !metaValues.parking });
+}}
+
           >
             Parking
           </Button>
 
           <Button
             variant={metaValues.wifi ? "contained" : "outlined"}
-            onClick={() => setValue("meta.wifi", !metaValues.wifi)}
+          onClick={() => {
+  setValue("meta", { ...metaValues, wifi: !metaValues.wifi});
+}}
+
           >
             Wifi
           </Button>
 
           <Button
             variant={metaValues.breakfast ? "contained" : "outlined"}
-            onClick={() => setValue("meta.breakfast", !metaValues.breakfast)}
+            onClick={() => {
+  setValue("meta", { ...metaValues, breakfast: !metaValues.breakfast });
+}}
+
           >
             Breakfast
           </Button>
 
           <Button
             variant={metaValues.pets ? "contained" : "outlined"}
-            onClick={() => setValue("meta.pets", !metaValues.pets)}
+          onClick={() => {
+  setValue("meta", { ...metaValues, pets: !metaValues.pets });
+}}
+
           >
             Pets
           </Button>
