@@ -3,6 +3,8 @@ import useMyStore from "../../Store/index";
 import DefaultImage from '../../assets/Images/DefaultBannerProfileImg.jpg';
 import EditProfileFormBox from "../EditProfileForm";
 import {Snackbar, Alert} from "@mui/material";
+import gStyles from '../../CSS_Modules/Global/global.module.css';
+import profileStyles from '../../CSS_Modules/Profile/profile.module.css';
 
 
 
@@ -17,14 +19,22 @@ React.useEffect(() => {
 }, [refresh]);
   return (
     <div>
-    
-   
-    <h2>{userProfile.name}</h2>
-    <p>{userProfile.bio}</p>
+      <div className={profileStyles.bannerAvatarDiv}>
+        <div className={profileStyles.bannerDiv}>
     <img src={userProfile.banner?.url || DefaultImage } alt="banner" />
-    <img src={userProfile.avatar?.url || DefaultImage } alt="avatar" />
+    </div>
+    <img className={profileStyles.avatar} src={userProfile.avatar?.url || DefaultImage } alt="avatar" />
+    </div>
+
+    <div className={profileStyles.profileInfoDiv}>
+   <h1 className= {gStyles.h1Black}>My Profile</h1>
+
+    <p className={gStyles.bodyBlack}>{userProfile.name}</p>
+    <p>{userProfile.bio}</p>
+
+  
  
-      <button
+      <button className= {gStyles.buttonPrimary}
         onClick={() => {
          
       setIsEditProfileVisible(true); 
@@ -32,6 +42,7 @@ React.useEffect(() => {
       >
         Edit Profile
       </button>
+      </div>
 
        <div>
             <div  style={{
@@ -71,6 +82,7 @@ React.useEffect(() => {
                   
 
       {isEditProfileVisible && (
+        
           <EditProfileFormBox
           toggleForm={() => setIsEditProfileVisible(false)}
           setSuccessMessage={setSuccessMessage}

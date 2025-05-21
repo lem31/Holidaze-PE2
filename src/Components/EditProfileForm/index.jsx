@@ -4,6 +4,8 @@ import {useForm, Controller, set} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EditProfileFormValidator from "../EditProfileFormValidator";
 import useMyStore from "../../Store";
+import profileStyles from "../../CSS_Modules/Profile/profile.module.css";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
 
 /**
  * EditProfileForm component renders a form for editing user profile with fields for name, email, password, bio, and images.
@@ -114,27 +116,50 @@ const EditProfileForm = ({
   
   
   return (
+
+<div className={profileStyles.editProfileFormDiv}>
     <form
+    className={profileStyles.editProfileForm}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
+          <h2 className={gStyles.h2White}>Edit Profile</h2>
       <Controller
-      label="Bio"
+   
         name="bio"
         control={control}
         render={({ field }) => (
           <TextField
+       
             {...field}
+            
+             label="Bio"
             variant="outlined"
             fullWidth
             multiline
             rows={3}
-            sx={{ marginBottom: 2 }}
+            sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },}}
+      
+        
           />
         )}
       />
       {validationErrors.bio && <p>{validationErrors.bio}</p>}
 
-      <Box sx={{ marginBottom: 2 }}>
+      <Box >
         <Controller
         
           name="banner.url"
@@ -142,15 +167,31 @@ const EditProfileForm = ({
           render={({ field }) => (
             <TextField
               {...field}
-             
+             label="Banner URL"
               variant="outlined"
               fullWidth
+               sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },}}
+              
             />
           )}
         />
         {validationErrors.bannerUrl && <p>{validationErrors.banner.url}</p>}
       </Box>
-      <Box sx={{ marginBottom: 2 }}>
+      <Box >
         {validationErrors.bannerUrl && <p>{validationErrors.bannerUrl}</p>}
         <Controller
          
@@ -159,15 +200,30 @@ const EditProfileForm = ({
           render={({ field }) => (
             <TextField
               {...field}
-            
+            label="Banner Alt Text"
               variant="outlined"
               fullWidth
+               sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },}}
             />
           )}
         />
         {validationErrors.bannerAlt && <p>{validationErrors.banner.alt}</p>}
       </Box>
-      <Box sx={{ marginBottom: 2 }}>
+      <Box >
         <Controller
     
           name="avatar.url"
@@ -175,14 +231,31 @@ const EditProfileForm = ({
           render={({ field }) => (
             <TextField
               {...field}
-         
+         label="Avatar URL"
               variant="outlined"
               fullWidth
-              sx={{ marginBottom: 1 }}
+            sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },}}
             />
           )}
         />
         {validationErrors.avatarUrl && <p>{validationErrors.avatar.url}</p>}
+      </Box>
+      <Box >
         <Controller
      
           name="avatar.alt"
@@ -190,29 +263,51 @@ const EditProfileForm = ({
           render={({ field }) => (
             <TextField
               {...field}
-           
+           label="Avatar Alt Text"
               variant="outlined"
               fullWidth
+           
+               sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+
+    },
+    "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },
+  }}
             />
           )}
         />
         {validationErrors.avatarAlt && <p>{validationErrors.avatar.alt}</p>}
       </Box>
-      <Button type="submit" variant="contained" color="primary" fullWidth>
+
+      <div className={profileStyles.buttonDiv}>
+      <Button className={gStyles.buttonPrimary} type="submit" variant="contained"  >
         Save Changes
       </Button>
 
       <Button
+      className={gStyles.buttonSecondary}
         type="button"
         variant="contained"
         color="secondary"
-        fullWidth
+      
         onClick={() => setIsEditProfileVisible(!isEditProfileVisible)}
       >
         {" "}
-        Close{" "}
+        Cancel{" "}
       </Button>
+      </div>
     </form>
+    </div>
   );
 };
 
