@@ -82,6 +82,7 @@ React.useEffect(() => {
                   
 
       {isEditProfileVisible && (
+        
           <EditProfileFormBox
           toggleForm={() => setIsEditProfileVisible(false)}
           setSuccessMessage={setSuccessMessage}

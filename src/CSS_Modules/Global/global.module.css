@@ -2,9 +2,9 @@
   background-color: var(--secondary-color-2) !important;
   color: var(--primary-color-1) !important;
   border: none;
-  border-radius: 5px;
+  border-radius: 5px !important;
   cursor: pointer;
-  padding: 12px 24px;
+  padding: 12px 24px !important;
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25)) !important;
   font-family: var(--font-family-3) !important;
 }
@@ -23,9 +23,9 @@
   background-color: var(--secondary-color) !important;
   color: var(--primary-color-1) !important;
   border: none;
-  border-radius: 5px;
+  border-radius: 5px !important;
   cursor: pointer;
-  padding: 24px 12px;
+  padding: 12px 24px  !important;
   font-family: var(--font-family-3) !important;
 }
 
@@ -358,4 +358,27 @@
     font-size: var(--font-size-tiny);
     font-family: var(--font-family-3);
   }
+
+  .buttonPrimary {
+  padding: 16px 32px !important;
+font-size: var(--font-size-tiny) !important;
+  }
+
+  .buttonSecondary {
+    padding: 16px 32px !important;
+    font-size: var(--font-size-tiny) !important;
+  }
+
+  .labelWhite .MuiInputLabel-root {
+    font-size: var(--font-size-tiny);
+    color: var(--primary-color-1);
+    font-family: var(--font-family-2);
+  }
+
+  .labelWhiteBold {
+    font-size: var(--font-size-tiny);
+    color: var(--primary-color-1);
+    font-family: var(--font-family-2);
+    font-weight: bold;
+}
 }

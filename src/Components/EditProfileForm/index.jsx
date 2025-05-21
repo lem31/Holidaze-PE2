@@ -117,7 +117,7 @@ const EditProfileForm = ({
   
   return (
 
-
+<div className={profileStyles.editProfileFormDiv}>
     <form
     className={profileStyles.editProfileForm}
       onSubmit={handleSubmit(handleFormSubmit)}
@@ -290,7 +290,7 @@ const EditProfileForm = ({
       </Box>
 
       <div className={profileStyles.buttonDiv}>
-      <Button className={gStyles.buttonPrimary} type="submit" variant="contained"  fullWidth>
+      <Button className={gStyles.buttonPrimary} type="submit" variant="contained"  >
         Save Changes
       </Button>
 
@@ -299,7 +299,7 @@ const EditProfileForm = ({
         type="button"
         variant="contained"
         color="secondary"
-        fullWidth
+      
         onClick={() => setIsEditProfileVisible(!isEditProfileVisible)}
       >
         {" "}
@@ -307,6 +307,7 @@ const EditProfileForm = ({
       </Button>
       </div>
     </form>
+    </div>
   );
 };
 
