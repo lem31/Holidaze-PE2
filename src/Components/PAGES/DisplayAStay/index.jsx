@@ -196,14 +196,15 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
           />
          <div className={stayStyles.locDescFacilDiv}>
           <div className={stayStyles.locationDescDiv}>
-          
+          <div className={stayStyles.locationDiv}>
           <p className={gStyles.bodyWhite}>
             <img className={stayStyles.icon} src={Location} alt="" />
             Location: {selectedStay.location.city},{" "}
             {selectedStay.location.country}
           </p>
-          <div className={stayStyles.descriptionDiv}>
-            <h2 className={gStyles.h2White}>Description</h2>
+          </div>
+          <div className={stayStyles.descriptionPriceDiv}>
+            <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>Description</h2>
           <p className={`${stayStyles.description} ${gStyles.bodyWhite}`}>{selectedStay.description}</p>
           <p className={gStyles.bodyWhite}>
             <img className={stayStyles.icon} src={Price} alt="" />Price: {selectedStay.price} NOK</p>
@@ -211,7 +212,7 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
 </div>
 
 <div className={stayStyles.facilH2Div}>
-          <h2 className={gStyles.h3White}>Available Facilities</h2>
+          <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>Available Facilities</h2>
           {availableFacilities.length > 0 ? (
             <ul>
                 <div className={stayStyles.facilityDiv} >
@@ -250,12 +251,12 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                position: "absolute",
-                top: "20px",
+                position: "fixed ",
+                top: "50%",
                 left: "50%",
-                transform: "translate(-50%)",
-                zIndex: 100,
-                width: "800px",
+                transform: "translate(-50% -50%)",
+                zIndex: 1000,
+                width: "80%",
                 height: "auto",
                 backgroundColor: "transparent",
                 boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",

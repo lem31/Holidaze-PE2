@@ -1,3 +1,8 @@
+
+
+
+
+
 .imageListContainer {
   width: 300px;
   height: 300px;
@@ -15,9 +20,12 @@
 
 .locationDescDiv {
   margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.descriptionDiv {
+.descriptionPriceDiv {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -199,6 +207,7 @@
 @media (min-width: 487px) and (max-width: 768px) {
   .stayContainer {
     flex-direction: column;
+    align-items: center;
   }
 
   .bookingSection {
@@ -224,9 +233,6 @@
   }
 
   .locationDescDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     width: auto;
     height: auto;
     margin-top: 0px;
@@ -235,7 +241,7 @@
   .checkInOutDiv {
     max-width: 400px;
   }
-  .descriptionDiv {
+  .descriptionPriceDiv {
     margin-top: 8px;
   }
 }
@@ -243,13 +249,14 @@
 @media (max-width: 486px) {
   .stayContainer {
     flex-direction: column;
+    align-items: center;
   }
 
   .bookingSection {
     display: flex;
     flex-direction: column;
-    max-width: 280px;
-    width: auto;
+    max-width: 300px;
+
     height: auto;
     align-items: center;
     justify-content: center;
@@ -268,20 +275,46 @@
   }
 
   .locationDescDiv {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+   
+    align-items: center;
+    width: auto;
     height: auto;
     margin-top: 0px;
   }
 
-  .checkInOutDiv {
-    max-width: 400px;
+  .locationDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+ width: 100%;
   }
 
-  .descriptionDiv {
+   .locationDiv p{
+
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+    text-wrap: wrap;
+    max-width: 200px;
+   
+
+  }
+
+  .checkInOutDiv {
+    max-width: 180px;
+  }
+
+  .descriptionPriceDiv {
     margin-top: 8px;
+    align-items: center;
+  width: 100%;
+  }
+
+  .description {
+    max-width: 180px;
+    height: auto;
+    text-wrap: wrap;
   }
 
   .facilityDiv li {
@@ -289,17 +322,55 @@
     height: 50px;
   }
 
-  .facilityDiv{
-   align-items: center;
-   gap: 8px;
+  .facilityDiv {
+    align-items: center;
+    gap: 8px;
   }
 
+  .facilH2Div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
 
-.facilH2Div {
-  display: flex;
+  .imageListContainer {
+    width: auto;
+    height: auto;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    border: 3px solid var(--tertiary-color-1);
+    border-radius: 10px;
+  }
+
+  .h2Stay{
+    text-wrap: wrap;
+text-align: center;
+    max-width: 200px;
+  }
+
+  .bookingCalendarDiv {
+ align-items: center;
+}
+
+/* .datePicker{
+display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  margin-top: 8px;
+  justify-content: center;
+  background-color: var(--primary-color-1);
+  overflow-y: hidden;
+  flex: 1 1 200px;
+  
+} */
+
+.calendar{
+  width: 100px;
 }
+
+
+
 }
+
