@@ -203,20 +203,23 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
           <p className={gStyles.bodyWhite}>
             <img className={stayStyles.icon} src={Price} alt="" />Price: {selectedStay.price} NOK</p>
 
-          <h2>Available Facilities</h2>
+          <h2 className={gStyles.h2White}>Available Facilities</h2>
           {availableFacilities.length > 0 ? (
             <ul>
+                <div className={stayStyles.facilityDiv} key={selectedStay.id}>
               {availableFacilities.map(([facility]) => (
-                <button>
-                  <li key={facility}>
+        
+                  <li key={selectedStay.id}>
                     <img
                       src={facilityIcons[facility]}
                       alt={`${facility} icon`}
                     />
                     {facility.charAt(0).toUpperCase() + facility.slice(1)}
                   </li>
-                </button>
+                 
+              
               ))}
+               </div>
             </ul>
           ) : (
             <p>No Facilities Available</p>
