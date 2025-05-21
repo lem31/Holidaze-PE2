@@ -52,6 +52,8 @@ const DisplayAStay = () => {
   console.log("Booking Message:", bookingMessage);
   console.log("Snackbar should open:", Boolean(bookingMessage));
 
+const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
+
   const facilityIcons = {
     wifi: Wifi,
     parking: Parking,
@@ -88,9 +90,15 @@ const DisplayAStay = () => {
   const handleBooking = async () => {
     setBookingMessage("Processing your booking...");
     setAlertSeverity("info");
+
     if (!isLoggedIn) {
       setAlertSeverity("warning");
       setBookingMessage("Please log in to make a booking.");
+      return;
+    }
+    if (isVenueManager) {
+      setAlertSeverity("warning");
+      setBookingMessage("Please log in as a guest to make a booking.");
       return;
     }
     if (!startDate || !endDate) {
