@@ -40,3 +40,18 @@ width: 100%;
     margin-top: 50px;
     gap: 12px;
 }
+
+.editProfileForm{
+    display: flex;
+
+    flex-direction: column;
+   width: 400px;
+padding: 20px;
+    gap: 12px;
+    background-color: var(--primary-color-2)
+}
+
+.inputBg .MuiInputBase-root {
+    background-color: var(--primary-color-1) !important;
+   
+}

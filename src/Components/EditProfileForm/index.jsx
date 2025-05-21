@@ -4,6 +4,8 @@ import {useForm, Controller, set} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EditProfileFormValidator from "../EditProfileFormValidator";
 import useMyStore from "../../Store";
+import profileStyles from "../../CSS_Modules/Profile/profile.module.css";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
 
 /**
  * EditProfileForm component renders a form for editing user profile with fields for name, email, password, bio, and images.
@@ -114,21 +116,33 @@ const EditProfileForm = ({
   
   
   return (
+
+
     <form
+    className={profileStyles.editProfileForm}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
+          <h2 className={gStyles.h2White}>Edit Profile</h2>
       <Controller
-      label="Bio"
+   
         name="bio"
         control={control}
         render={({ field }) => (
           <TextField
+       
             {...field}
+            
+             label="Bio"
             variant="outlined"
             fullWidth
             multiline
             rows={3}
-            sx={{ marginBottom: 2 }}
+            sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+    },}}
+      
+        
           />
         )}
       />
@@ -142,9 +156,14 @@ const EditProfileForm = ({
           render={({ field }) => (
             <TextField
               {...field}
-             
+             label="Banner URL"
               variant="outlined"
               fullWidth
+               sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+    },}}
+              
             />
           )}
         />
@@ -159,9 +178,13 @@ const EditProfileForm = ({
           render={({ field }) => (
             <TextField
               {...field}
-            
+            label="Banner Alt Text"
               variant="outlined"
               fullWidth
+               sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+    },}}
             />
           )}
         />
@@ -175,10 +198,13 @@ const EditProfileForm = ({
           render={({ field }) => (
             <TextField
               {...field}
-         
+         label="Avatar URL"
               variant="outlined"
               fullWidth
-              sx={{ marginBottom: 1 }}
+            sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+    },}}
             />
           )}
         />
@@ -190,9 +216,13 @@ const EditProfileForm = ({
           render={({ field }) => (
             <TextField
               {...field}
-           
+           label="Avatar Alt Text"
               variant="outlined"
               fullWidth
+               sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+    },}}
             />
           )}
         />
