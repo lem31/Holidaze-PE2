@@ -184,6 +184,7 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
           </div>
         </div>
         <div className={stayStyles.bookingSection}>
+          <div className={stayStyles.responsiveDiv}>
           <BookingCalendar
             setStartDate={setStartDate}
             startDate={startDate}
@@ -193,16 +194,23 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
             setNumberOfGuests={setNumberOfGuests}
            
           />
-         
+         <div className={stayStyles.locDescFacilDiv}>
+          <div className={stayStyles.locationDescDiv}>
+          
           <p className={gStyles.bodyWhite}>
             <img className={stayStyles.icon} src={Location} alt="" />
             Location: {selectedStay.location.city},{" "}
             {selectedStay.location.country}
           </p>
+          <div className={stayStyles.descriptionDiv}>
+            <h2 className={gStyles.h2White}>Description</h2>
           <p className={`${stayStyles.description} ${gStyles.bodyWhite}`}>{selectedStay.description}</p>
           <p className={gStyles.bodyWhite}>
             <img className={stayStyles.icon} src={Price} alt="" />Price: {selectedStay.price} NOK</p>
+            </div>
+</div>
 
+<div className={stayStyles.facilH2Div}>
           <h2 className={gStyles.h3White}>Available Facilities</h2>
           {availableFacilities.length > 0 ? (
             <ul>
@@ -224,6 +232,9 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
           ) : (
             <p>No Facilities Available</p>
           )}
+          </div>
+          </div>
+          </div>
 <div className={stayStyles.buttonDiv}>
           <button className={gStyles.buttonPrimary} type="submit" onClick={handleBooking}>
             Book Now
