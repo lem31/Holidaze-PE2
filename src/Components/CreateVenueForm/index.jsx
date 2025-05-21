@@ -10,21 +10,30 @@ const CreateVenueForm = ({ toggleForm }) => {
   const { createNewVenue, setSuccessMessage } = useMyStore();
   const [stays, setStays] = useState([]);
 
+
+
+  // State to manage the meta values
+
   const [metaValues, setMetaValues] = useState({
     wifi: false,
     parking: false,
     breakfast: false,
     pets: false,
   });
+
+  // CREATE VENUE FUNCTION
+
   const {
     register,
     handleSubmit,
     setValue,
     watch,
-
     setError,
     formState: { errors },
   } = useForm({
+    defaultValues: {
+      location: { lat: 0, lng: 0 },
+    },
     resolver: yupResolver(CreateVenueFormValidator),
     mode: "onSubmit",
   });
@@ -63,6 +72,8 @@ const fetchedStays = await fetchStays();
     }
   };
 
+  // UseEffect to check for changes in the meta values and update the state
+
   useEffect(() => {
     const meta = watch("meta") || {};
     setMetaValues({
@@ -73,12 +84,17 @@ const fetchedStays = await fetchStays();
     });
   }, [watch("meta")]);
 
+  // Add Image 
+
   const onAddImage = () => {
     const currentMedia = watch("media") || [];
 
     const updatedMedia = [...currentMedia, { url: "", alt: "" }];
     setValue("media", updatedMedia);
   };
+
+  //Remove Image
+  
 
   const removeImage = (index) => {
     const updatedMedia = [...watch("media")];
