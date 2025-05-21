@@ -25,6 +25,7 @@ function Footer() {
         <footer className={footerStyles.footer}> 
             <div className={footerStyles.crDiv}>
 <p className={footerStyles.copyRight}>© 2025 Holidaze  </p>
+<a href="https://icons8.com/" className={footerStyles.copyRight}> Icons by icons 8</a>
 </div >
   {!isLoggedIn && (
     <nav className={footerStyles.registerLoginNav}>

@@ -1,13 +1,54 @@
+
+
+
+
+
 .imageListContainer {
- width: 483px;
-  height: 459px;
+  width: 300px;
+  height: 300px;
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(2, 1fr);
   border: 3px solid var(--tertiary-color-1);
   border-radius: 10px;
+  overflow: hidden;
 }
 
+.imageListWrapper{
+   overflow: hidden;
+}
+
+.imageListItem{
+   overflow-y: hidden;
+}
+
+.responsiveDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.locationDescDiv {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.descriptionPriceDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+  max-width: 400px;
+}
+
+.h1 {
+  position: static;
+  text-wrap: wrap;
+  width: auto;
+}
 
 .imageItem {
   width: 50%;
@@ -20,7 +61,6 @@
   height: 200px;
 }
 
-
 .imageItem:nth-child(2),
 .imageItem:nth-child(3) {
   height: 150px;
@@ -30,82 +70,334 @@
   height: 100px;
 }
 
-.stayNameRatingDiv{
-    display: flex;
-    flex-direction: row;
-   align-items: center;
-   gap: 12px;
-   margin-bottom: 28px;
+.stayNameRatingDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  overflow-y: hidden;
+  width: auto;
+  padding: 10px;
+  position: static;
+  z-index: 2;
 }
 
-.nameRatingImages{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.nameRatingImages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
 }
 
-.stayCardPosition{
-    display: flex; 
+.stayCardPosition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 12px;
+}
+
+.stayContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color-2);
+}
+
+.description {
+  width: auto;
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.bookingSection {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: 800px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+}
+
+.stayStar {
+  color: var(--secondary-color);
+
+  z-index: 2;
+}
+
+.facilityDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.facilH2Div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.facilityDiv li {
+  background-color: var(--Button-Active-color-1);
+  box-shadow: inset 0 0 20px #320e3b;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+}
+
+.h2Stay {
+  padding-bottom: 24px;
+}
+
+.checkInOutDiv {
+  display: flex;
+
+  justify-content: center;
+  flex-wrap: wrap;
+  border: 3px solid var(--tertiary-color-1);
+  border-radius: 5px;
+  width: auto;
+  gap: 8px;
+  padding: 4px;
+  overflow-x: visible;
+}
+
+.datePicker {
+  background-color: var(--primary-color-1);
+  overflow-y: hidden;
+  flex: 1 1 200px;
+}
+
+.guestDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.buttonDiv {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.bookingCalendarDiv {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+/* MEDIA QUERIES */
+
+@media (min-width: 487px) and (max-width: 768px) {
+  .stayContainer {
     flex-direction: column;
     align-items: center;
-   
-}
+  }
 
-.stayContainer{
+  .bookingSection {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+
+    width: auto;
+    height: auto;
+    align-items: center;
     justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    gap: 20px;
+  }
+  .stayNameRatingDiv {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .responsiveDiv {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .locationDescDiv {
+    width: auto;
+    height: auto;
+    margin-top: 0px;
+  }
+
+  .checkInOutDiv {
+    max-width: 400px;
+  }
+  .descriptionPriceDiv {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 486px) {
+  .stayContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bookingSection {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .stayNameRatingDiv {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .responsiveDiv {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .locationDescDiv {
+   
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin-top: 0px;
+  }
+
+  .locationDiv{
     display: flex;
     flex-direction: row;
-    gap: 20px;
-width: 1200px;
-height: 549px;
-background-color: var(--primary-color-2);
-}
-    
-    .description{
-max-width: 435px;
-max-height: 100px;
-overflow-y: scroll;
-}
+    align-items: center;
+    justify-content: center;
+ width: 100%;
+  }
 
-.bookingSection{
-    display: flex;
-    flex-direction: column; 
+   .locationDiv p{
 
-    height: 800px;
-    align-items: left;
-    gap: 20px;
-    margin-top: 80px;
-}
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+    text-wrap: wrap;
+    max-width: 200px;
+   
 
-.stayStar{
-      color: var(--secondary-color);
+  }
 
-}
+  .checkInOutDiv {
+    max-width: 180px;
+  }
 
+  .descriptionPriceDiv {
+    margin-top: 8px;
+    align-items: center;
+  width: 100%;
+  }
 
+  .description {
+    max-width: 180px;
+    height: auto;
+    text-wrap: wrap;
+  }
 
-.starIcon, .guestIcon{
-    width: 32px;
-    height: 32px;}
+  .facilityDiv li {
+    width: 50px;
+    height: 50px;
+  }
 
-.h2Stay{
-    padding-bottom: 24px;
-}
-
-.checkInOutDiv{
-    display: flex;
-    flex-direction: row;
-    border: 3px solid var(--tertiary-color-1);
-    border-radius: 5px;
+  .facilityDiv {
+    align-items: center;
     gap: 8px;
-padding: 4px;
+  }
+
+  .facilH2Div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .imageListContainer {
+    width: auto;
+    height: auto;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    border: 3px solid var(--tertiary-color-1);
+    border-radius: 10px;
+  }
+
+  .h2Stay{
+    text-wrap: wrap;
+text-align: center;
+    max-width: 200px;
+  }
+
+  .bookingCalendarDiv {
+ align-items: center;
 }
 
-.datePicker{
-    background-color: var(--primary-color-1);
+/* .datePicker{
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-color-1);
+  overflow-y: hidden;
+  flex: 1 1 200px;
+  
+} */
 
+.calendar{
+  width: 100px;
 }
+
+.icon{
+  width: 24px;
+  height: 24px;
+}
+
+.guestDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.guestLabelDiv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+}
+
