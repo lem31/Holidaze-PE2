@@ -110,7 +110,7 @@ width: auto;
 
 
 
-.starIcon, .guestIcon{
+.icon{
     width: 32px;
     height: 32px;}
 
@@ -135,4 +135,11 @@ overflow-x: visible;
     background-color: var(--primary-color-1);
 overflow-y: hidden;
   flex: 1 1 200px;
+}
+
+.guestDiv{
+  display: flex;
+  flex-direction: row;
+ 
+  align-items: center;
 }

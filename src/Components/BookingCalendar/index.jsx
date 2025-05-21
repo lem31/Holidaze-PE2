@@ -86,9 +86,9 @@ const BookingCalendar = ({
         />
         </div>
 
-        <div>
+        <div className={stayStyles.guestDiv}>
           <label className={gStyles.bodyWhite} htmlFor="guests">Number of Guests:</label>
-          <img className={stayStyles.guestIcon} src={Guests} alt="Guests" />
+          <img className={stayStyles.icon} src={Guests} alt="Guests" />
           <select
             id="guests"
             value={numberOfGuests}

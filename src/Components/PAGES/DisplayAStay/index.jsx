@@ -14,6 +14,8 @@ import StarIcon from "@mui/icons-material/Star";
 import CheckDateConflicts from "../../CheckDateConflicts";
 import postBooking from "../../../API/PostBooking/index";
 import gStyles from "../../../CSS_Modules/Global/global.module.css";
+import Location from '../../../assets/Images/Location-pink.png';
+import Price from '../../../assets/Images/Price-tag-pink.png';
 
 /**
  * DisplayAStay component fetches and displays details of a selected stay.
@@ -171,7 +173,7 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
               {selectedStay.media.slice(0, 4).map((image, index) => (
                 <ImageListItem key={index}>
                   <img
-                    className={stayStyles.imageItem}
+                    className={stayStyles.icon}
                     src={image.url}
                     alt={`${selectedStay.name} image ${index + 1}`}
                     loading="lazy"
@@ -192,12 +194,14 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
            
           />
          
-          <p>
+          <p className={gStyles.bodyWhite}>
+            <img className={stayStyles.icon} src={Location} alt="" />
             Location: {selectedStay.location.city},{" "}
             {selectedStay.location.country}
           </p>
-          <p className={stayStyles.description}>{selectedStay.description}</p>
-          <p>Price: {selectedStay.price}</p>
+          <p className={`${stayStyles.description} ${gStyles.bodyWhite}`}>{selectedStay.description}</p>
+          <p className={gStyles.bodyWhite}>
+            <img className={stayStyles.icon} src={Price} alt="" />Price: {selectedStay.price} NOK</p>
 
           <h2>Available Facilities</h2>
           {availableFacilities.length > 0 ? (
