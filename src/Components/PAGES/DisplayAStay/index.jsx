@@ -176,7 +176,7 @@ const DisplayAStay = () => {
           <div className={stayStyles.imageListWrapper}>
             <ImageList className={stayStyles.imageListContainer} cols={2}>
               {selectedStay.media.slice(0, 4).map((image, index) => (
-                <ImageListItem key={index}>
+                <ImageListItem className={stayStyles.imageListItem} key={index}>
                   <img
                     className={stayStyles.icon}
                     src={image.url}
@@ -271,7 +271,6 @@ const DisplayAStay = () => {
               alignItems: "center",
               justifyContent: "center",
               position: "fixed ",
-            
               zIndex: 1000,
               width: "100vw",
               height: "auto",
@@ -284,11 +283,10 @@ const DisplayAStay = () => {
               onClose={() => setBookingMessage(null)}
               sx={{
                 fontSize: "20px",
-           display: "flex",
-               width: "400px",
+                display: "flex",
+                width: "400px",
                 height: "auto",
-textWrap: "wrap",
-
+                textWrap: "wrap",
                 textAlign: "center",
               }}
             >
