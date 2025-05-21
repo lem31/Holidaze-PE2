@@ -150,7 +150,7 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
       <div className={stayStyles.stayContainer}>
         <div className={stayStyles.nameRatingImages}>
           <div className={stayStyles.stayNameRatingDiv}>
-            <h1 className={gStyles.h1White}>{selectedStay.name}</h1>
+            <h1 className={`${gStyles.h1White} ${stayStyles.h1}`}>{selectedStay.name}</h1>
             <p className={stayStyles.stayStar}>
               {selectedStay?.rating && selectedStay.rating > 0 ? (
                 <>

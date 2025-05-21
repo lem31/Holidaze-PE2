@@ -60,8 +60,8 @@ const BookingCalendar = ({
        <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>Make a Booking</h2>
  
     
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div >
+    <LocalizationProvider  dateAdapter={AdapterDayjs}>
+  
 
         <div className={stayStyles.checkInOutDiv}>
        
@@ -105,7 +105,7 @@ const BookingCalendar = ({
         </div>
         {/* <button type='submit' onClick={handleBooking}>Book Now</button>
         {bookingMessage && <p>{bookingMessage}</p>} */}
-      </div>
+     
     </LocalizationProvider>
     </div>
   );

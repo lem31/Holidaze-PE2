@@ -173,7 +173,7 @@
 
 @media (min-width: 487px) and (max-width: 768px) {
   .h1White {
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-large-2);
     color: var(--primary-color-1);
     font-family: var(--font-family-1);
     font-weight: bold;
@@ -248,7 +248,7 @@
 
 @media (max-width: 486px) {
   .h1White {
-    font-size: var(--font-size-large-2);
+    font-size: var(--font-size-medium);
     color: var(--primary-color-1);
     font-family: var(--font-family-1);
     font-weight: bold;
