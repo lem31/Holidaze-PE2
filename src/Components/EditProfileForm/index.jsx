@@ -140,6 +140,17 @@ const EditProfileForm = ({
             sx={{
     "& .MuiOutlinedInput-root": {
       backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
     },}}
       
         
@@ -148,7 +159,7 @@ const EditProfileForm = ({
       />
       {validationErrors.bio && <p>{validationErrors.bio}</p>}
 
-      <Box sx={{ marginBottom: 2 }}>
+      <Box >
         <Controller
         
           name="banner.url"
@@ -162,6 +173,17 @@ const EditProfileForm = ({
                sx={{
     "& .MuiOutlinedInput-root": {
       backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
     },}}
               
             />
@@ -169,7 +191,7 @@ const EditProfileForm = ({
         />
         {validationErrors.bannerUrl && <p>{validationErrors.banner.url}</p>}
       </Box>
-      <Box sx={{ marginBottom: 2 }}>
+      <Box >
         {validationErrors.bannerUrl && <p>{validationErrors.bannerUrl}</p>}
         <Controller
          
@@ -184,13 +206,24 @@ const EditProfileForm = ({
                sx={{
     "& .MuiOutlinedInput-root": {
       backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
     },}}
             />
           )}
         />
         {validationErrors.bannerAlt && <p>{validationErrors.banner.alt}</p>}
       </Box>
-      <Box sx={{ marginBottom: 2 }}>
+      <Box >
         <Controller
     
           name="avatar.url"
@@ -204,11 +237,25 @@ const EditProfileForm = ({
             sx={{
     "& .MuiOutlinedInput-root": {
       backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
     },}}
             />
           )}
         />
         {validationErrors.avatarUrl && <p>{validationErrors.avatar.url}</p>}
+      </Box>
+      <Box >
         <Controller
      
           name="avatar.alt"
@@ -219,20 +266,36 @@ const EditProfileForm = ({
            label="Avatar Alt Text"
               variant="outlined"
               fullWidth
+           
                sx={{
     "& .MuiOutlinedInput-root": {
       backgroundColor: "white",
-    },}}
+
+    },
+    "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },
+  }}
             />
           )}
         />
         {validationErrors.avatarAlt && <p>{validationErrors.avatar.alt}</p>}
       </Box>
-      <Button type="submit" variant="contained" color="primary" fullWidth>
+
+      <div className={profileStyles.buttonDiv}>
+      <Button className={gStyles.buttonPrimary} type="submit" variant="contained"  fullWidth>
         Save Changes
       </Button>
 
       <Button
+      className={gStyles.buttonSecondary}
         type="button"
         variant="contained"
         color="secondary"
@@ -240,8 +303,9 @@ const EditProfileForm = ({
         onClick={() => setIsEditProfileVisible(!isEditProfileVisible)}
       >
         {" "}
-        Close{" "}
+        Cancel{" "}
       </Button>
+      </div>
     </form>
   );
 };
