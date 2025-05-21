@@ -206,13 +206,13 @@ console.log("Snackbar should open:", Boolean(bookingMessage));
           <h2 className={gStyles.h3White}>Available Facilities</h2>
           {availableFacilities.length > 0 ? (
             <ul>
-                <div className={stayStyles.facilityDiv} key={selectedStay.id}>
-              {availableFacilities.map(([facility]) => (
+                <div className={stayStyles.facilityDiv} >
+              {availableFacilities.map(([facility], index) => (
         
-                  <li key={selectedStay.id}>
+                  <li key={`${selectedStay.id}-${facility.name}-${index}`}>
                     <img
                       src={facilityIcons[facility]}
-                      alt={`${facility} icon`}
+                      alt={`${facility.name} icon`}
                     />
                     {facility.charAt(0).toUpperCase() + facility.slice(1)}
                   </li>

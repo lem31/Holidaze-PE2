@@ -56,7 +56,7 @@ const BookingCalendar = ({
   };
 
   return (
-    <div>
+    <div className={stayStyles.bookingCalendarDiv}>
        <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>Make a Booking</h2>
  
     
