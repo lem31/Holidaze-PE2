@@ -1,20 +1,18 @@
 .imageListContainer {
- width: 300px;
+  width: 300px;
   height: 300px;
   display: grid;
   gap: 10px;
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(2, 1fr);
   border: 3px solid var(--tertiary-color-1);
   border-radius: 10px;
 }
 
-.h1{
-    position: static;
-    text-wrap: wrap;
- width: auto;
- 
+.h1 {
+  position: static;
+  text-wrap: wrap;
+  width: auto;
 }
-
 
 .imageItem {
   width: 50%;
@@ -27,7 +25,6 @@
   height: 200px;
 }
 
-
 .imageItem:nth-child(2),
 .imageItem:nth-child(3) {
   height: 150px;
@@ -37,85 +34,82 @@
   height: 100px;
 }
 
-.stayNameRatingDiv{
-    display: flex;
- flex-direction: row;
-    flex-wrap: wrap;
-   align-items: center;
-    justify-content: center;
-   gap: 8px;
-   margin-bottom: 28px;
-   overflow-y: hidden;
-width: auto;
-   padding: 10px;
-   position: static;
-   z-index: 2
+.stayNameRatingDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  overflow-y: hidden;
+  width: auto;
+  padding: 10px;
+  position: static;
+  z-index: 2;
 }
 
-.nameRatingImages{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
+.nameRatingImages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
 }
 
-.stayCardPosition{
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-   margin: 20px;
-   padding: 12px;
+.stayCardPosition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 12px;
 }
 
-.stayContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    gap: 20px;
-width: 100%;
-height: 100%;
-background-color: var(--primary-color-2);
-}
-    
-    .description{
-max-width: 235px;
-max-height: 100px;
-overflow-y: scroll;
+.stayContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color-2);
 }
 
-.bookingSection{
-    display: flex;
-    flex-direction: column; 
-width: auto;
-    height: 800px;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 20px;
-
+.description {
+  max-width: 235px;
+  max-height: 100px;
+  overflow-y: scroll;
 }
 
-.stayStar{
-
-      color: var(--secondary-color);
-
-       z-index: 2;
-  
-
+.bookingSection {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: 800px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
 }
 
-.facilityDiv{
-   display: flex;
-    flex-direction: row;
-    gap: 12px;
+.stayStar {
+  color: var(--secondary-color);
+
+  z-index: 2;
 }
 
-.facilityDiv li{
-   background-color: var(--Button-Active-color-1);
+.facilityDiv {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.facilityDiv li {
+  background-color: var(--Button-Active-color-1);
   box-shadow: inset 0 0 20px #320e3b;
   width: 100px;
   height: 100px;
@@ -125,36 +119,45 @@ width: auto;
   justify-content: center;
 }
 
-.icon{
-    width: 32px;
-    height: 32px;}
-
-.h2Stay{
-    padding-bottom: 24px;
+.icon {
+  width: 32px;
+  height: 32px;
 }
 
-.checkInOutDiv{
-    display: flex;
+.h2Stay {
+  padding-bottom: 24px;
+}
 
-justify-content: center;
-    flex-wrap: wrap;
-    border: 3px solid var(--tertiary-color-1);
-    border-radius: 5px;
+.checkInOutDiv {
+  display: flex;
+
+  justify-content: center;
+  flex-wrap: wrap;
+  border: 3px solid var(--tertiary-color-1);
+  border-radius: 5px;
   width: auto;
-    gap: 8px;
-padding: 4px;
-overflow-x: visible;
+  gap: 8px;
+  padding: 4px;
+  overflow-x: visible;
 }
 
-.datePicker{
-    background-color: var(--primary-color-1);
-overflow-y: hidden;
+.datePicker {
+  background-color: var(--primary-color-1);
+  overflow-y: hidden;
   flex: 1 1 200px;
 }
 
-.guestDiv{
+.guestDiv {
   display: flex;
   flex-direction: row;
- 
   align-items: center;
+}
+
+.buttonDiv{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
 }
