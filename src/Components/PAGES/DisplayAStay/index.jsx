@@ -235,6 +235,7 @@ const DisplayAStay = () => {
                           key={`${selectedStay.id}-${facility.name}-${index}`}
                         >
                           <img
+                            className={stayStyles.icon}
                             src={facilityIcons[facility]}
                             alt={`${facility.name} icon`}
                           />

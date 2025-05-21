@@ -121,8 +121,10 @@ const BookingCalendar = ({
         </div>
 
         <div className={stayStyles.guestDiv}>
+          <div className={stayStyles.guestLabelDiv}>
           <label className={gStyles.bodyWhite} htmlFor="guests">Number of Guests:</label>
           <img className={stayStyles.icon} src={Guests} alt="Guests" />
+          </div>
           <select
             id="guests"
             value={numberOfGuests}
