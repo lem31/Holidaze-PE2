@@ -4,6 +4,8 @@ import Parking from "../../assets/Images/Parking.png";
 import Pets from "../../assets/Images/Pets.png";
 import Breakfast from "../../assets/Images/Breakfast.png";
 import InfoIcon from '@mui/icons-material/Info';
+import location from "../../assets/Images/Location-purple.png";
+import price from "../../assets/Images/Price-tag-purple.png";
 import {
   Snackbar,
   Alert,
@@ -184,10 +186,18 @@ function Venues({ vmVenues }) {
                               )}
                             </p>
                             </div>
-              <p>{venue.description}</p>
-              <p>City: {venue.location?.city || "Unknown"}</p>
-              <p>Country: {venue.location?.country || "Unknown"}</p>
-              <p>Price: {venue.price || "N/A"}</p>
+
+                           
+             
+              <div className={vmProfileStyles.locationBox}>
+               <img src={location} alt="Location" className={vmProfileStyles.icons} />
+              <p>{venue.location?.city || "Unknown City"}, {venue.location?.country || "Unknown Country"} </p>
+             </div>
+              <p className={vmProfileStyles.description}>{venue.description}</p>
+              <div className={vmProfileStyles.priceBox}>
+             <img src={price} alt="Price" className={vmProfileStyles.icons} />
+              <p> {venue.price || "N/A"}NOK/night</p>
+              </div>
                </div>
            
              
@@ -209,7 +219,7 @@ function Venues({ vmVenues }) {
                 
             </div>
 
-              <h4 className={gStyles.h4Black}>Available Facilities</h4>
+              <h4 className={`${gStyles.h4Black} ${vmProfileStyles.h4}`}>Available Facilities</h4>
               {venue.meta ? (
                 <ul className={vmProfileStyles.facilityList}>
                   {Object.entries(venue.meta)
@@ -233,12 +243,14 @@ function Venues({ vmVenues }) {
               )}
 
             
-
-              <Button onClick={() => handleDeleteClick(venue.id)}>
+<div className={vmProfileStyles.buttonContainer}>
+              <Button  type="button" variant="contained" className={gStyles.buttonPrimary} onClick={() => handleDeleteClick(venue.id) }>
                 Delete Venue
               </Button>
 
               <Button
+              type="button" variant="contained"
+              className={gStyles.buttonPrimary} 
                 onClick={() => {
                   console.log("Setting Selected Venue:", venue);
                   setSelectedVenue(venue);
@@ -247,6 +259,7 @@ function Venues({ vmVenues }) {
               >
                 Edit Venue
               </Button>
+              </div>
                 </div>
 
             
