@@ -3,6 +3,7 @@ import Wifi from "../../assets/Images/Wifi.png";
 import Parking from "../../assets/Images/Parking.png";
 import Pets from "../../assets/Images/Pets.png";
 import Breakfast from "../../assets/Images/Breakfast.png";
+import InfoIcon from '@mui/icons-material/Info';
 import {
   Snackbar,
   Alert,
@@ -87,7 +88,7 @@ function Venues({ vmVenues }) {
     <div>
       
          <div className={vmProfileStyles.h1CreateBtnDiv}>
-      <h1>Venues</h1>
+      <h2 className={gStyles.h2Black}>Venues</h2>
        <Button  className={gStyles.buttonPrimary} onClick={toggleForm}>
       CREATE VENUE
       
@@ -130,14 +131,17 @@ function Venues({ vmVenues }) {
             <div className={vmProfileStyles.venueCardPosition}>
           
              <div className={vmProfileStyles.outerBox}>
+              <div className={vmProfileStyles.bookingsInfoMsgBox} >
                   <Alert
                 className={vmProfileStyles.bookingsMessage}
                 severity="info"
+                 icon={<InfoIcon sx={{ color: 'white' }} />}
                 onClick={() => toggleBookingsPopup(venue.id)}
                 style={{ cursor: "pointer" }}
               >
                 {`This Venue has: (${venue.bookings?.length || 0}) bookings`}
               </Alert>
+              </div>
                 
         <div className={vmProfileStyles.innerBox}>
 
@@ -166,8 +170,9 @@ function Venues({ vmVenues }) {
  </div>
 
             <div className={vmProfileStyles.venueInfoBoxOne}>
-              <h2>{venue.name}</h2>
-                <p>
+              <div className={vmProfileStyles.venueNameRatingBox}>
+              <h3 className={`${gStyles.h3Black} ${vmProfileStyles.venueName}`}>{venue.name}</h3>
+                <p className={vmProfileStyles.venueRating}>
                               {venue?.rating && venue.rating > 0 ? (
                                 <>
                                   {Array.from({ length: Math.round(venue.rating) }).map((_, i) => (
@@ -178,6 +183,7 @@ function Venues({ vmVenues }) {
                                 ""
                               )}
                             </p>
+                            </div>
               <p>{venue.description}</p>
               <p>City: {venue.location?.city || "Unknown"}</p>
               <p>Country: {venue.location?.country || "Unknown"}</p>
