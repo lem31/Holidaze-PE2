@@ -31,7 +31,6 @@ function Venues({ vmVenues }) {
     pets: Pets,
     breakfast: Breakfast,
   };
-
   const {
     fetchVMVenues,
     successMessage,
@@ -85,6 +84,8 @@ function Venues({ vmVenues }) {
     setIsBookingsVisible(!isBookingsVisible);
   };
 
+
+
   return (
  
     <div>
@@ -97,6 +98,8 @@ function Venues({ vmVenues }) {
       </Button>
 </div>
     
+
+
      
       {isFormVisible && (
         <div
@@ -164,6 +167,7 @@ function Venues({ vmVenues }) {
                                 ""
                               )}
                             </p>
+                            </div>
 
                             <div className={vmProfileStyles.ratingBoxMobile}>
                           <p className={`${gStyles.bodyWhite} ${vmProfileStyles.ratingNumberBg}`}>{venue?.rating}</p>
@@ -180,7 +184,7 @@ function Venues({ vmVenues }) {
                         </p>
                 
             </div>
-                            </div>
+                            
 
 <div className={vmProfileStyles.carouselContainer}>
     <Carousel className={vmProfileStyles.venueCarousel} autoPlay={false} indicators={false}>
@@ -214,7 +218,7 @@ function Venues({ vmVenues }) {
                               )}
                             </p>
                             </div>
-                            </div>
+                          
 
                            
              
@@ -227,7 +231,7 @@ function Venues({ vmVenues }) {
              <img src={price} alt="Price" className={vmProfileStyles.icons} />
               <p> {venue.price || "N/A"}NOK/night</p>
               </div>
-             
+               </div>
            
              
             </div>
@@ -249,14 +253,15 @@ function Venues({ vmVenues }) {
             </div>
 
               <h4 className={`${gStyles.h4Black} ${vmProfileStyles.h4}`}>Available Facilities</h4>
-              {venue.meta ? (
+              {venue.meta && Object.values(venue.meta).some(value => value)? (
+               
                 <ul className={vmProfileStyles.facilityList}>
                   {Object.entries(venue.meta)
                     .filter(
                       ([key, value]) => value === true && facilityIcons[key]
                     )
                     .map(([facility]) => (
-                      <li className={gStyles.bodyWhite} key={`${venue.id}-${facility || "unknown"}`}>
+                      <li className={gStyles.bodyWhite} key={`${venue.id}-${facility} `}>
                         <img
                           src={facilityIcons[facility]}
                           alt={`${facility || "unknown"} icon`}
