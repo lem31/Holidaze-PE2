@@ -92,7 +92,7 @@ function Venues({ vmVenues }) {
       
          <div className={vmProfileStyles.h1CreateBtnDiv}>
       <h2 className={gStyles.h2Black}>Venues</h2>
-       <Button  className={gStyles.buttonPrimary} onClick={toggleForm}>
+       <Button  className={`${gStyles.buttonPrimary} ${vmProfileStyles.createButton}`} onClick={toggleForm}>
       CREATE VENUE
       
       </Button>

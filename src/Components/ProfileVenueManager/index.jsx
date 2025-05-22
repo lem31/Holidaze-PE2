@@ -51,6 +51,7 @@ const [selected, setSelected] = useState(false);
           selectedView={selectedView}
           userProfile={userProfile}
         />
+        <div className={vmProfileStyles.outerBtnDiv}>
         <div className={vmProfileStyles.buttonDiv}>
         <button
         className={selectedView === 'Venues' ? gStyles.buttonSecondary : gStyles.buttonPrimary}
@@ -70,6 +71,8 @@ const [selected, setSelected] = useState(false);
         >
           Bookings
         </button>
+     
+        </div>
         </div>
       </div>
 

@@ -7,12 +7,16 @@
   gap: 12px;
 }
 
-.venueNameRatingBoxMobile{
-    display: none;
+.createButton{
+   margin-bottom: 20px !important;
 }
 
-.ratingBoxMobile{
-    display: none;
+.venueNameRatingBoxMobile {
+  display: none;
+}
+
+.ratingBoxMobile {
+  display: none;
 }
 .h1CreateBtnDiv {
   display: flex;
@@ -25,7 +29,7 @@
 
 .outerBox {
   width: 90vw;
-  height: 506px;
+  height: auto;
   background-color: var(--primary-color-2);
   margin-bottom: 20px;
   border-radius: 5px;
@@ -48,20 +52,16 @@
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-
 }
-
-
-
 
 .venueBoxOne {
   display: flex;
   flex-direction: row;
-    justify-content: flex-start;
-    height: 310px;
-    width: 600px;
-    align-items: center;
-    gap: 20px;
+  justify-content: flex-start;
+  height: 310px;
+  width: 600px;
+  align-items: center;
+  gap: 20px;
 }
 
 .venueInfoBoxTwo {
@@ -72,60 +72,55 @@
   padding-right: 5px;
 }
 
-.facilityList{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 8px;
+.facilityList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
 }
 
-.facilityList li{
-    list-style: none;
-    background-color: var(--Button-Active-color-1) !important;
+.facilityList li {
+  list-style: none;
+  background-color: var(--Button-Active-color-1) !important;
   box-shadow: inset 0 0 20px #320e3b !important;
   width: 75px;
   height: 75px;
   align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
 }
 
-.facilityList li img{
-    width: 32px;
-    height: 32px;
-    display: block !important;
+.facilityList li img {
+  width: 32px;
+  height: 32px;
+  display: block !important;
 }
 
 .venueCarousel {
   width: 250px;
   height: 250px;
   align-items: center;
-    justify-content: center;
-   
+  justify-content: center;
 }
 
 .imgContainer {
-   display: flex;
-    flex-direction: row;
- justify-content: center;
-align-items: center;
-width: 250px;
-height: 250px;
-
-
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 250px;
 }
 
 .venueImg {
   width: 250px;
   height: 250px;
   border-radius: 5px;
-   object-fit: cover;
-   
+  object-fit: cover;
 }
 
 .venueCardPosition {
@@ -156,8 +151,7 @@ height: 250px;
 .bookingsMessage {
   position: absolute;
   background-color: var(--secondary-color) !important;
-color: var(--primary-color-1) !important;
-
+  color: var(--primary-color-1) !important;
 }
 
 .venueInfoBoxOne {
@@ -167,77 +161,72 @@ color: var(--primary-color-1) !important;
   gap: 10px;
   width: auto;
   height: auto;
-
 }
 
-.venueNameRatingBox{
-    display: flex;
-    flex-direction: row; 
-    gap: 8px;
-    width: auto;
-    align-items: center;
+.venueNameRatingBox {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  width: auto;
+  align-items: center;
 }
 
-.bookingsInfoMsgBox{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    width: 100vw;
-height: 420px;
- position: absolute;
+.bookingsInfoMsgBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  width: 100vw;
+  height: 20px;
+margin-bottom : 40px;
+  position: static;
 }
 
-.venueRating{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-width: auto;
-  
+.venueRating {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: auto;
 }
 
-.venueName{
-
-   width: 100%;
-    text-align: left;
-
-
-   
+.venueName {
+  width: 100%;
+  text-align: left;
 }
 
-.ratingBox{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+.ratingBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
-.buttonContainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 10px;
-    min-width: 280px;
-    max-width: 100%;
-  
-    height: auto;
-    margin-top: 80px;
-    
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  min-width: 280px;
+  max-width: 100%;
+
+  height: auto;
+  margin-top: 80px;
 }
 
-.h4{
-    margin-top: 20px;
+.h4 {
+  margin-top: 20px;
 }
 
-.icons{
-    width: 32px;
-    height: 32px;
+.icons {
+  width: 32px;
+  height: 32px;
 }
 
-.locationBox, .priceBox{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.locationBox,
+.priceBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .description {
@@ -248,137 +237,279 @@ width: auto;
 }
 
 @media (min-width: 487px) and (max-width: 768px) {
-
-
-    .venueCardPosition {
-
-  flex-direction: column;
-
-}
-    .outerBox{
-        flex-direction: column;
-        height: 100%;
-        padding-top: 20px;
-    }
-.innerBox{
+  .venueCardPosition {
+    flex-direction: column;
+  }
+  .outerBox {
+    flex-direction: column;
+   
+  
+    width: 80vw;
+  }
+  .innerBox {
     flex-direction: column;
     height: 100%;
-    max-width: 500px;
+    max-width: 400px;
 
-}
+  }
 
-.venueBoxOne {
-  
-  flex-direction: column;
+  .venueBoxOne {
+    flex-direction: column;
     height: max-content;
     width: max-content;
     gap: 0;
-}
+  }
 
-.mobileLayoutBoxOne{
+  .mobileLayoutBoxOne {
     display: flex;
     flex-direction: column-reverse;
-   
-}
+  }
 
-.venueNameRatingBoxMobile{
+  .venueNameRatingBoxMobile {
     display: flex;
     flex-direction: column;
+  }
 
-}
-
-.venueNameRatingBox{
+  .venueNameRatingBox {
     display: none;
+  }
 
-}
-
-.ratingBoxMobile{
+  .ratingBoxMobile {
     display: flex;
     flex-direction: row;
-   gap: 100px;
-   align-items: flex-end;
-  margin-bottom: 12px;
-  margin-top: 20px;
-}
+    gap: 100px;
+    align-items: flex-end;
+    margin-bottom: 12px;
+    margin-top: 20px;
+  }
 
-.venueRatingMobile{
-   
+  .venueRatingMobile {
     display: flex;
     flex-direction: row;
-   
-}
-.ratingBox, .venueNameRatingBox{
+  }
+  .ratingBox,
+  .venueNameRatingBox {
     display: none;
-}
+  }
 
-.facilityList{
+  .facilityList {
+    margin-top: 0;
+    margin-bottom: 20px;
+    height: auto;
+    justify-content: center;
+  }
 
-   margin-top: 0;
-   margin-bottom: 20px;
-   height: auto;
-}
-
-.venueInfoBoxTwo{
-   
+  .venueInfoBoxTwo {
     align-items: center;
     width: 100%;
     height: 100%;
-}
+  }
 
-
-.buttonContainer{
+  .buttonContainer {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: auto;
     padding: 0;
-   height: auto;
-    margin-top:8px;
-}
+    height: auto;
+    margin-top: 8px;
+  }
 
-.venueNameRatingBoxMobile{
+  .venueNameRatingBoxMobile {
     display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 12px;
     width: auto;
     height: auto;
     align-items: center;
     justify-content: center;
+  }
+  .starMobile {
+    color: var(--secondary-color);
+    width: 100%;
+    white-space: none;
+  }
 
-}
-.starMobile {
-  color: var(--secondary-color);
-  width: 100%;
-  white-space: none;
-}
-
-.venueNameMobile{
+  .venueNameMobile {
     width: auto;
     text-align: center;
     margin-bottom: 8px;
-}
+  }
 
-.ratingNumberBg {
+  .ratingNumberBg {
+    width: 32px;
+    height: 32px;
+  }
 
-
-  width: 32px;
-  height: 32px;
-
-}
-
-.venueInfoBoxOne {
-
-  flex-direction: column;
-align-items: center;
-
-
-}
-.descriptionBox{
+  .venueInfoBoxOne {
+    flex-direction: column;
+    align-items: center;
+  }
+  .descriptionBox {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100vw;
     height: auto;
     max-width: 250px;
-}}
+  }
+
+  .bookingsInfoMsgBox {
+
+  height: 50px;
+position: static;
+padding-bottom: 0;
+margin-bottom: 10px;
+
+}
+    
+}
+
+@media (max-width: 486px) {
+ .venueCardPosition {
+    flex-direction: column;
+  }
+  .outerBox {
+    flex-direction: column;
+
+  
+    width: 80vw
+  }
+  .innerBox {
+    flex-direction: column;
+    height: 100%;
+    max-width: 400px;
+  }
+
+  .venueBoxOne {
+    flex-direction: column;
+    height: max-content;
+    width: max-content;
+    gap: 0;
+  }
+
+  .mobileLayoutBoxOne {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .venueNameRatingBoxMobile {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .venueNameRatingBox {
+    display: none;
+  }
+
+  .ratingBoxMobile {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    align-items: flex-end;
+    margin-bottom: 12px;
+    margin-top: 20px;
+  }
+
+  .venueRatingMobile {
+    display: flex;
+    flex-direction: row;
+  }
+  .ratingBox,
+  .venueNameRatingBox {
+    display: none;
+  }
+
+  .facilityList {
+    margin-top: 0;
+    margin-bottom: 20px;
+    height: auto;
+justify-content: center;
+  }
+
+  .venueInfoBoxTwo {
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+   
+    padding: 0;
+    height: auto;
+    margin-top: 8px;
+     min-width: 200px;
+  max-width: 220px;
+  }
+
+  .venueNameRatingBoxMobile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: auto;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+  }
+  .starMobile {
+    color: var(--secondary-color);
+    width: 100%;
+    white-space: none;
+  }
+
+  .venueNameMobile {
+    width: auto;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .ratingNumberBg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .venueInfoBoxOne {
+    flex-direction: column;
+    align-items: center;
+  }
+  .descriptionBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: auto;
+    max-width: 250px;
+  }
+
+    .bookingsInfoMsgBox {
+
+  height: 50px;
+position: static;
+padding-bottom: 0;
+margin-bottom: 10px;
+}
+
+.buttonDiv {
+  display: flex;
+  flex-direction: column;
+    width: 100vw;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  gap: 12px;
+}
+
+.outerBtnDiv{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+align-items: center;
+
+}
+
+}
