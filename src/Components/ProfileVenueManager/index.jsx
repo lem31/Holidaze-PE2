@@ -5,6 +5,8 @@ import Venues from "../Venues";
 import VMBookings from "../VMBookings";
 import { Snackbar, Alert } from "@mui/material";
 import ProfileGlobal from "../ProfileGlobal";
+import vmProfileStyles from "../../CSS_Modules/VM_Profile/vmProfile.module.css";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
 
 const ProfileVenueManager = () => {
   const [successMessage, setSuccessMessage] = useState("");
@@ -12,6 +14,9 @@ const ProfileVenueManager = () => {
     useMyStore();
   const [selectedView, setSelectedView] = useState("");
   const [bookings, setVMBookings] = useState([]);
+const [selected, setSelected] = useState(false);
+
+
 
 
   useEffect(() => {
@@ -46,8 +51,10 @@ const ProfileVenueManager = () => {
           selectedView={selectedView}
           userProfile={userProfile}
         />
-        
+        <div className={vmProfileStyles.outerBtnDiv}>
+        <div className={vmProfileStyles.buttonDiv}>
         <button
+        className={selectedView === 'Venues' ? gStyles.buttonSecondary : gStyles.buttonPrimary}
           onClick={() => {
             setSelectedView("Venues");
             if (!vmVenues.length) fetchVMVenues();
@@ -56,6 +63,7 @@ const ProfileVenueManager = () => {
           Venues
         </button>
         <button
+                className={selectedView === 'Bookings' ? gStyles.buttonSecondary : gStyles.buttonPrimary}
           onClick={() => {
             setSelectedView("Bookings");
             fetchVMBookings();
@@ -63,6 +71,9 @@ const ProfileVenueManager = () => {
         >
           Bookings
         </button>
+     
+        </div>
+        </div>
       </div>
 
       <div>
