@@ -380,7 +380,6 @@ function Venues({ vmVenues }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-zIndex: 1500,
             position: "fixed",
             top: "50%",
             left: "50%",
