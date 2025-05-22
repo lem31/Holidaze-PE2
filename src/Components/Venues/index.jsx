@@ -141,14 +141,14 @@ function Venues({ vmVenues }) {
                 
         <div className={vmProfileStyles.innerBox}>
 
-            <div className={vmProfileStyles.venueCardLayoutBox}>
+         
    
             <div className={vmProfileStyles.venueBoxOne} key={`${venue.id || `fallback`}-${index}`}>
              
 
 
 
-
+<div className={vmProfileStyles.carouselContainer}>
     <Carousel className={vmProfileStyles.venueCarousel} autoPlay={false} indicators={false}>
              {Array.isArray(venue.media) &&
                 venue.media.map((image, index) => (
@@ -163,7 +163,7 @@ function Venues({ vmVenues }) {
                 ))}
                   </Carousel>
               
- 
+ </div>
 
             <div className={vmProfileStyles.venueInfoBoxOne}>
               <h2>{venue.name}</h2>
@@ -244,7 +244,7 @@ function Venues({ vmVenues }) {
                 </div>
 
             
-            </div>
+        
         
           
           </div>
