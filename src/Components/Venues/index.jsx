@@ -19,6 +19,7 @@ import SpecificVenueBookings from "../SpecificVenueBookings";
 import vmProfileStyles from "../../CSS_Modules/VM_Profile/vmProfile.module.css";
 import gStyles from "../../CSS_Modules/Global/global.module.css";
 import Carousel from 'react-material-ui-carousel';
+import StarIcon from '@mui/icons-material/Star';
 
 function Venues({ vmVenues }) {
   const facilityIcons = {
@@ -121,30 +122,87 @@ function Venues({ vmVenues }) {
      
 
       {Array.isArray(vmVenues) && vmVenues.length > 0 ? (
+
         vmVenues.filter((venue) => venue)
           .map((venue, index) => (
+
+
+            <div className={vmProfileStyles.venueCardPosition}>
+          
              <div className={vmProfileStyles.outerBox}>
+                  <Alert
+                className={vmProfileStyles.bookingsMessage}
+                severity="info"
+                onClick={() => toggleBookingsPopup(venue.id)}
+                style={{ cursor: "pointer" }}
+              >
+                {`This Venue has: (${venue.bookings?.length || 0}) bookings`}
+              </Alert>
+                
         <div className={vmProfileStyles.innerBox}>
+   
             <div key={`${venue.id || `fallback`}-${index}`}>
-              
-              <h2>{venue.name}</h2>
-              <p>{venue.description}</p>
-              <p>City: {venue.location?.city || "Unknown"}</p>
-              <p>Country: {venue.location?.country || "Unknown"}</p>
-              <p>Price: {venue.price || "N/A"}</p>
-               
-              {Array.isArray(venue.media) &&
+             
+
+<div className={vmProfileStyles.venueBoxOne}>
+
+  <div className={vmProfileStyles.carouselContainer}>
+    <Carousel className={vmProfileStyles.carousel} autoPlay={false} indicators={true}>
+             {Array.isArray(venue.media) &&
                 venue.media.map((image, index) => (
-                   <Carousel className={vmProfileStyles.carousel} autoPlay={false} indicators={true}>
+                 
+                       <div className={vmProfileStyles.imgContainer} key={`${venue.id}-${index}`}>
                   <img
+                    className={vmProfileStyles.venueImage}
                     key={`${venue.id}-${index}`}
                     src={image.url || ""}
                     alt={`${venue.name} image ${index + 1}`}
                     loading="lazy"
                   />
-                      </Carousel>
+                  </div>
+                    
                 ))}
-            
+                  </Carousel>
+                  </div>
+ 
+
+            <div className={vmProfileStyles.venueInfoBoxOne}>
+              <h2>{venue.name}</h2>
+                <p>
+                              {venue?.rating && venue.rating > 0 ? (
+                                <>
+                                  {Array.from({ length: Math.round(venue.rating) }).map((_, i) => (
+                                    <StarIcon className={vmProfileStyles.star} key={i}/>
+                                  ))}
+                                </>
+                              ) : (
+                                ""
+                              )}
+                            </p>
+              <p>{venue.description}</p>
+              <p>City: {venue.location?.city || "Unknown"}</p>
+              <p>Country: {venue.location?.country || "Unknown"}</p>
+              <p>Price: {venue.price || "N/A"}</p>
+               </div>
+               </div>
+             
+            </div>
+            <div className={vmProfileStyles.venueInfoBoxTwo}>
+            <div className={vmProfileStyles.ratingBox}>
+                          <p className={`${gStyles.bodyWhite} ${vmProfileStyles.ratingNumberBg}`}>{venue?.rating}</p>
+                        <p className={gStyles.bodyBlack}>
+                          {(() => {
+                            const rating = Math.round(venue?.rating);
+                            if (!rating) return "No rating";
+                            if (rating === 1) return "Poor quality";
+                            if (rating === 2) return "Not bad quality";
+                            if (rating === 3 || rating === 4) return "Good quality";
+                            if (rating === 5) return "Excellent quality";
+                            return "";
+                          })()}
+                        </p>
+                
+            </div>
 
               <h2>Available Facilities</h2>
               {venue.meta ? (
@@ -169,13 +227,7 @@ function Venues({ vmVenues }) {
                 <p>No Facilities Available</p>
               )}
 
-              <Alert
-                severity="info"
-                onClick={() => toggleBookingsPopup(venue.id)}
-                style={{ cursor: "pointer" }}
-              >
-                {`This Venue has: (${venue.bookings?.length || 0}) bookings`}
-              </Alert>
+            
 
               <Button onClick={() => handleDeleteClick(venue.id)}>
                 Delete Venue
@@ -192,6 +244,8 @@ function Venues({ vmVenues }) {
               </Button>
 
             
+            </div>
+        
             </div>
             </div>
             </div>

@@ -17,20 +17,24 @@
 }
 
 .outerBox{
-     width: 1000px;
+     width: 90vw;
   height: 506px;
   background-color: var(--primary-color-2);
   margin-bottom: 20px;
 border-radius: 5px;
 border: 3px solid var(--tertiary-color-1);
   display: flex;
-  justify-content: center;
-  align-items: center;
+    flex-direction: row;
+ align-items: center;
+    justify-content: center;
+
+
 }
 
 .innerBox{
-     max-width: 875px;
-  width: auto;
+     
+max-width: 875px;
+  width: 100%;
   height: 310px;
   background-color: var(--primary-color-1);
   display: flex;
@@ -40,10 +44,85 @@ border: 3px solid var(--tertiary-color-1);
   gap: 20px;
   border-radius: 4px;
 }
+
+.boxOne{
+        display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.venueBoxOne{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.venueInfoBoxTwo{
+     display: flex;
+  flex-direction: column;
+align-items: center;
+width: 200px;
+}
 .carousel{
 
  width: 250px;
  height: 250px;
 }
 
+.imgContainer{
+  display: flex;
+ justify-content: center;
+align-items: center;
+width: 250px;
+height: 250px;
+overflow: hidden;
+object-fit: contain;
 
+}
+
+.venueImg{
+    max-width: 250px;
+  max-height: 250px;
+  object-fit: contain;
+}
+
+.venueCardPosition{
+     display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
+.star{
+  color: var(--secondary-color);
+  width: 100%;
+ white-space: none;
+}
+
+
+.ratingNumberBg{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary-color-2);
+  width: 54px;
+  height: 48px;
+  border-radius: 5px;
+}
+
+.bookingsMessage{
+    position: absolute
+}
+
+.venueInfoBoxOne{
+    display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  padding-top: 20px;
+}
