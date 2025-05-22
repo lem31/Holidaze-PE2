@@ -7,4 +7,13 @@
     gap: 12px;
 }
 
+.h1CreateBtnDiv{
+    display: flex;
+    flex-direction: column;
+ align-items: center;
+ width: 100vw;
+    gap: 12px;
+     padding-top: 20px;
+}
+
 

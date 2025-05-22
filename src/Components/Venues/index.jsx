@@ -16,6 +16,8 @@ import useMyStore from "../../Store";
 import CreateVenueForm from "../CreateVenueForm";
 import EditVenueForm from "../EditVenueForm";
 import SpecificVenueBookings from "../SpecificVenueBookings";
+import vmProfileStyles from "../../CSS_Modules/VM_Profile/vmProfile.module.css";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
 
 function Venues({ vmVenues }) {
   const facilityIcons = {
@@ -79,9 +81,15 @@ function Venues({ vmVenues }) {
   };
 
   return (
+ 
     <div>
+         <div className={vmProfileStyles.h1CreateBtnDiv}>
       <h1>Venues</h1>
-
+       <Button  className={gStyles.buttonPrimary} onClick={toggleForm}>
+      CREATE VENUE
+      
+      </Button>
+</div>
       <div
         style={{
           position: "fixed",
@@ -131,9 +139,9 @@ function Venues({ vmVenues }) {
         </Snackbar>
       </div>
 
-      <Button onClick={toggleForm}>
-        {isFormVisible ? "Close Form" : "Create Venue"}
-      </Button>
+     
+
+      
       {isFormVisible && (
         <div
           style={{
