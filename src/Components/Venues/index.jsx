@@ -151,8 +151,36 @@ function Venues({ vmVenues }) {
    
             <div className={vmProfileStyles.venueBoxOne} key={`${venue.id || `fallback`}-${index}`}>
              
+ <div className={vmProfileStyles.venueNameRatingBoxMobile}>
+              <h3 className={`${gStyles.h3Black} ${vmProfileStyles.venueNameMobile}`}>{venue.name}</h3>
+                <p className={vmProfileStyles.venueRatingMobile}>
+                              {venue?.rating && venue.rating > 0 ? (
+                                <>
+                                  {Array.from({ length: Math.round(venue.rating) }).map((_, i) => (
+                                    <StarIcon className={vmProfileStyles.starMobile} key={i}/>
+                                  ))}
+                                </>
+                              ) : (
+                                ""
+                              )}
+                            </p>
 
-
+                            <div className={vmProfileStyles.ratingBoxMobile}>
+                          <p className={`${gStyles.bodyWhite} ${vmProfileStyles.ratingNumberBg}`}>{venue?.rating}</p>
+                        <p className={gStyles.bodyBlack}>
+                          {(() => {
+                            const rating = Math.round(venue?.rating);
+                            if (!rating) return "No rating";
+                            if (rating === 1) return "Poor quality";
+                            if (rating === 2) return "Not bad quality";
+                            if (rating === 3 || rating === 4) return "Good quality";
+                            if (rating === 5) return "Excellent quality";
+                            return "";
+                          })()}
+                        </p>
+                
+            </div>
+                            </div>
 
 <div className={vmProfileStyles.carouselContainer}>
     <Carousel className={vmProfileStyles.venueCarousel} autoPlay={false} indicators={false}>
@@ -186,6 +214,7 @@ function Venues({ vmVenues }) {
                               )}
                             </p>
                             </div>
+                            </div>
 
                            
              
@@ -198,7 +227,7 @@ function Venues({ vmVenues }) {
              <img src={price} alt="Price" className={vmProfileStyles.icons} />
               <p> {venue.price || "N/A"}NOK/night</p>
               </div>
-               </div>
+             
            
              
             </div>

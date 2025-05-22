@@ -7,6 +7,13 @@
   gap: 12px;
 }
 
+.venueNameRatingBoxMobile{
+    display: none;
+}
+
+.ratingBoxMobile{
+    display: none;
+}
 .h1CreateBtnDiv {
   display: flex;
   flex-direction: column;
@@ -236,10 +243,46 @@ width: auto;;
 }
 
 @media (min-width: 487px) and (max-width: 768px) {
+
+    .outerBox{
+        height: auto;
+    }
 .innerBox{
+    flex-direction: column;
+    height: auto;
+
+}
+
+.venueBoxOne {
+  
+  flex-direction: column;
+    justify-content: flex-start;
+    max-height: 800px;
+    width: 600px;
+    align-items: center;
+    /* gap: 40px; */
+}
+.mobileLayoutBoxOne{
+    display: flex;
+    flex-direction: column-reverse;
+   
+}
+
+.venueNameRatingBoxMobile{
+    display: flex;
     flex-direction: column;
 
 }
 
+.venueNameRatingBox{
+    display: none;
 
 }
+
+.ratingBoxMobile{
+    display: flex;
+    flex-direction: row;
+}
+.ratingBox{
+    display: none;
+}}
