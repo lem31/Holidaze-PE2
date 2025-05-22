@@ -226,7 +226,9 @@ function Venues({ vmVenues }) {
                <img src={location} alt="Location" className={vmProfileStyles.icons} />
               <p>{venue.location?.city || "Unknown City"}, {venue.location?.country || "Unknown Country"} </p>
              </div>
+             <div className={vmProfileStyles.descriptionBox}>
               <p className={vmProfileStyles.description}>{venue.description}</p>
+              </div>
               <div className={vmProfileStyles.priceBox}>
              <img src={price} alt="Price" className={vmProfileStyles.icons} />
               <p> {venue.price || "N/A"}NOK/night</p>
