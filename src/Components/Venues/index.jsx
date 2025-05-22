@@ -140,30 +140,29 @@ function Venues({ vmVenues }) {
               </Alert>
                 
         <div className={vmProfileStyles.innerBox}>
+
+            <div className={vmProfileStyles.venueCardLayoutBox}>
    
-            <div key={`${venue.id || `fallback`}-${index}`}>
+            <div className={vmProfileStyles.venueBoxOne} key={`${venue.id || `fallback`}-${index}`}>
              
 
-<div className={vmProfileStyles.venueBoxOne}>
 
-  <div className={vmProfileStyles.carouselContainer}>
-    <Carousel className={vmProfileStyles.carousel} autoPlay={false} indicators={true}>
+
+
+    <Carousel className={vmProfileStyles.venueCarousel} autoPlay={false} indicators={false}>
              {Array.isArray(venue.media) &&
                 venue.media.map((image, index) => (
-                 
-                       <div className={vmProfileStyles.imgContainer} key={`${venue.id}-${index}`}>
+                       <div className={vmProfileStyles.imgContainer} key={`${venue.id}-carousel-img-${index}`}>
                   <img
-                    className={vmProfileStyles.venueImage}
-                    key={`${venue.id}-${index}`}
+                    className={vmProfileStyles.venueImg}
                     src={image.url || ""}
                     alt={`${venue.name} image ${index + 1}`}
                     loading="lazy"
                   />
                   </div>
-                    
                 ))}
                   </Carousel>
-                  </div>
+              
  
 
             <div className={vmProfileStyles.venueInfoBoxOne}>
@@ -184,7 +183,7 @@ function Venues({ vmVenues }) {
               <p>Country: {venue.location?.country || "Unknown"}</p>
               <p>Price: {venue.price || "N/A"}</p>
                </div>
-               </div>
+           
              
             </div>
             <div className={vmProfileStyles.venueInfoBoxTwo}>
@@ -242,13 +241,16 @@ function Venues({ vmVenues }) {
               >
                 Edit Venue
               </Button>
+                </div>
 
             
             </div>
         
+          
+          </div>
             </div>
             </div>
-            </div>
+            
           ))
       ) : (
         <p>No venues available.</p>

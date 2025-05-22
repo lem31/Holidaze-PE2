@@ -1,109 +1,119 @@
-.buttonDiv{
-    display: flex;
-    flex-direction: row;
-    width: 100vw;
-    justify-content: center;
-    padding-top: 20px;
-    gap: 12px;
+.buttonDiv {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: center;
+  padding-top: 20px;
+  gap: 12px;
 }
 
-.h1CreateBtnDiv{
-    display: flex;
-    flex-direction: column;
- align-items: center;
- width: 100vw;
-    gap: 12px;
-     padding-top: 20px;
+.h1CreateBtnDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  gap: 12px;
+  padding-top: 20px;
 }
 
-.outerBox{
-     width: 90vw;
+.outerBox {
+  width: 90vw;
   height: 506px;
   background-color: var(--primary-color-2);
   margin-bottom: 20px;
-border-radius: 5px;
-border: 3px solid var(--tertiary-color-1);
+  border-radius: 5px;
+  border: 3px solid var(--tertiary-color-1);
   display: flex;
-    flex-direction: row;
- align-items: center;
-    justify-content: center;
-
-
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.innerBox{
-     
-max-width: 875px;
+.innerBox {
+  max-width: 875px;
   width: 100%;
   height: 310px;
   background-color: var(--primary-color-1);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
   border-radius: 4px;
+
 }
 
-.boxOne{
-        display: flex;
-    flex-direction: row;
-    gap: 20px;
-}
-
-.venueBoxOne{
+.venueCardLayoutBox{
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+   width: 100%;
+   height: 310px;
     gap: 20px;
-    width: 100%;
-    height: 100%;
 }
 
-.venueInfoBoxTwo{
-     display: flex;
-  flex-direction: column;
-align-items: center;
-width: 200px;
-}
-.carousel{
 
- width: 250px;
- height: 250px;
-}
 
-.imgContainer{
+.venueBoxOne {
   display: flex;
+  flex-direction: row;
+    justify-content: center;
+    height: 310px;
+    width: auto;
+    align-items: center;
+}
+
+.venueInfoBoxTwo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+}
+
+.venueCarousel {
+  width: 250px;
+  height: 250px;
+  align-items: center;
+    justify-content: center;
+   
+}
+
+.imgContainer {
+   display: flex;
+    flex-direction: row;
  justify-content: center;
 align-items: center;
 width: 250px;
 height: 250px;
 overflow: hidden;
 object-fit: contain;
-
+border-radius: 5px;
 }
 
-.venueImg{
-    max-width: 250px;
-  max-height: 250px;
-  object-fit: contain;
+.venueImg {
+  max-width: 350px;
+  max-height: 350px;
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+    object-fit: contain;
 }
 
-.venueCardPosition{
-     display: flex;
+.venueCardPosition {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100vw;
 }
 
-.star{
+.star {
   color: var(--secondary-color);
   width: 100%;
- white-space: none;
+  white-space: none;
 }
 
-
-.ratingNumberBg{
+.ratingNumberBg {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -114,15 +124,16 @@ object-fit: contain;
   border-radius: 5px;
 }
 
-.bookingsMessage{
-    position: absolute
+.bookingsMessage {
+  position: absolute;
 }
 
-.venueInfoBoxOne{
-    display: flex;
+.venueInfoBoxOne {
+  display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
-  width: 100%;
-  height: 100%;
-  padding-top: 20px;
+  width: 200px;
+  height: 310px;
+
 }
