@@ -152,6 +152,16 @@
   letter-spacing: 1.5%;
 }
 
+.h4Black {
+  font-size: var(--font-size-small);
+  color: var(--primary-color-3);
+  font-family: var(--font-family-1);
+  font-weight: bold;
+  text-align: center;
+  line-height: 130%;
+  letter-spacing: 1.5%;
+}
+
 .labelWhite .MuiInputLabel-root {
   font-size: var(--font-size-small);
   color: var(--primary-color-1);
@@ -241,6 +251,11 @@
     letter-spacing: 1.5%;
   }
 
+  .h4Black {
+  font-size: var(--font-size-small-2);
+ 
+}
+
   .bodyWhite {
     font-size: var(--font-size-small-2);
     color: var(--primary-color-1);
@@ -271,51 +286,43 @@
 
   .h1Black {
     font-size: var(--font-size-medium);
-    color: var(--primary-color-3);
-    font-family: var(--font-family-1);
-    font-weight: bold;
-    text-align: center;
+
     line-height: 120%;
     letter-spacing: 2%;
   }
 
   .h2White {
     font-size: var(--font-size-medium-2);
-    color: var(--primary-color-1);
-    font-family: var(--font-family-1);
-    font-weight: bold;
-    text-align: center;
+
     line-height: 120%;
     letter-spacing: 1.5%;
   }
   .h2Black {
     font-size: var(--font-size-medium-2);
-    color: var(--primary-color-3);
-    font-family: var(--font-family-1);
-    font-weight: bold;
-    text-align: center;
+   
+    
     line-height: 120%;
     letter-spacing: 1.5%;
   }
 
   .h3White {
     font-size: var(--font-size-medium-3);
-    color: var(--primary-color-1);
-    font-family: var(--font-family-1);
-    font-weight: bold;
-    text-align: center;
+   
     line-height: 120%;
     letter-spacing: 1.5%;
   }
   .h3Black {
     font-size: var(--font-size-medium-3);
-    color: var(--primary-color-3);
-    font-family: var(--font-family-1);
-    font-weight: bold;
-    text-align: center;
+    
     line-height: 120%;
     letter-spacing: 1.5%;
   }
+
+
+  .h4Black {
+  font-size: var(--font-size-small-3);
+ 
+}
 
   .bodyWhite {
     font-size: var(--font-size-small-3);

@@ -209,15 +209,15 @@ function Venues({ vmVenues }) {
                 
             </div>
 
-              <h2>Available Facilities</h2>
+              <h4 className={gStyles.h4Black}>Available Facilities</h4>
               {venue.meta ? (
-                <ul>
+                <ul className={vmProfileStyles.facilityList}>
                   {Object.entries(venue.meta)
                     .filter(
                       ([key, value]) => value === true && facilityIcons[key]
                     )
                     .map(([facility]) => (
-                      <li key={`${venue.id}-${facility || "unknown"}`}>
+                      <li className={gStyles.bodyWhite} key={`${venue.id}-${facility || "unknown"}`}>
                         <img
                           src={facilityIcons[facility]}
                           alt={`${facility || "unknown"} icon`}
