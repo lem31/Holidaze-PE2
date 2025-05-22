@@ -16,4 +16,34 @@
      padding-top: 20px;
 }
 
+.outerBox{
+     width: 1000px;
+  height: 506px;
+  background-color: var(--primary-color-2);
+  margin-bottom: 20px;
+border-radius: 5px;
+border: 3px solid var(--tertiary-color-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerBox{
+     max-width: 875px;
+  width: auto;
+  height: 310px;
+  background-color: var(--primary-color-1);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-radius: 4px;
+}
+.carousel{
+
+ width: 250px;
+ height: 250px;
+}
+
 

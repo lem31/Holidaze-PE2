@@ -18,6 +18,7 @@ import EditVenueForm from "../EditVenueForm";
 import SpecificVenueBookings from "../SpecificVenueBookings";
 import vmProfileStyles from "../../CSS_Modules/VM_Profile/vmProfile.module.css";
 import gStyles from "../../CSS_Modules/Global/global.module.css";
+import Carousel from 'react-material-ui-carousel';
 
 function Venues({ vmVenues }) {
   const facilityIcons = {
@@ -83,6 +84,7 @@ function Venues({ vmVenues }) {
   return (
  
     <div>
+      
          <div className={vmProfileStyles.h1CreateBtnDiv}>
       <h1>Venues</h1>
        <Button  className={gStyles.buttonPrimary} onClick={toggleForm}>
@@ -90,58 +92,8 @@ function Venues({ vmVenues }) {
       
       </Button>
 </div>
-      <div
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "auto",
-          height: "auto",
-        }}
-      >
-        <Snackbar
-          open={Boolean(successMessage)}
-          autoHideDuration={3000}
-          onClose={() => setSuccessMessage(null)}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            zIndex: 1500,
-            width: "400px",
-            height: "auto",
-            backgroundColor: "transparent",
-            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          <Alert
-            severity="success"
-            onClose={() => setSuccessMessage("")}
-            sx={{
-              fontSize: "20px",
-              padding: "20px",
-
-              textAlign: "center",
-            }}
-          >
-            {successMessage}
-          </Alert>
-        </Snackbar>
-      </div>
-
+    
      
-
-      
       {isFormVisible && (
         <div
           style={{
@@ -166,24 +118,33 @@ function Venues({ vmVenues }) {
         </div>
       )}
 
+     
+
       {Array.isArray(vmVenues) && vmVenues.length > 0 ? (
         vmVenues.filter((venue) => venue)
           .map((venue, index) => (
+             <div className={vmProfileStyles.outerBox}>
+        <div className={vmProfileStyles.innerBox}>
             <div key={`${venue.id || `fallback`}-${index}`}>
+              
               <h2>{venue.name}</h2>
               <p>{venue.description}</p>
               <p>City: {venue.location?.city || "Unknown"}</p>
               <p>Country: {venue.location?.country || "Unknown"}</p>
               <p>Price: {venue.price || "N/A"}</p>
+               
               {Array.isArray(venue.media) &&
                 venue.media.map((image, index) => (
+                   <Carousel className={vmProfileStyles.carousel} autoPlay={false} indicators={true}>
                   <img
                     key={`${venue.id}-${index}`}
                     src={image.url || ""}
                     alt={`${venue.name} image ${index + 1}`}
                     loading="lazy"
                   />
+                      </Carousel>
                 ))}
+            
 
               <h2>Available Facilities</h2>
               {venue.meta ? (
@@ -232,10 +193,13 @@ function Venues({ vmVenues }) {
 
             
             </div>
+            </div>
+            </div>
           ))
       ) : (
         <p>No venues available.</p>
       )}
+      
 
          <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
             <DialogTitle>Confirm Deletion</DialogTitle>
@@ -281,6 +245,57 @@ function Venues({ vmVenues }) {
           />
         </div>
       )}
+    
+
+        <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "auto",
+          height: "auto",
+        }}
+      >
+        <Snackbar
+          open={Boolean(successMessage)}
+          autoHideDuration={3000}
+          onClose={() => setSuccessMessage(null)}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            zIndex: 1500,
+            width: "400px",
+            height: "auto",
+            backgroundColor: "transparent",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <Alert
+            severity="success"
+            onClose={() => setSuccessMessage("")}
+            sx={{
+              fontSize: "20px",
+              padding: "20px",
+
+              textAlign: "center",
+            }}
+          >
+            {successMessage}
+          </Alert>
+        </Snackbar>
+      </div>
+
     </div>
   );
 }
