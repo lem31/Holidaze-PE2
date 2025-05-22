@@ -1,12 +1,20 @@
-import React, {useEffect} from 'react';
 import useMyStore from '../../Store/index';
+import  { useEffect, useState } from "react";
+import { Table, TableHead, TableRow, TableCell, TableBody, TableContainer, Paper, Button } from "@mui/material";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
 
 
 function SpecificVenueBookings({venueId}) {
+    const [isTableVisible, setIsTableVisible] = useState(true);
+const handleClose = (event) => {
+  setIsTableVisible(false);
+ event.target.blur();
+};
 
     const {fetchVMVenues, vmVenues, successMessage} = useMyStore();
     useEffect(() => {
      
+       
   
       fetchVMVenues();
     }, [successMessage]);
@@ -15,29 +23,68 @@ function SpecificVenueBookings({venueId}) {
     .filter((venue) => venue.id === venueId)
     .flatMap((venue) => venue.bookings || []);
 
-return (
-    <div>
-        {venueBookings.length > 0 ? (
-            venueBookings.map((booking, index) => (
-                <div key={`${booking.id || `fallback`}-${index}`}>
-                    <h2>Booking ID: {booking.id}</h2>
-                    <p>Customer: {booking.customer.name}</p>
-                    <p>Date: {booking.dateFrom} - {booking.dateTo}</p>
-                    <p>Guests: {booking.guests}</p>
-                    <p>Price: {booking.price}</p>
-                    <p>Created: {booking.created}</p>
-                </div>
-            ))
-        ) : (
-            <>
-                <h2>No Bookings Available</h2>
-                <p>Please check back later.</p>
-            </>
-        )}
-    </div>
-);
-  
+    const venue = vmVenues.find((venue) => venue.id === venueId);
+
+
+return isTableVisible ? (
+        <>
+        <div id="main-content" tabIndex="-1"></div>
+    <TableContainer component={Paper} sx={{ maxWidth: "800px", maxHeight: "400px", margin: "auto", padding: "50px", backgroundColor: "#320e3b", border: "3px solid", borderColor: "#a6cfd5", display: "flex", overflowX: "auto", overflowY: "scroll", flexDirection: "column", alignItems: "center" }}>
+        <h2 className={gStyles.h2White} style={{ textAlign: "center", marginBottom: "16px" }}>
+            {venue?.name || "Venue Bookings"}
+        </h2>
+        <Table aria-label="simple table">
+            <TableHead>
+                <TableRow>
+                    <TableCell   sx={{color:'#7f96ff'}}><strong>Customer</strong></TableCell>
+                    <TableCell sx={{color:'#7f96ff'}}><strong>Total Guests</strong></TableCell>
+                    <TableCell sx={{color:'#7f96ff'}}><strong>Check-in</strong></TableCell>
+                    <TableCell sx={{color:'#7f96ff'}}><strong>Check-out</strong></TableCell>
+                    <TableCell sx={{color:'#7f96ff'}}><strong>Total Price</strong></TableCell>
+                    <TableCell sx={{color:'#7f96ff'}}><strong>Created</strong></TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {venueBookings.length > 0 ? (
+                    venueBookings.map((booking, index) => {
+                        const checkIn = new Date(booking.dateFrom);
+                        const checkOut = new Date(booking.dateTo);
+                        const nights = Math.max(1, Math.round((checkOut - checkIn) / (1000 * 60 * 60 * 24)));
+                        const totalPrice = venue?.price * nights || "N/A";
+                        return (
+                            <TableRow key={`${booking.id || `fallback`}-${index}`}>
+                                <TableCell className={gStyles.bodyWhite}>{booking.customer?.name || "Unknown"}</TableCell>
+                                <TableCell className={gStyles.bodyWhite}>{booking.guests}</TableCell>
+                                <TableCell className={gStyles.bodyWhite}>{checkIn.toLocaleDateString()}</TableCell>
+                                <TableCell className={gStyles.bodyWhite}>{checkOut.toLocaleDateString()}</TableCell>
+                                <TableCell className={gStyles.bodyWhite}>{totalPrice} NOK</TableCell>
+                                <TableCell className={gStyles.bodyWhite}>{new Date(booking.created).toLocaleString()}</TableCell>
+                            </TableRow>
+                        );
+                    })
+                ) : (
+                    <TableRow>
+                        <TableCell colSpan={6} align="center">No Bookings Available</TableCell>
+                    </TableRow>
+                )}
+            </TableBody>
+        </Table>
+
+
+        <Button
+        className={gStyles.buttonSecondary}
+            variant="contained"
+            sx={{ mt: 2 }}
+            onClick={handleClose}
+        >
+            Close
+        </Button>
+    </TableContainer>
+    </>
+) : null;
 }
+
+    
 
 
 export default SpecificVenueBookings;

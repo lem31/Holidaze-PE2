@@ -179,11 +179,11 @@
 }
 
 .bodyWhite {
-  font-size: var(--font-size-small);
-  color: var(--primary-color-1);
-  font-family: var(--font-family-2);
-  line-height: 150%;
-  letter-spacing: 0.5%;
+  font-size: var(--font-size-small) !important;
+  color: var(--primary-color-1) !important;
+  font-family: var(--font-family-2)!important;
+  line-height: 150% !important;
+  letter-spacing: 0.5% !important;
 }
 
 .bodyBlack {
@@ -260,11 +260,11 @@
 }
 
   .bodyWhite {
-    font-size: var(--font-size-small-2);
-    color: var(--primary-color-1);
-    font-family: var(--font-family-2);
-    line-height: 160%;
-    letter-spacing: 0.5%;
+    font-size: var(--font-size-small-2) !important;
+    color: var(--primary-color-1) !important;
+    font-family: var(--font-family-2) !important;
+    line-height: 160% !important;
+    letter-spacing: 0.5% !important;
   }
 
   .bodyBlack {
@@ -328,11 +328,11 @@
 }
 
   .bodyWhite {
-    font-size: var(--font-size-small-3);
-    color: var(--primary-color-1);
-    font-family: var(--font-family-2);
-    line-height: 160%;
-    letter-spacing: 0.5%;
+    font-size: var(--font-size-small-3) !important;
+    color: var(--primary-color-1) !important;
+    font-family: var(--font-family-2) !important;
+    line-height: 160% !important;
+    letter-spacing: 0.5% !important;
   }
 
   .bodyBlack {
