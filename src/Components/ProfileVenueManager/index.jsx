@@ -5,6 +5,7 @@ import Venues from "../Venues";
 import VMBookings from "../VMBookings";
 import { Snackbar, Alert } from "@mui/material";
 import ProfileGlobal from "../ProfileGlobal";
+import vmProfileStyles from "../../CSS_Modules/VM_Profile/vmProfile.module.css";
 
 const ProfileVenueManager = () => {
   const [successMessage, setSuccessMessage] = useState("");
@@ -46,7 +47,7 @@ const ProfileVenueManager = () => {
           selectedView={selectedView}
           userProfile={userProfile}
         />
-        
+        <div className={vmProfileStyles.buttonDiv}>
         <button
           onClick={() => {
             setSelectedView("Venues");
@@ -63,6 +64,7 @@ const ProfileVenueManager = () => {
         >
           Bookings
         </button>
+        </div>
       </div>
 
       <div>

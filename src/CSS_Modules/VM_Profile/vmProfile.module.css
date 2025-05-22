@@ -1,0 +1,7 @@
+.buttonDiv{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: center;
+    padding-top: 20px;
+}
