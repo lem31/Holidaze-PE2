@@ -139,7 +139,7 @@ function Venues({ vmVenues }) {
                 severity="info"
                  icon={<InfoIcon sx={{ color: 'white' }} />}
                 onClick={() => toggleBookingsPopup(venue.id)}
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer", zIndex: 1000 }}
               >
                 {`This Venue has: (${venue.bookings?.length || 0}) bookings`}
               </Alert>
@@ -344,13 +344,13 @@ function Venues({ vmVenues }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-
+zIndex: 1500,
             position: "fixed",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             zIndex: 1500,
-            width: "400px",
+           width: '300px',
             height: "auto",
             backgroundColor: "transparent",
             boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
@@ -362,8 +362,8 @@ function Venues({ vmVenues }) {
             sx={{
               fontSize: "20px",
               padding: "20px",
-
               textAlign: "center",
+              zIndex: 2000,
             }}
           >
             {successMessage}
