@@ -19,6 +19,11 @@
   box-shadow: inset 0 0 20px #320e3b !important;
 }
 
+.buttonPrimary:focus {
+  background-color: var(--Button-Active-color-2) !important;
+  box-shadow: inset 0 0 30px #320e3b !important;
+}
+
 .buttonSecondary {
   background-color: var(--secondary-color) !important;
   color: var(--primary-color-1) !important;
@@ -36,6 +41,12 @@
 .buttonSecondary:active {
   background-color: var(--Button-Active-color-1) !important;
   box-shadow: inset 0 0 20px #320e3b !important;
+  
+}
+
+.buttonSecondary:focus {
+  background-color: var(--Button-Active-color-1) !important;
+  box-shadow: inset 0 0 30px #320e3b !important;
   
 }
 
