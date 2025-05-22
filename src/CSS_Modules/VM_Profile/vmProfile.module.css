@@ -234,3 +234,12 @@ width: auto;;
   max-height: 100px;
   overflow-y: scroll;
 }
+
+@media (min-width: 487px) and (max-width: 768px) {
+.innerBox{
+    flex-direction: column;
+
+}
+
+
+}
