@@ -348,6 +348,9 @@ function EditVenueForm({ toggleEditForm }) {
 color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },
 }}
           >
                     <img className={editVenueStyles.metaImg} src={Parking} alt="" />
@@ -363,6 +366,9 @@ fontFamily:"Lato",
 color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },
 }}
           >
                     <img className={editVenueStyles.metaImg} src={Wifi} alt="" />
@@ -378,6 +384,9 @@ fontFamily:"Lato",
 color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },
 }}
           >
                     <img className={editVenueStyles.metaImg} src={Breakfast} alt="" />
@@ -393,6 +402,9 @@ fontFamily:"Lato",
 color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },
 }}
           >
                     <img className={editVenueStyles.metaImg} src={Pets} alt="" />

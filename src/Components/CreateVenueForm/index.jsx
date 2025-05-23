@@ -353,6 +353,9 @@ const fetchedStays = await fetchStays();
 color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },
 }}
 
 
@@ -371,6 +374,9 @@ fontFamily:"Lato",
   color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },
 
 }}
 
@@ -409,6 +415,9 @@ fontFamily:"Lato",
 color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },
 }}
    >
             <img className={createVenueStyles.metaImg} src={Pets} alt="" />

@@ -70,3 +70,63 @@ color:var(--primary-color-1)}
     width: 42px;
     height: 42px;
 }
+
+
+@media (min-width: 487px) and (max-width: 768px) {
+   
+    .editVenueForm{
+     width: 400px;
+    }
+
+
+.metaImg{
+    width: 32px;
+    height: 32px;
+}
+
+.metaButton{
+
+
+  width: 92px;
+  height: 92px;
+ 
+
+}
+
+.metaBox{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  
+}
+}
+
+@media (max-width: 486px) { 
+    .editVenueForm{
+   width: 220px;
+    }
+
+
+.metaImg{
+    width: 24px;
+    height: 24px;
+}
+
+.metaButton{
+
+
+  width: 72px;
+  height: 72px;
+
+ 
+
+}
+
+.metaBox{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  
+}}
