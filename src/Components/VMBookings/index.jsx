@@ -30,18 +30,35 @@ function VMBookings() {
 
   console.log("Venue Bookings:", venueBookings);
 
+ 
+  const getVenueForBooking = (booking) =>
+    vmVenues.find((v) => v.bookings?.some((b) => b.id === booking.id));
+
+  const getNights = (booking) =>
+    Math.max(
+      1,
+      Math.round(
+        (new Date(booking.dateTo) - new Date(booking.dateFrom)) /
+          (1000 * 60 * 60 * 24)
+      )
+    );
+
   return (
     <div>
+
       <div className={vmProfileStyles.mobileViewBookings}>
-        {venueBookings.length > 0 && (
+        {venueBookings.length > 0 ? (
           <div className={vmProfileStyles.bookingCardWrapper}>
             <div className={vmProfileStyles.bookingCardBg}>
-              <h2>
-                {venueBookings[currentBookingIndex]?.venue?.name ||
+              <h2 className={gStyles.h2White}>
+                {getVenueForBooking(venueBookings[currentBookingIndex])?.name ||
                   "Unknown Venue"}
               </h2>
               <img
-                src={venueBookings[currentBookingIndex]?.venue?.media[0]?.url}
+                src={
+                  getVenueForBooking(venueBookings[currentBookingIndex])
+                    ?.media[0]?.url
+                }
                 alt="Venue"
                 className={vmProfileStyles.bookingImage}
               />
@@ -85,23 +102,20 @@ function VMBookings() {
               </div>
             </div>
           </div>
+        ) : (
+          <>
+            <h2 className={gStyles.h2White}>No Bookings Available</h2>
+            <p>Please check back later.</p>
+          </>
         )}
       </div>
 
+  
       <div className={vmProfileStyles.desktopViewBookings}>
         {venueBookings.length > 0 ? (
           venueBookings.map((booking, index) => {
-            const venue = vmVenues.find((v) =>
-              v.bookings?.some((b) => b.id === booking.id)
-            );
-            const nights = Math.max(
-              1,
-              Math.round(
-                (new Date(booking.dateTo) - new Date(booking.dateFrom)) /
-                  (1000 * 60 * 60 * 24)
-              )
-            );
-
+            const venue = getVenueForBooking(booking);
+            const nights = getNights(booking);
             return (
               <div
                 className={vmProfileStyles.bookingCardWrapper}
@@ -110,7 +124,9 @@ function VMBookings() {
                 <div className={vmProfileStyles.bookingCardBg}>
                   <div className={vmProfileStyles.bookingInfoDiv}>
                     <div className={vmProfileStyles.venueNameImgDiv}>
-                      <h2>{venue?.name || "Unknown Venue"}</h2>
+                      <h2 className={gStyles.h2White}>
+                        {venue?.name || "Unknown Venue"}
+                      </h2>
                       <img
                         src={venue?.media[0]?.url}
                         alt="Venue"
@@ -118,27 +134,50 @@ function VMBookings() {
                       />
                     </div>
                     <div className={vmProfileStyles.bookingGridDiv}>
-                      <p>
-                        <strong>Customer:</strong> {booking.customer.name}
-                      </p>
-                      <p>
-                        <strong>Total Guests:</strong> {booking.guests}
-                      </p>
-                      <p>
-                        <strong>Check-in:</strong>{" "}
-                        {new Date(booking.dateFrom).toLocaleDateString()}
-                      </p>
-                      <p>
-                        <strong>Check-out:</strong>{" "}
-                        {new Date(booking.dateTo).toLocaleDateString()}
-                      </p>
-                      <p>
-                        <strong>Duration:</strong> {nights} nights
-                      </p>
-                      <p>
-                        <strong>Total Price:</strong> {venue?.price * nights}{" "}
-                        NOK
-                      </p>
+                      <div className={vmProfileStyles.bookingRowDiv}>
+                        <p className={gStyles.bodyLPurple}>
+                          <strong>Customer</strong>{" "}
+                        </p>
+                        <p className={gStyles.bodyWhite}>
+                          {booking.customer.name}
+                        </p>
+                      </div>
+                      <div className={vmProfileStyles.bookingRowDiv}>
+                        <p className={gStyles.bodyLPurple}>
+                          <strong>Total Guests</strong>{" "}
+                        </p>
+                        <p className={gStyles.bodyWhite}>{booking.guests}</p>
+                      </div>
+                      <div className={vmProfileStyles.bookingRowDiv}>
+                        <p className={gStyles.bodyLPurple}>
+                          <strong>Check-in</strong>{" "}
+                        </p>
+                        <p className={gStyles.bodyWhite}>
+                          {new Date(booking.dateFrom).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <div className={vmProfileStyles.bookingRowDiv}>
+                        <p className={gStyles.bodyLPurple}>
+                          <strong>Check-out</strong>{" "}
+                        </p>
+                        <p className={gStyles.bodyWhite}>
+                          {new Date(booking.dateTo).toLocaleDateString()}
+                        </p>
+                      </div>
+                      <div className={vmProfileStyles.bookingRowDiv}>
+                        <p className={gStyles.bodyLPurple}>
+                          <strong>Duration</strong>{" "}
+                        </p>
+                        <p className={gStyles.bodyWhite}>{nights} nights</p>
+                      </div>
+                      <div className={vmProfileStyles.bookingRowDiv}>
+                        <p className={gStyles.bodyLPurple}>
+                          <strong>Total Price</strong>
+                        </p>{" "}
+                        <p className={gStyles.bodyWhite}>
+                          {venue?.price * nights} NOK
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>

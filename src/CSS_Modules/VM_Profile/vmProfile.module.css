@@ -7,8 +7,8 @@
   gap: 12px;
 }
 
-.createButton{
-   margin-bottom: 20px !important;
+.createButton {
+  margin-bottom: 20px !important;
 }
 
 .venueNameRatingBoxMobile {
@@ -179,7 +179,7 @@
   gap: 10px;
   width: 100vw;
   height: 20px;
-margin-bottom : 40px;
+  margin-bottom: 40px;
   position: static;
 }
 
@@ -236,17 +236,17 @@ margin-bottom : 40px;
   overflow-y: scroll;
 }
 
-.mobileViewBookings{
+.mobileViewBookings {
   display: none;
 }
 
-.buttonDivPopup{
+.buttonDivPopup {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.venueNameImgDiv{
+.venueNameImgDiv {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -254,7 +254,7 @@ margin-bottom : 40px;
   align-items: center;
 }
 
-.bookingImage{
+.bookingImage {
   width: 200px;
   height: 200px;
   object-fit: cover;
@@ -262,31 +262,29 @@ margin-bottom : 40px;
   border: 3px solid var(--tertiary-color-1);
 }
 
-.bookingInfoDiv{
+.bookingInfoDiv {
   display: flex;
   flex-direction: row;
- 
+
   height: auto;
   width: max-content;
- 
+
   gap: 20px;
   justify-content: center;
   align-items: center;
-  
- 
 }
 
-.bookingRowDiv{
+.bookingRowDiv {
   display: grid;
-grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   justify-content: center;
   align-items: center;
-  width: 300px;
+  width: 200px;
   height: auto;
   gap: 4px;
 }
 
-.bookingCardWrapper{
+.bookingCardWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -294,64 +292,56 @@ grid-template-columns: repeat(2, 1fr);
   width: 100vw;
 }
 
-.bookingCardBg{
- background-color: var(--primary-color-2);
-margin-bottom: 20px;
+.bookingCardBg {
+  background-color: var(--primary-color-2);
+  margin-bottom: 20px;
   border-radius: 5px;
   padding: 20px;
 }
 
 .mobileViewBookings {
-    display: none;
-  }
+  display: none;
+}
 
-  .desktopViewBookings {
-    display: flex;
-    flex-direction: column;
-  }
-
-  
-.bookingCardBg{
- background-color: var(--primary-color-2);
-
-  border-radius: 5px;
+.desktopViewBookings {
   display: flex;
   flex-direction: column;
 }
 
 @media (min-width: 487px) and (max-width: 768px) {
-
-  .bookingInfoDiv{
-
-  flex-direction: column;
-
- 
- 
-  }
-
-  .bookingGridDiv{
+  .bookingCardBg {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 300px;
+    gap: 8px;
+  }
+
+  .bookingInfoDiv {
+    flex-direction: column;
+    align-items: center;
     
   }
 
-  .bookingRowDiv{
+  .bookingGridDiv {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+align-items: flex-start;
+   
+  }
 
-  width: 200px;
+  .bookingRowDiv {
+    width: 200px;
 
 
-}
+  
+  }
 
-
-
-   .mobileViewBookings{
+  .mobileViewBookings {
     display: flex;
   }
 
-  .desktopViewBookings{
+  .desktopViewBookings {
     display: none;
   }
   .venueCardPosition {
@@ -359,15 +349,13 @@ margin-bottom: 20px;
   }
   .outerBox {
     flex-direction: column;
-   
-  
+
     width: 80vw;
   }
   .innerBox {
     flex-direction: column;
     height: 100%;
     max-width: 400px;
-
   }
 
   .venueBoxOne {
@@ -473,38 +461,32 @@ margin-bottom: 20px;
   }
 
   .bookingsInfoMsgBox {
+    height: 50px;
+    position: static;
+    padding-bottom: 0;
+    margin-bottom: 10px;
+  }
 
-  height: 50px;
-position: static;
-padding-bottom: 0;
-margin-bottom: 10px;
-
-}
-
-.desktopViewBookings{
-  display: none;
-}
-    
+  .desktopViewBookings {
+    display: none;
+  }
 }
 
 @media (max-width: 486px) {
-
-
-  .desktopViewBookings{
+  .desktopViewBookings {
     display: none;
   }
 
-  .mobileViewBookings{
+  .mobileViewBookings {
     display: flex;
   }
- .venueCardPosition {
+  .venueCardPosition {
     flex-direction: column;
   }
   .outerBox {
     flex-direction: column;
 
-  
-    width: 80vw
+    width: 80vw;
   }
   .innerBox {
     flex-direction: column;
@@ -555,7 +537,7 @@ margin-bottom: 10px;
     margin-top: 0;
     margin-bottom: 20px;
     height: auto;
-justify-content: center;
+    justify-content: center;
   }
 
   .venueInfoBoxTwo {
@@ -568,12 +550,12 @@ justify-content: center;
     display: flex;
     flex-direction: column;
     gap: 10px;
-   
+
     padding: 0;
     height: auto;
     margin-top: 8px;
-     min-width: 200px;
-  max-width: 220px;
+    min-width: 200px;
+    max-width: 220px;
   }
 
   .venueNameRatingBoxMobile {
@@ -616,70 +598,58 @@ justify-content: center;
     max-width: 250px;
   }
 
-    .bookingsInfoMsgBox {
+  .bookingsInfoMsgBox {
+    height: 50px;
+    position: static;
+    padding-bottom: 0;
+    margin-bottom: 10px;
+  }
 
-  height: 50px;
-position: static;
-padding-bottom: 0;
-margin-bottom: 10px;
-}
-
-.buttonDiv {
-  display: flex;
-  flex-direction: column;
-    width: 100vw;
-  justify-content: center;
-  align-items: center;
-  padding-top: 20px;
-  gap: 12px;
-}
-
-.outerBtnDiv{
+  .buttonDiv {
     display: flex;
     flex-direction: column;
     width: 100vw;
-align-items: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    gap: 12px;
+  }
 
-}
+  .outerBtnDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    align-items: center;
+  }
 
-.buttonDivPopup{
-  display: flex;
-  flex-direction: column;
-justify-content: center;
-
-}
-
-
-  .bookingGridDiv{
+  .buttonDivPopup {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    width: 300px;
-    
   }
 
-   .bookingRowDiv{
-
-  width: 200px;
-
-
-}
-
-  .bookingInfoDiv{
-
-  flex-direction: column;
-  width: 100%;
  
 
-}
+  .bookingRowDiv {
+    width: 200px;
+  }
 
-.desktopViewBookings{
-  display: none;
-}
+  .bookingInfoDiv {
+    flex-direction: column;
+    width: 100%;
+  }
 
-.mobileViewBookings {
+  .desktopViewBookings {
+    display: none;
+  }
+
+  .mobileViewBookings {
     display: block;
   }
 
+  .bookingCardBg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
