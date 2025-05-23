@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import useMyStore from '../../Store';
 import gStyles from '../../CSS_Modules/Global/global.module.css';
-
+import homeStyles from '../../CSS_Modules/Home/home.module.css';
 /**
  * ViewAvailabilityButton component renders a button to navigate to an individual stay and 
  * view availability of a particular stay.
@@ -26,9 +26,12 @@ const handleClick = () => {
 };
 
 return (
-  < button className={`${gStyles.buttonPrimary} ${gStyles.buttonsFonts}`} onClick={handleClick} >
+  <div className={homeStyles.buttonAvailabilityContainer}>
+  < button className={`${gStyles.buttonPrimary} ${gStyles.buttonsFonts}${homeStyles.buttonAvailability}`} onClick={handleClick} >
     View Availability
   </button>
+  </div>
+  
 )
 }
 
