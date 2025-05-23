@@ -144,6 +144,7 @@ const fetchedStays = await fetchStays();
           required
     
           autoComplete="name"
+          
           sx={{
     "& .MuiOutlinedInput-root": {
       backgroundColor: "white",
