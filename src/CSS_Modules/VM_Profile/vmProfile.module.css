@@ -293,6 +293,11 @@ grid-template-columns: repeat(2, 1fr);
 
 @media (min-width: 487px) and (max-width: 768px) {
 
+  .bookingInfoDiv{
+
+  flex-direction: column;
+
+}
 
    .mobileViewBookings{
     display: flex;
@@ -431,6 +436,12 @@ margin-bottom: 10px;
 }
 
 @media (max-width: 486px) {
+
+  .bookingInfoDiv{
+
+  flex-direction: column;
+
+}
   .desktopViewBookings{
     display: none;
   }
