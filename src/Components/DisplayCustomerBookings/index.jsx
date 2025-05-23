@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import fetchCustomerBookings from "../../API/FetchCustomerBookings";
+import cBookingStyles from '../../CSS_Modules/CustomerBookings/customerBookings.module.css';
 
 const DisplayCustomerBookings = () => { 
     const [bookingsData, setBookingsData] = useState([]);
@@ -35,18 +36,32 @@ const DisplayCustomerBookings = () => {
                 const totalPrice = booking.venue?.price ? booking.venue.price * numberOfNights : "N/A";
 
                 return (
-                    <div key={booking.id}>
+                    <div className={cBookingStyles.outerContainer} >
+                        <div className={cBookingStyles.innerContainer}>
+                        
+                    <div className={cBookingStyles.cardLayout} key={booking.id}>
+                        <div className={cBookingStyles.nameCreatedImgDiv}>
+                        <div className={cBookingStyles.nameCreatedDiv}>
                         <h2>{booking.venue?.name || "Venue Not Found"}</h2>
+                        <p>Booked on:{new Date(booking.created).toLocaleDateString()}</p>
+                        </div>
                         {booking.venue?.media?.[0]?.url ? (
-                            <img src={booking.venue.media[0].url} alt={booking.venue.name} />
+                            <img className={cBookingStyles.bookingImg} src={booking.venue.media[0].url} alt={booking.venue.name} />
                         ) : (
                             <p>No image available</p>
                         )}
-                        <p>Guests: {booking.guests}</p>
-                        <p>Check-in: {new Date(booking.dateFrom).toLocaleDateString()}</p>
-                        <p>Check-out: {new Date(booking.dateTo).toLocaleDateString()}</p>
-                        <p>Number of Nights: {numberOfNights}</p>
-                        <p>Total Price: {totalPrice}</p>
+                        </div>
+                        <div className={cBookingStyles.bookingInfoDiv}>
+                        <p>Guests:</p> <p>Check-in:</p> <p>Check-out:</p><p>Number of Nights:</p>  
+                            <p>Total Price:</p>
+                        <p>{booking.guests}</p>
+                        <p>{new Date(booking.dateFrom).toLocaleDateString()}</p>
+                        <p>{new Date(booking.dateTo).toLocaleDateString()}</p>
+                        <p>{numberOfNights}</p>
+                     <p>{totalPrice}</p>
+                        </div>
+                    </div>
+                    </div>
                     </div>
                 );
             })}

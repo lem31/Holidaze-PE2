@@ -1,0 +1,34 @@
+.nameCreatedImgDiv{
+    display: flex;
+    flex-direction: column;
+   
+
+}
+
+.nameCreatedDiv{
+    display: flex;
+    flex-direction: row;
+justify-content: space-between;
+padding-left: 20px;
+padding-right: 20px;
+}
+
+.bookingImg{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.bookingInfoDiv{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    width: 420px;
+
+}
+
+.cardLayout{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
