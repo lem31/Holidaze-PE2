@@ -46,6 +46,7 @@ function Venues({ vmVenues }) {
   const { deleteVenue } = useMyStore();
 
 
+
   useEffect(() => {
     fetchVMVenues();
   }, [fetchVMVenues, successMessage]);
@@ -329,7 +330,7 @@ function Venues({ vmVenues }) {
         open={isBookingsVisible}
         onClose={() => setIsBookingsVisible(false)}
       >
-        {selectedVenueId && <SpecificVenueBookings venueId={selectedVenueId} />}
+        {selectedVenueId && isBookingsVisible &&  <SpecificVenueBookings venueId={selectedVenueId} onClose={()=> setIsBookingsVisible(false)} />}
       </Dialog>
 
       {isEditFormVisible && selectedVenue && (

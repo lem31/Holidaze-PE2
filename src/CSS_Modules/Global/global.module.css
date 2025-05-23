@@ -155,6 +155,8 @@
   letter-spacing: 1.5%;
 }
 
+
+
 .h4Black {
   font-size: var(--font-size-small);
   color: var(--primary-color-3);
@@ -179,11 +181,19 @@
 }
 
 .bodyWhite {
-  font-size: var(--font-size-small);
-  color: var(--primary-color-1);
-  font-family: var(--font-family-2);
-  line-height: 150%;
-  letter-spacing: 0.5%;
+  font-size: var(--font-size-small) !important;
+  color: var(--primary-color-1) !important;
+  font-family: var(--font-family-2)!important;
+  line-height: 150% !important;
+  letter-spacing: 0.5% !important;
+}
+
+.bodyLPurple {
+  font-size: var(--font-size-small) !important;
+  color: var(--secondary-color-2) !important;
+  font-family: var(--font-family-2)!important;
+  line-height: 150% !important;
+  letter-spacing: 0.5% !important;
 }
 
 .bodyBlack {
@@ -193,6 +203,7 @@
   line-height: 150%;
   letter-spacing: 0.5%;
 }
+
 
 /* Media Queries */
 
@@ -260,11 +271,11 @@
 }
 
   .bodyWhite {
-    font-size: var(--font-size-small-2);
-    color: var(--primary-color-1);
-    font-family: var(--font-family-2);
-    line-height: 160%;
-    letter-spacing: 0.5%;
+    font-size: var(--font-size-small-2) !important;
+    color: var(--primary-color-1) !important;
+    font-family: var(--font-family-2) !important;
+    line-height: 160% !important;
+    letter-spacing: 0.5% !important;
   }
 
   .bodyBlack {
@@ -274,6 +285,14 @@
     line-height: 160%;
     letter-spacing: 0.5%;
   }
+
+  .bodyLPurple {
+  font-size: var(--font-size-small-2) !important;
+  color: var(--secondary-color-2) !important;
+  font-family: var(--font-family-2)!important;
+ line-height: 160% !important;
+    letter-spacing: 0.5% !important;
+}
 }
 
 @media (max-width: 486px) {
@@ -328,11 +347,11 @@
 }
 
   .bodyWhite {
-    font-size: var(--font-size-small-3);
-    color: var(--primary-color-1);
-    font-family: var(--font-family-2);
-    line-height: 160%;
-    letter-spacing: 0.5%;
+    font-size: var(--font-size-small-3) !important;
+    color: var(--primary-color-1) !important;
+    font-family: var(--font-family-2) !important;
+    line-height: 160% !important;
+    letter-spacing: 0.5% !important;
   }
 
   .bodyBlack {
@@ -342,6 +361,14 @@
     line-height: 160%;
     letter-spacing: 0.5%;
   }
+
+  .bodyLPurple {
+  font-size: var(--font-size-small-3) !important;
+  color: var(--secondary-color-2) !important;
+  font-family: var(--font-family-2)!important;
+ line-height: 160% !important;
+    letter-spacing: 0.5% !important;
+}
 
   .labelWhite {
     font-size: var(--font-size-small-3);
