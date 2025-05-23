@@ -70,7 +70,7 @@ return isTableVisible ? (
             })
         ) : (
             <TableRow>
-            <TableCell colSpan={6} align="center">No Bookings Available</TableCell>
+            <TableCell className={gStyles.bodyWhite} colSpan={6} align="center">No Bookings Available</TableCell>
             </TableRow>
         )}
         </TableBody>

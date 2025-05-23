@@ -1,5 +1,7 @@
-import React, { useEffect} from 'react';
+import  { useEffect} from 'react';
 import useMyStore from '../../Store/index';
+import { GlobalStyles } from '@mui/material';
+import gStyles from "../../CSS_Modules/Global/global.module.css";
 
 function VMBookings() {
   const {fetchVMVenues, vmVenues, successMessage} = useMyStore();
@@ -28,7 +30,7 @@ function VMBookings() {
           ))
         ) : (
           <>
-            <h2>No Bookings Available</h2>
+            <h2 className={gStyles.h2White}>No Bookings Available</h2>
             <p>Please check back later.</p>
           </>
         )}
