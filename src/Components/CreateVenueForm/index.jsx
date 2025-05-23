@@ -5,6 +5,7 @@ import useMyStore from "../../Store/index";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import fetchStays from "../../API/FetchStays";
+import createVenueStyles from "../../CSS_Modules/CreateVenue/createVenue.module.css";
 
 const CreateVenueForm = ({ toggleForm }) => {
   const { createNewVenue, setSuccessMessage } = useMyStore();
@@ -103,6 +104,7 @@ const fetchedStays = await fetchStays();
   };
 
   return (
+    <div className={createVenueStyles.createVenueFormDiv}>
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box
         sx={{
@@ -353,6 +355,7 @@ const fetchedStays = await fetchStays();
         </Button>
       </Box>
     </form>
+    </div>
   );
 };
 

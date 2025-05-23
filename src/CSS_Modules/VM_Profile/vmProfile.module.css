@@ -487,6 +487,8 @@ align-items: flex-start;
     flex-direction: row;
     justify-content: center;
   }
+
+
 }
 
 @media (max-width: 486px) {
