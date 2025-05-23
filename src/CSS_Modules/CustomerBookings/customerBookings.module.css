@@ -1,0 +1,310 @@
+
+.bookingInfoGridMobile{
+    display: none;}
+
+.h2 {
+    text-align: left;
+    width: 100%;
+    overflow-wrap: break-word;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.h2Div {
+    align-items: flex-start;
+    min-height: min-content;
+}
+
+.h1Div{
+    display: flex;
+    flex-direction: row;
+padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100vw;
+    justify-content: center;
+
+}
+
+
+
+
+.innerContainer{
+     background-color: var(--primary-color-2);
+    border-radius: 5px;
+    padding: 20px;
+    border: 3px solid var(--tertiary-color-1);
+    height: auto;
+}
+
+.outerContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+ margin-bottom: 20px;
+    width: 100vw;
+    height: auto;
+ 
+}
+
+.nameCreatedDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+justify-content: space-between;
+
+height: 50px;
+width: 660px;
+
+
+}
+
+.bookingImg{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.bookingInfoGrid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    width: 500px;
+    height: 100px;
+ align-items: center;
+
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+
+}
+
+.bookingDetailsContainer{
+    display: flex;
+    flex-direction: row;
+align-items: center;
+height: 200px;
+width: 100%
+}
+
+.bookingInfoDiv{
+    display: flex;
+    flex-direction: column;
+ justify-content: center;
+    width: 520px;
+    height: 180px;
+ 
+}
+
+.cardLayout{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 8px;
+    height: 280px;
+    width: 100%;
+}
+
+@media (min-width: 487px) and (max-width: 768px) {
+
+    .h1Div{
+   
+    padding-bottom: 0;
+   
+
+}
+
+.h2Div{
+     height: auto;
+    min-height: 50px;
+
+}
+
+.bookingDetailsContainer{
+    display: flex;
+    flex-direction: column;
+height: auto;
+    align-items: center;}
+
+.cardLayout{
+ 
+    align-items: center;
+    flex-direction: column;
+    height: auto;
+    min-height: 200px;
+}
+
+.nameCreatedDiv{
+    display: flex;
+   
+    flex-direction: column-reverse;
+justify-content: center;
+align-items: center;
+ height: auto;
+    min-height: 50px;
+    max-width: 200px;
+
+
+}
+
+
+
+.h2{
+margin-left: 0;
+text-align: center;
+
+
+}
+
+.bookingImg{
+   
+
+    border-radius: 5px;
+}
+
+.bookingInfoGrid{
+    display: none;
+}
+
+.bookingInfoGridMobile{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    width: 200px;
+    height: 300px;
+    place-items: center; 
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.bookingInfoDiv{
+   
+align-items: center;
+width: 300px;
+height: 300px
+   
+
+
+
+}
+
+.innerContainer{
+    display: flex;
+    flex-direction: column;
+   width: auto;
+    height: auto;
+    min-height: 200px;
+
+   align-items: center;
+}
+.outerContainer{
+    width: 100vw;
+     height: auto;
+    min-height: 200px;
+    margin-bottom: 12px;
+}}
+
+@media (max-width: 486px) {
+    .h1Div{
+   
+    padding-bottom: 0;
+   
+
+}
+
+.h2Div{
+     height: auto;
+    min-height: 50px;
+
+}
+
+.bookingDetailsContainer{
+    display: flex;
+    flex-direction: column;
+height: auto;
+    align-items: center;}
+
+.cardLayout{
+ 
+    align-items: center;
+    flex-direction: column;
+    height: auto;
+    min-height: 200px;
+}
+
+.nameCreatedDiv{
+    display: flex;
+   
+    flex-direction: column-reverse;
+justify-content: center;
+align-items: center;
+ height: auto;
+    min-height: 50px;
+    max-width: 200px;
+
+
+}
+
+
+
+.h2{
+margin-left: 0;
+text-align: center;
+
+
+}
+
+.bookingImg{
+   
+
+    border-radius: 5px;
+}
+
+.bookingInfoGrid{
+    display: none;
+}
+
+.bookingInfoGridMobile{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    width: 200px;
+    height: 300px;
+    place-items: center; 
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.bookingInfoDiv{
+   
+align-items: center;
+width: 300px;
+height: 300px
+   
+
+
+
+}
+
+.innerContainer{
+    display: flex;
+    flex-direction: column;
+   width: 200px;
+    height: auto;
+    min-height: 200px;
+
+   align-items: center;
+}
+.outerContainer{
+    width: 100vw;
+     height: auto;
+    min-height: 200px;
+    margin-bottom: 12px;
+}
+
+
+
+}
