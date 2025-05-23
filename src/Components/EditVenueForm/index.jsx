@@ -4,6 +4,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import useMyStore from "../../Store";
 import CreateVenueFormValidator from "../CreateVenueFormValidator";
 import { Box, Button, TextField } from "@mui/material";
+import editVenueStyles from "../../CSS_Modules/EditVenue/editVenue.module.css";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
+import Parking from "../../assets/images/Parking.png";
+import Wifi from "../../assets/images/Wifi.png";
+import Breakfast from "../../assets/images/Breakfast.png";
+import Pets from "../../assets/images/Pets.png";
 
 function EditVenueForm({ toggleEditForm }) {
   const { editVenue, setSuccessMessage, selectedVenue, fetchVMVenues } =
@@ -120,17 +126,13 @@ function EditVenueForm({ toggleEditForm }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+
+    <div className={editVenueStyles.overlay} onClick={toggleEditForm} >
+          <div className={editVenueStyles.editVenueFormDiv}onClick={(e) => e.stopPropagation()}>
+    <form className={editVenueStyles.editVenueForm} onSubmit={handleSubmit(onSubmit)}>
+       <h2 className={gStyles.h2White}>Edit Venue</h2>
       <Box
-        sx={{
-          marginBottom: 2,
-          width: "800px",
-          height: "100px",
-          padding: 3,
-          backgroundColor: "white",
-          zIndex: 2000,
-          position: "relative",
-        }}
+       
       >
         {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
         <TextField
@@ -139,8 +141,23 @@ function EditVenueForm({ toggleEditForm }) {
           variant="outlined"
           fullWidth
           required
-          sx={{ marginBottom: 2 }}
+          
           autoComplete="name"
+           sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },}}
         />
 
         {errors.description && (
@@ -152,7 +169,21 @@ function EditVenueForm({ toggleEditForm }) {
           variant="outlined"
           fullWidth
           required
-          sx={{ marginBottom: 2 }}
+          sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },  marginTop:'12px',}}
         />
 
         {Array.isArray(watch("media")) &&
@@ -163,7 +194,21 @@ function EditVenueForm({ toggleEditForm }) {
                 {...register(`media.${index}.url`)}
                 variant="outlined"
                 fullWidth
-                sx={{ marginBottom: 1 }}
+             sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },  marginTop:'12px',}}
               />
               {errors.media?.[index]?.url && (
                 <p style={{ color: "red" }}>
@@ -176,21 +221,40 @@ function EditVenueForm({ toggleEditForm }) {
                 {...register(`media.${index}.alt`)}
                 variant="outlined"
                 fullWidth
+                 sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+     
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
               />
               {errors.media?.[index]?.alt && (
                 <p style={{ color: "red" }}>
                   {errors.media[index].alt.message}
                 </p>
               )}
-
-              <Button type="button" onClick={() => removeImage(index)}>
+<div className={editVenueStyles.removeBtnDiv}>
+              <Button className={gStyles.buttonSecondary} type="button" onClick={() => removeImage(index)}>
                 Remove Image
               </Button>
+              </div>
             </Box>
           ))}
-        <Button type="button" onClick={onAddImage}>
+          <div className={editVenueStyles.addBtnDiv}>
+        <Button className={gStyles.buttonPrimary} type="button" onClick={onAddImage}>
           Add Image
         </Button>
+        </div>
 
         <TextField
           label="Price"
@@ -199,7 +263,22 @@ function EditVenueForm({ toggleEditForm }) {
           variant="outlined"
           fullWidth
           required
-          sx={{ marginBottom: 2 }}
+         sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },
+  marginTop:'12px',}}
         />
         {errors.price && <p style={{ color: "red" }}>{errors.price.message}</p>}
 
@@ -210,7 +289,21 @@ function EditVenueForm({ toggleEditForm }) {
           variant="outlined"
           fullWidth
           required
-          sx={{ marginBottom: 2 }}
+        sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.maxGuests && (
           <p style={{ color: "red" }}>{errors.maxGuests.message}</p>
@@ -223,44 +316,86 @@ function EditVenueForm({ toggleEditForm }) {
           variant="outlined"
           fullWidth
           required
-          sx={{ marginBottom: 2 }}
+         sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.rating && (
           <p style={{ color: "red" }}>{errors.rating.message}</p>
         )}
 
         <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: 2,
-          }}
+         className={editVenueStyles.metaBox}
         >
           <Button
+          className={editVenueStyles.metaButton}
             variant={metaValues.parking ? "contained" : "outlined"}
             onClick={() => toggleFacility("parking")}
+            sx={{backgroundColor: metaValues.parking ? "#e55299" : "rgb(233, 155, 174)",
+  boxShadow: metaValues.parking ? "inset 0 0 40px #320e3b" : "none",
+color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
+}}
           >
+                    <img className={editVenueStyles.metaImg} src={Parking} alt="" />
             Parking
           </Button>
 
           <Button
+          className={editVenueStyles.metaButton}
             variant={metaValues.wifi ? "contained" : "outlined"}
             onClick={() => toggleFacility("wifi")}
+            sx={{backgroundColor: metaValues.wifi ? "#e55299" : "rgb(233, 155, 174)",
+  boxShadow: metaValues.wifi ? "inset 0 0 40px #320e3b" : "none",
+color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
+}}
           >
+                    <img className={editVenueStyles.metaImg} src={Wifi} alt="" />
             Wifi
           </Button>
 
           <Button
+           className={editVenueStyles.metaButton}
             variant={metaValues.breakfast ? "contained" : "outlined"}
             onClick={() => toggleFacility("breakfast")}
+            sx={{backgroundColor: metaValues.breakfast ? "#e55299" : "rgb(233, 155, 174)",
+  boxShadow: metaValues.breakfast ? "inset 0 0 40px #320e3b" : "none",
+color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
+}}
           >
+                    <img className={editVenueStyles.metaImg} src={Breakfast} alt="" />
             Breakfast
           </Button>
 
           <Button
+           className={editVenueStyles.metaButton}
             variant={metaValues.pets ? "contained" : "outlined"}
             onClick={() => toggleFacility("pets")}
+            sx={{backgroundColor: metaValues.pets ? "#e55299" : "rgb(233, 155, 174)",
+  boxShadow: metaValues.pets ? "inset 0 0 40px #320e3b" : "none",
+color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
+}}
           >
+                    <img className={editVenueStyles.metaImg} src={Pets} alt="" />
             Pets
           </Button>
         </Box>
@@ -270,7 +405,21 @@ function EditVenueForm({ toggleEditForm }) {
           {...register("location.address")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+         sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },marginTop:'12px',}}
         />
         {errors.location?.address && (
           <p style={{ color: "red" }}>{errors.location.address.message}</p>
@@ -281,7 +430,21 @@ function EditVenueForm({ toggleEditForm }) {
           {...register("location.city")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+         sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.location?.city && (
           <p style={{ color: "red" }}>{errors.location.city.message}</p>
@@ -292,7 +455,21 @@ function EditVenueForm({ toggleEditForm }) {
           {...register("location.zip", { valueAsString: true })}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+          sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.location?.zip && (
           <p style={{ color: "red" }}>{errors.location.zip.message}</p>
@@ -303,7 +480,21 @@ function EditVenueForm({ toggleEditForm }) {
           {...register("location.country")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+          sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.location?.country && (
           <p style={{ color: "red" }}>{errors.location.country.message}</p>
@@ -314,7 +505,21 @@ function EditVenueForm({ toggleEditForm }) {
           {...register("location.continent")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+         sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.location?.continent && (
           <p style={{ color: "red" }}>{errors.location.continent.message}</p>
@@ -326,7 +531,23 @@ function EditVenueForm({ toggleEditForm }) {
           {...register("location.lat")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+          sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },
+    marginTop:'12px',
+   }}
         />
         {errors.location?.lat && (
           <p style={{ color: "red" }}>{errors.location.lat.message}</p>
@@ -338,17 +559,34 @@ function EditVenueForm({ toggleEditForm }) {
           {...register("location.lng")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+          sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+
+    },  marginTop:'12px',}}
         />
         {errors.location?.lng && (
           <p style={{ color: "red" }}>{errors.location.lng.message}</p>
         )}
 
-        <button type="submit" style={{ width: "100%", padding: "40px" }}>
+        <Button  className={gStyles.buttonPrimary} type="submit" style={{ width: "100%", padding: "40px" }}>
           Save Venue
-        </button>
+        </Button>
 
         <Button
+         className={gStyles.buttonSecondary}
           type="button"
           variant="contained"
           color="primary"
@@ -360,6 +598,8 @@ function EditVenueForm({ toggleEditForm }) {
         </Button>
       </Box>
     </form>
+    </div>
+    </div>
   );
 }
 

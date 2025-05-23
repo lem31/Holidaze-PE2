@@ -169,6 +169,7 @@ const fetchedStays = await fetchStays();
           {...register("description")}
           variant="outlined"
           fullWidth
+          autoComplete="description"
           required
           sx={{
     "& .MuiOutlinedInput-root": {
@@ -194,6 +195,7 @@ const fetchedStays = await fetchStays();
                 label="Image URL"
                 {...register(`media.${index}.url`)}
                 variant="outlined"
+                autoComplete="image-url"
                 fullWidth
               sx={{
     "& .MuiOutlinedInput-root": {
@@ -600,7 +602,7 @@ fontFamily:"Lato",
         </Button>
 
         <Button
-        className={gStyles.buttonPrimary}
+        className={gStyles.buttonSecondary}
           type="button"
           variant="contained"
           color="primary"
