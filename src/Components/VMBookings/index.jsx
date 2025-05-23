@@ -1,6 +1,6 @@
 import  { useEffect} from 'react';
 import useMyStore from '../../Store/index';
-import { GlobalStyles } from '@mui/material';
+
 import gStyles from "../../CSS_Modules/Global/global.module.css";
 
 function VMBookings() {
