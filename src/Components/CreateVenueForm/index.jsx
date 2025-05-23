@@ -1,5 +1,5 @@
 import { Box, TextField, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import CreateVenueFormValidator from "../CreateVenueFormValidator";
 import useMyStore from "../../Store/index";
 import { useForm } from "react-hook-form";
@@ -12,9 +12,16 @@ import Wifi from "../../Assets/Images/Wifi.png";
 import Breakfast from "../../Assets/Images/Breakfast.png";
 import Pets from "../../Assets/Images/Pets.png";
 
-const CreateVenueForm = ({ toggleForm }) => {
+
+const CreateVenueForm = ({ toggleForm}) => {
   const { createNewVenue, setSuccessMessage } = useMyStore();
   const [stays, setStays] = useState([]);
+
+
+
+
+
+
 
 const toggleMeta =(key) => {
   setMetaValues((prevMeta)=> {
@@ -114,8 +121,14 @@ const fetchedStays = await fetchStays();
     setValue("media", updatedMedia);
   };
 
-  return (
-    <div className={createVenueStyles.createVenueFormDiv}>
+  return(
+ 
+
+  
+    
+   <div className={createVenueStyles.overlay} onClick={toggleForm} >
+
+    <div className={createVenueStyles.createVenueFormDiv}onClick={(e) => e.stopPropagation()}>
     
     <form className={createVenueStyles.createVenueForm} onSubmit={handleSubmit(onSubmit)}>
         <h2 className={gStyles.h2White}>Create Venue</h2>
@@ -320,10 +333,12 @@ const fetchedStays = await fetchStays();
         )}
 
         <Box
+        className={createVenueStyles.metaBox}
+
           sx={{
-            display: "flex",
+       
           gap: 4,
-            marginBottom: 2,
+           
           }}
         >
           <Button
@@ -333,6 +348,9 @@ const fetchedStays = await fetchStays();
   toggleMeta("parking")
 } sx={{backgroundColor: metaValues.parking ? "#e55299" : "rgb(233, 155, 174)",
   boxShadow: metaValues.parking ? "inset 0 0 40px #320e3b" : "none",
+color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
 }}
 
 
@@ -348,6 +366,9 @@ const fetchedStays = await fetchStays();
   toggleMeta("wifi")
 } sx={{backgroundColor: metaValues.wifi ? "#e55299" : "rgb(233, 155, 174)",
   boxShadow: metaValues.wifi ? "inset 0 0 40px #320e3b" : "none",
+  color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
 }}
 
           >
@@ -362,7 +383,12 @@ const fetchedStays = await fetchStays();
   toggleMeta("breakfast")
 } sx={{backgroundColor: metaValues.breakfast ? "#e55299" : "rgb(233, 155, 174)",
   boxShadow: metaValues.breakfast ? "inset 0 0 40px #320e3b" : "none",
-}}
+  color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },}}
 
 
           >
@@ -377,6 +403,9 @@ const fetchedStays = await fetchStays();
   toggleMeta("pets")
 } sx={{backgroundColor: metaValues.pets ? "#e55299" : "rgb(233, 155, 174)",
   boxShadow: metaValues.pets ? "inset 0 0 40px #320e3b" : "none",
+color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
 }}
    >
             <img className={createVenueStyles.metaImg} src={Pets} alt="" />
@@ -579,7 +608,10 @@ const fetchedStays = await fetchStays();
       </Box>
     </form>
     </div>
-  );
+    </div>
+ 
+  )
+
 };
 
 export default CreateVenueForm;

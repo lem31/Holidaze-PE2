@@ -106,8 +106,8 @@ function Venues({ vmVenues }) {
         <div
           style={{
             position: "fixed",
-            width: "80vw",
-            height: "80vh",
+            width: "100vw",
+            height: "100vh",
             display: "flex",
 
             alignItems: "center",
@@ -122,7 +122,7 @@ function Venues({ vmVenues }) {
         >
          
 
-          <CreateVenueForm toggleForm={toggleForm} />
+          <CreateVenueForm toggleForm={toggleForm} isFormVisible={isFormVisible} />
         </div>
       )}
 
