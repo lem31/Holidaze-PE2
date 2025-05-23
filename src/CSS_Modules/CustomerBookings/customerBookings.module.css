@@ -1,8 +1,25 @@
 .nameCreatedImgDiv{
     display: flex;
     flex-direction: column;
-   
 
+
+}
+
+.innerContainer{
+     background-color: var(--primary-color-2);
+    border-radius: 5px;
+    padding: 20px;
+    border: 3px solid var(--tertiary-color-1);
+}
+
+.outerContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+ margin-bottom: 20px;
+    width: 100vw;
+ 
 }
 
 .nameCreatedDiv{
@@ -11,24 +28,51 @@
 justify-content: space-between;
 padding-left: 20px;
 padding-right: 20px;
+
+
+
+width: 650px;
+position: absolute;
+
+
+
 }
 
 .bookingImg{
     width: 150px;
     height: 150px;
     object-fit: cover;
+    margin-top: 50px;
+    border-radius: 5px;
 }
 
-.bookingInfoDiv{
+.bookingInfoGrid{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    width: 420px;
+    width: 500px;
+    height: 100px;
+ align-items: center;
 
+
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 20px;
+
+}
+
+.bookingInfoDiv{
+    display: flex;
+    flex-direction: column;
+ justify-content: center;
+    width: 520px;
+    height: 100%;
+ 
 }
 
 .cardLayout{
     display: flex;
+    align-items: center;
     flex-direction: row;
     gap: 20px;
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import fetchCustomerBookings from "../../API/FetchCustomerBookings";
 import cBookingStyles from '../../CSS_Modules/CustomerBookings/customerBookings.module.css';
+import gStyles from '../../CSS_Modules/Global/global.module.css';
 
 const DisplayCustomerBookings = () => { 
     const [bookingsData, setBookingsData] = useState([]);
@@ -29,7 +30,7 @@ const DisplayCustomerBookings = () => {
 
     return (
         <div>
-            <h1>Bookings</h1>
+            <h1 className={gStyles.h1Black}>Bookings</h1>
             {bookingsData.map((booking) => {
              
                 const numberOfNights = (new Date(booking.dateTo) - new Date(booking.dateFrom)) / (1000 * 60 * 60 * 24);
@@ -42,8 +43,8 @@ const DisplayCustomerBookings = () => {
                     <div className={cBookingStyles.cardLayout} key={booking.id}>
                         <div className={cBookingStyles.nameCreatedImgDiv}>
                         <div className={cBookingStyles.nameCreatedDiv}>
-                        <h2>{booking.venue?.name || "Venue Not Found"}</h2>
-                        <p>Booked on:{new Date(booking.created).toLocaleDateString()}</p>
+                        <h2 className={gStyles.h2White}>{booking.venue?.name || "Venue Not Found"}</h2>
+                        <p className={gStyles.bodyWhite}>Booked on:{new Date(booking.created).toLocaleDateString()}</p>
                         </div>
                         {booking.venue?.media?.[0]?.url ? (
                             <img className={cBookingStyles.bookingImg} src={booking.venue.media[0].url} alt={booking.venue.name} />
@@ -52,13 +53,19 @@ const DisplayCustomerBookings = () => {
                         )}
                         </div>
                         <div className={cBookingStyles.bookingInfoDiv}>
-                        <p>Guests:</p> <p>Check-in:</p> <p>Check-out:</p><p>Number of Nights:</p>  
-                            <p>Total Price:</p>
-                        <p>{booking.guests}</p>
-                        <p>{new Date(booking.dateFrom).toLocaleDateString()}</p>
-                        <p>{new Date(booking.dateTo).toLocaleDateString()}</p>
-                        <p>{numberOfNights}</p>
-                     <p>{totalPrice}</p>
+                           
+                        <div className={cBookingStyles.bookingInfoGrid}>
+                        <p className={gStyles.bodyWhite}>Guests:</p> 
+                        <p className={gStyles.bodyWhite}>Check-in:</p>
+                         <p className={gStyles.bodyWhite}>Check-out:</p>
+                         <p className={gStyles.bodyWhite}>No. of Nights:</p>  
+                            <p className={gStyles.bodyWhite}>Total Price:</p>
+                        <p className={gStyles.bodyWhite}>{booking.guests}</p>
+                        <p className={gStyles.bodyWhite}>{new Date(booking.dateFrom).toLocaleDateString()}</p>
+                        <p className={gStyles.bodyWhite}>{new Date(booking.dateTo).toLocaleDateString()}</p>
+                        <p className={gStyles.bodyWhite}>{numberOfNights}</p>
+                     <p className={gStyles.bodyWhite}>{totalPrice}</p>
+                        </div>
                         </div>
                     </div>
                     </div>
