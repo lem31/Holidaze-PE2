@@ -4,6 +4,19 @@
 
 
 }
+.h1Div{
+    display: flex;
+    flex-direction: row;
+padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100vw;
+    justify-content: center;
+}
+
+.h2{
+margin-left: -14px;
+
+}
 
 .innerContainer{
      background-color: var(--primary-color-2);

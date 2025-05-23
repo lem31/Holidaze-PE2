@@ -30,7 +30,9 @@ const DisplayCustomerBookings = () => {
 
     return (
         <div>
-            <h1 className={gStyles.h1Black}>Bookings</h1>
+            <div className={cBookingStyles.h1Div}>
+            <h1 className={`${gStyles.h1Black}${cBookingStyles.h1}`}>Bookings</h1>
+            </div>
             {bookingsData.map((booking) => {
              
                 const numberOfNights = (new Date(booking.dateTo) - new Date(booking.dateFrom)) / (1000 * 60 * 60 * 24);
@@ -43,7 +45,7 @@ const DisplayCustomerBookings = () => {
                     <div className={cBookingStyles.cardLayout} key={booking.id}>
                         <div className={cBookingStyles.nameCreatedImgDiv}>
                         <div className={cBookingStyles.nameCreatedDiv}>
-                        <h2 className={gStyles.h2White}>{booking.venue?.name || "Venue Not Found"}</h2>
+                        <h2 className={`${gStyles.h2White} ${cBookingStyles.h2}`}>{booking.venue?.name || "Venue Not Found"}</h2>
                         <p className={gStyles.bodyWhite}>Booked on:{new Date(booking.created).toLocaleDateString()}</p>
                         </div>
                         {booking.venue?.media?.[0]?.url ? (
