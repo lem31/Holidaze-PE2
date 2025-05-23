@@ -259,6 +259,38 @@ margin-bottom : 40px;
   border: 3px solid var(--tertiary-color-1);
 }
 
+.bookingInfoDiv{
+  display: flex;
+  flex-direction: row;
+  background-color: var(--primary-color-2);
+  height: auto;
+  width: max-content;
+  margin: 10px 0px 10px 0px;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.bookingRowDiv{
+  display: grid;
+grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: auto;
+  gap: 4px;
+}
+
+.bookingCardWrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+}
+
 @media (min-width: 487px) and (max-width: 768px) {
 
 
