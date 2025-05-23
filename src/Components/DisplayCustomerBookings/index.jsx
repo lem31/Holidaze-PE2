@@ -45,15 +45,19 @@ const DisplayCustomerBookings = () => {
           <div className={cBookingStyles.outerContainer}>
             <div className={cBookingStyles.innerContainer}>
               <div className={cBookingStyles.cardLayout} key={booking.id}>
-                <div className={cBookingStyles.nameCreatedImgDiv}>
+               
                   <div className={cBookingStyles.nameCreatedDiv}>
+                    <div className={cBookingStyles.h2Div}>
                     <h2 className={`${gStyles.h2White} ${cBookingStyles.h2}`}>
+                       
                       {booking.venue?.name || "Venue Not Found"}
                     </h2>
+                     </div>
                     <p className={gStyles.bodyWhite}>
                       Booked on:{new Date(booking.created).toLocaleDateString()}
                     </p>
                   </div>
+                  <div className={cBookingStyles.bookingDetailsContainer}>
                   {booking.venue?.media?.[0]?.url ? (
                     <img
                       className={cBookingStyles.bookingImg}
@@ -63,7 +67,7 @@ const DisplayCustomerBookings = () => {
                   ) : (
                     <p>No image available</p>
                   )}
-                </div>
+              
                 <div className={cBookingStyles.bookingInfoDiv}>
                   <div className={cBookingStyles.bookingInfoGrid}>
                     <p className={gStyles.bodyWhite}>Guests:</p>
@@ -79,7 +83,7 @@ const DisplayCustomerBookings = () => {
                       {new Date(booking.dateTo).toLocaleDateString()}
                     </p>
                     <p className={gStyles.bodyWhite}>{numberOfNights}</p>
-                    <p className={gStyles.bodyWhite}>{totalPrice}</p>
+                    <p className={gStyles.bodyWhite}>{totalPrice}NOK</p>
                   </div>
 
                   <div className={cBookingStyles.bookingInfoGridMobile}>
@@ -100,6 +104,7 @@ const DisplayCustomerBookings = () => {
 
                     <p className={gStyles.bodyWhite}>{totalPrice}</p>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
