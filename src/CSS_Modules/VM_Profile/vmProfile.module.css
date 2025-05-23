@@ -246,6 +246,19 @@ margin-bottom : 40px;
   justify-content: center;
 }
 
+.venueNameImgDiv{
+  display: flex;
+  flex-direction: column;
+}
+
+.bookingImage{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 3px solid var(--tertiary-color-1);
+}
+
 @media (min-width: 487px) and (max-width: 768px) {
 
 
