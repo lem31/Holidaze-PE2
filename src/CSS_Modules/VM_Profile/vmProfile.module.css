@@ -243,6 +243,7 @@ margin-bottom : 40px;
 .buttonDivPopup{
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 @media (min-width: 487px) and (max-width: 768px) {

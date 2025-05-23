@@ -1,6 +1,7 @@
 import  { useEffect} from 'react';
 import useMyStore from '../../Store/index';
 import gStyles from "../../CSS_Modules/Global/global.module.css";
+import vmProfileStyles from "../../CSS_Modules/VM_Profile/vmProfile.module.css";
 
 function VMBookings() {
   const {fetchVMVenues, vmVenues, successMessage} = useMyStore();
@@ -9,7 +10,10 @@ function VMBookings() {
   
       fetchVMVenues();
     }, [successMessage]);
+
   const venueBookings = vmVenues.flatMap(venue=> venue.bookings || []);
+
+
 
   console.log("Venue Bookings:", venueBookings);
   
@@ -18,13 +22,16 @@ function VMBookings() {
     <div>
     {venueBookings.length > 0 ? (
       venueBookings.map((booking, index) => (
-        <div key={`${booking.id || `fallback`}-${index}`}>
+
+        <div className={vmProfileStyles.bookingCardWrapper}>
+        <div className={vmProfileStyles.bookingInfoDiv} key={`${booking.id || `fallback`}-${index}`}>
           <h2>Booking ID: {booking.id}</h2>
           <p>Customer: {booking.customer.name}</p>
           <p>Date: {booking.dateFrom} - {booking.dateTo}</p>
           <p>Guests: {booking.guests}</p>
           <p>Price: {booking.price}</p>
           <p>Created: {booking.created}</p>
+        </div>
         </div>
           ))
         ) : (
