@@ -249,6 +249,9 @@ margin-bottom : 40px;
 .venueNameImgDiv{
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .bookingImage{
@@ -262,15 +265,15 @@ margin-bottom : 40px;
 .bookingInfoDiv{
   display: flex;
   flex-direction: row;
-  background-color: var(--primary-color-2);
+ 
   height: auto;
   width: max-content;
-  margin: 10px 0px 10px 0px;
+ 
   gap: 20px;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  border-radius: 5px;
+  
+ 
 }
 
 .bookingRowDiv{
@@ -291,13 +294,58 @@ grid-template-columns: repeat(2, 1fr);
   width: 100vw;
 }
 
+.bookingCardBg{
+ background-color: var(--primary-color-2);
+margin-bottom: 20px;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.mobileViewBookings {
+    display: none;
+  }
+
+  .desktopViewBookings {
+    display: flex;
+    flex-direction: column;
+  }
+
+  
+.bookingCardBg{
+ background-color: var(--primary-color-2);
+
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 487px) and (max-width: 768px) {
 
   .bookingInfoDiv{
 
   flex-direction: column;
 
+ 
+ 
+  }
+
+  .bookingGridDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    
+  }
+
+  .bookingRowDiv{
+
+  width: 200px;
+
+
 }
+
+
 
    .mobileViewBookings{
     display: flex;
@@ -432,16 +480,16 @@ padding-bottom: 0;
 margin-bottom: 10px;
 
 }
+
+.desktopViewBookings{
+  display: none;
+}
     
 }
 
 @media (max-width: 486px) {
 
-  .bookingInfoDiv{
 
-  flex-direction: column;
-
-}
   .desktopViewBookings{
     display: none;
   }
@@ -600,5 +648,38 @@ align-items: center;
 justify-content: center;
 
 }
+
+
+  .bookingGridDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    
+  }
+
+   .bookingRowDiv{
+
+  width: 200px;
+
+
+}
+
+  .bookingInfoDiv{
+
+  flex-direction: column;
+  width: 100%;
+ 
+
+}
+
+.desktopViewBookings{
+  display: none;
+}
+
+.mobileViewBookings {
+    display: block;
+  }
 
 }
