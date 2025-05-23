@@ -184,7 +184,7 @@ const fetchedStays = await fetchStays();
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    },  marginTop:'12px',}}
         />
 
         {Array.isArray(watch("media")) &&
@@ -209,7 +209,7 @@ const fetchedStays = await fetchStays();
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    },  marginTop:'12px',}}
               />
               {errors.media?.[index]?.url && (
                 <p style={{ color: "red" }}>
@@ -231,27 +231,30 @@ const fetchedStays = await fetchStays();
       color: "white",
       fontFamily:"Lato",
       fontSize: "16px",
-      marginTop: '-10px',
+     
     },
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    }, marginTop:'12px',}}
               />
               {errors.media?.[index]?.alt && (
                 <p style={{ color: "red" }}>
                   {errors.media[index].alt.message}
                 </p>
               )}
-
+<div className={createVenueStyles.removeBtnDiv}>
               <Button className={gStyles.buttonSecondary} type="button" onClick={() => removeImage(index)}>
                 Remove Image
               </Button>
+              </div>
             </Box>
           ))}
+        <div className={createVenueStyles.addBtnDiv}>
         <Button className={gStyles.buttonPrimary} type="button" onClick={onAddImage}>
           Add Image
         </Button>
+        </div>
 
         <TextField
           label="Price"
@@ -274,7 +277,8 @@ const fetchedStays = await fetchStays();
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    },
+  marginTop:'12px',}}
         />
         {errors.price && <p style={{ color: "red" }}>{errors.price.message}</p>}
 
@@ -299,7 +303,7 @@ const fetchedStays = await fetchStays();
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    }, marginTop:'12px',}}
         />
         {errors.maxGuests && (
           <p style={{ color: "red" }}>{errors.maxGuests.message}</p>
@@ -326,7 +330,7 @@ const fetchedStays = await fetchStays();
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    }, marginTop:'12px',}}
         />
         {errors.rating && (
           <p style={{ color: "red" }}>{errors.rating.message}</p>
@@ -335,11 +339,7 @@ const fetchedStays = await fetchStays();
         <Box
         className={createVenueStyles.metaBox}
 
-          sx={{
-       
-          gap: 4,
-           
-          }}
+        
         >
           <Button
           className={createVenueStyles.metaButton}
@@ -369,6 +369,7 @@ fontFamily:"Lato",
   color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+
 }}
 
           >
@@ -432,7 +433,7 @@ fontFamily:"Lato",
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    },marginTop:'12px',}}
         />
         {errors.location?.address && (
           <p style={{ color: "red" }}>{errors.location.address.message}</p>
@@ -457,7 +458,7 @@ fontFamily:"Lato",
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    }, marginTop:'12px',}}
         />
         {errors.location?.city && (
           <p style={{ color: "red" }}>{errors.location.city.message}</p>
@@ -482,7 +483,7 @@ fontFamily:"Lato",
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    }, marginTop:'12px',}}
         />
         {errors.location?.zip && (
           <p style={{ color: "red" }}>{errors.location.zip.message}</p>
@@ -507,7 +508,7 @@ fontFamily:"Lato",
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    }, marginTop:'12px',}}
         />
         {errors.location?.country && (
           <p style={{ color: "red" }}>{errors.location.country.message}</p>
@@ -532,7 +533,7 @@ fontFamily:"Lato",
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    }, marginTop:'12px',}}
         />
         {errors.location?.continent && (
           <p style={{ color: "red" }}>{errors.location.continent.message}</p>
@@ -558,7 +559,9 @@ fontFamily:"Lato",
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+    },
+    marginTop:'12px',
+   }}
         />
         {errors.location?.lat && (
           <p style={{ color: "red" }}>{errors.location.lat.message}</p>
@@ -574,6 +577,7 @@ fontFamily:"Lato",
     "& .MuiOutlinedInput-root": {
       backgroundColor: "white",
       marginBottom: "16px",
+    
     },
   "& .MuiInputLabel-root": {
       color: "white",
@@ -584,7 +588,8 @@ fontFamily:"Lato",
 
     "& .MuiInputLabel-root.Mui-focused":{
       color: "#e56399",
-    },}}
+
+    },  marginTop:'12px',}}
         />
         {errors.location?.lng && (
           <p style={{ color: "red" }}>{errors.location.lng.message}</p>
