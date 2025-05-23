@@ -169,6 +169,7 @@ const fetchedStays = await fetchStays();
           {...register("description")}
           variant="outlined"
           fullWidth
+          autoComplete="description"
           required
           sx={{
     "& .MuiOutlinedInput-root": {
@@ -194,6 +195,7 @@ const fetchedStays = await fetchStays();
                 label="Image URL"
                 {...register(`media.${index}.url`)}
                 variant="outlined"
+                autoComplete="image-url"
                 fullWidth
               sx={{
     "& .MuiOutlinedInput-root": {
@@ -351,6 +353,9 @@ const fetchedStays = await fetchStays();
 color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },
 }}
 
 
@@ -369,6 +374,9 @@ fontFamily:"Lato",
   color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },
 
 }}
 
@@ -407,6 +415,9 @@ fontFamily:"Lato",
 color: "white", 
 fontSize: "14px",
 fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },
 }}
    >
             <img className={createVenueStyles.metaImg} src={Pets} alt="" />
@@ -600,7 +611,7 @@ fontFamily:"Lato",
         </Button>
 
         <Button
-        className={gStyles.buttonPrimary}
+        className={gStyles.buttonSecondary}
           type="button"
           variant="contained"
           color="primary"

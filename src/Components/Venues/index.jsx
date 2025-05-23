@@ -337,9 +337,10 @@ function Venues({ vmVenues }) {
         <div
           style={{
             position: "fixed",
-            width: "80vw",
-            height: "80vh",
-            display: "hidden",
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+           
 
             alignItems: "center",
             justifyContent: "center",

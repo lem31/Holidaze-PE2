@@ -1,35 +1,26 @@
-  .createVenueFormDiv{
-    display: flex;
+.overlay {
+position: static;
+
+  width: 100%;
+  height: auto;
+ background-color: rgba(0, 0, 0, 0.6);
+overflow: hidden;
+ 
+}
+
+.editVenueFormDiv{
+     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
   margin-top: 12px;
 
-   padding-top: 220px;
+ 
 overflow: hidden;
-
-
 }
 
-.removeBtnDiv{
-    margin-bottom: 10px;
-}
-
-.addBtnDiv{
-    margin-bottom: 10px;
-}
-
-.metaBox{
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    flex-wrap: wrap;
-  
-}
-
-.createVenueForm{
+.editVenueForm{
     display: flex;
     flex-direction: column;
    width: 600px;
@@ -43,9 +34,26 @@ padding-top: 40px;
     background-color: var(--primary-color-2);
     overflow-y: auto;
     position:fixed;
+  
+}
 
+.removeBtnDiv{
+     margin-bottom: 10px;
+}
+.addBtnDiv{
+    margin-bottom: 10px;
 
 }
+
+.metaBox{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    flex-wrap: wrap;
+  
+}
+
 .metaButton{
 
 
@@ -63,21 +71,10 @@ color:var(--primary-color-1)}
     height: 42px;
 }
 
-.overlay {
-position: static;
- 
-  width: 100%;
-  height: auto;
- background-color: rgba(0, 0, 0, 0.6);
- 
-}
-
-
-
 
 @media (min-width: 487px) and (max-width: 768px) {
    
-    .createVenueForm{
+    .editVenueForm{
      width: 400px;
     }
 
@@ -106,7 +103,7 @@ position: static;
 }
 
 @media (max-width: 486px) { 
-    .createVenueForm{
+    .editVenueForm{
    width: 220px;
     }
 
