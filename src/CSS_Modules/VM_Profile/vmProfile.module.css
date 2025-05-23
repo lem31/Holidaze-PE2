@@ -470,6 +470,14 @@ align-items: flex-start;
   .desktopViewBookings {
     display: none;
   }
+
+  .bookingNumDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px
+  }
 }
 
 @media (max-width: 486px) {

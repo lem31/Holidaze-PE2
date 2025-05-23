@@ -42,15 +42,23 @@ function VMBookings() {
           (1000 * 60 * 60 * 24)
       )
     );
+const nights = getNights(venueBookings[currentBookingIndex]);
+  const venue = getVenueForBooking(venueBookings[currentBookingIndex]);
+
 
   return (
+       
     <div>
-
+   
       <div className={vmProfileStyles.mobileViewBookings}>
         {venueBookings.length > 0 ? (
+          
+
           <div className={vmProfileStyles.bookingCardWrapper}>
             <div className={vmProfileStyles.bookingCardBg}>
+          
               <h2 className={gStyles.h2White}>
+                    
                 {getVenueForBooking(venueBookings[currentBookingIndex])?.name ||
                   "Unknown Venue"}
               </h2>
@@ -64,36 +72,78 @@ function VMBookings() {
               />
 
               <div className={vmProfileStyles.bookingGridDiv}>
-                <p>
-                  <strong>Customer:</strong>{" "}
+<div className={vmProfileStyles.bookingNumDiv}>
+                
+                 <p className={gStyles.bodyWhite}>Booking {currentBookingIndex + 1} of {venueBookings.length}</p>
+
+                 </div>
+                <div className={vmProfileStyles.bookingRowDiv}>
+                <p className={gStyles.bodyLPurple}>
+                  <strong>Customer</strong>{" "}</p>
+                <p className={gStyles.bodyWhite}>
                   {venueBookings[currentBookingIndex].customer.name}
                 </p>
-                <p>
-                  <strong>Total Guests:</strong>{" "}
+                </div>
+                <div className={vmProfileStyles.bookingRowDiv}>
+                <p className={gStyles.bodyLPurple}>
+                  <strong>Total Guests</strong>{" "} </p>
+                <p className={gStyles.bodyWhite}>
                   {venueBookings[currentBookingIndex].guests}
                 </p>
-                <p>
-                  <strong>Check-in:</strong>{" "}
+                </div>
+                <div className={vmProfileStyles.bookingRowDiv}>
+                <p className={gStyles.bodyLPurple}>
+                  <strong>Check-in</strong>{" "}</p>
+                <p className={gStyles.bodyWhite}>
                   {new Date(
                     venueBookings[currentBookingIndex].dateFrom
                   ).toLocaleDateString()}
                 </p>
-                <p>
-                  <strong>Check-out:</strong>{" "}
+                </div>
+                <div className={vmProfileStyles.bookingRowDiv}>
+                <p className={gStyles.bodyLPurple}>
+                  <strong>Check-out</strong>{" "}</p>
+                <p className={gStyles.bodyWhite}>
                   {new Date(
                     venueBookings[currentBookingIndex].dateTo
                   ).toLocaleDateString()}
                 </p>
+                </div>
+                 <div className={vmProfileStyles.bookingRowDiv}>
+                        <p className={gStyles.bodyLPurple}>
+                          <strong>Duration</strong>{" "}
+                        </p>
+                        <p className={gStyles.bodyWhite}>{nights} nights</p>
+                      </div>
+                      <div className={vmProfileStyles.bookingRowDiv}>
+                        <p className={gStyles.bodyLPurple}>
+                          <strong>Total Price</strong>
+                        </p>{" "}
+                        <p className={gStyles.bodyWhite}>
+                          {venue?.price * nights} NOK
+                        </p>
+                      </div>
+                         <div className={vmProfileStyles.bookingRowDiv}>
+                        <p className={gStyles.bodyLPurple}>
+                          <strong>Booked on</strong>{" "}
+                        </p>
+                        <p className={gStyles.bodyWhite}>
+                          {new Date(venueBookings[currentBookingIndex].created).toLocaleDateString()}
+                        </p>
+                      </div>
+                      
               </div>
 
-              <div style={{ marginTop: "20px" }}>
+              <div className={vmProfileStyles.buttonDivPopup}style={{  gap: "10px",  }}>
                 <Button
+                className ={gStyles.buttonSecondary}
                   onClick={handlePrevBooking}
                   disabled={currentBookingIndex === 0}
                 >
                   Previous
                 </Button>
                 <Button
+                  className ={gStyles.buttonSecondary}
                   onClick={handleNextBooking}
                   disabled={currentBookingIndex === venueBookings.length - 1}
                 >
@@ -114,8 +164,7 @@ function VMBookings() {
       <div className={vmProfileStyles.desktopViewBookings}>
         {venueBookings.length > 0 ? (
           venueBookings.map((booking, index) => {
-            const venue = getVenueForBooking(booking);
-            const nights = getNights(booking);
+          
             return (
               <div
                 className={vmProfileStyles.bookingCardWrapper}
@@ -176,6 +225,15 @@ function VMBookings() {
                         </p>{" "}
                         <p className={gStyles.bodyWhite}>
                           {venue?.price * nights} NOK
+                        </p>
+                      </div>
+
+                        <div className={vmProfileStyles.bookingRowDiv}>
+                        <p className={gStyles.bodyLPurple}>
+                          <strong>Booked on</strong>{" "}
+                        </p>
+                        <p className={gStyles.bodyWhite}>
+                          {new Date(booking.created).toLocaleDateString()}
                         </p>
                       </div>
                     </div>
