@@ -1,17 +1,35 @@
 import { Box, TextField, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import CreateVenueFormValidator from "../CreateVenueFormValidator";
 import useMyStore from "../../Store/index";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import fetchStays from "../../API/FetchStays";
 import createVenueStyles from "../../CSS_Modules/CreateVenue/createVenue.module.css";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
+import Parking from "../../Assets/Images/Parking.png";
+import Wifi from "../../Assets/Images/Wifi.png";
+import Breakfast from "../../Assets/Images/Breakfast.png";
+import Pets from "../../Assets/Images/Pets.png";
 
-const CreateVenueForm = ({ toggleForm }) => {
+
+const CreateVenueForm = ({ toggleForm}) => {
   const { createNewVenue, setSuccessMessage } = useMyStore();
   const [stays, setStays] = useState([]);
 
 
+
+
+
+
+
+const toggleMeta =(key) => {
+  setMetaValues((prevMeta)=> {
+    const updatedMeta = { ...prevMeta, [key]: !prevMeta[key] };
+    setValue("meta", updatedMeta);
+    return updatedMeta;
+  })
+}
 
   // State to manage the meta values
 
@@ -103,17 +121,19 @@ const fetchedStays = await fetchStays();
     setValue("media", updatedMedia);
   };
 
-  return (
-    <div className={createVenueStyles.createVenueFormDiv}>
-    <form onSubmit={handleSubmit(onSubmit)}>
+  return(
+ 
+
+  
+    
+   <div className={createVenueStyles.overlay} onClick={toggleForm} >
+
+    <div className={createVenueStyles.createVenueFormDiv}onClick={(e) => e.stopPropagation()}>
+    
+    <form className={createVenueStyles.createVenueForm} onSubmit={handleSubmit(onSubmit)}>
+        <h2 className={gStyles.h2White}>Create Venue</h2>
       <Box
-        sx={{
-          marginBottom: 2,
-          width: "800px",
-          height: "100px",
-          padding: 3,
-          backgroundColor: "white",
-        }}
+       
       >
         {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
         <TextField
@@ -122,8 +142,23 @@ const fetchedStays = await fetchStays();
           variant="outlined"
           fullWidth
           required
-          sx={{ marginBottom: 2 }}
+    
           autoComplete="name"
+          sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },}}
         />
 
         {errors.description && (
@@ -135,7 +170,21 @@ const fetchedStays = await fetchStays();
           variant="outlined"
           fullWidth
           required
-          sx={{ marginBottom: 2 }}
+          sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },  marginTop:'12px',}}
         />
 
         {Array.isArray(watch("media")) &&
@@ -146,7 +195,21 @@ const fetchedStays = await fetchStays();
                 {...register(`media.${index}.url`)}
                 variant="outlined"
                 fullWidth
-                sx={{ marginBottom: 1 }}
+              sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },  marginTop:'12px',}}
               />
               {errors.media?.[index]?.url && (
                 <p style={{ color: "red" }}>
@@ -159,21 +222,39 @@ const fetchedStays = await fetchStays();
                 {...register(`media.${index}.alt`)}
                 variant="outlined"
                 fullWidth
+                sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+     
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
               />
               {errors.media?.[index]?.alt && (
                 <p style={{ color: "red" }}>
                   {errors.media[index].alt.message}
                 </p>
               )}
-
-              <Button type="button" onClick={() => removeImage(index)}>
+<div className={createVenueStyles.removeBtnDiv}>
+              <Button className={gStyles.buttonSecondary} type="button" onClick={() => removeImage(index)}>
                 Remove Image
               </Button>
+              </div>
             </Box>
           ))}
-        <Button type="button" onClick={onAddImage}>
+        <div className={createVenueStyles.addBtnDiv}>
+        <Button className={gStyles.buttonPrimary} type="button" onClick={onAddImage}>
           Add Image
         </Button>
+        </div>
 
         <TextField
           label="Price"
@@ -182,7 +263,22 @@ const fetchedStays = await fetchStays();
           variant="outlined"
           fullWidth
           required
-          sx={{ marginBottom: 2 }}
+        sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },
+  marginTop:'12px',}}
         />
         {errors.price && <p style={{ color: "red" }}>{errors.price.message}</p>}
 
@@ -193,7 +289,21 @@ const fetchedStays = await fetchStays();
           variant="outlined"
           fullWidth
           required
-          sx={{ marginBottom: 2 }}
+   sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.maxGuests && (
           <p style={{ color: "red" }}>{errors.maxGuests.message}</p>
@@ -206,56 +316,100 @@ const fetchedStays = await fetchStays();
           variant="outlined"
           fullWidth
           required
-          sx={{ marginBottom: 2 }}
+   sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.rating && (
           <p style={{ color: "red" }}>{errors.rating.message}</p>
         )}
 
         <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: 2,
-          }}
+        className={createVenueStyles.metaBox}
+
+        
         >
           <Button
+          className={createVenueStyles.metaButton}
             variant={metaValues.parking ? "contained" : "outlined"}
-           onClick={() => {
-  setValue("meta", { ...metaValues, parking: !metaValues.parking });
+           onClick={() => 
+  toggleMeta("parking")
+} sx={{backgroundColor: metaValues.parking ? "#e55299" : "rgb(233, 155, 174)",
+  boxShadow: metaValues.parking ? "inset 0 0 40px #320e3b" : "none",
+color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
 }}
 
+
           >
+            <img className={createVenueStyles.metaImg} src={Parking} alt="" />
             Parking
           </Button>
 
           <Button
+           className={createVenueStyles.metaButton}
             variant={metaValues.wifi ? "contained" : "outlined"}
-          onClick={() => {
-  setValue("meta", { ...metaValues, wifi: !metaValues.wifi});
+            onClick={() => 
+  toggleMeta("wifi")
+} sx={{backgroundColor: metaValues.wifi ? "#e55299" : "rgb(233, 155, 174)",
+  boxShadow: metaValues.wifi ? "inset 0 0 40px #320e3b" : "none",
+  color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
+
 }}
 
           >
+           < img className={createVenueStyles.metaImg} src={Wifi} alt="" />
             Wifi
           </Button>
 
           <Button
+           className={createVenueStyles.metaButton}
             variant={metaValues.breakfast ? "contained" : "outlined"}
-            onClick={() => {
-  setValue("meta", { ...metaValues, breakfast: !metaValues.breakfast });
-}}
+           onClick={() => 
+  toggleMeta("breakfast")
+} sx={{backgroundColor: metaValues.breakfast ? "#e55299" : "rgb(233, 155, 174)",
+  boxShadow: metaValues.breakfast ? "inset 0 0 40px #320e3b" : "none",
+  color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
+"@media (max-width: 486px)": {
+      fontSize: "12px",
+    },}}
+
 
           >
+            <img className={createVenueStyles.metaImg} src={Breakfast} alt="" />
             Breakfast
           </Button>
 
           <Button
+            className={createVenueStyles.metaButton}
             variant={metaValues.pets ? "contained" : "outlined"}
-          onClick={() => {
-  setValue("meta", { ...metaValues, pets: !metaValues.pets });
+          onClick={() => 
+  toggleMeta("pets")
+} sx={{backgroundColor: metaValues.pets ? "#e55299" : "rgb(233, 155, 174)",
+  boxShadow: metaValues.pets ? "inset 0 0 40px #320e3b" : "none",
+color: "white", 
+fontSize: "14px",
+fontFamily:"Lato",
 }}
-
-          >
+   >
+            <img className={createVenueStyles.metaImg} src={Pets} alt="" />
             Pets
           </Button>
         </Box>
@@ -265,7 +419,21 @@ const fetchedStays = await fetchStays();
           {...register("location.address")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+       sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },marginTop:'12px',}}
         />
         {errors.location?.address && (
           <p style={{ color: "red" }}>{errors.location.address.message}</p>
@@ -276,7 +444,21 @@ const fetchedStays = await fetchStays();
           {...register("location.city")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+     sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.location?.city && (
           <p style={{ color: "red" }}>{errors.location.city.message}</p>
@@ -287,7 +469,21 @@ const fetchedStays = await fetchStays();
           {...register("location.zip", { valueAsString: true })}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+        sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.location?.zip && (
           <p style={{ color: "red" }}>{errors.location.zip.message}</p>
@@ -298,7 +494,21 @@ const fetchedStays = await fetchStays();
           {...register("location.country")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+        sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.location?.country && (
           <p style={{ color: "red" }}>{errors.location.country.message}</p>
@@ -309,7 +519,21 @@ const fetchedStays = await fetchStays();
           {...register("location.continent")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+        sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    }, marginTop:'12px',}}
         />
         {errors.location?.continent && (
           <p style={{ color: "red" }}>{errors.location.continent.message}</p>
@@ -321,7 +545,23 @@ const fetchedStays = await fetchStays();
           {...register("location.lat")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+         sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },
+    marginTop:'12px',
+   }}
         />
         {errors.location?.lat && (
           <p style={{ color: "red" }}>{errors.location.lat.message}</p>
@@ -333,17 +573,34 @@ const fetchedStays = await fetchStays();
           {...register("location.lng")}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 2 }}
+         sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "16px",
+    
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+
+    },  marginTop:'12px',}}
         />
         {errors.location?.lng && (
           <p style={{ color: "red" }}>{errors.location.lng.message}</p>
         )}
 
-        <button type="submit" style={{ width: "100%" }}>
+        <Button        className={gStyles.buttonPrimary} type="submit" style={{ width: "100%" }}>
           Create Venue
-        </button>
+        </Button>
 
         <Button
+        className={gStyles.buttonPrimary}
           type="button"
           variant="contained"
           color="primary"
@@ -356,7 +613,10 @@ const fetchedStays = await fetchStays();
       </Box>
     </form>
     </div>
-  );
+    </div>
+ 
+  )
+
 };
 
 export default CreateVenueForm;
