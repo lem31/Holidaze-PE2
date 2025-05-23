@@ -293,6 +293,7 @@
 }
 
 .bookingCardBg {
+  
   background-color: var(--primary-color-2);
   margin-bottom: 20px;
   border-radius: 5px;
