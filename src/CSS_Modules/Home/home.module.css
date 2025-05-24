@@ -417,12 +417,11 @@ margin-left: 10px
 .selectLabel {
 
 position: relative;
-display: flex;
-  transform: translate(-50%, -50%);
-  margin-top: 0.5px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+margin-top: -8px;
+margin-left: -20px;
+
+text-align: center;
+width: 300px;
 
 }
 
@@ -673,6 +672,7 @@ max-height: 2.5em;
   flex-direction: column;
   align-items: center;
   margin-top: 0;
+
 }
 .buttonAvailability{
   margin-right: 0;
@@ -723,12 +723,11 @@ width: 200px;
 .selectLabel {
 
 position: relative;
-display: flex;
-  transform: translate(-50%, -50%);
-  margin-top: 0.5px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+margin-top: -8px;
+margin-left: -20px;
+
+text-align: center;
+width: 300px;
 
 }
 
@@ -749,7 +748,7 @@ display: flex;
 .selectDiv {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 align-items: center;
 }
 
@@ -786,11 +785,11 @@ align-items: center;
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-start;
-  width: 500px;
+  width: 200px;
 }
 .closeButton{
-    margin-top: -120px;
-   
+    margin-top: -140px;
+   margin-left: 15px;
 }
 
 
@@ -803,19 +802,21 @@ align-items: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* width: 100vw; */
+
 margin-top: -20.8px;
   gap: 0;
 
 }
 
    .suggestionList {
- 
+ padding-top: 30px;
   font-family: var(--font-family-2);
   font-size: var(--font-size-small-2);
   line-height: 160%;
   letter-spacing: 0.5%;
-
+width: 240px;
+left: 5px;
+margin-top: -2px;
 }
   .orP {
     font-size: var(--font-size-small-2);
@@ -954,6 +955,7 @@ max-height: 3em;
   flex-direction: column;
   align-items: center;
   margin-top: 0;
+
 }
 .buttonAvailability{
   margin-right: 0;
