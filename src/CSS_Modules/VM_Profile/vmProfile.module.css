@@ -149,7 +149,7 @@
 }
 
 .bookingsMessage {
-  position: absolute;
+  position: static !important;
   background-color: var(--secondary-color) !important;
   color: var(--primary-color-1) !important;
 }
