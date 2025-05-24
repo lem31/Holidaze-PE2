@@ -15,10 +15,16 @@ async function onLogin(endpoint, userData, navigate) {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to Login user");
+          const errorData= await response.json();
+       console.error("Login failed:", errorData);
+       return errorData;
+     
+  
+
     }
 
     const data = await response.json();
+   
     const accessToken = data?.data?.accessToken;
     const userName = data?.data?.name;
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, TextField, Button } from "@mui/material";
-
+import loginStyles from "../../CSS_Modules/Login/login.module.css";
+import gStyles from '../../CSS_Modules/Global/global.module.css';
 /**
  * LoginForm component renders a login form with email and password fields.
  * It handles input changes and form submission.
@@ -16,47 +17,88 @@ import { Box, TextField, Button } from "@mui/material";
  * );
  */
 
-const LoginForm = ({ formValues, onInputChange, onSubmit }) => {
+const LoginForm = ({ formValues, onInputChange, onSubmit, register, errors }) => {
   return (
+
+    <div className={loginStyles.loginFormContainer}>
+
     <form
+    className={loginStyles.loginForm}
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(e);
       }}
     >
+      <h1 className={gStyles.h1White}>LOGIN</h1>
+<Box sx={{ position: "relative" }}>
+  <TextField
+    label="Email"
+    {...register("email")}
+    type="email"
+    variant="outlined"
+    fullWidth
+    required
+    autoComplete="email"
+    error={!!errors.email} 
+   helperText={errors.email?.message || " "}
+    sx={{
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "white",
+        marginBottom: "12px",
+      },
+      "& .MuiInputLabel-root": {
+        color: "white",
+        fontFamily: "Lato",
+        fontSize: "16px",
+        marginTop: "-10px",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#e56399",
+      },
+    }}
+  />
 
-<Box sx={{ marginBottom: 2 }}>
-      <TextField
-        label="Email"
-        name="email"
-        type="email"
-        value={formValues.email}
-        onChange={(e) => onInputChange(e.target.name, e.target.value)}
-        variant="outlined"
-        fullWidth
-        required
-        autoComplete='email'
-        sx={{ marginBottom: 2 }}
-      />
+
+
       <TextField
         label="Password"
-        name="password"
+        {...register("password")}
+       
         type="password"
-        value={formValues.password}
+   
         onChange={(e) => onInputChange(e.target.name, e.target.value)}
         variant="outlined"
         fullWidth
         required
-        sx={{ marginBottom: 2 }}
+
+         error={!!errors.password}
+          helperText={errors.password?.message || " "}
+         sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "8px",
+      marginTop: "16px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '5px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },}}
       />
     
    </Box>
       
     
-      <Button type="submit" variant="contained" color="primary" fullWidth>
+      <Button className={gStyles.buttonPrimary} type="submit" variant="contained" color="primary" >
         Login
       </Button>
     </form>
+    </div>
   )};
 
 export default LoginForm;
