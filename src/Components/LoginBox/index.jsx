@@ -53,7 +53,7 @@ const LoginBox = () => {
 
   try {
     const response = await onLogin(API_URL, formData, navigate);
-    console.log("Login response:", response);
+ 
 
     if (response.errors?.length > 0) {
       setErrorMessage(response.errors[0].message);

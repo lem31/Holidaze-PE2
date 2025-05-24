@@ -29,7 +29,7 @@ function VMBookings() {
   const venueBookings = vmVenues.flatMap((venue) => venue.bookings || []);
   const totalPages = Math.ceil(venueBookings.length / bookingsPerPage);
 
-  console.log("Venue Bookings:", venueBookings);
+ 
 
  
   const getVenueForBooking = (booking) =>

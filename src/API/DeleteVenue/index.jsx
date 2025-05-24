@@ -21,7 +21,7 @@ const deleteVenue = async (venueId, token) => {
     );
 
       if (response.status === 204) { 
-      console.log("Venue deleted successfully");
+     
       return true;
     } else {
       console.error(" Failed to delete venue, status:", response.status);

@@ -11,7 +11,7 @@ const fetchStays = async () => {
     const results = await Promise.all(requests);
     const stays = results.flatMap(data => data.data || []);
 
-    console.log("Fetched stays:", stays);
+  
     return stays;
 
   } catch (error) {

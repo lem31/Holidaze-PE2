@@ -77,7 +77,7 @@ const toggleMeta =(key) => {
 const fetchedStays = await fetchStays();
 
       setStays(fetchedStays);
-      console.log("Fetched stays in create new venue:", fetchedStays);
+  
     
 
       setTimeout(() => {

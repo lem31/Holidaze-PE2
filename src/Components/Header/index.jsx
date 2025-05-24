@@ -59,7 +59,7 @@ useEffect(() => {
 <div>
  <button className={hStyles.hamburgerButton}    onClick={() => {
     setIsMobileNavOpen(prevState => !prevState);
-    console.log("Mobile Nav Toggled:", !isMobileNavOpen);
+ 
   }}>
 <img src={Hamburger} alt="Hamburger Menu Icon"  />
 </button>
@@ -87,7 +87,7 @@ useEffect(() => {
 <div className={hStyles.accountBox}>
   <button className={hStyles.accountIcon} onClick={() => {
       setIsDropDownOpen(prevState => !prevState); 
-      console.log('Dropdown Toggled', !isDropDownOpen);
+    
         }}>
 <img className={hStyles.navIcons} src={Account} alt="Account Dropdown Options Icon" />
 </button>

@@ -23,10 +23,6 @@ async function fetchCustomerBookings() {
 
         const bookingsData = await response.json();
 
-        console.log('Full API Response:', bookingsData);
-console.log('First Booking:', bookingsData.data[0]);
-console.log('Venue Data:', bookingsData.data[0]?.venue);
-        console.log('Bookings Data:', bookingsData);
         return bookingsData.data;
     } catch (error) {
         console.error('Error fetching user venues:', error);

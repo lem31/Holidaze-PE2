@@ -4,7 +4,7 @@ async function postBooking(bookingData) {
   const token = localStorage.getItem("token");
   
 
-  console.log("Token from localStorage:", token);
+
   if (!token) {
     console.error("Token not found in localStorage");
     throw new Error("Token not found in localStorage");

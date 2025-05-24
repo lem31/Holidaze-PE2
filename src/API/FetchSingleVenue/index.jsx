@@ -17,8 +17,7 @@ async function fetchSingleVenue(id) {
 
         const singleVenue = await response.json();
 
-        console.log('Full API Response:', singleVenue);
-console.log('Single Venue:', singleVenue.data[0]);
+        
 
        
        return singleVenue.data;

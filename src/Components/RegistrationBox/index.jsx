@@ -55,7 +55,7 @@ const RegisterBox = () => {
       venueManager: newValue === 0,
     }));
 
-    console.log("Tab changed to:", newValue);
+   
 
   };
 
@@ -104,8 +104,7 @@ const RegisterBox = () => {
   setValidationErrors({});
   
       const response =  await onRegister(API_URL, formValues);
-      console.log('Form submitted with values:', formValues);
-      console.log("Registration successful:", response);
+    
 
       navigate("/Login", {state: {successMessage: 'Registration successful! Please log in.'}});
 

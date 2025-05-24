@@ -11,10 +11,10 @@ function Profile() {
   useEffect(() => {
     const getProfile = async () => {
       const profileData = await fetchUserProfile();
-      console.log("🔍 Full Profile API Response:", profileData);
+
       if (profileData) {
         setUserProfile(profileData);
-        console.log("Fetched User Profile:", profileData);
+       
       } else {
         console.error("Failed to fetch user profile: Profile data is undefined");
       }
