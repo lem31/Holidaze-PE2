@@ -298,7 +298,7 @@ height: fit-content;
 }
 
 .description{
-  max-width: 250px;
+  max-width: 450px;
   max-height: 60px;
   overflow-y: auto;
 }

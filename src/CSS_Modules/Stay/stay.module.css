@@ -1,11 +1,8 @@
 
 
-
-
-
 .imageListContainer {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 500px;
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(2, 1fr);
@@ -31,13 +28,15 @@
   margin-top: 18px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  height: 500px;
+  width: 400px;
 }
 
 .descriptionPriceDiv {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   gap: 12px;
   margin-top: 12px;
@@ -90,6 +89,7 @@
   flex-direction: column;
   gap: 12px;
   align-items: center;
+  height: max-content;
 }
 
 .stayCardPosition {
@@ -98,32 +98,35 @@
   align-items: center;
   margin: 20px;
   padding: 12px;
+  height: max-content;
 }
 
 .stayContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 10px 10px 30px 10px;
+
   gap: 20px;
   width: 100%;
-  height: 100%;
+  height: 500px;
+  overflow-y: auto;
   background-color: var(--primary-color-2);
 }
 
 .description {
-  width: auto;
-  max-height: 100px;
-  overflow-y: scroll;
+  width: 300px;
+height: 200px;
+  overflow-y: auto;
 }
 
 .bookingSection {
   display: flex;
   flex-direction: column;
   width: auto;
-  height: 800px;
+  height: max-content;
   align-items: flex-start;
   justify-content: center;
   gap: 20px;
@@ -140,15 +143,17 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+
   gap: 12px;
 }
 
 .facilH2Div {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
-  margin-top: 12px;
+  
+
 }
 
 .facilityDiv li {
@@ -167,9 +172,7 @@
   height: 32px;
 }
 
-.h2Stay {
-  padding-bottom: 24px;
-}
+
 
 .checkInOutDiv {
   display: flex;
@@ -232,6 +235,9 @@
   .stayNameRatingDiv {
     display: flex;
     flex-direction: column;
+    margin-bottom: 0;
+    gap: 0;
+    padding: 0;
   }
 
   .responsiveDiv {
@@ -242,16 +248,81 @@
   }
 
   .locationDescDiv {
-    width: auto;
-    height: auto;
+    width: 300px;
+    height: 200px;
     margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .checkInOutDiv {
     max-width: 400px;
   }
   .descriptionPriceDiv {
-    margin-top: 8px;
+align-items: center;
+    height: 200px;
+    gap: 0;
+    width: 300px;
+    justify-content: flex-start;
+  }
+
+
+
+
+   .facilityDiv {
+    justify-content: center;
+    width: 100%;
+   
+  }
+
+  .facilityUl{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .locDescFacilDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+
+  .facilH2Div {
+   
+    gap: 0;
+    margin-top: 40px;
+    height: 200px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+  .h2Stay {
+  padding-bottom: 0;
+}
+
+  .nameRatingImages {
+  
+  gap: 0;
+
+}
+
+.description {
+    max-width: 180px;
+    height: auto;
+    text-wrap: wrap;
+    height: 200px;
+    z-index: 2;
+    color: white;
   }
 }
 
@@ -266,7 +337,7 @@
     flex-direction: column;
     max-width: 300px;
 
-    height: auto;
+    height: max-content;
     align-items: center;
     justify-content: center;
     gap: 20px;
@@ -332,8 +403,8 @@
   }
 
   .facilityDiv {
-    align-items: center;
-    gap: 8px;
+   justify-content: center;
+   width: 100%
   }
 
   .facilH2Div {
@@ -364,16 +435,7 @@ text-align: center;
  align-items: center;
 }
 
-/* .datePicker{
-display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--primary-color-1);
-  overflow-y: hidden;
-  flex: 1 1 200px;
-  
-} */
+
 
 .calendar{
   width: 100px;
@@ -398,6 +460,11 @@ display: flex;
   gap: 4px;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+.nameRatingImages {
+  
+  gap: 0;
+
 }
 }
 
