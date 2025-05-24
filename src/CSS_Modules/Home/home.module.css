@@ -97,18 +97,21 @@ height: 400px;
 
 .selectLabel {
   position: absolute;
-  margin-top: -10px;
-  margin-left: -10px;
-  color: var(--primary-color-3);
+  margin-top: -15px;
+  
+  color: var(--secondary-color-2) !important;
   font-family: var(--font-family-4);
   font-size: var(--font-size-small);
   line-height: 160%;
   letter-spacing: 0.5%;
   transform: translate(-20%, -30%);
-  text-align: center;
+  text-align: left;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 300px;
+}
+.selectLabel:hover {
+  color: var(--secondary-color) !important;
 }
 
 .selectOption .MuiSelect-select {
