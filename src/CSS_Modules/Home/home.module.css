@@ -10,13 +10,35 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 40px;
+position: relative;
+}
+
+.selectBox{
+  position: relative;
+}
+
+.closeButtonDiv{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: end;
+  width: 480px;
+  position: absolute;
+  height: 50px;
+  z-index:2;
+
+
 }
 
 
 .suggestionContainer{
 
-margin-top: -18px;
-
+margin-top: -60px;
+display:flex;
+flex-direction: column;
+align-items: center;
+overflow: visible;
+position: relative;
 }
 
 .searchSelectBar {
@@ -49,11 +71,17 @@ margin-top: -18px;
 }
 
 .customMenu {
+position: absolute !important;
+
+
+ 
   background-color: var(--primary-color-2) !important;
   color: var(--secondary-color-2) !important;
-  border: 1px solid #ccc;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 120px;
+  border: 1px solid #ccc !important;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
+ width: 200px;
+
+
 }
 
 .selectOption {
@@ -64,6 +92,7 @@ margin-top: -18px;
   align-items: center;
   width: 200px;
   height: 30px;
+ 
 }
 
 .selectLabel {
@@ -93,11 +122,11 @@ margin-top: -18px;
   color: var(--secondary-color-2);
   position: relative;
   border-radius: 10px;
-  width: 100vw;
-  height: 300px;
+  width: 500px;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
   align-items: left;
   gap: 12px;
   font-family: var(--font-family-2);
@@ -111,6 +140,7 @@ margin-top: -18px;
   display: flex;
   flex-direction: row;
   gap: 20px;
+  height: 30px;
 }
 
 .selectDropDown {
@@ -202,8 +232,8 @@ object-fit: contain;
 }
 
 .stayCardOuterWrapper{
-  width: 1000px;
-  height: 506px;
+  width: 90vw;
+  height: auto;
   background-color: var(--primary-color-2);
   margin-bottom: 20px;
 border-radius: 5px;
@@ -211,41 +241,62 @@ border: 3px solid var(--tertiary-color-1);
   display: flex;
   justify-content: center;
   align-items: center;
+padding: 20px;
 }
 
 .stayCardWrapper{
-  max-width: 875px;
-  width: auto;
-  height: 310px;
+  width: 90vw;
+  height: 380px;
+
   background-color: var(--primary-color-1);
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 5px;
   border-radius: 4px;
+  padding: 8px;
 }
 
 .nameRatingDiv{
   display: flex;
-  flex-direction:column;
-  align-items: start;
-width: 500px;
+  flex-direction:row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 4px;
+  position: relative;
+min-width:800px;
+width:100%;
+
 
 }
+
+
 
 .ratingAvailabilityBtnDiv{
   display: flex;
   flex-direction: column;
-  gap: 100px;
-align-items: center;
-width: 200px;
+  gap: 150px;
+align-items: flex-end;
+justify-content: flex-end;
+width: 300px;
+height: fit-content;
+
+}
+
+.starRatingDiv{
+  display: flex;
+  flex-direction: row;
+  position: relative;
+ 
+
 }
 
 .description{
   max-width: 250px;
   max-height: 60px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .stayCardIcons{
   width: 32px;
@@ -257,6 +308,14 @@ width: 200px;
   flex-direction: row;
   align-items: center;
 }
+.location{
+  max-width: 200px;
+  text-wrap: wrap;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 
 .stayImageContainer{
   display: flex;
@@ -271,14 +330,24 @@ width: 200px;
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  gap: 14px;
-  width: 400px;
+
+  width: 280px;
+}
+
+.ratingBox{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .h1Home{
-  max-width: 350px;
-  text-wrap: wrap;
-  text-align: left;
+   text-align: left;
+    width: auto;
+max-height: 3em;
+ overflow-y: auto;
+  overflow-x: hidden;
+   max-width: 220px;
+   text-wrap:wrap;
 }
 
 .star{
@@ -302,6 +371,15 @@ width: 200px;
 @media (max-width: 486px) {
 
 
+.description{
+  width: 180px;
+max-height: 4em;
+overflow-x: hidden;
+overflow-y: auto;
+text-wrap: wrap;
+margin-left: 10px
+
+}
 
 .customMenu {
 
@@ -354,6 +432,7 @@ display: flex;
     width: 295px;
     height: 50px;
     border-radius: 18px;
+    
   }
 
 .selectDiv {
@@ -361,6 +440,7 @@ display: flex;
   flex-direction: column;
   gap: 8px;
 align-items: center;
+
 }
 
 .searchIcon {
@@ -396,7 +476,7 @@ align-items: center;
   flex-direction: row;
   justify-content: end;
   align-items: center;
-  width: 90vw;
+  width: 200px;
 }
 
 .suggestionContainer{
@@ -404,9 +484,10 @@ align-items: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-margin-top: -45.8px;
+
+margin-top: -24.8px;
   gap: 0;
+
 }
 
    .suggestionList {
@@ -415,6 +496,7 @@ margin-top: -45.8px;
   font-size: var(--font-size-small-3);
   line-height: 160%;
   letter-spacing: 0%;
+width: 200px;
 
 }
 
@@ -454,35 +536,55 @@ margin-top: -45.8px;
     display: none;
   }
 
-  .mobileView{
+    .mobileView{
     display: flex;
     flex-direction: column;
+ max-height: 150px;
+ max-width: 180px;
+
+    
   }
 
-
-  .stayCardWrapper{
-    width: 220px;
+  .stayCardLayoutBox{
     height: auto;
-    flex-direction: column;
-    gap: 8px;
+    min-height: 300px;
+    
   }
-
 
   .stayCardOuterWrapper{
-  width: 300px;
-  min-height: 550px;
-  height: auto;
+    width: 90vw;
+    height: auto;
+    min-height: 750px;
+    background-color: var(--primary-color-2);
+  
+ margin:auto, 0;
 
-}
+  }
+
+
+  
+  .stayCardWrapper{
+    width: 220px;
+  height: 700px;
+ 
+    flex-direction: column;
+    gap: 8px;
+   
+   
+  }
+
+ 
 
 .ratingBoxMobile{
  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  width: 180px;
+  height: 50px;
+  margin-bottom: auto;
   gap: 15px;
-  margin-top: 12px;
+
 }
 
 .ratingNumberBg{
@@ -494,7 +596,8 @@ margin-top: -45.8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;
+ 
+ 
 }
 .stayImageContainer{
  
@@ -511,10 +614,15 @@ margin-top: -45.8px;
 }
 
 .h1HomeMobile{
-  max-width: 200px;
+  width: 200px;
   text-wrap: wrap;
   text-align: center;
-    overflow-y: hidden;
+max-height: 2.5em;
+ overflow-y: auto;
+  overflow-x: hidden;
+    white-space: normal;
+
+
 }
 
 
@@ -524,20 +632,29 @@ margin-top: -45.8px;
 
 .ratingAvailabilityBtnDiv{
   padding-bottom: 18px;
+  align-items: flex-start;
+    height: 40px;
+  width: 200px;
 }
 
 .stayDetails{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
   width: 220px;
 }
 
+
 .location{
   max-width: 200px;
+  text-wrap: wrap;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
+
 
 .searchSelectBar {
   width: 100vw;
@@ -545,6 +662,18 @@ margin-top: -45.8px;
   flex-direction: column;
   align-items: center;
   margin-top: 0;
+}
+.buttonAvailability{
+  margin-right: 0;
+}
+
+.buttonAvailabilityContainer{
+  display: flex;
+  flex-direction: row;
+
+ justify-content: center;
+
+width: 200px;
 }
 
 }
@@ -554,7 +683,7 @@ margin-top: -45.8px;
 
 .customMenu {
 
-  margin-top: 155px;
+  margin-top: 135px;
   width: 200px;
 }
 
@@ -601,7 +730,8 @@ display: flex;
     align-items: center;
     background-color: var(--primary-color-2);
     width: 295px;
-    height: 50px;
+    height: 200px;
+
     border-radius: 18px;
   }
 
@@ -643,19 +773,25 @@ align-items: center;
 .closeButtonDiv{
   display: flex;
   flex-direction: row;
-  justify-content: end;
-  align-items: center;
-  width: 90vw;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 200px;
 }
+
+
+
+
+
 
 .suggestionContainer{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-margin-top: -45.8px;
+  /* width: 100vw; */
+margin-top: -20.8px;
   gap: 0;
+
 }
 
    .suggestionList {
@@ -691,24 +827,24 @@ margin-top: -45.8px;
   .mobileView{
     display: flex;
     flex-direction: column;
-   
+
   }
 
   .stayCardWrapper{
-    width: 220px;
+    width: 320px;
   height: 700px;
-  height: auto;
+  
     flex-direction: column;
     gap: 8px;
     margin-top: 10px;
     margin-bottom: 10px;
+   
   }
 
 
   .stayCardOuterWrapper{
-  width: 300px;
-  height: auto;
-
+  width: 350px;
+ height: auto;
 }
 .ratingBoxMobile{
  display: flex;
@@ -717,7 +853,7 @@ margin-top: -45.8px;
   justify-content: center;
   width: 300px;
   gap: 15px;
-  margin-top: 12px;
+margin-bottom: auto;
 }
 
 .ratingNumberBg{
@@ -729,7 +865,7 @@ margin-top: -45.8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;
+
 }
 
 .stayImageContainer{
@@ -747,10 +883,20 @@ margin-top: -45.8px;
 }
 
 .h1HomeMobile{
-  max-width: 200px;
+ 
+
+
+ 
+  text-align: center;
+
+
+  width: 200px;
   text-wrap: wrap;
   text-align: center;
-  overflow-y: hidden;
+max-height: 3em;
+ overflow-y: auto;
+  overflow-x: hidden;
+    white-space: normal;
 }
 
 .h1Home{
@@ -759,19 +905,32 @@ margin-top: -45.8px;
 
 .ratingAvailabilityBtnDiv{
   padding-bottom: 18px;
+  align-items: flex-start;
+  height: 40px;
+  width: 200px;
 }
 
 .stayDetails{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 14px;
   width: 220px;
 }
 
+.stayCardLayoutBox{
+  height: auto;
+  min-height: 300px;
+  
+}
+
 .location{
   max-width: 200px;
+  text-wrap: wrap;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .searchSelectBar {
@@ -781,4 +940,17 @@ margin-top: -45.8px;
   align-items: center;
   margin-top: 0;
 }
+.buttonAvailability{
+  margin-right: 0;
+}
+
+.buttonAvailabilityContainer{
+  display: flex;
+  flex-direction: row;
+
+ justify-content: center;
+
+width: 200px;
+}
+
 }

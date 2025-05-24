@@ -57,17 +57,17 @@ const DisplayStays = () => {
       <div className={homeStyles.nameRatingDivMobile}>
 
          <h1 className={`${homeStyles.h1HomeMobile} ${gStyles.h1Black}`}>{stay?.name || "Unknown Stay"}</h1>
-                  <p>
-                {stay?.rating && stay.rating > 0 ? (
-                  <>
-                    {Array.from({ length: Math.round(stay.rating) }).map((_, i) => (
-                      <StarIcon className={homeStyles.star} key={i}/>
-                    ))}
-                  </>
-                ) : (
-                  ""
-                )}
-              </p>
+                  
+          {stay?.rating && stay.rating > 0 ? (
+  <div>
+    {Array.from({ length: Math.round(stay.rating) }).map((_, i) => (
+      <StarIcon className={homeStyles.star} key={i} />
+    ))}
+  </div>
+) : null}
+                
+            
+            
              
             
               </div>
@@ -109,18 +109,22 @@ const DisplayStays = () => {
             </div>
             <div className={homeStyles.stayDetails}>
               <div className={homeStyles.nameRatingDiv}>
-                  <p>
+                   <h1 className={`${homeStyles.h1Home} ${gStyles.h1Black}`}>{stay?.name || "Unknown Stay"}</h1>
+                   <div className={homeStyles.starRatingDiv}>
                 {stay?.rating && stay.rating > 0 ? (
-                  <>
+                  
+<p>
                     {Array.from({ length: Math.round(stay.rating) }).map((_, i) => (
                       <StarIcon className={homeStyles.star} key={i}/>
                     ))}
-                  </>
+                    </p>
+           
+              
                 ) : (
                   "No rating"
                 )}
-              </p>
-              <h1 className={`${homeStyles.h1Home} ${gStyles.h1Black}`}>{stay?.name || "Unknown Stay"}</h1>
+                 </div>
+             
             
               </div>
               <p className={`${homeStyles.location} ${gStyles.bodyBlack}`}>
