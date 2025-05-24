@@ -364,7 +364,7 @@ align-items: center;
 
   .description {
     max-width: 180px;
-
+align-items: center;
     text-wrap: wrap;
   }
 
