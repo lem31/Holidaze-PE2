@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import { Box, TextField, Button } from "@mui/material";
-
+import { Box, TextField, Button,Tabs, Tab, Typography} from "@mui/material";
+import regStyles from "../../CSS_Modules/RegisterForm/register.module.css";
 /**
  * RegisterForm component renders a registration form with fields for name, email, password, bio, and images.
  * It handles input changes, image changes, adding new images, and form submission.
@@ -22,7 +22,7 @@ import { Box, TextField, Button } from "@mui/material";
  * @returns {JSX.Element} The rendered component.
  */
 
-const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {}, defaultBanner, defaultAvatar }) => {
+const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {}, defaultBanner, defaultAvatar, activeTab, handleTabChange }) => {
 
   useEffect(() => {
     console.log("Form values state:", formValues);
@@ -30,13 +30,65 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
   
   return (
    
-
+<div className ={regStyles.registerFormContainer}>
     <form
+      className={regStyles.registerForm}
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(e);
       }}
     >
+
+        <Box className={regStyles.tabContainer}>
+      <Tabs
+      
+        value={activeTab}
+        onChange={handleTabChange}
+        aria-label="Registration Tabs"
+        centered
+       sx={{
+       
+ backgroundColor: "transparent",
+    borderRadius: "8px",
+    padding: "10px",
+    "& .MuiTab-root": {
+      flex: 1,
+      fontWeight: "bold",
+     
+
+      transition: "background-color 0.3s",
+    },
+  }}
+      >
+        <Tab label="Venue Manager"
+        className={regStyles.tab}
+        sx={{
+ backgroundColor: activeTab === 0 ? "#320e3b" : "rgb(227, 133, 179)", 
+
+
+      fontWeight: "bold",
+      borderRadius: "8px 8px 0 0",
+      width: '270px',
+      "&.Mui-selected":  { color: activeTab === 0 ? "white" : "black" }, 
+    }}
+      />
+        <Tab label="Customer"  className={regStyles.tab} sx={{
+   backgroundColor: activeTab === 1 ? "#320e3b" : "rgb(227, 133, 179)",
+     
+      fontWeight: "bold",
+      borderRadius: "8px 8px 0 0",
+       width: '270px',
+    "&.Mui-selected": { color: activeTab === 1 ? "white" : "black" },
+    }} />
+      </Tabs>
+</Box>
+     <Box sx={{  }}>
+        <Typography className={`${regStyles.boxHeader}`} variant="h4" component="h2" align="center"  color="white" fontFamily="Playfair Display">
+          {activeTab === 0
+            ? "Register as a Venue Manager"
+            : "Register as a Customer"}
+        </Typography>
+       
       <TextField
         label="Name"
         name="name"
@@ -45,7 +97,21 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
         variant="outlined"
         fullWidth
         required
-        sx={{ marginBottom: 2 }}
+  sx={{
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "white",
+        marginBottom: "20px",
+      },
+      "& .MuiInputLabel-root": {
+        color: "white",
+        fontFamily: "Lato",
+        fontSize: "16px",
+        marginTop: "-10px",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#e56399",
+      },
+    }}
       />
       {validationErrors.name && <p>{validationErrors.name}</p>}
       <TextField
@@ -57,7 +123,21 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
         variant="outlined"
         fullWidth
         required
-        sx={{ marginBottom: 2 }}
+       sx={{
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "white",
+        marginBottom: "20px",
+      },
+      "& .MuiInputLabel-root": {
+        color: "white",
+        fontFamily: "Lato",
+        fontSize: "16px",
+        marginTop: "-10px",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#e56399",
+      },
+    }}
       />
       {validationErrors.email && <p style={{ color: "red" }}>{validationErrors.email}</p>}
       <TextField
@@ -69,7 +149,21 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
         variant="outlined"
         fullWidth
         required
-        sx={{ marginBottom: 2 }}
+       sx={{
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "white",
+        marginBottom: "20px",
+      },
+      "& .MuiInputLabel-root": {
+        color: "white",
+        fontFamily: "Lato",
+        fontSize: "16px",
+        marginTop: "-10px",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#e56399",
+      },
+    }}
       />
       {validationErrors.password && <p>{validationErrors.password}</p>}
       <TextField
@@ -81,10 +175,24 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
         fullWidth
         multiline
         rows={3}
-        sx={{ marginBottom: 2 }}
+       sx={{
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "white",
+        marginBottom: "20px",
+      },
+      "& .MuiInputLabel-root": {
+        color: "white",
+        fontFamily: "Lato",
+        fontSize: "16px",
+        marginTop: "-10px",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#e56399",
+      },
+    }}
       />
       {validationErrors.bio && <p>{validationErrors.bio}</p>}
-      <Box sx={{ marginBottom: 2 }}>
+   
         <TextField
           label="Banner Image URL"
           name="bannerUrl"
@@ -92,7 +200,21 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
           onChange={(e) => onInputChange(e.target.name, e.target.value)}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 1 }}
+           sx={{
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "white",
+        marginBottom: "20px",
+      },
+      "& .MuiInputLabel-root": {
+        color: "white",
+        fontFamily: "Lato",
+        fontSize: "16px",
+        marginTop: "-10px",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#e56399",
+      },
+    }}
         />
         {validationErrors.bannerUrl && <p>{validationErrors.bannerUrl}</p>}
         <TextField
@@ -102,10 +224,25 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
           onChange={(e) => onInputChange(e.target.name, e.target.value)}
           variant="outlined"
           fullWidth
+           sx={{
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "white",
+        marginBottom: "20px",
+      },
+      "& .MuiInputLabel-root": {
+        color: "white",
+        fontFamily: "Lato",
+        fontSize: "16px",
+        marginTop: "-10px",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#e56399",
+      },
+    }}
         />
         {validationErrors.bannerAlt && <p>{validationErrors.banner.alt}</p>}
-      </Box>
-      <Box sx={{ marginBottom: 2 }}>
+   
+
         <TextField
           label="Avatar Image URL"
           name="avatarUrl"
@@ -113,7 +250,21 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
           onChange={(e) => onInputChange(e.target.name, e.target.value)}
           variant="outlined"
           fullWidth
-          sx={{ marginBottom: 1 }}
+       sx={{
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "white",
+        marginBottom: "20px",
+      },
+      "& .MuiInputLabel-root": {
+        color: "white",
+        fontFamily: "Lato",
+        fontSize: "16px",
+        marginTop: "-10px",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#e56399",
+      },
+    }}
         />
         {validationErrors.avatarUrl && <p>{validationErrors.avatar.url}</p>}
         <TextField
@@ -123,6 +274,21 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
           onChange={(e) => onInputChange(e.target.name, e.target.value)}
           variant="outlined"
           fullWidth
+           sx={{
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "white",
+        marginBottom: "12px",
+      },
+      "& .MuiInputLabel-root": {
+        color: "white",
+        fontFamily: "Lato",
+        fontSize: "16px",
+        marginTop: "-10px",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#e56399",
+      },
+    }}
         />
         {validationErrors.avatarAlt && <p>{validationErrors.avatar.alt}</p>}
       </Box>
@@ -130,6 +296,7 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
         Register
       </Button>
     </form>
+  </div>
   );
 };
 

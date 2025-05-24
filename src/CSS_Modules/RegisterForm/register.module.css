@@ -1,0 +1,81 @@
+.registerFormContainer{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.h1Reg{
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boxHeader{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+padding-bottom: 20px;
+
+
+
+}
+
+.tab{
+    width: 270px;
+}
+
+.tabContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+   margin-top: -65px
+
+
+}
+
+.tabs{
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerForm{
+    background-color: var(--primary-color-2);
+    width: 500px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 20px 50px 20px;
+    border-radius: 5px;
+   margin-bottom: 40px;
+}
+
+@media (min-width: 487px) and (max-width: 768px) {
+    .registerForm{
+        width: 400px;
+    }
+
+    .tab{
+    width: 220px !important;
+}
+}
+@media (max-width: 486px) {
+    .registerForm{
+        width: 200px;
+       
+    }
+.tabs{
+    width: 1000px
+
+}
+
+.tab{
+    width: 120px !important;
+}}
