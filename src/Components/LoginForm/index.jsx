@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, TextField, Button } from "@mui/material";
-
+import loginStyles from "../../CSS_Modules/Login/login.module.css";
+import gStyles from '../../CSS_Modules/Global/global.module.css';
 /**
  * LoginForm component renders a login form with email and password fields.
  * It handles input changes and form submission.
@@ -18,13 +19,17 @@ import { Box, TextField, Button } from "@mui/material";
 
 const LoginForm = ({ formValues, onInputChange, onSubmit }) => {
   return (
+
+    <div className={loginStyles.loginFormContainer}>
+
     <form
+    className={loginStyles.loginForm}
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(e);
       }}
     >
-
+      <h1 className={gStyles.h1White}>LOGIN</h1>
 <Box sx={{ marginBottom: 2 }}>
       <TextField
         label="Email"
@@ -36,7 +41,21 @@ const LoginForm = ({ formValues, onInputChange, onSubmit }) => {
         fullWidth
         required
         autoComplete='email'
-        sx={{ marginBottom: 2 }}
+          sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "20px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },}}
       />
       <TextField
         label="Password"
@@ -47,16 +66,31 @@ const LoginForm = ({ formValues, onInputChange, onSubmit }) => {
         variant="outlined"
         fullWidth
         required
-        sx={{ marginBottom: 2 }}
+         sx={{
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "white",
+      marginBottom: "14px",
+    },
+  "& .MuiInputLabel-root": {
+      color: "white",
+      fontFamily:"Lato",
+      fontSize: "16px",
+      marginTop: '-10px',
+    },
+
+    "& .MuiInputLabel-root.Mui-focused":{
+      color: "#e56399",
+    },}}
       />
     
    </Box>
       
     
-      <Button type="submit" variant="contained" color="primary" fullWidth>
+      <Button className={gStyles.buttonPrimary} type="submit" variant="contained" color="primary" >
         Login
       </Button>
     </form>
+    </div>
   )};
 
 export default LoginForm;

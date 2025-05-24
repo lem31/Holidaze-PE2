@@ -60,9 +60,7 @@ const LoginBox = () => {
   return (
     <Box>
       <Box sx={{ marginTop: 3 }}>
-        <Typography variant="h6" sx={{ marginBottom: 2 }}>
-          Login
-        </Typography>
+    
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <LoginForm
           formValues={formValues}

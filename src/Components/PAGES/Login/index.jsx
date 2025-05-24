@@ -62,7 +62,7 @@ if (isLoggedIn) {
             )}
             </div>
             
-      <h1>Login</h1>
+
         <LoginBox />
     </div>
   );
