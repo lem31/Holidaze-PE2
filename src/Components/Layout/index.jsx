@@ -1,7 +1,7 @@
 import {Outlet} from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
-import hStyles from "../../CSS_Modules/Header/header.module.css";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
 
 /**
  * Layout component is a wrapper for the application's layout structure.
@@ -13,12 +13,12 @@ import hStyles from "../../CSS_Modules/Header/header.module.css";
 
 function Layout() {
 return(
-  <div >
+  <div className={gStyles.layoutWrapper}>
 
   <Header/>
-
+<main className={gStyles.mainContent}>
   <Outlet/>
-
+</main>
   <Footer/>
 
   </div>

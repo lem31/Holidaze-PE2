@@ -1,3 +1,15 @@
+
+.layoutWrapper{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent{
+  flex:1;
+}
+
+
 .buttonPrimary {
   background-color: var(--secondary-color-2) !important;
   color: var(--primary-color-1) !important;
