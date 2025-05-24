@@ -39,19 +39,23 @@ const LoginBox = () => {
   };
 
   const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    setErrorMessage('');
+  event.preventDefault();
+  setErrorMessage('');
 
-    try {
-      const response = await onLogin(API_URL, formValues, navigate);
-      if(!response.ok){
-        const errorData = await response.json();
-        setErrorMessage(errorData.message || 'Invalid email or password');
-      }
-    } catch (error) {
-     setErrorMessage('An error occurred during login. Please try again.');
+  try {
+    const response = await onLogin(API_URL, formValues, navigate);
+    console.log("Login response:", response);
+
+    if (response.errors?.length > 0) {
+      setErrorMessage(response.errors[0].message);
+    } else {
+      setErrorMessage('Unexpected error occurred. Please try again.');
     }
-  };
+  } catch (error) {
+    setErrorMessage('A network error occurred. Please check your connection and try again.');
+  }
+};
+
 
   return (
     <Box>
