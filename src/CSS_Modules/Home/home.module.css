@@ -10,7 +10,11 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 40px;
- 
+position: relative;
+}
+
+.selectBox{
+  position: relative;
 }
 
 .closeButtonDiv{
@@ -18,7 +22,7 @@
   flex-direction: row;
   justify-content: end;
   align-items: end;
-  width: 48vw;
+  width: 480px;
   position: absolute;
   height: 50px;
   z-index:2;
@@ -33,6 +37,8 @@ margin-top: -60px;
 display:flex;
 flex-direction: column;
 align-items: center;
+overflow: visible;
+position: relative;
 }
 
 .searchSelectBar {
@@ -65,11 +71,17 @@ align-items: center;
 }
 
 .customMenu {
+position: absolute !important;
+
+
+ 
   background-color: var(--primary-color-2) !important;
   color: var(--secondary-color-2) !important;
-  border: 1px solid #ccc;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 120px;
+  border: 1px solid #ccc !important;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
+ width: 200px;
+
+
 }
 
 .selectOption {
@@ -80,6 +92,7 @@ align-items: center;
   align-items: center;
   width: 200px;
   height: 30px;
+ 
 }
 
 .selectLabel {
@@ -419,6 +432,7 @@ display: flex;
     width: 295px;
     height: 50px;
     border-radius: 18px;
+    
   }
 
 .selectDiv {
@@ -473,6 +487,7 @@ align-items: center;
   width: 100vw;
 margin-top: -45.8px;
   gap: 0;
+
 }
 
    .suggestionList {
@@ -481,6 +496,7 @@ margin-top: -45.8px;
   font-size: var(--font-size-small-3);
   line-height: 160%;
   letter-spacing: 0%;
+
 
 }
 
@@ -667,7 +683,7 @@ width: 200px;
 
 .customMenu {
 
-  margin-top: 155px;
+  margin-top: 135px;
   width: 200px;
 }
 
@@ -757,10 +773,16 @@ align-items: center;
 .closeButtonDiv{
   display: flex;
   flex-direction: row;
-  justify-content: end;
-  align-items: center;
-  width: 90vw;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 480px;
+  height: 280px
 }
+
+
+
+
+
 
 .suggestionContainer{
   display: flex;
@@ -768,8 +790,9 @@ align-items: center;
   justify-content: center;
   align-items: center;
   width: 100vw;
-margin-top: -45.8px;
+margin-top: -20.8px;
   gap: 0;
+
 }
 
    .suggestionList {
