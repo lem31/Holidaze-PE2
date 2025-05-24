@@ -73,7 +73,7 @@ position: relative;
 .customMenu {
 position: absolute !important;
 
-
+height: 400px;
  
   background-color: var(--primary-color-2) !important;
   color: var(--secondary-color-2) !important;
@@ -97,18 +97,21 @@ position: absolute !important;
 
 .selectLabel {
   position: absolute;
-  margin-top: -10px;
-  margin-left: -10px;
-  color: var(--primary-color-3);
+  margin-top: -15px;
+  
+  color: var(--secondary-color-2) !important;
   font-family: var(--font-family-4);
   font-size: var(--font-size-small);
   line-height: 160%;
   letter-spacing: 0.5%;
   transform: translate(-20%, -30%);
-  text-align: center;
+  text-align: left;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 300px;
+}
+.selectLabel:hover {
+  color: var(--secondary-color) !important;
 }
 
 .selectOption .MuiSelect-select {
@@ -183,6 +186,7 @@ padding-right: 10px;
   float: right;
   line-height: 130%;
   letter-spacing: 2%;
+
 }
 
 .closeButton:hover {
@@ -383,7 +387,7 @@ margin-left: 10px
 
 .customMenu {
 
-  margin-top: 155px;
+
   width: 200px;
 }
 
@@ -396,9 +400,18 @@ margin-left: 10px
     width: 295px;
     height: 50px;
     border-radius: 18px;
+
   }
 
-
+.searchInputDiv{
+  padding: 20px;
+  background-color: var(--primary-color-2);
+  width: 300px;
+  border-radius: 18px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 
 .selectOption{
   height: 40px;
@@ -412,15 +425,13 @@ margin-left: 10px
 .selectLabel {
 
 position: relative;
-display: flex;
-  transform: translate(-50%, -50%);
-  margin-top: 0.5px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+margin-top: -8px;
+margin-left: -20px;
+
+text-align: center;
+width: 300px;
 
 }
-
 
 
   .selectBox{
@@ -430,24 +441,31 @@ display: flex;
     align-items: center;
     background-color: var(--primary-color-2);
     width: 295px;
-    height: 50px;
+    height: 200px;
+
     border-radius: 18px;
-    
   }
 
 .selectDiv {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 align-items: center;
 
+}
+
+.selectOptionDiv{
+    background-color: var(--primary-color-2);
+padding: 20px;
 }
 
 .searchIcon {
   width: 24px;
   height: 24px;
-  padding-right: 0;
 
+position: absolute;
+right: 5px;
+ 
 }
 
 .searchInputIconDiv{
@@ -455,9 +473,8 @@ align-items: center;
   flex-direction: row;
   align-items: center;
   justify-self: center;
-  width: 200px;
-}
 
+}
 
 .selectWrapper {
   background: none;
@@ -474,9 +491,12 @@ align-items: center;
 .closeButtonDiv{
   display: flex;
   flex-direction: row;
-  justify-content: end;
-  align-items: center;
-  width: 200px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 240px;
+margin-top: -20px;
+ height: 60px;
+
 }
 
 .suggestionContainer{
@@ -484,8 +504,8 @@ align-items: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-margin-top: -24.8px;
+ 
+margin-top: -35.8px;
   gap: 0;
 
 }
@@ -496,8 +516,8 @@ margin-top: -24.8px;
   font-size: var(--font-size-small-3);
   line-height: 160%;
   letter-spacing: 0%;
-width: 200px;
-
+width: 220px;
+   padding-top: 30px;
 }
 
 
@@ -524,6 +544,9 @@ width: 200px;
     font-size: var(--font-size-tiny);
     line-height: 130%;
     letter-spacing: 2%;
+    margin-top: -110px;
+margin-left: 20px;
+   
   }
 
 
@@ -662,7 +685,9 @@ max-height: 2.5em;
   flex-direction: column;
   align-items: center;
   margin-top: 0;
+height: 300px;
 }
+
 .buttonAvailability{
   margin-right: 0;
 }
@@ -683,7 +708,7 @@ width: 200px;
 
 .customMenu {
 
-  margin-top: 135px;
+
   width: 200px;
 }
 
@@ -692,16 +717,26 @@ width: 200px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: var(--primary-color-2);
-    width: 295px;
+
+    width: 100vw;
     height: 50px;
-    border-radius: 18px;
+   
   }
+.searchInputDiv{
+  padding: 20px;
+  background-color: var(--primary-color-2);
+  width: 300px;
+  border-radius: 18px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 
 
 
 .selectOption{
   height: 40px;
+
 
 }
 
@@ -712,12 +747,11 @@ width: 200px;
 .selectLabel {
 
 position: relative;
-display: flex;
-  transform: translate(-50%, -50%);
-  margin-top: 0.5px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+margin-top: -8px;
+margin-left: -20px;
+
+text-align: center;
+width: 300px;
 
 }
 
@@ -738,15 +772,23 @@ display: flex;
 .selectDiv {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 align-items: center;
+
+}
+
+.selectOptionDiv{
+    background-color: var(--primary-color-2);
+padding: 20px;
 }
 
 .searchIcon {
   width: 24px;
   height: 24px;
-  padding-right: 0;
 
+position: absolute;
+right: 5px;
+ 
 }
 
 .searchInputIconDiv{
@@ -754,7 +796,7 @@ align-items: center;
   flex-direction: row;
   align-items: center;
   justify-self: center;
-  width: 200px;
+
 }
 
 
@@ -777,6 +819,10 @@ align-items: center;
   align-items: flex-start;
   width: 200px;
 }
+.closeButton{
+    margin-top: -140px;
+   margin-left: 15px;
+}
 
 
 
@@ -788,19 +834,21 @@ align-items: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* width: 100vw; */
+
 margin-top: -20.8px;
   gap: 0;
 
 }
 
    .suggestionList {
- 
+ padding-top: 30px;
   font-family: var(--font-family-2);
   font-size: var(--font-size-small-2);
   line-height: 160%;
   letter-spacing: 0.5%;
-
+width: 240px;
+left: 5px;
+margin-top: -2px;
 }
   .orP {
     font-size: var(--font-size-small-2);
@@ -939,6 +987,7 @@ max-height: 3em;
   flex-direction: column;
   align-items: center;
   margin-top: 0;
+height: 300px;
 }
 .buttonAvailability{
   margin-right: 0;

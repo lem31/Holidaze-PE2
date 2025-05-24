@@ -91,7 +91,6 @@ margin-top: 20px;
   display: flex;
   flex-direction: row;
  align-items: center;
- 
  gap: 10px;
 }
 
@@ -122,12 +121,24 @@ margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
+
   width: 200px;
   height: 166px;
-background-color: var(--primary-color-2);
-z-index: 100;
-right: 8%;
+  background-color: var(--primary-color-2);
+  position: absolute !important;
+right: 50px;
+  z-index: 9999;
+  margin-top: -10px;
+border-radius: 5px;
+}
+
+.dropDownBoxContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+position: relative;
+
 
 }
 
@@ -211,20 +222,28 @@ gap: 10px;
 
   }
 
+.mobileNavDivBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
 
+}
 
   .mobileNavDiv{
 
      display: none;
     position: absolute;
     top: 114px;
-    left: 14%;
-    width: 126px; 
+      left: 150px;
+    width: 100px; 
     height: auto;
     background-color: var(--primary-color-2);
     padding: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 100;
+     margin-top: -120px;
   }
 
   .mobileNavDiv.active{
@@ -278,20 +297,29 @@ gap: 10px;
     background: none;
    
   }
+.mobileNavDivBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
 
+}
 
     .mobileNavDiv{
  flex-direction: column;
+ align-items: center;
      display: none;
     position: absolute;
     top: 114px;
-    left: 10%;
+    left: 165px;
     width: 126px; 
     height: auto;
     background-color: var(--primary-color-2);
     padding: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 100;
+    margin-top: -120px;
   }
 
    .mobileNavDiv.active{
