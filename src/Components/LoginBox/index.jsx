@@ -1,10 +1,13 @@
-import  { useState } from "react";
+
 import { Box, Typography } from "@mui/material";
 import LoginForm from "../LoginForm";
 import onLogin from "../../API/OnLogin";
 import { useNavigate } from "react-router-dom";
 import Alert from "@mui/material/Alert";
-
+import LoginFormValidator from "../LoginFormValidator/loginValidator.jsx";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 /**
  * LoginBox component handles user login functionality.
@@ -26,24 +29,30 @@ const LoginBox = () => {
   const API_URL = "https://v2.api.noroff.dev/auth/login";
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
+ 
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(LoginFormValidator), 
   });
 
-  const handleInputChange = (name, value) => {
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
+  // const handleInputChange = (name, value) => {
+  //   setFormValues((prevValues) => ({
+  //     ...prevValues,
+  //     [name]: value,
+  //   }));
+  // };
 
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = async (formData) => {
   event.preventDefault();
   setErrorMessage('');
 
   try {
-    const response = await onLogin(API_URL, formValues, navigate);
+    const response = await onLogin(API_URL, formData, navigate);
     console.log("Login response:", response);
 
     if (response.errors?.length > 0) {
@@ -63,9 +72,11 @@ const LoginBox = () => {
     
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <LoginForm
-          formValues={formValues}
-          onInputChange={handleInputChange}
-          onSubmit={handleFormSubmit}
+      
+      
+          onSubmit={handleSubmit(handleFormSubmit)}
+           register={register} 
+          errors={errors}
         />
       </Box>
     </Box>

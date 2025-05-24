@@ -17,7 +17,7 @@ import gStyles from '../../CSS_Modules/Global/global.module.css';
  * );
  */
 
-const LoginForm = ({ formValues, onInputChange, onSubmit }) => {
+const LoginForm = ({ formValues, onInputChange, onSubmit, register, errors }) => {
   return (
 
     <div className={loginStyles.loginFormContainer}>
@@ -30,52 +30,60 @@ const LoginForm = ({ formValues, onInputChange, onSubmit }) => {
       }}
     >
       <h1 className={gStyles.h1White}>LOGIN</h1>
-<Box sx={{ marginBottom: 2 }}>
-      <TextField
-        label="Email"
-        name="email"
-        type="email"
-        value={formValues.email}
-        onChange={(e) => onInputChange(e.target.name, e.target.value)}
-        variant="outlined"
-        fullWidth
-        required
-        autoComplete='email'
-          sx={{
-    "& .MuiOutlinedInput-root": {
-      backgroundColor: "white",
-      marginBottom: "20px",
-    },
-  "& .MuiInputLabel-root": {
-      color: "white",
-      fontFamily:"Lato",
-      fontSize: "16px",
-      marginTop: '-10px',
-    },
+<Box sx={{ position: "relative" }}>
+  <TextField
+    label="Email"
+    {...register("email")}
+    type="email"
+    variant="outlined"
+    fullWidth
+    required
+    autoComplete="email"
+    error={!!errors.email} 
+   helperText={errors.email?.message || " "}
+    sx={{
+      "& .MuiOutlinedInput-root": {
+        backgroundColor: "white",
+        marginBottom: "12px",
+      },
+      "& .MuiInputLabel-root": {
+        color: "white",
+        fontFamily: "Lato",
+        fontSize: "16px",
+        marginTop: "-10px",
+      },
+      "& .MuiInputLabel-root.Mui-focused": {
+        color: "#e56399",
+      },
+    }}
+  />
 
-    "& .MuiInputLabel-root.Mui-focused":{
-      color: "#e56399",
-    },}}
-      />
+
+
       <TextField
         label="Password"
-        name="password"
+        {...register("password")}
+       
         type="password"
-        value={formValues.password}
+   
         onChange={(e) => onInputChange(e.target.name, e.target.value)}
         variant="outlined"
         fullWidth
         required
+
+         error={!!errors.password}
+          helperText={errors.password?.message || " "}
          sx={{
     "& .MuiOutlinedInput-root": {
       backgroundColor: "white",
-      marginBottom: "14px",
+      marginBottom: "8px",
+      marginTop: "16px",
     },
   "& .MuiInputLabel-root": {
       color: "white",
       fontFamily:"Lato",
       fontSize: "16px",
-      marginTop: '-10px',
+      marginTop: '5px',
     },
 
     "& .MuiInputLabel-root.Mui-focused":{
