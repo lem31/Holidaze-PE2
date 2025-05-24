@@ -106,7 +106,9 @@ useEffect(() => {
           <div className={homeStyles.selectDiv} >
                <FormControl className={homeStyles.selectBox} variant="outlined">
                             <InputLabel className={homeStyles.selectLabel}id="country-select-label">Select Country</InputLabel>
-                            <Select
+                          
+                          <div className={homeStyles.selectOptionDiv}>
+                           <Select
                                 labelId="country-select-label"
                                 value={selectedCountry}
                                 onChange={handleCountryChange}
@@ -119,6 +121,7 @@ useEffect(() => {
                                     <MenuItem className={homeStyles.selectDropDown} key={country} value={country}>{country}</MenuItem>
                                 ))}
                             </Select>
+                            </div>
                         </FormControl>
                     <div className={homeStyles.orDiv}>
 <p className={homeStyles.orP}>OR</p>
@@ -126,7 +129,8 @@ useEffect(() => {
 <div className={homeStyles.searchDiv}>
 <div className={homeStyles.searchInputIconDiv}> 
   <div>
-                    <input className={homeStyles.optionAndInput}  type='text' value={searchQuery} onChange={handleSearchChange} placeholder='Search stays' />
+                    <div className={homeStyles.searchInputDiv}><input className={homeStyles.optionAndInput}  type='text' value={searchQuery} onChange={handleSearchChange} placeholder='Search stays' />
+                    </div>
                     </div>
                     <img className={homeStyles.searchIcon}src={Search} alt="" />
                     </div>

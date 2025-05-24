@@ -403,7 +403,15 @@ margin-left: 10px
 
   }
 
-
+.searchInputDiv{
+  padding: 20px;
+  background-color: var(--primary-color-2);
+  width: 300px;
+  border-radius: 18px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 
 .selectOption{
   height: 40px;
@@ -426,7 +434,6 @@ width: 300px;
 }
 
 
-
   .selectBox{
     display: flex;
     flex-direction: row;
@@ -434,24 +441,31 @@ width: 300px;
     align-items: center;
     background-color: var(--primary-color-2);
     width: 295px;
-    height: 50px;
+    height: 200px;
+
     border-radius: 18px;
-    
   }
 
 .selectDiv {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 align-items: center;
 
+}
+
+.selectOptionDiv{
+    background-color: var(--primary-color-2);
+padding: 20px;
 }
 
 .searchIcon {
   width: 24px;
   height: 24px;
-  padding-right: 0;
 
+position: absolute;
+right: 5px;
+ 
 }
 
 .searchInputIconDiv{
@@ -459,9 +473,8 @@ align-items: center;
   flex-direction: row;
   align-items: center;
   justify-self: center;
-  width: 200px;
-}
 
+}
 
 .selectWrapper {
   background: none;
@@ -492,7 +505,7 @@ margin-top: -20px;
   justify-content: center;
   align-items: center;
  
-margin-top: -24.8px;
+margin-top: -35.8px;
   gap: 0;
 
 }
@@ -672,8 +685,9 @@ max-height: 2.5em;
   flex-direction: column;
   align-items: center;
   margin-top: 0;
-
+height: 300px;
 }
+
 .buttonAvailability{
   margin-right: 0;
 }
@@ -703,16 +717,26 @@ width: 200px;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-color: var(--primary-color-2);
-    width: 295px;
+
+    width: 100vw;
     height: 50px;
-    border-radius: 18px;
+   
   }
+.searchInputDiv{
+  padding: 20px;
+  background-color: var(--primary-color-2);
+  width: 300px;
+  border-radius: 18px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
 
 
 
 .selectOption{
   height: 40px;
+
 
 }
 
@@ -750,13 +774,21 @@ width: 300px;
   flex-direction: column;
   gap: 0;
 align-items: center;
+
+}
+
+.selectOptionDiv{
+    background-color: var(--primary-color-2);
+padding: 20px;
 }
 
 .searchIcon {
   width: 24px;
   height: 24px;
-  padding-right: 0;
 
+position: absolute;
+right: 5px;
+ 
 }
 
 .searchInputIconDiv{
@@ -764,7 +796,7 @@ align-items: center;
   flex-direction: row;
   align-items: center;
   justify-self: center;
-  width: 200px;
+
 }
 
 
@@ -955,7 +987,7 @@ max-height: 3em;
   flex-direction: column;
   align-items: center;
   margin-top: 0;
-
+height: 300px;
 }
 .buttonAvailability{
   margin-right: 0;
