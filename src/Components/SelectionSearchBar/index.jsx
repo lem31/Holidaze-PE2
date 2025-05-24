@@ -129,7 +129,8 @@ useEffect(() => {
 <div className={homeStyles.searchDiv}>
 <div className={homeStyles.searchInputIconDiv}> 
   <div>
-                    <div className={homeStyles.searchInputDiv}><input className={homeStyles.optionAndInput}  type='text' value={searchQuery} onChange={handleSearchChange} placeholder='Search stays' />
+                    <div className={homeStyles.searchInputDiv}>
+                      <input className={homeStyles.optionAndInput}  type='text' value={searchQuery} onChange={handleSearchChange} placeholder='Search stays' />
                     </div>
                     </div>
                     <img className={homeStyles.searchIcon}src={Search} alt="" />
