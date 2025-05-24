@@ -22,7 +22,7 @@ const useMyStore = create(
       setStays: (newStays) => {
         set({ stays: newStays });
         localStorage.setItem("stays", JSON.stringify(newStays));
-        console.log("Stored stays:", newStays);
+      
       },
 
 
@@ -36,10 +36,7 @@ get().persist.clearStorage();
       setBookings: (newBookings) => {
         set({ bookings: newBookings });
         localStorage.setItem("bookings", JSON.stringify(newBookings));
-        console.log(
-          "Stored bookings:",
-          JSON.parse(localStorage.getItem("bookings"))
-        );
+      
       },
 
       vmBookings: [],
@@ -47,10 +44,7 @@ get().persist.clearStorage();
         set({ vmBookings: newVMBookings });
 
         localStorage.setItem("vmBookings", JSON.stringify(newVMBookings));
-        console.log(
-          "Stored vmBookings:",
-          JSON.parse(localStorage.getItem("vmBookings"))
-        );
+       
       },
       selectedStay: null,
       token: null,
@@ -78,13 +72,12 @@ get().persist.clearStorage();
           localStorage.setItem("userName", userName);
         }
         set({ token: newToken, userName, isLoggedIn: true });
-        console.log("Login state persisted successfully.");
+      
       },
 
       setUserProfile: (profileData) => {
         set({ userProfile: profileData });
-        console.log("userProfile", profileData);
-        console.log("User profile persisted successfully.");
+     
       },
 
       logout: () => {
@@ -94,22 +87,21 @@ get().persist.clearStorage();
           userProfile: null,
           isLoggedIn: false,
         });
-        console.log("User logged out successfully.");
+     
       },
 
       checkLoginStatus: () => {
         const token = get().token;
         const userName = get().userName;
 
-        console.log("Restored token:", token);
-        console.log("Restored username:", userName);
+  
 
         if (token && userName) {
           set({ isLoggedIn: true, loginChecked: true });
-          console.log("Login state restored successfully.");
+      
         } else {
           set({ isLoggedIn: false, loginChecked: true });
-          console.log("No login state found.");
+       
         }
       },
 
@@ -124,13 +116,13 @@ get().persist.clearStorage();
           }
 
           set({ loadingProfile: true });
-          console.log("Fetching user profile...");
+        
 
           const profileData = await fetchUserProfile(userName, token);
           if (profileData) {
-            console.log("Profile data fetched:", profileData);
+        
             set({ userProfile: profileData.data, loadingProfile: false });
-            console.log("Stored user profile:", profileData);
+       
             return profileData.data;
           } else {
             throw new Error("Failed to fetch profile data.");
@@ -159,7 +151,7 @@ get().persist.clearStorage();
           if (updatedProfile) {
             set({ userProfile: updatedProfile, loadingProfile: false });
             localStorage.setItem("userProfile", JSON.stringify(updatedProfile));
-            console.log("Profile updated successfully:", updatedProfile);
+     
 
             const response = await fetch(endpoint, {
               method: "PUT",
@@ -189,7 +181,7 @@ get().persist.clearStorage();
         try {
           set({ loading: true, error: false });
           const fetchedStays = await fetchStays();
-          console.log("RAW API RESPONSE:", fetchedStays);
+         
           if (!fetchedStays || !Array.isArray(fetchedStays)) {
             set({ stays: [], loading: false });
           }
@@ -202,7 +194,7 @@ get().persist.clearStorage();
 
       fetchAndSetSelectedStay: async (id) => {
         try {
-          console.log("Fetching stay data for ID:", id);
+      
           if (!id) {
             console.error("Invalid stay ID:", id);
             return;
@@ -217,7 +209,7 @@ get().persist.clearStorage();
           }
           set({ selectedStay: response });
 
-          console.log("Stored selectedStay:", selectedStay);
+
           return response;
         } catch (error) {
           console.error("Error fetching stay data:", error);
@@ -231,7 +223,7 @@ get().persist.clearStorage();
 
         set({ selectedStay: completeStay });
 
-        console.log("Updated selectedStay with full data:", completeStay);
+
       },
 
 
@@ -248,12 +240,12 @@ get().persist.clearStorage();
         try {
           set({ loading: true });
           const userVenues = await fetchVMVenues(userName, token);
-          console.log("🔍 API Response for vmVenues:", userVenues);
+    
 
           if (userVenues && Array.isArray(userVenues)) {
             set({ vmVenues: userVenues, loading: false });
 
-            console.log("Stored vmVenues:", userVenues);
+           
 
             return userVenues;
           } else {
@@ -272,7 +264,7 @@ get().persist.clearStorage();
 
       setSelectedVenue: (venue) => {
         set({ selectedVenue: venue });
-        console.log("Selected venue:", venue);
+       
       },
 
       createNewVenue: async (venueData) => {
@@ -296,10 +288,7 @@ get().persist.clearStorage();
         const token = get().token;
         const userName = get().userName;
 
-        console.log("Before update:", get().vmVenues);
-
-        console.log("🔍 Token before request:", token);
-        console.log("🔍 Username before request:", userName);
+        
         if (!token || !userName) {
           console.error(
             "Authentication error: Token or username is missing or invalid."
@@ -308,11 +297,10 @@ get().persist.clearStorage();
             "Authentication error: Token and username are required. Please login again."
           );
         }
-        console.log("🔍 Token before API request:", token);
+
         const selectedVenue = get().selectedVenue;
         const selectedVenueId = selectedVenue?.id;
-        console.log("🔍 Selected Venue:", selectedVenue);
-        console.log("🔍 Selected Venue ID:", selectedVenueId);
+  
 
         if (!token) {
           setError("api", { message: "Authentication error: Token missing." });
@@ -325,8 +313,7 @@ get().persist.clearStorage();
             token
           );
 
-          console.log("API Response:", updatedVenue);
-          console.log("vmVenues after update:", get().vmVenues);
+      
 
           set((state) => ({
             vmVenues: state.vmVenues.map((v) =>
@@ -341,7 +328,7 @@ get().persist.clearStorage();
           await fetchStays();
 
           set({ successMessage: "Venue updated successfully!" });
-          console.log("Venue updated successfully:", updatedVenue);
+      
           return updatedVenue;
         } catch (error) {
           console.error("Error updating venue:", error);

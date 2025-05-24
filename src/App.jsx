@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     if (isHydrated && !loginChecked) {
       checkLoginStatus();
-      console.log("Login status checked");
+     
 
     }
   }, [isHydrated, checkLoginStatus]);

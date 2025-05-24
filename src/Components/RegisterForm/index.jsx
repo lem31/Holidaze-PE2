@@ -25,7 +25,7 @@ import regStyles from "../../CSS_Modules/RegisterForm/register.module.css";
 const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {}, defaultBanner, defaultAvatar, activeTab, handleTabChange }) => {
 
   useEffect(() => {
-    console.log("Form values state:", formValues);
+   
   }, [formValues]);
   
   return (

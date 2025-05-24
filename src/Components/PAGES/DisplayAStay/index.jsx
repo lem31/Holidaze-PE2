@@ -48,9 +48,7 @@ const DisplayAStay = () => {
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [alertSeverity, setAlertSeverity] = useState("success");
 
-  console.log("Selected Stay DisplayAStay:", selectedStay);
-  console.log("Booking Message:", bookingMessage);
-  console.log("Snackbar should open:", Boolean(bookingMessage));
+
 
 const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
 
@@ -62,7 +60,7 @@ const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
   };
   useEffect(() => {
     if (!loading && !selectedStay && id) {
-      console.log("No stay data found, redirecting to home page");
+
       navigate("/");
     }
   }, []);
@@ -70,7 +68,7 @@ const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
   useEffect(() => {
     const fetchStayData = async (id) => {
       try {
-        console.log("Fetching stay data for ID:", id);
+      
         await fetchAndSetSelectedStay(id);
         setLoading(false);
       } catch (error) {

@@ -65,17 +65,17 @@ function Venues({ vmVenues }) {
   };
 
   const toggleForm = () => {
-    console.log("🚀 ToggleForm Clicked!");
+   
     setIsFormVisible((prevVisible) => {
-      console.log("New form visibility:", !prevVisible);
+    
       return !prevVisible;
     });
   };
 
   const toggleEditForm = () => {
-    console.log("🚀 ToggleEditForm Clicked!");
+   
     setIsEditFormVisible((prevVisible) => {
-      console.log("New edit form visibility:", !prevVisible);
+      
       return !prevVisible;
     });
   };
@@ -289,7 +289,7 @@ function Venues({ vmVenues }) {
               type="button" variant="contained"
               className={gStyles.buttonPrimary} 
                 onClick={() => {
-                  console.log("Setting Selected Venue:", venue);
+                 
                   setSelectedVenue(venue);
                   setIsEditFormVisible(true);
                 }}

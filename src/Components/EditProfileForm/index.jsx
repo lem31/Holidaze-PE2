@@ -51,7 +51,7 @@ const EditProfileForm = ({
     },
   });
       
-    console.log("userProfile", userProfile);
+
 
 
 
@@ -95,7 +95,7 @@ const EditProfileForm = ({
           abortEarly: false,
         });
         setValidationErrors({});
-        console.log("Form data being submitted:", data);
+     
   
         const success = await updateUserProfile(userData);
         if (success) {

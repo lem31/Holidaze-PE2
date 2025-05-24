@@ -15,7 +15,7 @@ const { userProfile } = useMyStore();
 
 const [refresh, setRefresh] = React.useState(false);
 React.useEffect(() => {
-  console.log('profile updated, forcing refresh');
+
 }, [refresh]);
   return (
     <div>

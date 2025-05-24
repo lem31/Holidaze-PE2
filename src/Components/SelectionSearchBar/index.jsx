@@ -39,7 +39,7 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
     return matchesSearch && matchesCountry;
   });
 
-   console.log(" Filtered stays:", filteredStays);
+
 
   onFilter(filteredStays);
 }, [stays, searchQuery, selectedCountry]); 
@@ -92,7 +92,7 @@ useEffect(() => {
         event.preventDefault();
         if (stay && stay.id) {
             setSelectedStay(stay);
-            console.log("Navigating to:", `/Stay/${stay.id}`);
+          
             navigate(`/Stay/${stay.id}`);
         } else {
             console.error('Invalid stay object or missing stay.id:', stay);

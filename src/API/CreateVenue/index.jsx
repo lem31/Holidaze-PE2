@@ -27,7 +27,7 @@ export const createVenue = async (token, venueData) => {
 
     const data = await response.json();
 
-    console.log("Full API Response:", data);
+  
 
     return data;
   } catch (error) {
