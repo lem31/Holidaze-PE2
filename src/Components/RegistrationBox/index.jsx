@@ -4,6 +4,8 @@ import RegisterForm from "../RegisterForm";
 import onRegister from "../../API/OnRegister/index.js";
 import RegisterFormValidator from '../RegisterFormValidator';
 import { useNavigate } from "react-router-dom";
+import regStyles from "../../CSS_Modules/RegisterForm/register.module.css";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
 
 /**
  * RegisterBox component handles user registration functionality.
@@ -119,23 +121,10 @@ const RegisterBox = () => {
   };
 
   return (
-    <Box>
-      <Tabs
-        value={activeTab}
-        onChange={handleTabChange}
-        aria-label="Registration Tabs"
-        centered
-      >
-        <Tab label="Venue Manager" />
-        <Tab label="Customer" />
-      </Tabs>
+    
 
       <Box sx={{ marginTop: 3 }}>
-        <Typography variant="h6" sx={{ marginBottom: 2 }}>
-          {activeTab === 0
-            ? "Register as a Venue Manager"
-            : "Register as a Customer"}
-        </Typography>
+      
         <RegisterForm
           formValues={formValues}
           onInputChange={handleInputChange}
@@ -145,9 +134,12 @@ const RegisterBox = () => {
           validationErrors={validationErrors}
           defaultBanner={defaultBanner}
           defaultAvatar={defaultAvatar}
+          activeTab={activeTab}
+          handleTabChange={handleTabChange}
+          
         />
       </Box>
-    </Box>
+    
   );
 };
 
