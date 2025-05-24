@@ -158,6 +158,7 @@ const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
 
   return (
     <div className={stayStyles.stayCardPosition}>
+
       <div className={stayStyles.stayContainer}>
         <div className={stayStyles.nameRatingImages}>
           <div className={stayStyles.stayNameRatingDiv}>
@@ -229,42 +230,9 @@ const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
                 </div>
               </div>
 
-              <div className={stayStyles.facilH2Div}>
-                <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>
-                  Available Facilities
-                </h2>
-                {availableFacilities.length > 0 ? (
-                  <ul>
-                    <div className={stayStyles.facilityDiv}>
-                      {availableFacilities.map(([facility], index) => (
-                        <li
-                          key={`${selectedStay.id}-${facility.name}-${index}`}
-                        >
-                          <img
-                            className={stayStyles.icon}
-                            src={facilityIcons[facility]}
-                            alt={`${facility.name} icon`}
-                          />
-                          {facility.charAt(0).toUpperCase() + facility.slice(1)}
-                        </li>
-                      ))}
-                    </div>
-                  </ul>
-                ) : (
-                  <p>No Facilities Available</p>
-                )}
-              </div>
+              
             </div>
-          </div>
-          <div className={stayStyles.buttonDiv}>
-            <button
-              className={gStyles.buttonPrimary}
-              type="submit"
-              onClick={handleBooking}
-            >
-              Book Now
-            </button>
-          </div>
+            
 
           <Snackbar
             open={Boolean(bookingMessage)}
@@ -301,6 +269,43 @@ const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
           </Snackbar>
         </div>
       </div>
+      <div className={stayStyles.facilH2Div}>
+                <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>
+                  Available Facilities
+                </h2>
+                {availableFacilities.length > 0 ? (
+                  <ul className={stayStyles.facilityUl}>
+                    <div className={stayStyles.facilityDiv}>
+                      {availableFacilities.map(([facility], index) => (
+                        <li
+                          key={`${selectedStay.id}-${facility.name}-${index}`}
+                        >
+                          <img
+                            className={stayStyles.icon}
+                            src={facilityIcons[facility]}
+                            alt={`${facility.name} icon`}
+                          />
+                          {facility.charAt(0).toUpperCase() + facility.slice(1)}
+                        </li>
+                      ))}
+                    </div>
+                  </ul>
+                ) : (
+                  <p>No Facilities Available</p>
+                )}
+                   <div className={stayStyles.buttonDiv}>
+            <button
+              className={gStyles.buttonPrimary}
+              type="submit"
+              onClick={handleBooking}
+            >
+              Book Now
+            </button>
+          </div>
+              </div>
+            
+          </div>
+         
     </div>
   );
 };
