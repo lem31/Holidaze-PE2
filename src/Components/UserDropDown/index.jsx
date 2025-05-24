@@ -3,6 +3,7 @@ import Logout from "../../assets/Images/Logout.png";
 import useMyStore from "../../Store";
 // import {useNavigate} from 'react-router-dom';
 import hStyles from "../../CSS_Modules/Header/header.module.css";
+import { useNavigate } from "react-router-dom";
 
 /**
  * UserDropDown component renders a dropdown menu for user profile and logout options.
@@ -17,7 +18,7 @@ import hStyles from "../../CSS_Modules/Header/header.module.css";
 function UserDropDown({isOpen}) {
   const { userProfile } = useMyStore((state) => state);
   const logout = useMyStore((state) => state.logout);
-
+const navigate = useNavigate();
   const handleLogout = () => {
     logout();
     navigate("/");
