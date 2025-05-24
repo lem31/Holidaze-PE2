@@ -61,6 +61,7 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
   }}
       >
         <Tab label="Venue Manager"
+        className={regStyles.tab}
         sx={{
  backgroundColor: activeTab === 0 ? "#320e3b" : "rgb(227, 133, 179)", 
 
@@ -71,7 +72,7 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
       "&.Mui-selected":  { color: activeTab === 0 ? "white" : "black" }, 
     }}
       />
-        <Tab label="Customer" sx={{
+        <Tab label="Customer"  className={regStyles.tab} sx={{
    backgroundColor: activeTab === 1 ? "#320e3b" : "rgb(227, 133, 179)",
      
       fontWeight: "bold",

@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 50px;
 }
 
 .h1Reg{
@@ -22,6 +22,10 @@ padding-bottom: 20px;
 
 
 
+}
+
+.tab{
+    width: 270px;
 }
 
 .tabContainer{
@@ -57,10 +61,21 @@ padding-bottom: 20px;
     .registerForm{
         width: 400px;
     }
+
+    .tab{
+    width: 220px !important;
+}
 }
 @media (max-width: 486px) {
     .registerForm{
-        width: 80vw;
+        width: 200px;
        
     }
+.tabs{
+    width: 1000px
+
 }
+
+.tab{
+    width: 120px !important;
+}}
