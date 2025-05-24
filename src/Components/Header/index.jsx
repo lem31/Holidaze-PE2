@@ -113,7 +113,7 @@ useEffect(() => {
 
    {isMobileNavOpen && (
 
-
+<div className={hStyles.mobileNavDivBox}>
 <div className={`${hStyles.mobileNavDiv} ${isMobileNavOpen ? hStyles.active : ''}`}>
   <nav className={hStyles.mobileNav}>
 <a className={hStyles.navLink} href="/">
@@ -124,14 +124,16 @@ useEffect(() => {
 <a className={hStyles.navLink}  href="/Login"> <img className={hStyles.navIcons}  src={Login} alt="Login Icon" />Login</a> </>)}
 </nav>
 </div>
-
+</div>
 
 )}
+<div className={hStyles.dropDownBoxContainer}>
    {isDropDownOpen &&
  
     <UserDropDown isOpen={isDropDownOpen}  />
  
 }
+</div>
    </div>
  
 

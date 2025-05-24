@@ -73,7 +73,7 @@ position: relative;
 .customMenu {
 position: absolute !important;
 
-
+height: 400px;
  
   background-color: var(--primary-color-2) !important;
   color: var(--secondary-color-2) !important;
@@ -183,6 +183,7 @@ padding-right: 10px;
   float: right;
   line-height: 130%;
   letter-spacing: 2%;
+
 }
 
 .closeButton:hover {
@@ -383,7 +384,7 @@ margin-left: 10px
 
 .customMenu {
 
-  margin-top: 155px;
+
   width: 200px;
 }
 
@@ -396,6 +397,7 @@ margin-left: 10px
     width: 295px;
     height: 50px;
     border-radius: 18px;
+
   }
 
 
@@ -474,9 +476,12 @@ align-items: center;
 .closeButtonDiv{
   display: flex;
   flex-direction: row;
-  justify-content: end;
-  align-items: center;
-  width: 200px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 240px;
+margin-top: -20px;
+ height: 60px;
+
 }
 
 .suggestionContainer{
@@ -484,7 +489,7 @@ align-items: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+ 
 margin-top: -24.8px;
   gap: 0;
 
@@ -496,8 +501,8 @@ margin-top: -24.8px;
   font-size: var(--font-size-small-3);
   line-height: 160%;
   letter-spacing: 0%;
-width: 200px;
-
+width: 220px;
+   padding-top: 30px;
 }
 
 
@@ -524,6 +529,9 @@ width: 200px;
     font-size: var(--font-size-tiny);
     line-height: 130%;
     letter-spacing: 2%;
+    margin-top: -110px;
+margin-left: 20px;
+   
   }
 
 
@@ -683,7 +691,7 @@ width: 200px;
 
 .customMenu {
 
-  margin-top: 135px;
+
   width: 200px;
 }
 
@@ -775,7 +783,11 @@ align-items: center;
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-start;
-  width: 200px;
+  width: 500px;
+}
+.closeButton{
+    margin-top: -120px;
+   
 }
 
 
