@@ -123,7 +123,7 @@ position: absolute !important;
   position: relative;
   border-radius: 10px;
   width: 500px;
-  height: 300px;
+  max-height: 300px;
   display: flex;
   flex-direction: column;
 
@@ -476,7 +476,7 @@ align-items: center;
   flex-direction: row;
   justify-content: end;
   align-items: center;
-  width: 90vw;
+  width: 200px;
 }
 
 .suggestionContainer{
@@ -484,8 +484,8 @@ align-items: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-margin-top: -45.8px;
+
+margin-top: -24.8px;
   gap: 0;
 
 }
@@ -496,7 +496,7 @@ margin-top: -45.8px;
   font-size: var(--font-size-small-3);
   line-height: 160%;
   letter-spacing: 0%;
-
+width: 200px;
 
 }
 
@@ -775,8 +775,7 @@ align-items: center;
   flex-direction: row;
   justify-content: flex-end;
   align-items: flex-start;
-  width: 480px;
-  height: 280px
+  width: 200px;
 }
 
 
@@ -789,7 +788,7 @@ align-items: center;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  /* width: 100vw; */
 margin-top: -20.8px;
   gap: 0;
 
