@@ -316,7 +316,7 @@ function Venues({ vmVenues }) {
                           ))}
                       </ul>
                     ) : (
-                      <p>No Facilities Available</p>
+                      <p className={gStyles.bodyWhite}>No Facilities Available</p>
                     )}
 
                     <div className={vmProfileStyles.buttonContainer}>

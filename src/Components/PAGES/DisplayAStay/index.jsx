@@ -255,6 +255,7 @@ const DisplayAStay = () => {
                   width: "400px",
                   height: "auto",
                   textWrap: "wrap",
+                  zIndex: 1500,
                   textAlign: "center",
                 }}
               >
@@ -283,7 +284,7 @@ const DisplayAStay = () => {
               </div>
             </ul>
           ) : (
-            <p>No Facilities Available</p>
+            <p className={gStyles.bodyWhite}>No Facilities Available</p>
           )}
           <div className={stayStyles.buttonDiv}>
             <button
