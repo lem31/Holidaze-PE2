@@ -391,7 +391,7 @@ const CreateVenueForm = ({ toggleForm }) => {
                 <img
                   className={createVenueStyles.metaImg}
                   src={Parking}
-                  alt=""
+                  alt="parking"
                 />
                 Parking
               </Button>
@@ -415,7 +415,7 @@ const CreateVenueForm = ({ toggleForm }) => {
                   },
                 }}
               >
-                <img className={createVenueStyles.metaImg} src={Wifi} alt="" />
+                <img className={createVenueStyles.metaImg} src={Wifi} alt="wifi" />
                 Wifi
               </Button>
 
@@ -441,7 +441,7 @@ const CreateVenueForm = ({ toggleForm }) => {
                 <img
                   className={createVenueStyles.metaImg}
                   src={Breakfast}
-                  alt=""
+                  alt="breakfast"
                 />
                 Breakfast
               </Button>
@@ -465,7 +465,7 @@ const CreateVenueForm = ({ toggleForm }) => {
                   },
                 }}
               >
-                <img className={createVenueStyles.metaImg} src={Pets} alt="" />
+                <img className={createVenueStyles.metaImg} src={Pets} alt="pets" />
                 Pets
               </Button>
             </Box>

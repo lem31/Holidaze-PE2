@@ -221,7 +221,7 @@ const DisplayAStay = () => {
               <div className={stayStyles.locationDescDiv}>
                 <div className={stayStyles.locationDiv}>
                   <p className={gStyles.bodyWhite}>
-                    <img className={stayStyles.icon} src={Location} alt="" />
+                    <img className={stayStyles.icon} src={Location} alt="location" />
                     Location: {selectedStay.location.city},{" "}
                     {selectedStay.location.country}
                   </p>
@@ -238,7 +238,7 @@ const DisplayAStay = () => {
                     </p>
                   </div>
                   <p className={gStyles.bodyWhite}>
-                    <img className={stayStyles.icon} src={Price} alt="" />
+                    <img className={stayStyles.icon} src={Price} alt="price" />
                     Price: {selectedStay.price} NOK
                   </p>
                   {startDate && endDate && totalPrice > 0 && (

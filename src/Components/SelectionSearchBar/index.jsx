@@ -151,7 +151,7 @@ const SelectionSearchBar = ({ stays, onFilter }) => {
                     />
                   </div>
                 </div>
-                <img className={homeStyles.searchIcon} src={Search} alt="" />
+                <img className={homeStyles.searchIcon} src={Search} alt="search" />
               </div>
             </div>
           </div>

@@ -12,6 +12,7 @@
 
 .buttonPrimary {
   background-color: var(--secondary-color-2) !important;
+  font-weight: bold !important;
   color: var(--primary-color-1) !important;
   border: none;
   border-radius: 5px !important;
@@ -40,6 +41,7 @@
 
 .buttonSecondary {
   background-color: var(--secondary-color) !important;
+  font-weight: bold !important;
   color: var(--primary-color-1) !important;
   border: none;
   border-radius: 5px !important;
