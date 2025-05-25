@@ -98,9 +98,9 @@ right: 20px;
 }
 
 .crDiv{
-    position: absolute;
+    /* position: absolute; */
   left: 0;
-padding-left: 5px;
+    padding-left: 0;
 
 }
 
