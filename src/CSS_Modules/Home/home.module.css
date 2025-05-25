@@ -386,9 +386,8 @@ margin-left: 10px
 }
 
 .customMenu {
-
-
   width: 200px;
+
 }
 
   .searchDiv{
@@ -406,7 +405,7 @@ margin-left: 10px
 .searchInputDiv{
   padding: 20px;
   background-color: var(--primary-color-2);
-  width: 250px;
+  width: 200px;
   border-radius: 18px;
   align-items: center;
   display: flex;
@@ -414,7 +413,7 @@ margin-left: 10px
 }
 
 .selectOption{
-  height: 40px;
+  height: 30px;
 
 }
 
@@ -425,7 +424,7 @@ margin-left: 10px
 .selectLabel {
 
 position: relative;
-margin-top: -8px;
+margin-top: -15px;
 margin-left: -20px;
 
 text-align: center;
@@ -440,7 +439,7 @@ width: 300px;
     justify-content: center;
     align-items: center;
     background-color: var(--primary-color-2);
-    width: 295px;
+    width: 150px;
     height: 200px;
 
     border-radius: 18px;
@@ -459,14 +458,8 @@ align-items: center;
 padding: 20px;
 }
 
-.searchIcon {
-  width: 24px;
-  height: 24px;
 
-position: absolute;
-right: 5px;
- 
-}
+
 
 .searchInputIconDiv{
   display: flex;
@@ -536,8 +529,7 @@ width: 220px;
   }
 
   .searchIcon {
-    width: 24px;
-    height: 24px;
+   display: none;
   }
 
   .closeButton {
@@ -562,7 +554,7 @@ margin-left: 20px;
     .mobileView{
     display: flex;
     flex-direction: column;
- max-height: 150px;
+ height: 200px;
  max-width: 180px;
 
     
@@ -588,7 +580,7 @@ margin-left: 20px;
   
   .stayCardWrapper{
     width: 220px;
-  height: 700px;
+  height: max-content;
  
     flex-direction: column;
     gap: 8px;
@@ -604,7 +596,7 @@ margin-left: 20px;
   align-items: center;
   justify-content: center;
   width: 180px;
-  height: 50px;
+  height: 100px;
   margin-bottom: auto;
   gap: 15px;
 
@@ -619,7 +611,7 @@ margin-left: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
- 
+ height: 180px;
  
 }
 .stayImageContainer{

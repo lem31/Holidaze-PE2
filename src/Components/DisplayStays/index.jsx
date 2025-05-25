@@ -43,7 +43,7 @@ const DisplayStays = () => {
   return (
     <div>
       <SelectionSearchBar stays={stays || []} onFilter={setFilteredStays} />
-      <h1 className={gStyles.h1Black} style={{display: 'flex', justifyContent: 'center', width: '100vw'}}>Browse Our Stays</h1>
+      <h1 className={gStyles.h1Black} style={{display: 'flex', justifyContent: 'center', width: '100vw', textWrap: 'wrap', textAlign:'center'}}>Browse Our Stays</h1>
       {filteredStays.length > 0 ? (
         filteredStays.map((stay, index) => (
           <div
