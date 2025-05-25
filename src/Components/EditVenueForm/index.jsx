@@ -400,7 +400,7 @@ function EditVenueForm({ toggleEditForm }) {
                   },
                 }}
               >
-                <img className={editVenueStyles.metaImg} src={Parking} alt="" />
+                <img className={editVenueStyles.metaImg} src={Parking} alt="parking" />
                 Parking
               </Button>
 
@@ -423,7 +423,7 @@ function EditVenueForm({ toggleEditForm }) {
                   },
                 }}
               >
-                <img className={editVenueStyles.metaImg} src={Wifi} alt="" />
+                <img className={editVenueStyles.metaImg} src={Wifi} alt="wifi" />
                 Wifi
               </Button>
 
@@ -449,7 +449,7 @@ function EditVenueForm({ toggleEditForm }) {
                 <img
                   className={editVenueStyles.metaImg}
                   src={Breakfast}
-                  alt=""
+                  alt="breakfast"
                 />
                 Breakfast
               </Button>
@@ -473,7 +473,7 @@ function EditVenueForm({ toggleEditForm }) {
                   },
                 }}
               >
-                <img className={editVenueStyles.metaImg} src={Pets} alt="" />
+                <img className={editVenueStyles.metaImg} src={Pets} alt="pets" />
                 Pets
               </Button>
             </Box>
