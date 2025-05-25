@@ -217,6 +217,14 @@ const DisplayAStay = () => {
               numberOfGuests={numberOfGuests}
               setNumberOfGuests={setNumberOfGuests}
             />
+<div className={stayStyles.totalPriceDiv}>
+            {startDate && endDate && totalPrice > 0 && (
+                    <p className={gStyles.bodyWhite}>
+                      Total Price:{" "}
+                      {totalPrice > 0 ? `${totalPrice} NOK` : "Select dates"}
+                    </p>
+                  )}
+                  </div>
             <div className={stayStyles.locDescFacilDiv}>
               <div className={stayStyles.locationDescDiv}>
                 <div className={stayStyles.locationDiv}>
@@ -241,12 +249,7 @@ const DisplayAStay = () => {
                     <img className={stayStyles.icon} src={Price} alt="price" />
                     Price: {selectedStay.price} NOK
                   </p>
-                  {startDate && endDate && totalPrice > 0 && (
-                    <p className={gStyles.bodyWhite}>
-                      Total Price:{" "}
-                      {totalPrice > 0 ? `${totalPrice} NOK` : "Select dates"}
-                    </p>
-                  )}
+                  
                 </div>
               </div>
             </div>
