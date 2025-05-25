@@ -1,3 +1,13 @@
+/**
+ * Deletes a venue by its ID from the Holidaze API.
+ *
+ * @async
+ * @function
+ * @param {string} venueId - The unique identifier of the venue to delete (must be a 36-character string).
+ * @param {string} token - The Bearer token for authentication.
+ * @returns {Promise<boolean>} Returns true if the venue was successfully deleted, false otherwise.
+ */
+
 const deleteVenue = async (venueId, token) => {
   try {
     if (!token) {

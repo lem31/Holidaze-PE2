@@ -1,3 +1,13 @@
+/**
+ * Fetches a list of stays (venues) from the Holidaze API with booking information.
+ * Retrieves multiple pages and combines the results into a single array.
+ *
+ * @async
+ * @function fetchStays
+ * @returns {Promise<Array<Object>>} A promise that resolves to an array of stay objects.
+ * @throws {Error} Throws an error if the fetch operation fails.
+ */
+
 const fetchStays = async () => {
   try {
     const pageCount = 10; 

@@ -44,7 +44,7 @@ function Venues({ vmVenues }) {
   const [isBookingsVisible, setIsBookingsVisible] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const { deleteVenue } = useMyStore();
-
+const [messageType, setMessageType] = useState("success");
 
 
   useEffect(() => {
@@ -394,7 +394,7 @@ function Venues({ vmVenues }) {
           }}
         >
           <Alert
-            severity="success"
+            severity={messageType}
             onClose={() => setSuccessMessage("")}
             sx={{
               fontSize: "20px",

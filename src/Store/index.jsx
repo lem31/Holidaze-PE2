@@ -269,7 +269,7 @@ get().persist.clearStorage();
 
       createNewVenue: async (venueData) => {
         const token = get().token;
-        const userName = get().userName;
+
         const response = await createVenue(token, venueData);
 
         if (!response || !response.data) {
@@ -349,13 +349,13 @@ get().persist.clearStorage();
             stays: Array.isArray(state.stays)
               ? state.stays.filter((stay) => stay.id !== venueId)
               : [],
-            successMessage: "Venue deleted successfully!",
+            successMessage: success ? "Venue deleted successfully!" : "Failed to delete venue.",
+            messageType: success ? "success" : "error",
           }));
 
           await fetchVMVenues(userName, token);
 
-          // set({ vmVenues: [...get().vmVenues] });
-          // set({ stays: [...get().stays] });
+          
         } else {
           setSuccessMessage: "Failed to delete venue.";
         }

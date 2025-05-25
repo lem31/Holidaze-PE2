@@ -1,3 +1,15 @@
+/**
+ * Updates an existing venue with new data via the Holidaze API.
+ *
+ * @async
+ * @function editVenue
+ * @param {string} selectedVenueId - The ID of the venue to update.
+ * @param {Object} updatedVenueData - The updated data for the venue.
+ * @param {string} token - The Bearer token for authentication.
+ * @returns {Promise<Object>} The updated venue data from the API.
+ * @throws {Error} If the API request fails or no token is provided.
+ */
+
 export const editVenue = async (selectedVenueId, updatedVenueData, token) => {
   const API_URL = `https://v2.api.noroff.dev/holidaze/venues/${selectedVenueId}`;
 

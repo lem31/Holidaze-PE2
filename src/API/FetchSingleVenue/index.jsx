@@ -1,3 +1,13 @@
+/**
+ * Fetches details for a single venue by its ID, including its bookings.
+ *
+ * @async
+ * @function fetchSingleVenue
+ * @param {string} id - The unique identifier of the venue to fetch.
+ * @returns {Promise<Object>} The data object containing venue details.
+ * @throws {Error} If the fetch request fails or the response is not ok.
+ */
+
 async function fetchSingleVenue(id) {
 
   

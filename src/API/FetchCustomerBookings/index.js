@@ -1,3 +1,15 @@
+/**
+ * Fetches the bookings for the currently logged-in customer from the Holidaze API.
+ *
+ * Retrieves the user's bookings, including venue details, using the stored userName and token from localStorage.
+ * Throws an error if authentication details are missing or if the API request fails.
+ *
+ * @async
+ * @function fetchCustomerBookings
+ * @returns {Promise<Array>} Resolves to an array of booking objects for the user.
+ * @throws {Error} If userName or token is missing, or if the API request fails.
+ */
+
 async function fetchCustomerBookings() {
 
     const userName = localStorage.getItem('userName');
