@@ -12,9 +12,9 @@
  * @component
  */
 
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
-import { useForm, Controller, set } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import EditProfileFormValidator from "../EditProfileFormValidator";
 import useMyStore from "../../Store";

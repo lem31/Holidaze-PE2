@@ -132,8 +132,9 @@ function EditVenueForm({ toggleEditForm }) {
         throw new Error("Venue update failed");
       } else if (response) {
         fetchVMVenues();
+        toggleEditForm();
         setTimeout(() => {
-          toggleEditForm();
+          
           setSuccessMessage("Venue successfully updated!");
         }, 500);
       }

@@ -50,6 +50,19 @@ const DisplayAStay = () => {
 
   const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
 
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    if (startDate && endDate && selectedStay?.price) {
+      const checkInDate = new Date(startDate);
+      const checkOutDate = new Date(endDate);
+      const nights = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+      setTotalPrice(nights * selectedStay.price);
+    } else {
+      setTotalPrice(0);
+    }
+  }, [startDate, endDate, selectedStay]);
+
   const facilityIcons = {
     wifi: Wifi,
     parking: Parking,
@@ -154,12 +167,13 @@ const DisplayAStay = () => {
 
   return (
     <div className={stayStyles.stayCardPosition}>
+      <h1 className={gStyles.h1Black}>Venue Availability</h1>
       <div className={stayStyles.stayContainer}>
         <div className={stayStyles.nameRatingImages}>
           <div className={stayStyles.stayNameRatingDiv}>
-            <h1 className={`${gStyles.h1White} ${stayStyles.h1}`}>
+            <h2 className={`${gStyles.h2White} ${stayStyles.h2}`}>
               {selectedStay.name}
-            </h1>
+            </h2>
             <p className={stayStyles.stayStar}>
               {selectedStay?.rating && selectedStay.rating > 0 ? (
                 <>
@@ -176,7 +190,10 @@ const DisplayAStay = () => {
           </div>
 
           <div className={stayStyles.imageListWrapper}>
-            <ImageList className={stayStyles.imageListContainer} cols={2}>
+            <ImageList
+              className={stayStyles.imageListContainer}
+              cols={selectedStay.media.length < 2 ? 1 : 2}
+            >
               {selectedStay.media.slice(0, 4).map((image, index) => (
                 <ImageListItem className={stayStyles.imageListItem} key={index}>
                   <img
@@ -213,15 +230,23 @@ const DisplayAStay = () => {
                   <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>
                     Description
                   </h2>
-                  <p
-                    className={`${stayStyles.description} ${gStyles.bodyWhite}`}
-                  >
-                    {selectedStay.description}
-                  </p>
+                  <div className={stayStyles.descriptionDiv}>
+                    <p
+                      className={`${stayStyles.description} ${gStyles.bodyWhite}`}
+                    >
+                      {selectedStay.description}
+                    </p>
+                  </div>
                   <p className={gStyles.bodyWhite}>
                     <img className={stayStyles.icon} src={Price} alt="" />
                     Price: {selectedStay.price} NOK
                   </p>
+                  {startDate && endDate && totalPrice > 0 && (
+                    <p className={gStyles.bodyWhite}>
+                      Total Price:{" "}
+                      {totalPrice > 0 ? `${totalPrice} NOK` : "Select dates"}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -253,6 +278,7 @@ const DisplayAStay = () => {
                   width: "400px",
                   height: "auto",
                   textWrap: "wrap",
+                  zIndex: 1500,
                   textAlign: "center",
                 }}
               >
@@ -269,7 +295,7 @@ const DisplayAStay = () => {
             <ul className={stayStyles.facilityUl}>
               <div className={stayStyles.facilityDiv}>
                 {availableFacilities.map(([facility], index) => (
-                  <li key={`${selectedStay.id}-${facility.name}-${index}`}>
+                  <li className={gStyles.bodyWhite} key={`${selectedStay.id}-${facility.name}-${index}`}>
                     <img
                       className={stayStyles.icon}
                       src={facilityIcons[facility]}
@@ -281,7 +307,7 @@ const DisplayAStay = () => {
               </div>
             </ul>
           ) : (
-            <p>No Facilities Available</p>
+            <p className={gStyles.bodyWhite}>No Facilities Available</p>
           )}
           <div className={stayStyles.buttonDiv}>
             <button

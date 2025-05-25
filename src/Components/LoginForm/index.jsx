@@ -17,7 +17,7 @@ import { Box, TextField, Button } from "@mui/material";
 import loginStyles from "../../CSS_Modules/Login/login.module.css";
 import gStyles from "../../CSS_Modules/Global/global.module.css";
 
-const LoginForm = ({ onInputChange, onSubmit, register, errors }) => {
+const LoginForm = ({ onSubmit, register, errors }) => {
   return (
     <div className={loginStyles.loginFormContainer}>
       <form
@@ -60,7 +60,6 @@ const LoginForm = ({ onInputChange, onSubmit, register, errors }) => {
             label="Password"
             {...register("password")}
             type="password"
-            onChange={(e) => onInputChange(e.target.name, e.target.value)}
             variant="outlined"
             fullWidth
             required
