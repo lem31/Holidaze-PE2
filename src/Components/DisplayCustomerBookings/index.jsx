@@ -1,3 +1,15 @@
+/**
+ * DisplayCustomerBookings component fetches and displays a list of customer bookings.
+ *
+ * - Fetches booking data from the API on mount.
+ * - Handles loading, error, and empty states.
+ * - Displays booking details including venue, dates, guests, and total price.
+ * - Responsive layout for desktop and mobile views.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered list of customer bookings or a message if none are found.
+ */
+
 import { useEffect, useState } from "react";
 import fetchCustomerBookings from "../../API/FetchCustomerBookings";
 import cBookingStyles from "../../CSS_Modules/CustomerBookings/customerBookings.module.css";
@@ -45,19 +57,17 @@ const DisplayCustomerBookings = () => {
           <div className={cBookingStyles.outerContainer}>
             <div className={cBookingStyles.innerContainer}>
               <div className={cBookingStyles.cardLayout} key={booking.id}>
-               
-                  <div className={cBookingStyles.nameCreatedDiv}>
-                    <div className={cBookingStyles.h2Div}>
+                <div className={cBookingStyles.nameCreatedDiv}>
+                  <div className={cBookingStyles.h2Div}>
                     <h2 className={`${gStyles.h2White} ${cBookingStyles.h2}`}>
-                       
                       {booking.venue?.name || "Venue Not Found"}
                     </h2>
-                     </div>
-                    <p className={gStyles.bodyWhite}>
-                      Booked on:{new Date(booking.created).toLocaleDateString()}
-                    </p>
                   </div>
-                  <div className={cBookingStyles.bookingDetailsContainer}>
+                  <p className={gStyles.bodyWhite}>
+                    Booked on:{new Date(booking.created).toLocaleDateString()}
+                  </p>
+                </div>
+                <div className={cBookingStyles.bookingDetailsContainer}>
                   {booking.venue?.media?.[0]?.url ? (
                     <img
                       className={cBookingStyles.bookingImg}
@@ -67,44 +77,44 @@ const DisplayCustomerBookings = () => {
                   ) : (
                     <p>No image available</p>
                   )}
-              
-                <div className={cBookingStyles.bookingInfoDiv}>
-                  <div className={cBookingStyles.bookingInfoGrid}>
-                    <p className={gStyles.bodyWhite}>Guests:</p>
-                    <p className={gStyles.bodyWhite}>Check-in:</p>
-                    <p className={gStyles.bodyWhite}>Check-out:</p>
-                    <p className={gStyles.bodyWhite}>No. of Nights:</p>
-                    <p className={gStyles.bodyWhite}>Total Price:</p>
-                    <p className={gStyles.bodyWhite}>{booking.guests}</p>
-                    <p className={gStyles.bodyWhite}>
-                      {new Date(booking.dateFrom).toLocaleDateString()}
-                    </p>
-                    <p className={gStyles.bodyWhite}>
-                      {new Date(booking.dateTo).toLocaleDateString()}
-                    </p>
-                    <p className={gStyles.bodyWhite}>{numberOfNights}</p>
-                    <p className={gStyles.bodyWhite}>{totalPrice}NOK</p>
+
+                  <div className={cBookingStyles.bookingInfoDiv}>
+                    <div className={cBookingStyles.bookingInfoGrid}>
+                      <p className={gStyles.bodyWhite}>Guests:</p>
+                      <p className={gStyles.bodyWhite}>Check-in:</p>
+                      <p className={gStyles.bodyWhite}>Check-out:</p>
+                      <p className={gStyles.bodyWhite}>No. of Nights:</p>
+                      <p className={gStyles.bodyWhite}>Total Price:</p>
+                      <p className={gStyles.bodyWhite}>{booking.guests}</p>
+                      <p className={gStyles.bodyWhite}>
+                        {new Date(booking.dateFrom).toLocaleDateString()}
+                      </p>
+                      <p className={gStyles.bodyWhite}>
+                        {new Date(booking.dateTo).toLocaleDateString()}
+                      </p>
+                      <p className={gStyles.bodyWhite}>{numberOfNights}</p>
+                      <p className={gStyles.bodyWhite}>{totalPrice}NOK</p>
+                    </div>
+
+                    <div className={cBookingStyles.bookingInfoGridMobile}>
+                      <p className={gStyles.bodyWhite}>Guests:</p>
+                      <p className={gStyles.bodyWhite}>{booking.guests}</p>
+                      <p className={gStyles.bodyWhite}>Check-in:</p>
+                      <p className={gStyles.bodyWhite}>
+                        {new Date(booking.dateFrom).toLocaleDateString()}
+                      </p>
+                      <p className={gStyles.bodyWhite}>Check-out:</p>
+
+                      <p className={gStyles.bodyWhite}>
+                        {new Date(booking.dateTo).toLocaleDateString()}
+                      </p>
+                      <p className={gStyles.bodyWhite}>No. of Nights:</p>
+                      <p className={gStyles.bodyWhite}>{numberOfNights}</p>
+                      <p className={gStyles.bodyWhite}>Total Price:</p>
+
+                      <p className={gStyles.bodyWhite}>{totalPrice}</p>
+                    </div>
                   </div>
-
-                  <div className={cBookingStyles.bookingInfoGridMobile}>
-                    <p className={gStyles.bodyWhite}>Guests:</p>
-                    <p className={gStyles.bodyWhite}>{booking.guests}</p>
-                    <p className={gStyles.bodyWhite}>Check-in:</p>
-                    <p className={gStyles.bodyWhite}>
-                      {new Date(booking.dateFrom).toLocaleDateString()}
-                    </p>
-                    <p className={gStyles.bodyWhite}>Check-out:</p>
-
-                    <p className={gStyles.bodyWhite}>
-                      {new Date(booking.dateTo).toLocaleDateString()}
-                    </p>
-                    <p className={gStyles.bodyWhite}>No. of Nights:</p>
-                    <p className={gStyles.bodyWhite}>{numberOfNights}</p>
-                    <p className={gStyles.bodyWhite}>Total Price:</p>
-
-                    <p className={gStyles.bodyWhite}>{totalPrice}</p>
-                  </div>
-                </div>
                 </div>
               </div>
             </div>

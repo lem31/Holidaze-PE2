@@ -1,6 +1,16 @@
-import React, { useEffect, useState } from "react";
+/**
+ * ProfileVenueManager component for Venue Managers.
+ *
+ * Displays and manages the profile, venues, and bookings for a venue manager.
+ * Allows switching between "Venues" and "Bookings" views, and shows success messages via Snackbar.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered ProfileVenueManager component.
+ */
+
+import { useEffect, useState } from "react";
 import useMyStore from "../../Store/index";
-import EditProfileFormBox from "../EditProfileFormBox";
+
 import Venues from "../Venues";
 import VMBookings from "../VMBookings";
 import { Snackbar, Alert } from "@mui/material";
@@ -14,10 +24,6 @@ const ProfileVenueManager = () => {
     useMyStore();
   const [selectedView, setSelectedView] = useState("");
   const [bookings, setVMBookings] = useState([]);
-const [selected, setSelected] = useState(false);
-
-
-
 
   useEffect(() => {
     fetchVMVenues();
@@ -45,40 +51,44 @@ const [selected, setSelected] = useState(false);
   return (
     <div>
       <div>
-<ProfileGlobal
-       
+        <ProfileGlobal
           setSelectedView={setSelectedView}
           selectedView={selectedView}
           userProfile={userProfile}
         />
         <div className={vmProfileStyles.outerBtnDiv}>
-        <div className={vmProfileStyles.buttonDiv}>
-        <button
-        className={selectedView === 'Venues' ? gStyles.buttonSecondary : gStyles.buttonPrimary}
-          onClick={() => {
-            setSelectedView("Venues");
-            if (!vmVenues.length) fetchVMVenues();
-          }}
-        >
-          Venues
-        </button>
-        <button
-                className={selectedView === 'Bookings' ? gStyles.buttonSecondary : gStyles.buttonPrimary}
-          onClick={() => {
-            setSelectedView("Bookings");
-            fetchVMBookings();
-          }}
-        >
-          Bookings
-        </button>
-     
-        </div>
+          <div className={vmProfileStyles.buttonDiv}>
+            <button
+              className={
+                selectedView === "Venues"
+                  ? gStyles.buttonSecondary
+                  : gStyles.buttonPrimary
+              }
+              onClick={() => {
+                setSelectedView("Venues");
+                if (!vmVenues.length) fetchVMVenues();
+              }}
+            >
+              Venues
+            </button>
+            <button
+              className={
+                selectedView === "Bookings"
+                  ? gStyles.buttonSecondary
+                  : gStyles.buttonPrimary
+              }
+              onClick={() => {
+                setSelectedView("Bookings");
+                fetchVMBookings();
+              }}
+            >
+              Bookings
+            </button>
+          </div>
         </div>
       </div>
 
       <div>
-     
-     
         {selectedView === "Venues" && (
           <Venues
             successMessage={successMessage}

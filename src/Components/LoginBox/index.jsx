@@ -1,14 +1,3 @@
-
-import { Box, Typography } from "@mui/material";
-import LoginForm from "../LoginForm";
-import onLogin from "../../API/OnLogin";
-import { useNavigate } from "react-router-dom";
-import Alert from "@mui/material/Alert";
-import LoginFormValidator from "../LoginFormValidator/loginValidator.jsx";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-
 /**
  * LoginBox component handles user login functionality.
  * It includes a form for entering email and password,
@@ -25,11 +14,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
  * );
  */
 
+import { Box, Typography } from "@mui/material";
+import LoginForm from "../LoginForm";
+import onLogin from "../../API/OnLogin";
+import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import LoginFormValidator from "../LoginFormValidator/loginValidator.jsx";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 const LoginBox = () => {
   const API_URL = "https://v2.api.noroff.dev/auth/login";
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
- 
 
   const {
     register,
@@ -37,45 +35,35 @@ const LoginBox = () => {
     setError,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(LoginFormValidator), 
+    resolver: yupResolver(LoginFormValidator),
   });
 
-  // const handleInputChange = (name, value) => {
-  //   setFormValues((prevValues) => ({
-  //     ...prevValues,
-  //     [name]: value,
-  //   }));
-  // };
-
   const handleFormSubmit = async (formData) => {
-  event.preventDefault();
-  setErrorMessage('');
+    event.preventDefault();
+    setErrorMessage("");
 
-  try {
-    const response = await onLogin(API_URL, formData, navigate);
- 
+    try {
+      const response = await onLogin(API_URL, formData, navigate);
 
-    if (response.errors?.length > 0) {
-      setErrorMessage(response.errors[0].message);
-    } else {
-      setErrorMessage('Unexpected error occurred. Please try again.');
+      if (response.errors?.length > 0) {
+        setErrorMessage(response.errors[0].message);
+      } else {
+        setErrorMessage("Unexpected error occurred. Please try again.");
+      }
+    } catch (error) {
+      setErrorMessage(
+        "A network error occurred. Please check your connection and try again."
+      );
     }
-  } catch (error) {
-    setErrorMessage('A network error occurred. Please check your connection and try again.');
-  }
-};
-
+  };
 
   return (
     <Box>
       <Box sx={{ marginTop: 3 }}>
-    
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <LoginForm
-      
-      
           onSubmit={handleSubmit(handleFormSubmit)}
-           register={register} 
+          register={register}
           errors={errors}
         />
       </Box>

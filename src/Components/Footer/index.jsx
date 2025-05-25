@@ -1,11 +1,3 @@
-import Register from '../../assets/Images/Register.png';
-import Login from '../../assets/Images/Login.png';
-import Facebook from '../../assets/Images/Facebook.png';
-import Twitter from '../../assets/Images/Twitter.png';
-import Instagram from '../../assets/Images/Instagram.png';
-import useMyStore from '../../Store';
-import footerStyles from '../../CSS_Modules/Footer/footer.module.css';
-
 /**
  * Footer component renders the footer section of the application.
  * It includes links to the registration and login pages,
@@ -13,43 +5,72 @@ import footerStyles from '../../CSS_Modules/Footer/footer.module.css';
  * @returns {JSX.Element} The rendered component.
  * @component
  * @example
- * 
+ *
  */
 
-
+import Register from "../../assets/Images/Register.png";
+import Login from "../../assets/Images/Login.png";
+import Facebook from "../../assets/Images/Facebook.png";
+import Twitter from "../../assets/Images/Twitter.png";
+import Instagram from "../../assets/Images/Instagram.png";
+import useMyStore from "../../Store";
+import footerStyles from "../../CSS_Modules/Footer/footer.module.css";
 
 function Footer() {
-     const isLoggedIn = useMyStore((state) => state.isLoggedIn);
-    return(
+  const isLoggedIn = useMyStore((state) => state.isLoggedIn);
+  return (
     <div className={footerStyles.footerDiv}>
-        <footer className={footerStyles.footer}> 
-            <div className={footerStyles.crDiv}>
-<p className={footerStyles.copyRight}>© 2025 Holidaze  </p>
-<a href="https://icons8.com/" className={footerStyles.copyRight}> Icons by icons 8</a>
-</div >
-  {!isLoggedIn && (
-    <nav className={footerStyles.registerLoginNav}>
-        <div  className={footerStyles.Ul}>
-<a className={footerStyles.footerA} href="/Register">
-<img className={footerStyles.navIcons} src={Register} alt="Register icon" />
-Register
-</a>
-<a href="/Login"  className={footerStyles.footerA} >
-<img className={footerStyles.navIcons} src={Login} alt="Login icon" />
-Login
-</a>
+      <footer className={footerStyles.footer}>
+        <div className={footerStyles.crDiv}>
+          <p className={footerStyles.copyRight}>© 2025 Holidaze </p>
+          <a href="https://icons8.com/" className={footerStyles.copyRight}>
+            {" "}
+            Icons by icons 8
+          </a>
         </div>
+        {!isLoggedIn && (
+          <nav className={footerStyles.registerLoginNav}>
+            <div className={footerStyles.Ul}>
+              <a className={footerStyles.footerA} href="/Register">
+                <img
+                  className={footerStyles.navIcons}
+                  src={Register}
+                  alt="Register icon"
+                />
+                Register
+              </a>
+              <a href="/Login" className={footerStyles.footerA}>
+                <img
+                  className={footerStyles.navIcons}
+                  src={Login}
+                  alt="Login icon"
+                />
+                Login
+              </a>
+            </div>
+          </nav>
+        )}
 
-</nav>
-    )}
-    
+        <div className={footerStyles.smIconsDiv}>
+          <img
+            className={footerStyles.smIcons}
+            src={Facebook}
+            alt="Facebook icon"
+          />
+          <img
+            className={footerStyles.smIcons}
+            src={Instagram}
+            alt="Instagram icon"
+          />
+          <img
+            className={footerStyles.smIcons}
+            src={Twitter}
+            alt="Twitter icon"
+          />
+        </div>
+      </footer>
+    </div>
+  );
+}
 
-<div className={footerStyles.smIconsDiv}>
-<img className={footerStyles.smIcons} src={Facebook} alt="Facebook icon" />
-<img className={footerStyles.smIcons} src={Instagram} alt="Instagram icon" />
-<img className={footerStyles.smIcons} src={Twitter} alt="Twitter icon" />
-</div>
-        </footer>
-    </div> ) }
-
-    export default Footer;
+export default Footer;

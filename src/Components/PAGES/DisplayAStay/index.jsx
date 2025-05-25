@@ -1,3 +1,19 @@
+/**
+ * DisplayAStay component fetches and displays details of a selected stay.
+ * It uses the useMyStore hook to access the store and fetch stay data.
+ * It also includes a booking calendar for users to make reservations.
+ * The component handles loading and error states,
+ * and displays the stay's name, images, description, price, location,
+ * and available facilities.
+ * @param {Object} props - The component props.
+ * @returns {JSX.Element} The rendered component.
+ * @component
+ * @example
+ * return (
+ * <DisplayAStay />
+ * );
+ */
+
 import { useEffect, useState } from "react";
 import useMyStore from "../../../Store";
 import { useParams, useNavigate } from "react-router-dom";
@@ -17,22 +33,6 @@ import gStyles from "../../../CSS_Modules/Global/global.module.css";
 import Location from "../../../assets/Images/Location-pink.png";
 import Price from "../../../assets/Images/Price-tag-pink.png";
 
-/**
- * DisplayAStay component fetches and displays details of a selected stay.
- * It uses the useMyStore hook to access the store and fetch stay data.
- * It also includes a booking calendar for users to make reservations.
- * The component handles loading and error states,
- * and displays the stay's name, images, description, price, location,
- * and available facilities.
- * @param {Object} props - The component props.
- * @returns {JSX.Element} The rendered component.
- * @component
- * @example
- * return (
- * <DisplayAStay />
- * );
- */
-
 const DisplayAStay = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -48,9 +48,7 @@ const DisplayAStay = () => {
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [alertSeverity, setAlertSeverity] = useState("success");
 
-
-
-const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
+  const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
 
   const facilityIcons = {
     wifi: Wifi,
@@ -60,7 +58,6 @@ const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
   };
   useEffect(() => {
     if (!loading && !selectedStay && id) {
-
       navigate("/");
     }
   }, []);
@@ -68,7 +65,6 @@ const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
   useEffect(() => {
     const fetchStayData = async (id) => {
       try {
-      
         await fetchAndSetSelectedStay(id);
         setLoading(false);
       } catch (error) {
@@ -158,7 +154,6 @@ const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
 
   return (
     <div className={stayStyles.stayCardPosition}>
-
       <div className={stayStyles.stayContainer}>
         <div className={stayStyles.nameRatingImages}>
           <div className={stayStyles.stayNameRatingDiv}>
@@ -229,71 +224,66 @@ const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
                   </p>
                 </div>
               </div>
-
-              
             </div>
-            
 
-          <Snackbar
-            open={Boolean(bookingMessage)}
-            autoHideDuration={3000}
-            onClose={() => setBookingMessage(null)}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "center",
-              position: "fixed ",
-              zIndex: 1000,
-              width: "100vw",
-              height: "auto",
-              backgroundColor: "transparent",
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <Alert
-              severity={alertSeverity}
+            <Snackbar
+              open={Boolean(bookingMessage)}
+              autoHideDuration={3000}
               onClose={() => setBookingMessage(null)}
+              anchorOrigin={{ vertical: "top", horizontal: "center" }}
               sx={{
-                fontSize: "20px",
                 display: "flex",
-                width: "400px",
+                flexWrap: "wrap",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "fixed ",
+                zIndex: 1000,
+                width: "100vw",
                 height: "auto",
-                textWrap: "wrap",
-                textAlign: "center",
+                backgroundColor: "transparent",
+                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
               }}
             >
-              {bookingMessage}
-            </Alert>
-          </Snackbar>
+              <Alert
+                severity={alertSeverity}
+                onClose={() => setBookingMessage(null)}
+                sx={{
+                  fontSize: "20px",
+                  display: "flex",
+                  width: "400px",
+                  height: "auto",
+                  textWrap: "wrap",
+                  textAlign: "center",
+                }}
+              >
+                {bookingMessage}
+              </Alert>
+            </Snackbar>
+          </div>
         </div>
-      </div>
-      <div className={stayStyles.facilH2Div}>
-                <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>
-                  Available Facilities
-                </h2>
-                {availableFacilities.length > 0 ? (
-                  <ul className={stayStyles.facilityUl}>
-                    <div className={stayStyles.facilityDiv}>
-                      {availableFacilities.map(([facility], index) => (
-                        <li
-                          key={`${selectedStay.id}-${facility.name}-${index}`}
-                        >
-                          <img
-                            className={stayStyles.icon}
-                            src={facilityIcons[facility]}
-                            alt={`${facility.name} icon`}
-                          />
-                          {facility.charAt(0).toUpperCase() + facility.slice(1)}
-                        </li>
-                      ))}
-                    </div>
-                  </ul>
-                ) : (
-                  <p>No Facilities Available</p>
-                )}
-                   <div className={stayStyles.buttonDiv}>
+        <div className={stayStyles.facilH2Div}>
+          <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>
+            Available Facilities
+          </h2>
+          {availableFacilities.length > 0 ? (
+            <ul className={stayStyles.facilityUl}>
+              <div className={stayStyles.facilityDiv}>
+                {availableFacilities.map(([facility], index) => (
+                  <li key={`${selectedStay.id}-${facility.name}-${index}`}>
+                    <img
+                      className={stayStyles.icon}
+                      src={facilityIcons[facility]}
+                      alt={`${facility.name} icon`}
+                    />
+                    {facility.charAt(0).toUpperCase() + facility.slice(1)}
+                  </li>
+                ))}
+              </div>
+            </ul>
+          ) : (
+            <p>No Facilities Available</p>
+          )}
+          <div className={stayStyles.buttonDiv}>
             <button
               className={gStyles.buttonPrimary}
               type="submit"
@@ -302,10 +292,8 @@ const isVenueManager = useMyStore((state) => state.userProfile?.venueManager);
               Book Now
             </button>
           </div>
-              </div>
-            
-          </div>
-         
+        </div>
+      </div>
     </div>
   );
 };
