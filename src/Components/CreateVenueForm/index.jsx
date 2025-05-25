@@ -1,3 +1,20 @@
+/**
+ * CreateVenueForm component allows users to create a new venue by filling out a form.
+ *
+ * Features:
+ * - Uses react-hook-form with Yup validation for form state management and validation.
+ * - Allows dynamic addition and removal of image fields.
+ * - Handles venue meta options (wifi, parking, breakfast, pets) with toggle buttons.
+ * - Submits form data to create a new venue and fetches updated stays.
+ * - Displays validation and API error messages.
+ *
+ * Props:
+ * @param {Object} props
+ * @param {Function} props.toggleForm - Function to toggle the visibility of the form/modal.
+ *
+ * @returns {JSX.Element} The CreateVenueForm component.
+ */
+
 import { Box, TextField, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import CreateVenueFormValidator from "../CreateVenueFormValidator";
