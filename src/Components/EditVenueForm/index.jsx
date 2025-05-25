@@ -24,10 +24,10 @@ import CreateVenueFormValidator from "../CreateVenueFormValidator";
 import { Box, Button, TextField } from "@mui/material";
 import editVenueStyles from "../../CSS_Modules/EditVenue/editVenue.module.css";
 import gStyles from "../../CSS_Modules/Global/global.module.css";
-import Parking from "../../assets/images/Parking.png";
-import Wifi from "../../assets/images/Wifi.png";
-import Breakfast from "../../assets/images/Breakfast.png";
-import Pets from "../../assets/images/Pets.png";
+import Parking from "../../assets/Images/Parking.png";
+import Wifi from "../../assets/Images/Wifi.png";
+import Breakfast from "../../assets/Images/Breakfast.png";
+import Pets from "../../assets/Images/Pets.png";
 
 function EditVenueForm({ toggleEditForm }) {
   const { editVenue, setSuccessMessage, selectedVenue, fetchVMVenues } =
