@@ -1,10 +1,3 @@
-import Profile from "../../assets/Images/Profile.png";
-import Logout from "../../assets/Images/Logout.png";
-import useMyStore from "../../Store";
-// import {useNavigate} from 'react-router-dom';
-import hStyles from "../../CSS_Modules/Header/header.module.css";
-import { useNavigate } from "react-router-dom";
-
 /**
  * UserDropDown component renders a dropdown menu for user profile and logout options.
  *
@@ -15,10 +8,17 @@ import { useNavigate } from "react-router-dom";
  * and log out. It uses images for the profile and logout icons.
  */
 
-function UserDropDown({isOpen}) {
+import Profile from "../../assets/Images/Profile.png";
+import Logout from "../../assets/Images/Logout.png";
+import useMyStore from "../../Store";
+
+import hStyles from "../../CSS_Modules/Header/header.module.css";
+import { useNavigate } from "react-router-dom";
+
+function UserDropDown({ isOpen }) {
   const { userProfile } = useMyStore((state) => state);
   const logout = useMyStore((state) => state.logout);
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -26,15 +26,15 @@ const navigate = useNavigate();
 
   return isOpen ? (
     <div className={hStyles.dropDownBox}>
-  
       <div className={hStyles.profileInfoBox}>
         <div className={hStyles.avatarBox}>
-
           {userProfile?.avatar?.url && (
-  <img className={hStyles.navIcons} src={userProfile.avatar.url} alt="User Avatar" />
-)}
-
-          
+            <img
+              className={hStyles.navIcons}
+              src={userProfile.avatar.url}
+              alt="User Avatar"
+            />
+          )}
         </div>
         <div className={hStyles.userNameBox}>
           <p className={hStyles.labelWhite}>{userProfile.name}</p>
@@ -56,10 +56,7 @@ const navigate = useNavigate();
         </div>
       </div>
     </div>
-  ): null;
+  ) : null;
 }
 
 export default UserDropDown;
-
-
-

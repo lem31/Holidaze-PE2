@@ -1,3 +1,50 @@
+/**
+ * Zustand store for managing Holidaze application state.
+ *
+ * @module Store
+ * @typedef {Object} StoreState
+ * @property {Array} stays - List of stays/venues.
+ * @property {Array} bookings - List of user bookings.
+ * @property {Array} vmBookings - List of venue manager bookings.
+ * @property {Array} vmVenues - List of venues managed by the user.
+ * @property {Object|null} selectedStay - Currently selected stay/venue.
+ * @property {Object|null} selectedVenue - Currently selected venue for editing.
+ * @property {string|null} token - Authentication token.
+ * @property {string|null} userName - Logged-in user's username.
+ * @property {boolean} isLoggedIn - Login status.
+ * @property {Object|null} userProfile - User profile data.
+ * @property {boolean} loadingProfile - Loading state for profile.
+ * @property {boolean} loginChecked - Whether login status has been checked.
+ * @property {string} successMessage - Success message for UI feedback.
+ * @property {Object|null} venueData - Data for a single venue.
+ * @property {boolean} loading - General loading state.
+ * @property {boolean|string} error - Error state or message.
+ *
+ * @function setStays - Set the list of stays.
+ * @function setBookings - Set the list of bookings.
+ * @function setVmBookings - Set the list of venue manager bookings.
+ * @function setVmVenues - Set the list of venues managed by the user.
+ * @function setSuccessMessage - Set a success message.
+ * @function login - Log in a user and set authentication data.
+ * @function setUserProfile - Set the user profile data.
+ * @function logout - Log out the user and clear authentication data.
+ * @function checkLoginStatus - Check if the user is logged in.
+ * @function fetchUserProfile - Fetch the user's profile from the API.
+ * @function updateUserProfile - Update the user's profile via the API.
+ * @function fetchStays - Fetch all stays/venues from the API.
+ * @function fetchAndSetSelectedStay - Fetch and set a selected stay by ID.
+ * @function setSelectedStay - Set the selected stay.
+ * @function fetchVMVenues - Fetch venues managed by the user.
+ * @function setSelectedVenue - Set the selected venue for editing.
+ * @function createNewVenue - Create a new venue via the API.
+ * @function editVenue - Edit an existing venue via the API.
+ * @function deleteVenue - Delete a venue via the API.
+ * @function fetchVMBookings - Fetch bookings for the venue manager.
+ * @function resetStore - Reset the store to its initial state and reload the page.
+ *
+ *
+ */
+
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import fetchStays from "../API/FetchStays";
@@ -11,10 +58,7 @@ import FetchSingleVenue from "../API/FetchSingleVenue";
 import { createJSONStorage } from "zustand/middleware";
 
 const useMyStore = create(
-
   persist(
-
-    
     (set, get) => ({
       stays: [],
       bookings: [],
@@ -22,21 +66,18 @@ const useMyStore = create(
       setStays: (newStays) => {
         set({ stays: newStays });
         localStorage.setItem("stays", JSON.stringify(newStays));
-      
       },
 
+      resetStore: () => {
+        get().persist.clearStorage();
 
-   resetStore: () => {
-get().persist.clearStorage();
-
-    set({ stays: [], loading: false, error: false }); 
-    window.location.reload(); 
-  },
+        set({ stays: [], loading: false, error: false });
+        window.location.reload();
+      },
 
       setBookings: (newBookings) => {
         set({ bookings: newBookings });
         localStorage.setItem("bookings", JSON.stringify(newBookings));
-      
       },
 
       vmBookings: [],
@@ -44,7 +85,6 @@ get().persist.clearStorage();
         set({ vmBookings: newVMBookings });
 
         localStorage.setItem("vmBookings", JSON.stringify(newVMBookings));
-       
       },
       selectedStay: null,
       token: null,
@@ -72,12 +112,10 @@ get().persist.clearStorage();
           localStorage.setItem("userName", userName);
         }
         set({ token: newToken, userName, isLoggedIn: true });
-      
       },
 
       setUserProfile: (profileData) => {
         set({ userProfile: profileData });
-     
       },
 
       logout: () => {
@@ -87,21 +125,16 @@ get().persist.clearStorage();
           userProfile: null,
           isLoggedIn: false,
         });
-     
       },
 
       checkLoginStatus: () => {
         const token = get().token;
         const userName = get().userName;
 
-  
-
         if (token && userName) {
           set({ isLoggedIn: true, loginChecked: true });
-      
         } else {
           set({ isLoggedIn: false, loginChecked: true });
-       
         }
       },
 
@@ -116,13 +149,11 @@ get().persist.clearStorage();
           }
 
           set({ loadingProfile: true });
-        
 
           const profileData = await fetchUserProfile(userName, token);
           if (profileData) {
-        
             set({ userProfile: profileData.data, loadingProfile: false });
-       
+
             return profileData.data;
           } else {
             throw new Error("Failed to fetch profile data.");
@@ -151,7 +182,6 @@ get().persist.clearStorage();
           if (updatedProfile) {
             set({ userProfile: updatedProfile, loadingProfile: false });
             localStorage.setItem("userProfile", JSON.stringify(updatedProfile));
-     
 
             const response = await fetch(endpoint, {
               method: "PUT",
@@ -181,7 +211,7 @@ get().persist.clearStorage();
         try {
           set({ loading: true, error: false });
           const fetchedStays = await fetchStays();
-         
+
           if (!fetchedStays || !Array.isArray(fetchedStays)) {
             set({ stays: [], loading: false });
           }
@@ -194,7 +224,6 @@ get().persist.clearStorage();
 
       fetchAndSetSelectedStay: async (id) => {
         try {
-      
           if (!id) {
             console.error("Invalid stay ID:", id);
             return;
@@ -209,7 +238,6 @@ get().persist.clearStorage();
           }
           set({ selectedStay: response });
 
-
           return response;
         } catch (error) {
           console.error("Error fetching stay data:", error);
@@ -222,10 +250,7 @@ get().persist.clearStorage();
         const completeStay = stays.find((s) => s.id === stay.id) || stay;
 
         set({ selectedStay: completeStay });
-
-
       },
-
 
       fetchVMVenues: async () => {
         const token = get().token;
@@ -240,12 +265,9 @@ get().persist.clearStorage();
         try {
           set({ loading: true });
           const userVenues = await fetchVMVenues(userName, token);
-    
 
           if (userVenues && Array.isArray(userVenues)) {
             set({ vmVenues: userVenues, loading: false });
-
-           
 
             return userVenues;
           } else {
@@ -261,10 +283,8 @@ get().persist.clearStorage();
         }
       },
 
-
       setSelectedVenue: (venue) => {
         set({ selectedVenue: venue });
-       
       },
 
       createNewVenue: async (venueData) => {
@@ -288,7 +308,6 @@ get().persist.clearStorage();
         const token = get().token;
         const userName = get().userName;
 
-        
         if (!token || !userName) {
           console.error(
             "Authentication error: Token or username is missing or invalid."
@@ -300,7 +319,6 @@ get().persist.clearStorage();
 
         const selectedVenue = get().selectedVenue;
         const selectedVenueId = selectedVenue?.id;
-  
 
         if (!token) {
           setError("api", { message: "Authentication error: Token missing." });
@@ -312,8 +330,6 @@ get().persist.clearStorage();
             updatedVenueData,
             token
           );
-
-      
 
           set((state) => ({
             vmVenues: state.vmVenues.map((v) =>
@@ -328,7 +344,7 @@ get().persist.clearStorage();
           await fetchStays();
 
           set({ successMessage: "Venue updated successfully!" });
-      
+
           return updatedVenue;
         } catch (error) {
           console.error("Error updating venue:", error);
@@ -349,13 +365,13 @@ get().persist.clearStorage();
             stays: Array.isArray(state.stays)
               ? state.stays.filter((stay) => stay.id !== venueId)
               : [],
-            successMessage: success ? "Venue deleted successfully!" : "Failed to delete venue.",
+            successMessage: success
+              ? "Venue deleted successfully!"
+              : "Failed to delete venue.",
             messageType: success ? "success" : "error",
           }));
 
           await fetchVMVenues(userName, token);
-
-          
         } else {
           setSuccessMessage: "Failed to delete venue.";
         }
@@ -387,14 +403,11 @@ get().persist.clearStorage();
         }
       },
     }),
-{
-    name: "auth-storage",
-    storage: createJSONStorage(() => localStorage),
-  },
-   
+    {
+      name: "auth-storage",
+      storage: createJSONStorage(() => localStorage),
+    }
   )
-  
-  
 );
 
 export default useMyStore;

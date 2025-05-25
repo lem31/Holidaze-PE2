@@ -1,6 +1,3 @@
-import RegisterBox from "../../RegistrationBox";
-import gStyles from '../../../CSS_Modules/Global/global.module.css';
-import regStyles from '../../../CSS_Modules/RegisterForm/register.module.css';
 /**
  * Register component renders the registration page of the application.
  * It includes a title and the RegisterBox component for user registration.
@@ -12,13 +9,17 @@ import regStyles from '../../../CSS_Modules/RegisterForm/register.module.css';
  * );
  */
 
+import RegisterBox from "../../RegistrationBox";
+import gStyles from "../../../CSS_Modules/Global/global.module.css";
+import regStyles from "../../../CSS_Modules/RegisterForm/register.module.css";
+
 function Register() {
   return (
     <div>
       <div className={regStyles.h1Reg}>
-      <h1 className={gStyles.h1Black}>Register</h1>
+        <h1 className={gStyles.h1Black}>Register</h1>
       </div>
-<RegisterBox/>
+      <RegisterBox />
     </div>
   );
 }

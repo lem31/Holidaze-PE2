@@ -1,3 +1,15 @@
+/**
+ * VMBookings component displays a list of venue bookings for the venue manager.
+ *
+ * - Fetches venue data and bookings from the store.
+ * - Supports pagination for mobile view (one booking per page).
+ * - Shows all bookings in a list for desktop view.
+ * - Displays a message if no bookings are available.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered VMBookings component.
+ */
+
 import { useEffect, useState } from "react";
 import useMyStore from "../../Store/index";
 import gStyles from "../../CSS_Modules/Global/global.module.css";
@@ -29,9 +41,6 @@ function VMBookings() {
   const venueBookings = vmVenues.flatMap((venue) => venue.bookings || []);
   const totalPages = Math.ceil(venueBookings.length / bookingsPerPage);
 
- 
-
- 
   const getVenueForBooking = (booking) =>
     vmVenues.find((v) => v.bookings?.some((b) => b.id === booking.id));
 
@@ -44,37 +53,29 @@ function VMBookings() {
       )
     );
 
-
-
-  
   return (
     <div>
       {venueBookings.length > 0 ? (
         <>
-        
           <div className={vmProfileStyles.mobileViewBookings}>
-            <BookingCard 
-              booking={venueBookings[currentBookingIndex]} 
-              venue={getVenueForBooking(venueBookings[currentBookingIndex])} 
-              nights={getNights(venueBookings[currentBookingIndex])} 
+            <BookingCard
+              booking={venueBookings[currentBookingIndex]}
+              venue={getVenueForBooking(venueBookings[currentBookingIndex])}
+              nights={getNights(venueBookings[currentBookingIndex])}
               handlePrevBooking={handlePrevBooking}
               handleNextBooking={handleNextBooking}
               currentBookingIndex={currentBookingIndex}
               venueBookings={venueBookings}
             />
-            
-          
-           
           </div>
 
-        
           <div className={vmProfileStyles.desktopViewBookings}>
             {venueBookings.map((booking, index) => (
-              <BookingCard 
-                key={booking.id || index} 
-                booking={booking} 
-                venue={getVenueForBooking(booking)} 
-                nights={getNights(booking)} 
+              <BookingCard
+                key={booking.id || index}
+                booking={booking}
+                venue={getVenueForBooking(booking)}
+                nights={getNights(booking)}
               />
             ))}
           </div>
@@ -88,7 +89,5 @@ function VMBookings() {
     </div>
   );
 }
-
-
 
 export default VMBookings;

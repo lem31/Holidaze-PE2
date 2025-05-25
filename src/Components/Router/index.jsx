@@ -1,14 +1,3 @@
-import {Routes, Route, BrowserRouter} from "react-router-dom";
-import Layout from '../Layout';
-import Stays from '../PAGES/Stays';
-import DisplayAStay from "../PAGES/DisplayAStay";
-import Register from '../PAGES/Register';
-import Login from '../PAGES/Login';
-import Profile from '../PAGES/Profile';
-
-
-
-
 /**
  * Router component that defines the application's routing structure using React Router.
  *
@@ -20,26 +9,30 @@ import Profile from '../PAGES/Profile';
  * @returns {JSX.Element} The Router component containing the application's route definitions.
  */
 
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Layout from "../Layout";
+import Stays from "../PAGES/Stays";
+import DisplayAStay from "../PAGES/DisplayAStay";
+import Register from "../PAGES/Register";
+import Login from "../PAGES/Login";
+import Profile from "../PAGES/Profile";
+
 function Router() {
-  return(
+  return (
     <>
-    <BrowserRouter >
-    <Routes >
-      <Route path="/" element={<Layout/>}>
-       <Route index element={<Stays/>}/>
-      <Route path= "/Stay/:id" element ={<DisplayAStay/>}/>
-      <Route path= "/Register" element = {<Register/>}/>  
-      <Route path= "/Login" element ={<Login/>}/>
-      <Route path= "/MyProfile" element ={<Profile/>}/>
-     
-     
-
-      </Route>
-    </Routes>
-    </BrowserRouter>
-
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Stays />} />
+            <Route path="/Stay/:id" element={<DisplayAStay />} />
+            <Route path="/Register" element={<Register />} />
+            <Route path="/Login" element={<Login />} />
+            <Route path="/MyProfile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
-  )
+  );
 }
 
 export default Router;
