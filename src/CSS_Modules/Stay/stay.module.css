@@ -1,27 +1,21 @@
-
-
 .imageListContainer {
-   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-  grid-auto-rows: minmax(100px, auto); 
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-rows: minmax(100px, auto);
   gap: 10px;
   width: 400px;
-  min-height: 250px; 
+  min-height: 250px;
   border: 3px solid var(--tertiary-color-1);
   border-radius: 10px;
   overflow: hidden;
 }
 
-
-
-.imageListWrapper{
-   overflow: hidden;
- 
+.imageListWrapper {
+  overflow: hidden;
 }
 
-.imageListItem{
-   overflow-y: hidden;
- 
+.imageListItem {
+  overflow-y: hidden;
 }
 
 .responsiveDiv {
@@ -46,6 +40,15 @@
   gap: 12px;
   margin-top: 12px;
   max-width: 400px;
+  height: max-content;
+}
+.descriptionDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
 }
 
 .h1 {
@@ -124,7 +127,7 @@
 
 .description {
   width: 300px;
-height: 200px;
+  height: 100px;
   overflow-y: auto;
 }
 
@@ -158,8 +161,6 @@ height: 200px;
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  
-
 }
 
 .facilityDiv li {
@@ -177,8 +178,6 @@ height: 200px;
   width: 32px;
   height: 32px;
 }
-
-
 
 .checkInOutDiv {
   display: flex;
@@ -223,8 +222,6 @@ height: 200px;
 /* MEDIA QUERIES */
 
 @media (min-width: 487px) and (max-width: 768px) {
- 
-
   .stayNameRatingDiv {
     display: flex;
     flex-direction: column;
@@ -252,23 +249,19 @@ height: 200px;
     max-width: 400px;
   }
   .descriptionPriceDiv {
-align-items: center;
-   
+    align-items: center;
+
     gap: 0;
     width: 300px;
     justify-content: flex-start;
   }
 
-
-
-
-   .facilityDiv {
+  .facilityDiv {
     justify-content: center;
     width: 100%;
-   
   }
 
-  .facilityUl{
+  .facilityUl {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -278,47 +271,37 @@ align-items: center;
     padding: 0;
   }
 
-  .locDescFacilDiv{
+  .locDescFacilDiv {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
   }
 
-
   .facilH2Div {
-   
     gap: 0;
- 
+
     height: 400px;
     width: 400px;
-    
   }
 
-
   .h2Stay {
-  padding-bottom: 0;
-}
+    padding-bottom: 0;
+  }
 
   .nameRatingImages {
-  
-  gap: 0;
+    gap: 0;
+  }
+  .stayContainer {
+    padding-bottom: 100px;
+  }
 
-}
-.stayContainer{
-  padding-bottom: 100px;
-}
-
-.buttonDiv {
-  
-  margin-top: 22px;
-}
-
+  .buttonDiv {
+    margin-top: 22px;
+  }
 }
 
 @media (max-width: 486px) {
-
-
   .stayNameRatingDiv {
     display: flex;
     flex-direction: column;
@@ -332,29 +315,24 @@ align-items: center;
   }
 
   .locationDescDiv {
-   
     align-items: center;
     width: 250px;
-
   }
 
-  .locationDiv{
+  .locationDiv {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
- width: 100%;
+    width: 100%;
   }
 
-   .locationDiv p{
-
+  .locationDiv p {
     align-items: flex-start;
     justify-content: center;
     text-align: center;
     text-wrap: wrap;
     max-width: 200px;
-   
-
   }
 
   .checkInOutDiv {
@@ -364,12 +342,12 @@ align-items: center;
   .descriptionPriceDiv {
     margin-top: 8px;
     align-items: center;
-  width: 100%;
+    width: 100%;
   }
 
   .description {
     max-width: 180px;
-align-items: center;
+    align-items: center;
     text-wrap: wrap;
   }
 
@@ -378,26 +356,25 @@ align-items: center;
     height: 65px;
   }
 
-  .facilityUl{
+  .facilityUl {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    
+
     width: 300px;
     margin: 0;
     padding: 0;
   }
 
   .facilityDiv {
- justify-content: center;
+    justify-content: center;
     width: 100%;
     position: relative;
     width: 220px;
   }
 
   .facilH2Div {
-   
     gap: 8px;
     margin-top: 8px;
     height: 400px;
@@ -406,7 +383,7 @@ align-items: center;
 
   .imageListContainer {
     width: 230px;
-   height: 250px;
+    height: 250px;
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(2, 1fr);
@@ -414,46 +391,41 @@ align-items: center;
     border-radius: 10px;
   }
 
-  .h2Stay{
+  .h2Stay {
     text-wrap: wrap;
-text-align: center;
+    text-align: center;
     max-width: 200px;
   }
 
   .bookingCalendarDiv {
- align-items: center;
+    align-items: center;
+  }
+
+  .calendar {
+    width: 100px;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .guestDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .guestLabelDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .nameRatingImages {
+    gap: 0;
+  }
 }
-
-
-
-.calendar{
-  width: 100px;
-}
-
-.icon{
-  width: 24px;
-  height: 24px;
-}
-
-.guestDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.guestLabelDiv{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-.nameRatingImages {
-  
-  gap: 0;
-
-}
-}
-
