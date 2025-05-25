@@ -872,7 +872,7 @@ margin-top: -2px;
 
   .stayCardWrapper{
     width: 320px;
-  height: 700px;
+  height: max-content;
   
     flex-direction: column;
     gap: 8px;
