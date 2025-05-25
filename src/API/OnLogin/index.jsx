@@ -18,9 +18,6 @@ async function onLogin(endpoint, userData, navigate) {
           const errorData= await response.json();
        console.error("Login failed:", errorData);
        return errorData;
-     
-  
-
     }
 
     const data = await response.json();
@@ -47,8 +44,8 @@ async function onLogin(endpoint, userData, navigate) {
 
     return data;
   } catch (error) {
-    console.error("Login failed:", error.message || error);
-    throw new Error(`Login failed: ${error.message}`);
+   
+    return { success: false, message: error.message || "Login failed" };
   }
 }
 

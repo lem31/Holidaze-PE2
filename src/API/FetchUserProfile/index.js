@@ -1,3 +1,14 @@
+/**
+ * Fetches the user profile data from the Holidaze API.
+ *
+ * @async
+ * @function fetchUserProfile
+ * @param {string} userName - The username of the profile to fetch.
+ * @param {string} token - The authentication token for the API request.
+ * @returns {Promise<Object>} The user profile data.
+ * @throws {Error} If the user is not authenticated or the API request fails.
+ */
+
 async function fetchUserProfile(userName, token) {
   if (!token) {
     throw new Error("User not authenticated");
@@ -23,9 +34,7 @@ async function fetchUserProfile(userName, token) {
 
     const profileData = await response.json();
 
- 
-
-    return profileData
+    return profileData;
   } catch (error) {
     throw error;
   }
