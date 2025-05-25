@@ -113,7 +113,7 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
       },
     }}
       />
-      {validationErrors.name && <p>{validationErrors.name}</p>}
+      {validationErrors.name && <p style={{ color: "red" }}>{validationErrors.name}</p>}
       <TextField
         label="Email"
         name="email"
@@ -165,7 +165,7 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
       },
     }}
       />
-      {validationErrors.password && <p>{validationErrors.password}</p>}
+      {validationErrors.password && <p style={{ color: "red" }}>{validationErrors.password}</p>}
       <TextField
         label="Bio"
         name="bio"
@@ -191,7 +191,7 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
       },
     }}
       />
-      {validationErrors.bio && <p>{validationErrors.bio}</p>}
+     {validationErrors.bio && <p style={{ color: "red" }}>{validationErrors.bio}</p>}
    
         <TextField
           label="Banner Image URL"
@@ -216,7 +216,7 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
       },
     }}
         />
-        {validationErrors.bannerUrl && <p>{validationErrors.bannerUrl}</p>}
+        {validationErrors.bannerUrl && <p style={{ color: "red" }}>{validationErrors.bannerUrl}</p>}
         <TextField
           label="Banner Alt Text"
           name="bannerAlt"
@@ -240,7 +240,7 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
       },
     }}
         />
-        {validationErrors.bannerAlt && <p>{validationErrors.banner.alt}</p>}
+        {validationErrors.bannerAlt && <p style={{ color: "red" }}>{validationErrors.banner.alt}</p>}
    
 
         <TextField
@@ -266,7 +266,7 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
       },
     }}
         />
-        {validationErrors.avatarUrl && <p>{validationErrors.avatar.url}</p>}
+        {validationErrors.avatarUrl && <p style={{ color: "red" }}>{validationErrors.avatar.url}</p>}
         <TextField
           label="Avatar Alt Text"
           name="avatarAlt"
@@ -290,7 +290,7 @@ const RegisterForm = ({ formValues, onInputChange, onSubmit, validationErrors= {
       },
     }}
         />
-        {validationErrors.avatarAlt && <p>{validationErrors.avatar.alt}</p>}
+        {validationErrors.avatarAlt && <p style={{ color: "red" }}>{validationErrors.avatar.alt}</p>}
       </Box>
       <Button type="submit" variant="contained" color="primary" fullWidth>
         Register
