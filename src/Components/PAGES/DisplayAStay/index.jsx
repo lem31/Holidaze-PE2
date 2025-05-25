@@ -153,13 +153,15 @@ const DisplayAStay = () => {
   };
 
   return (
+  
     <div className={stayStyles.stayCardPosition}>
+        <h1 className={gStyles.h1Black}>Venue Availability</h1>
       <div className={stayStyles.stayContainer}>
         <div className={stayStyles.nameRatingImages}>
           <div className={stayStyles.stayNameRatingDiv}>
-            <h1 className={`${gStyles.h1White} ${stayStyles.h1}`}>
+            <h2 className={`${gStyles.h2White} ${stayStyles.h2}`}>
               {selectedStay.name}
-            </h1>
+            </h2>
             <p className={stayStyles.stayStar}>
               {selectedStay?.rating && selectedStay.rating > 0 ? (
                 <>
