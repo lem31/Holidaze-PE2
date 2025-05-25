@@ -178,7 +178,7 @@ const DisplayAStay = () => {
           </div>
 
           <div className={stayStyles.imageListWrapper}>
-            <ImageList className={stayStyles.imageListContainer} cols={2}>
+            <ImageList className={stayStyles.imageListContainer} cols={selectedStay.media.length < 2 ? 1 : 2}>
               {selectedStay.media.slice(0, 4).map((image, index) => (
                 <ImageListItem className={stayStyles.imageListItem} key={index}>
                   <img

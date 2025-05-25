@@ -33,7 +33,7 @@ const DisplayStays = () => {
   }, [stays]);
 
   if (loading) {
-    return <p>Loading stays...</p>;
+    return <p style={{fontSize: '42px', display: 'flex', justifyContent: 'center', fontFamily: 'Playfair Display'}}>Loading stays...</p>;
   }
 
   if (error) {
