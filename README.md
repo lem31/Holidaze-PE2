@@ -1,12 +1,151 @@
-# React + Vite
+**Overview**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PE2 Travel App is an accommodation booking platform for Holidaze, allowing users to explore and book venues. It allows customers to make bookings and for venue managers to manage their venue listings.
 
-Currently, two official plugins are available:
+**Features**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🏠 All users can browse available venues with an interactive calendar
 
-## Expanding the ESLint configuration
+🔍 Search for venues by name or filter by country
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+📅 Customers can book stays and view their upcoming bookings
+
+🏨 Venue managers can create, update, and delete venues, as well as view any bookings made at their venues.
+
+👤 All registered users can login, view their profile and edit their profile details.
+
+📁 Secure authentication using JWT
+
+**Installation**
+
+1. 🚀 Clone the repository:
+
+git clone https://github.com/lem31/pe2-travel-app.git
+
+2. 📁 Navigate to the project folder:
+
+cd pe2-travel-app
+
+3. 📦 Install Dependencies:
+
+npm install
+
+**Running the App**
+
+1. 🖥️ Start the development server: 
+
+npm run dev
+
+2. 🏗️ Build for Production: 
+
+npm run build
+
+3. 👀 Preview the production build: 
+
+npm run preview
+
+**Tech Stack:**
+
+1. Frontend: React, Vite
+
+2. State Management: Zustand
+
+3. Styling: MUI, Emotion, CSS Modules
+
+4. Forms & Validation: React Hook Form, Yup
+
+5. Authentication: JWT Decode
+
+6. Routing: React Router DOM
+
+**API Integration**
+
+This project integrates with the Holidaze API, allowing users to manage venue listings and bookings. Ensure you have a valid API key for authentication.
+
+**Development Process**
+
+1️⃣ **Planning & Design**
+
+✅ Kanban Board: Used for task tracking in GitHub Projects/Trello
+
+✅ Style Guide: Designed in Figma with logo, fonts, and colors
+
+✅ Prototype: Created in Figma for desktop and mobile
+
+2️⃣ **User Stories**
+
+👥 **All Users**
+
+1. View a list of venues
+
+2. Search for a venue
+
+3. Register as a Customer or Venue Manager
+
+4. View a venue’s availability on a calendar
+
+👤 **Customers**
+
+1. Browse Stays and individual stays
+
+2. Login/logout
+
+3. Create bookings
+
+4. View upcoming bookings
+
+5. View profile and update profile/avatar
+
+👔 **Venue Managers**
+
+1. Browse Stays and individual stays
+
+2. Login/logout
+
+3. Create, edit, delete venues
+
+4. View bookings for managed venues
+
+5. View profile and update profile/avatar
+
+**Testing & Deployment**
+
+**Manual Testing**
+
+Test all user stories
+
+**Automated Testing** 
+
+**Use online tools like:**
+
+1. HTML Markup Validation
+
+2. Lighthouse (performance & accessibility)
+
+3. WAVE (accessibility)
+
+**Deployment**
+
+**Host the project using:**
+
+1. GitHub Pages
+
+2. Netlify
+
+3. Vercel
+
+**How to contribute**
+
+1. Fork the repository
+
+2. Create a new branch (feature/new-feature)
+
+3. Submit a Pull Request
+
+**License**
+
+This project is licensed under the MIT License.
+
+**Live Demo**
+
+🚀 [Visit the Deployed Version](holidaze-lem.netlify.app)
