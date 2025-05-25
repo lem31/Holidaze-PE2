@@ -24,10 +24,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import fetchStays from "../../API/FetchStays";
 import createVenueStyles from "../../CSS_Modules/CreateVenue/createVenue.module.css";
 import gStyles from "../../CSS_Modules/Global/global.module.css";
-import Parking from "../../Assets/Images/Parking.png";
-import Wifi from "../../Assets/Images/Wifi.png";
-import Breakfast from "../../Assets/Images/Breakfast.png";
-import Pets from "../../Assets/Images/Pets.png";
+import Parking from "../../assets/Images/Parking.png";
+import Wifi from "../../assets/Images/Wifi.png";
+import Breakfast from "../../assets/Images/Breakfast.png";
+import Pets from "../../assets/Images/Pets.png";
 
 const CreateVenueForm = ({ toggleForm }) => {
   const { createNewVenue, setSuccessMessage } = useMyStore();
