@@ -75,7 +75,7 @@ const DisplayCustomerBookings = () => {
                       alt={booking.venue.name}
                     />
                   ) : (
-                    <p>No image available</p>
+                    <p className={gStyles.bodyWhite}>No image available</p>
                   )}
 
                   <div className={cBookingStyles.bookingInfoDiv}>
