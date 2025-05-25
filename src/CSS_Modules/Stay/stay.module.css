@@ -122,6 +122,7 @@
   width: 100%;
   max-height: 800px;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: var(--primary-color-2);
 }
 
