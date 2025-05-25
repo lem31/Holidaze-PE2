@@ -18,7 +18,7 @@
 }
 
 .copyRight{
-    font-size: var(--font-size-small-3);
+    font-size: var(--font-size-small);
     color: var(--primary-color-1);
 
     white-space: nowrap;
@@ -76,7 +76,7 @@ right: 20px;
 
   @media (max-width: 486px){
 .copyRight, .footerA{
-    font-size: var(--font-size-tiny);
+    font-size: var(--font-size-small-2);
 }
 
  .smIcons{
