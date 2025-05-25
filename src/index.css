@@ -37,14 +37,13 @@
   --font-family-4: "Montserrat", serif, sans-serif;
 }
 
-
-
-html, body{
+ html, body{
   overflow-x: hidden;
+  
   margin: 0;
   padding: 0;
  height: 100%;
-}
+} 
 
 
 

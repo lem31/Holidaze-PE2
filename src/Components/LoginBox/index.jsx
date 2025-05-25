@@ -40,12 +40,7 @@ const LoginBox = () => {
     resolver: yupResolver(LoginFormValidator), 
   });
 
-  // const handleInputChange = (name, value) => {
-  //   setFormValues((prevValues) => ({
-  //     ...prevValues,
-  //     [name]: value,
-  //   }));
-  // };
+  
 
   const handleFormSubmit = async (formData) => {
   event.preventDefault();

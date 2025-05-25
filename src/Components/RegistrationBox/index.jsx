@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Box, Tabs, Tab, Typography } from "@mui/material";
+import { useState } from "react";
+import { Box} from "@mui/material";
+import Alert from "@mui/material/Alert";
 import RegisterForm from "../RegisterForm";
 import onRegister from "../../API/OnRegister/index.js";
 import RegisterFormValidator from '../RegisterFormValidator';
 import { useNavigate } from "react-router-dom";
-import regStyles from "../../CSS_Modules/RegisterForm/register.module.css";
-import gStyles from "../../CSS_Modules/Global/global.module.css";
+
 
 /**
  * RegisterBox component handles user registration functionality.
@@ -42,6 +42,7 @@ const RegisterBox = () => {
     avatar: defaultAvatar,
     venueManager: true,
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
 
   const navigate = useNavigate();
@@ -102,13 +103,15 @@ const RegisterBox = () => {
     try{
  await RegisterFormValidator.validate(updatedFormValues, {abortEarly: false});
   setValidationErrors({});
-  
-      const response =  await onRegister(API_URL, formValues);
-    
+try{
+     const response=  await onRegister(API_URL, formValues);
+ 
 
-      navigate("/Login", {state: {successMessage: 'Registration successful! Please log in.'}});
-
-    } catch (validationError) {
+      navigate("/Login", {state: {successMessage: 'Registration successful! Please log in.'},});
+} catch(error){
+  setErrorMessage(error.message);}
+   
+    }  catch (validationError) {
       const errors = {};
       if (validationError.inner) {
         validationError.inner.forEach((err) => {
@@ -116,11 +119,15 @@ const RegisterBox = () => {
         });
       }
       setValidationErrors(errors);
+      setErrorMessage( "Validation failed. Please check your inputs." );
     }
   };
 
   return (
-    
+
+    <div>
+   {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
+
 
       <Box sx={{ marginTop: 3 }}>
       
@@ -138,7 +145,7 @@ const RegisterBox = () => {
           
         />
       </Box>
-    
+    </div>
   );
 };
 

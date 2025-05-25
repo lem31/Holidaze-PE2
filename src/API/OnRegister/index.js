@@ -8,14 +8,17 @@ async function onRegister(endpoint, userData) {
       body: JSON.stringify(userData),
     });
 
+     const data = await response.json();
+
     if (!response.ok) {
-      throw new Error("Failed to register user");
+      throw new Error(data.errors?.[0]?.message || "Registration failed");
     }
 
-    const data = await response.json();
+   
 
     return data;
   } catch (error) {
+        console.error("API Registration Error:", error);
     throw error;
   }
 }
