@@ -33,7 +33,7 @@ const DisplayStays = () => {
   }, [stays]);
 
   if (loading) {
-    return <p>Loading stays...</p>;
+    return <p style={{fontSize: '42px', display: 'flex', justifyContent: 'center', fontFamily: 'Playfair Display'}}>Loading stays...</p>;
   }
 
   if (error) {
@@ -43,6 +43,7 @@ const DisplayStays = () => {
   return (
     <div>
       <SelectionSearchBar stays={stays || []} onFilter={setFilteredStays} />
+      <h1 className={gStyles.h1Black} style={{display: 'flex', justifyContent: 'center', width: '100vw'}}>Browse Our Stays</h1>
       {filteredStays.length > 0 ? (
         filteredStays.map((stay, index) => (
           <div
@@ -53,11 +54,11 @@ const DisplayStays = () => {
               <div className={homeStyles.stayCardWrapper}>
                 <div className={homeStyles.mobileView}>
                   <div className={homeStyles.nameRatingDivMobile}>
-                    <h1
-                      className={`${homeStyles.h1HomeMobile} ${gStyles.h1Black}`}
+                    <h2
+                      className={`${homeStyles.h1HomeMobile} ${gStyles.h2Black}`}
                     >
                       {stay?.name || "Unknown Stay"}
-                    </h1>
+                    </h2>
 
                     {stay?.rating && stay.rating > 0 ? (
                       <div>
@@ -117,9 +118,9 @@ const DisplayStays = () => {
                 </div>
                 <div className={homeStyles.stayDetails}>
                   <div className={homeStyles.nameRatingDiv}>
-                    <h1 className={`${homeStyles.h1Home} ${gStyles.h1Black}`}>
+                    <h2 className={`${homeStyles.h1Home} ${gStyles.h2Black}`}>
                       {stay?.name || "Unknown Stay"}
-                    </h1>
+                    </h2>
                     <div className={homeStyles.starRatingDiv}>
                       {stay?.rating && stay.rating > 0 ? (
                         <p>

@@ -130,7 +130,7 @@ function Venues({ vmVenues }) {
         vmVenues
           .filter((venue) => venue)
           .map((venue, index) => (
-            <div className={vmProfileStyles.venueCardPosition}>
+            <div key={venue.id} className={vmProfileStyles.venueCardPosition}>
               <div className={vmProfileStyles.outerBox}>
                 <div className={vmProfileStyles.bookingsInfoMsgBox}>
                   <Alert
@@ -163,7 +163,7 @@ function Venues({ vmVenues }) {
                             }).map((_, i) => (
                               <StarIcon
                                 className={vmProfileStyles.starMobile}
-                                key={i}
+                                key={`${venue.id}-starMobile-${i}`}
                               />
                             ))}
                           </>
@@ -203,7 +203,7 @@ function Venues({ vmVenues }) {
                           venue.media.map((image, index) => (
                             <div
                               className={vmProfileStyles.imgContainer}
-                              key={`${venue.id}-carousel-img-${index}`}
+                              key={image.url ? `${venue.id}-carousel-img-${image.url}` : `${venue.id}-carousel-img-${index}`}
                             >
                               <img
                                 className={vmProfileStyles.venueImg}
@@ -231,7 +231,7 @@ function Venues({ vmVenues }) {
                               }).map((_, i) => (
                                 <StarIcon
                                   className={vmProfileStyles.star}
-                                  key={i}
+                                  key={`${venue.id}-star-${i}`}
                                 />
                               ))}
                             </>
@@ -316,7 +316,7 @@ function Venues({ vmVenues }) {
                           ))}
                       </ul>
                     ) : (
-                      <p>No Facilities Available</p>
+                      <p className={gStyles.bodyWhite}>No Facilities Available</p>
                     )}
 
                     <div className={vmProfileStyles.buttonContainer}>
