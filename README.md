@@ -148,4 +148,4 @@ This project is licensed under the MIT License.
 
 **Live Demo**
 
-🚀 [Visit the Deployed Version](holidaze-lem.netlify.app)
+🚀 [Visit the Deployed Version](https://holidaze-lem.netlify.app/)
