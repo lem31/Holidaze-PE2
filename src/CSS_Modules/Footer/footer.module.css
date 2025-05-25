@@ -76,7 +76,7 @@ right: 20px;
 
   @media (max-width: 486px){
 .copyRight, .footerA{
-    font-size: var(--font-size-small-2);
+    font-size: var(--font-size-small-3);
 }
 
  .smIcons{
