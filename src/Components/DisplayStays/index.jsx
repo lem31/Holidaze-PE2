@@ -22,15 +22,20 @@ import StarIcon from '@mui/icons-material/Star';
  */
 
 const DisplayStays = () => {
-  const { error, stays } = useMyStore();
+  const { error, stays, loading } = useMyStore();
 
   const [filteredStays, setFilteredStays] = useState([]);
 
+
   useEffect(() => {
- if (stays.length !== filteredStays.length) {
-    setFilteredStays(stays);
-  }
+ if(stays.length > 0) {
+    setFilteredStays(stays);}
+  
   }, [stays]);
+
+  if (loading) {
+  return <p>Loading stays...</p>; 
+}
 
   if (error) {
     return <p>Error: Unable to fetch stays.</p>;
@@ -158,8 +163,10 @@ const DisplayStays = () => {
             </div>
             </div>
           </div>
+      
         ))
       ) : (
+        
         <p>No stays found matching your search.</p>
       )}
     </div>
