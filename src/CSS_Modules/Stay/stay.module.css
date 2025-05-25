@@ -1,11 +1,8 @@
 
 
-
-
-
 .imageListContainer {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 500px;
   display: grid;
   gap: 10px;
   grid-template-columns: repeat(2, 1fr);
@@ -31,13 +28,15 @@
   margin-top: 18px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  height: 500px;
+  width: 400px;
 }
 
 .descriptionPriceDiv {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   gap: 12px;
   margin-top: 12px;
@@ -90,6 +89,7 @@
   flex-direction: column;
   gap: 12px;
   align-items: center;
+  height: max-content;
 }
 
 .stayCardPosition {
@@ -98,32 +98,36 @@
   align-items: center;
   margin: 20px;
   padding: 12px;
+  height: max-content;
 }
 
 .stayContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  padding: 10px;
+  padding-bottom: 40px;
+  padding-top: 20px;
+
   gap: 20px;
   width: 100%;
-  height: 100%;
+  max-height: 800px;
+  overflow-y: auto;
   background-color: var(--primary-color-2);
 }
 
 .description {
-  width: auto;
-  max-height: 100px;
-  overflow-y: scroll;
+  width: 300px;
+height: 200px;
+  overflow-y: auto;
 }
 
 .bookingSection {
   display: flex;
   flex-direction: column;
   width: auto;
-  height: 800px;
+  height: max-content;
   align-items: flex-start;
   justify-content: center;
   gap: 20px;
@@ -140,15 +144,17 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+
   gap: 12px;
 }
 
 .facilH2Div {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
-  margin-top: 12px;
+  
+
 }
 
 .facilityDiv li {
@@ -167,9 +173,7 @@
   height: 32px;
 }
 
-.h2Stay {
-  padding-bottom: 24px;
-}
+
 
 .checkInOutDiv {
   display: flex;
@@ -214,24 +218,14 @@
 /* MEDIA QUERIES */
 
 @media (min-width: 487px) and (max-width: 768px) {
-  .stayContainer {
-    flex-direction: column;
-    align-items: center;
-  }
+ 
 
-  .bookingSection {
-    display: flex;
-    flex-direction: column;
-
-    width: auto;
-    height: auto;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
   .stayNameRatingDiv {
     display: flex;
     flex-direction: column;
+    margin-bottom: 0;
+    gap: 0;
+    padding: 0;
   }
 
   .responsiveDiv {
@@ -242,35 +236,84 @@
   }
 
   .locationDescDiv {
-    width: auto;
-    height: auto;
-    margin-top: 0px;
+    width: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .checkInOutDiv {
     max-width: 400px;
   }
   .descriptionPriceDiv {
-    margin-top: 8px;
+align-items: center;
+   
+    gap: 0;
+    width: 300px;
+    justify-content: flex-start;
   }
+
+
+
+
+   .facilityDiv {
+    justify-content: center;
+    width: 100%;
+   
+  }
+
+  .facilityUl{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .locDescFacilDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+
+  .facilH2Div {
+   
+    gap: 0;
+ 
+    height: 400px;
+    width: 400px;
+    
+  }
+
+
+  .h2Stay {
+  padding-bottom: 0;
+}
+
+  .nameRatingImages {
+  
+  gap: 0;
+
+}
+.stayContainer{
+  padding-bottom: 100px;
+}
+
+.buttonDiv {
+  
+  margin-top: 22px;
+}
+
 }
 
 @media (max-width: 486px) {
-  .stayContainer {
-    flex-direction: column;
-    align-items: center;
-  }
 
-  .bookingSection {
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
 
-    height: auto;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
   .stayNameRatingDiv {
     display: flex;
     flex-direction: column;
@@ -286,9 +329,8 @@
   .locationDescDiv {
    
     align-items: center;
-    width: auto;
-    height: auto;
-    margin-top: 0px;
+    width: 250px;
+
   }
 
   .locationDiv{
@@ -322,31 +364,44 @@
 
   .description {
     max-width: 180px;
-    height: auto;
+align-items: center;
     text-wrap: wrap;
   }
 
   .facilityDiv li {
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
+  }
+
+  .facilityUl{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    width: 300px;
+    margin: 0;
+    padding: 0;
   }
 
   .facilityDiv {
-    align-items: center;
-    gap: 8px;
+ justify-content: center;
+    width: 100%;
+    position: relative;
+    width: 220px;
   }
 
   .facilH2Div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+   
     gap: 8px;
     margin-top: 8px;
+    height: 400px;
+    width: 400px;
   }
 
   .imageListContainer {
-    width: auto;
-    height: auto;
+    width: 230px;
+   height: 250px;
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(2, 1fr);
@@ -364,16 +419,7 @@ text-align: center;
  align-items: center;
 }
 
-/* .datePicker{
-display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--primary-color-1);
-  overflow-y: hidden;
-  flex: 1 1 200px;
-  
-} */
+
 
 .calendar{
   width: 100px;
@@ -398,6 +444,11 @@ display: flex;
   gap: 4px;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+.nameRatingImages {
+  
+  gap: 0;
+
 }
 }
 

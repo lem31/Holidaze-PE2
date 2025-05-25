@@ -1,3 +1,15 @@
+
+.layoutWrapper{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainContent{
+  flex:1;
+}
+
+
 .buttonPrimary {
   background-color: var(--secondary-color-2) !important;
   color: var(--primary-color-1) !important;
@@ -7,7 +19,6 @@
   padding: 12px 24px !important;
   text-wrap: none !important;
   white-space: nowrap !important;
-
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25)) !important;
   font-family: var(--font-family-3) !important;
 }
@@ -117,9 +128,9 @@
 }
 
 .h2White {
-  font-size: var(--font-size-large-2);
-  color: var(--primary-color-1);
-  font-family: var(--font-family-1);
+  font-size: var(--font-size-large-2) !important;
+  color: var(--primary-color-1) !important;
+  font-family: var(--font-family-1) !important;
   font-weight: bold;
   text-align: center;
   line-height: 130%;
@@ -155,6 +166,8 @@
   letter-spacing: 1.5%;
 }
 
+
+
 .h4Black {
   font-size: var(--font-size-small);
   color: var(--primary-color-3);
@@ -179,11 +192,19 @@
 }
 
 .bodyWhite {
-  font-size: var(--font-size-small);
-  color: var(--primary-color-1);
-  font-family: var(--font-family-2);
-  line-height: 150%;
-  letter-spacing: 0.5%;
+  font-size: var(--font-size-small) !important;
+  color: var(--primary-color-1) !important;
+  font-family: var(--font-family-2)!important;
+  line-height: 150% !important;
+  letter-spacing: 0.5% !important;
+}
+
+.bodyLPurple {
+  font-size: var(--font-size-small) !important;
+  color: var(--secondary-color-2) !important;
+  font-family: var(--font-family-2)!important;
+  line-height: 150% !important;
+  letter-spacing: 0.5% !important;
 }
 
 .bodyBlack {
@@ -193,6 +214,7 @@
   line-height: 150%;
   letter-spacing: 0.5%;
 }
+
 
 /* Media Queries */
 
@@ -260,11 +282,11 @@
 }
 
   .bodyWhite {
-    font-size: var(--font-size-small-2);
-    color: var(--primary-color-1);
-    font-family: var(--font-family-2);
-    line-height: 160%;
-    letter-spacing: 0.5%;
+    font-size: var(--font-size-small-2) !important;
+    color: var(--primary-color-1) !important;
+    font-family: var(--font-family-2) !important;
+    line-height: 160% !important;
+    letter-spacing: 0.5% !important;
   }
 
   .bodyBlack {
@@ -274,6 +296,14 @@
     line-height: 160%;
     letter-spacing: 0.5%;
   }
+
+  .bodyLPurple {
+  font-size: var(--font-size-small-2) !important;
+  color: var(--secondary-color-2) !important;
+  font-family: var(--font-family-2)!important;
+ line-height: 160% !important;
+    letter-spacing: 0.5% !important;
+}
 }
 
 @media (max-width: 486px) {
@@ -328,11 +358,11 @@
 }
 
   .bodyWhite {
-    font-size: var(--font-size-small-3);
-    color: var(--primary-color-1);
-    font-family: var(--font-family-2);
-    line-height: 160%;
-    letter-spacing: 0.5%;
+    font-size: var(--font-size-small-3) !important;
+    color: var(--primary-color-1) !important;
+    font-family: var(--font-family-2) !important;
+    line-height: 160% !important;
+    letter-spacing: 0.5% !important;
   }
 
   .bodyBlack {
@@ -342,6 +372,14 @@
     line-height: 160%;
     letter-spacing: 0.5%;
   }
+
+  .bodyLPurple {
+  font-size: var(--font-size-small-3) !important;
+  color: var(--secondary-color-2) !important;
+  font-family: var(--font-family-2)!important;
+ line-height: 160% !important;
+    letter-spacing: 0.5% !important;
+}
 
   .labelWhite {
     font-size: var(--font-size-small-3);

@@ -1,15 +1,3 @@
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
-import { styled } from '@mui/material/styles';
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { useState } from "react";
-import useMyStore from "../../Store";
-import Guests from "../../assets/Images/Guests.png";
-import gStyles from "../../CSS_Modules/Global/global.module.css";
-import stayStyles from "../../CSS_Modules/Stay/stay.module.css";
-
-
-
-
 /**
  * BookingCalendar component allows users to make a booking for a selected stay.
  * It includes date pickers for check-in and check-out dates,
@@ -26,6 +14,15 @@ import stayStyles from "../../CSS_Modules/Stay/stay.module.css";
  * );
  */
 
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { styled } from "@mui/material/styles";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useState } from "react";
+import useMyStore from "../../Store";
+import Guests from "../../assets/Images/Guests.png";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
+import stayStyles from "../../CSS_Modules/Stay/stay.module.css";
+
 const BookingCalendar = ({
   setStartDate,
   startDate,
@@ -33,33 +30,26 @@ const BookingCalendar = ({
   endDate,
   numberOfGuests,
   setNumberOfGuests,
-  
 }) => {
-
   const CustomDatePicker = styled(DatePicker)({
-
-  '& .MuiPickersPopper-root': {
-   maxWidth: '10vw',
-
-  },
-  '& .MuiCalendarPicker-root': {
-    width: '280px',
-  },
-  '& .MuiPickersDay-root': {
-    width: '40px',
-    height: '40px',
-  },
-  '& .MuiInputAdornment-root': {
-
-   right: '0px',
-    position: 'absolute',
-    overflow: 'hidden',
-    zIndex: 1,
-    paddingRight: '8px',
-  },
-
-  
-});
+    "& .MuiPickersPopper-root": {
+      maxWidth: "10vw",
+    },
+    "& .MuiCalendarPicker-root": {
+      width: "280px",
+    },
+    "& .MuiPickersDay-root": {
+      width: "40px",
+      height: "40px",
+    },
+    "& .MuiInputAdornment-root": {
+      right: "0px",
+      position: "absolute",
+      overflow: "hidden",
+      zIndex: 1,
+      paddingRight: "8px",
+    },
+  });
   const selectedStay = useMyStore((state) => state.selectedStay);
 
   const [guestWarning, setGuestWarning] = useState(null);
@@ -83,47 +73,46 @@ const BookingCalendar = ({
     } else setGuestWarning(null);
   };
 
-
-
   return (
     <div className={stayStyles.bookingCalendarDiv}>
-       <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>Make a Booking</h2>
- 
-    
-    <LocalizationProvider className={stayStyles.calendar} dateAdapter={AdapterDayjs}>
-  
+      <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>
+        Make a Booking
+      </h2>
 
+      <LocalizationProvider
+        className={stayStyles.calendar}
+        dateAdapter={AdapterDayjs}
+      >
         <div className={stayStyles.checkInOutDiv}>
-       
-        <CustomDatePicker
-        className={stayStyles.datePicker}
-          label="Check-in"
-          value={startDate}
-          onChange={(newValue) => setStartDate(newValue)}
-          shouldDisableDate={(date) =>
-            unavailableDates.has(date.toISOString().split("T")[0])
+          <CustomDatePicker
+            className={stayStyles.datePicker}
+            label="Check-in"
+            value={startDate}
+            onChange={(newValue) => setStartDate(newValue)}
+            shouldDisableDate={(date) =>
+              unavailableDates.has(date.toISOString().split("T")[0])
+            }
+            disablePortal
+          />
 
-          }
-          disablePortal
-         
-        />
-
-        <CustomDatePicker
-         className={stayStyles.datePicker}
-          label="Check-out"
-          value={endDate}
-          onChange={(newValue) => setEndDate(newValue)}
-          shouldDisableDate={(date) =>
-            unavailableDates.has(date.toISOString().split("T")[0])
-          }
-          disablePortal
-        />
+          <CustomDatePicker
+            className={stayStyles.datePicker}
+            label="Check-out"
+            value={endDate}
+            onChange={(newValue) => setEndDate(newValue)}
+            shouldDisableDate={(date) =>
+              unavailableDates.has(date.toISOString().split("T")[0])
+            }
+            disablePortal
+          />
         </div>
 
         <div className={stayStyles.guestDiv}>
           <div className={stayStyles.guestLabelDiv}>
-          <label className={gStyles.bodyWhite} htmlFor="guests">Number of Guests:</label>
-          <img className={stayStyles.icon} src={Guests} alt="Guests" />
+            <label className={gStyles.bodyWhite} htmlFor="guests">
+              Number of Guests:
+            </label>
+            <img className={stayStyles.icon} src={Guests} alt="Guests" />
           </div>
           <select
             id="guests"
@@ -139,10 +128,7 @@ const BookingCalendar = ({
           </select>
           {guestWarning && <p> {guestWarning}</p>}
         </div>
-        {/* <button type='submit' onClick={handleBooking}>Book Now</button>
-        {bookingMessage && <p>{bookingMessage}</p>} */}
-     
-    </LocalizationProvider>
+      </LocalizationProvider>
     </div>
   );
 };

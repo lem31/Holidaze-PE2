@@ -1,10 +1,3 @@
-import React, { useState } from "react";
-import { Box, Tabs, Tab, Typography } from "@mui/material";
-import RegisterForm from "../RegisterForm";
-import onRegister from "../../API/OnRegister/index.js";
-import RegisterFormValidator from '../RegisterFormValidator';
-import { useNavigate } from "react-router-dom";
-
 /**
  * RegisterBox component handles user registration functionality.
  * It includes a form for entering user details such as name, email, password, bio, and images.
@@ -19,17 +12,25 @@ import { useNavigate } from "react-router-dom";
  * <RegisterBox />
  */
 
+import { useState } from "react";
+import { Box } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import RegisterForm from "../RegisterForm";
+import onRegister from "../../API/OnRegister/index.js";
+import RegisterFormValidator from "../RegisterFormValidator";
+import { useNavigate } from "react-router-dom";
+
 const RegisterBox = () => {
   const defaultBanner = {
     url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
     alt: "Default Banner",
-  }
+  };
   const defaultAvatar = {
     url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
     alt: "Default Avatar",
-  }
- const API_URL = "https://v2.api.noroff.dev/auth/register";
- const [validationErrors, setValidationErrors] = useState({});
+  };
+  const API_URL = "https://v2.api.noroff.dev/auth/register";
+  const [validationErrors, setValidationErrors] = useState({});
   const [activeTab, setActiveTab] = useState(0);
   const [formValues, setFormValues] = useState({
     name: "",
@@ -40,25 +41,18 @@ const RegisterBox = () => {
     avatar: defaultAvatar,
     venueManager: true,
   });
-
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
 
-  const handleTabChange = ( event, newValue) => {
+  const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
 
     setFormValues((prevValues) => ({
-   
       ...prevValues,
       venueManager: newValue === 0,
     }));
-
-    console.log("Tab changed to:", newValue);
-
   };
-
-
- 
 
   const handleInputChange = (name, value) => {
     setFormValues((prevValues) => ({
@@ -83,7 +77,7 @@ const RegisterBox = () => {
   };
 
   const handleFormSubmit = async (event) => {
-    if(!event) return;
+    if (!event) return;
     event.preventDefault();
 
     const updatedFormValues = {
@@ -97,16 +91,20 @@ const RegisterBox = () => {
         alt: formValues.avatar.alt || defaultAvatar.alt,
       },
     };
-    try{
- await RegisterFormValidator.validate(updatedFormValues, {abortEarly: false});
-  setValidationErrors({});
-  
-      const response =  await onRegister(API_URL, formValues);
-      console.log('Form submitted with values:', formValues);
-      console.log("Registration successful:", response);
+    try {
+      await RegisterFormValidator.validate(updatedFormValues, {
+        abortEarly: false,
+      });
+      setValidationErrors({});
+      try {
+        const response = await onRegister(API_URL, formValues);
 
-      navigate("/Login", {state: {successMessage: 'Registration successful! Please log in.'}});
-
+        navigate("/Login", {
+          state: { successMessage: "Registration successful! Please log in." },
+        });
+      } catch (error) {
+        setErrorMessage(error.message);
+      }
     } catch (validationError) {
       const errors = {};
       if (validationError.inner) {
@@ -115,27 +113,15 @@ const RegisterBox = () => {
         });
       }
       setValidationErrors(errors);
+      setErrorMessage("Validation failed. Please check your inputs.");
     }
   };
 
   return (
-    <Box>
-      <Tabs
-        value={activeTab}
-        onChange={handleTabChange}
-        aria-label="Registration Tabs"
-        centered
-      >
-        <Tab label="Venue Manager" />
-        <Tab label="Customer" />
-      </Tabs>
+    <div>
+      {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
 
       <Box sx={{ marginTop: 3 }}>
-        <Typography variant="h6" sx={{ marginBottom: 2 }}>
-          {activeTab === 0
-            ? "Register as a Venue Manager"
-            : "Register as a Customer"}
-        </Typography>
         <RegisterForm
           formValues={formValues}
           onInputChange={handleInputChange}
@@ -145,9 +131,11 @@ const RegisterBox = () => {
           validationErrors={validationErrors}
           defaultBanner={defaultBanner}
           defaultAvatar={defaultAvatar}
+          activeTab={activeTab}
+          handleTabChange={handleTabChange}
         />
       </Box>
-    </Box>
+    </div>
   );
 };
 

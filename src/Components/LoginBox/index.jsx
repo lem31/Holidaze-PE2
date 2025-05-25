@@ -1,11 +1,3 @@
-import  { useState } from "react";
-import { Box, Typography } from "@mui/material";
-import LoginForm from "../LoginForm";
-import onLogin from "../../API/OnLogin";
-import { useNavigate } from "react-router-dom";
-import Alert from "@mui/material/Alert";
-
-
 /**
  * LoginBox component handles user login functionality.
  * It includes a form for entering email and password,
@@ -22,48 +14,57 @@ import Alert from "@mui/material/Alert";
  * );
  */
 
+import { Box, Typography } from "@mui/material";
+import LoginForm from "../LoginForm";
+import onLogin from "../../API/OnLogin";
+import { useNavigate } from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import LoginFormValidator from "../LoginFormValidator/loginValidator.jsx";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 const LoginBox = () => {
   const API_URL = "https://v2.api.noroff.dev/auth/login";
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(LoginFormValidator),
   });
 
-  const handleInputChange = (name, value) => {
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
-
-  const handleFormSubmit = async (event) => {
+  const handleFormSubmit = async (formData) => {
     event.preventDefault();
-    setErrorMessage('');
+    setErrorMessage("");
 
     try {
-      const response = await onLogin(API_URL, formValues, navigate);
-      if(!response.ok){
-        const errorData = await response.json();
-        setErrorMessage(errorData.message || 'Invalid email or password');
+      const response = await onLogin(API_URL, formData, navigate);
+
+      if (response.errors?.length > 0) {
+        setErrorMessage(response.errors[0].message);
+      } else {
+        setErrorMessage("Unexpected error occurred. Please try again.");
       }
     } catch (error) {
-     setErrorMessage('An error occurred during login. Please try again.');
+      setErrorMessage(
+        "A network error occurred. Please check your connection and try again."
+      );
     }
   };
 
   return (
     <Box>
       <Box sx={{ marginTop: 3 }}>
-        <Typography variant="h6" sx={{ marginBottom: 2 }}>
-          Login
-        </Typography>
         {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <LoginForm
-          formValues={formValues}
-          onInputChange={handleInputChange}
-          onSubmit={handleFormSubmit}
+          onSubmit={handleSubmit(handleFormSubmit)}
+          register={register}
+          errors={errors}
         />
       </Box>
     </Box>

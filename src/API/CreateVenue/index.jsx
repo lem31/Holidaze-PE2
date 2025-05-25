@@ -1,3 +1,18 @@
+/**
+ * Creates a new venue by sending a POST request to the Holidaze API.
+ *
+ * @async
+ * @function createVenue
+ * @param {string} token - The authentication token for the API request.
+ * @param {Object} venueData - The data for the venue to be created.
+ * @param {string} venueData.name - The name of the venue.
+ * @param {string} venueData.description - The description of the venue.
+ * @param {number} venueData.price - The price per night for the venue.
+ * @param {number} venueData.maxGuests - The maximum number of guests allowed.
+ * @returns {Promise<Object>} The created venue data from the API.
+ * @throws Will throw an error if required venue data is missing or if the API request fails.
+ */
+
 export const createVenue = async (token, venueData) => {
   const API_URL = "https://v2.api.noroff.dev/holidaze/venues";
 
@@ -6,9 +21,16 @@ export const createVenue = async (token, venueData) => {
     return;
   }
 
-  if (!venueData.name || !venueData.description || venueData.price === undefined || venueData.maxGuests === undefined) {
-  throw new Error("Missing required venue data! Ensure name, description, price, and maxGuests are provided.");
-}
+  if (
+    !venueData.name ||
+    !venueData.description ||
+    venueData.price === undefined ||
+    venueData.maxGuests === undefined
+  ) {
+    throw new Error(
+      "Missing required venue data! Ensure name, description, price, and maxGuests are provided."
+    );
+  }
   try {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -26,8 +48,6 @@ export const createVenue = async (token, venueData) => {
     }
 
     const data = await response.json();
-
-    console.log("Full API Response:", data);
 
     return data;
   } catch (error) {

@@ -1,16 +1,46 @@
+/**
+ * CreateVenueForm component allows users to create a new venue by filling out a form.
+ *
+ * Features:
+ * - Uses react-hook-form with Yup validation for form state management and validation.
+ * - Allows dynamic addition and removal of image fields.
+ * - Handles venue meta options (wifi, parking, breakfast, pets) with toggle buttons.
+ * - Submits form data to create a new venue and fetches updated stays.
+ * - Displays validation and API error messages.
+ *
+ * Props:
+ * @param {Object} props
+ * @param {Function} props.toggleForm - Function to toggle the visibility of the form/modal.
+ *
+ * @returns {JSX.Element} The CreateVenueForm component.
+ */
+
 import { Box, TextField, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CreateVenueFormValidator from "../CreateVenueFormValidator";
 import useMyStore from "../../Store/index";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import fetchStays from "../../API/FetchStays";
+import createVenueStyles from "../../CSS_Modules/CreateVenue/createVenue.module.css";
+import gStyles from "../../CSS_Modules/Global/global.module.css";
+import Parking from "../../assets/Images/Parking.png";
+import Wifi from "../../assets/Images/Wifi.png";
+import Breakfast from "../../assets/Images/Breakfast.png";
+import Pets from "../../assets/Images/Pets.png";
 
 const CreateVenueForm = ({ toggleForm }) => {
   const { createNewVenue, setSuccessMessage } = useMyStore();
   const [stays, setStays] = useState([]);
+  const [messageType, setMessageType] = useState("success");
 
-
+  const toggleMeta = (key) => {
+    setMetaValues((prevMeta) => {
+      const updatedMeta = { ...prevMeta, [key]: !prevMeta[key] };
+      setValue("meta", updatedMeta);
+      return updatedMeta;
+    });
+  };
 
   // State to manage the meta values
 
@@ -53,22 +83,22 @@ const CreateVenueForm = ({ toggleForm }) => {
     };
 
     try {
-    await createNewVenue(venueData);
-   
-const fetchedStays = await fetchStays();
+      await createNewVenue(venueData);
+
+      const fetchedStays = await fetchStays();
 
       setStays(fetchedStays);
-      console.log("Fetched stays in create new venue:", fetchedStays);
-    
 
       setTimeout(() => {
-      
         toggleForm();
+        setMessageType("success");
         setSuccessMessage("Venue created successfully!");
       }, 500);
     } catch (error) {
-      console.error("Error creating venue:", error);
-      setError("api", { message: "Failed to create venue" });
+      setMessageType("error");
+      setError("api", {
+        message: error.message || "Failed to create venue. Please try again",
+      });
     }
   };
 
@@ -84,7 +114,7 @@ const fetchedStays = await fetchStays();
     });
   }, [watch("meta")]);
 
-  // Add Image 
+  // Add Image
 
   const onAddImage = () => {
     const currentMedia = watch("media") || [];
@@ -94,7 +124,6 @@ const fetchedStays = await fetchStays();
   };
 
   //Remove Image
-  
 
   const removeImage = (index) => {
     const updatedMedia = [...watch("media")];
@@ -103,256 +132,560 @@ const fetchedStays = await fetchStays();
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Box
-        sx={{
-          marginBottom: 2,
-          width: "800px",
-          height: "100px",
-          padding: 3,
-          backgroundColor: "white",
-        }}
+    <div className={createVenueStyles.overlay} onClick={toggleForm}>
+      <div
+        className={createVenueStyles.createVenueFormDiv}
+        onClick={(e) => e.stopPropagation()}
       >
-        {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
-        <TextField
-          label="Name"
-          {...register("name")}
-          variant="outlined"
-          fullWidth
-          required
-          sx={{ marginBottom: 2 }}
-          autoComplete="name"
-        />
+        <form
+          className={createVenueStyles.createVenueForm}
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <h2 className={gStyles.h2White}>Create Venue</h2>
+          <Box>
+            {errors.name && (
+              <p style={{ color: "red" }}>{errors.name.message}</p>
+            )}
+            <TextField
+              label="Name"
+              {...register("name")}
+              variant="outlined"
+              fullWidth
+              required
+              autoComplete="name"
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
 
-        {errors.description && (
-          <p style={{ color: "red" }}>{errors.description.message}</p>
-        )}
-        <TextField
-          label="Description"
-          {...register("description")}
-          variant="outlined"
-          fullWidth
-          required
-          sx={{ marginBottom: 2 }}
-        />
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+              }}
+            />
 
-        {Array.isArray(watch("media")) &&
-          watch("media").map((image, index) => (
-            <Box key={index}>
-              <TextField
-                label="Image URL"
-                {...register(`media.${index}.url`)}
-                variant="outlined"
-                fullWidth
-                sx={{ marginBottom: 1 }}
-              />
-              {errors.media?.[index]?.url && (
-                <p style={{ color: "red" }}>
-                  {errors.media[index].url.message}
-                </p>
-              )}
+            {errors.description && (
+              <p style={{ color: "red" }}>{errors.description.message}</p>
+            )}
+            <TextField
+              label="Description"
+              {...register("description")}
+              variant="outlined"
+              fullWidth
+              autoComplete="description"
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
 
-              <TextField
-                label="Alt Text"
-                {...register(`media.${index}.alt`)}
-                variant="outlined"
-                fullWidth
-              />
-              {errors.media?.[index]?.alt && (
-                <p style={{ color: "red" }}>
-                  {errors.media[index].alt.message}
-                </p>
-              )}
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
 
-              <Button type="button" onClick={() => removeImage(index)}>
-                Remove Image
+            {Array.isArray(watch("media")) &&
+              watch("media").map((image, index) => (
+                <Box key={index}>
+                  <TextField
+                    label="Image URL"
+                    {...register(`media.${index}.url`)}
+                    variant="outlined"
+                    autoComplete="image-url"
+                    fullWidth
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        backgroundColor: "white",
+                        marginBottom: "16px",
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "white",
+                        fontFamily: "Lato",
+                        fontSize: "16px",
+                        marginTop: "-10px",
+                      },
+
+                      "& .MuiInputLabel-root.Mui-focused": {
+                        color: "#e56399",
+                      },
+                      marginTop: "12px",
+                    }}
+                  />
+                  {errors.media?.[index]?.url && (
+                    <p style={{ color: "red" }}>
+                      {errors.media[index].url.message}
+                    </p>
+                  )}
+
+                  <TextField
+                    label="Alt Text"
+                    {...register(`media.${index}.alt`)}
+                    variant="outlined"
+                    fullWidth
+                    sx={{
+                      "& .MuiOutlinedInput-root": {
+                        backgroundColor: "white",
+                        marginBottom: "16px",
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "white",
+                        fontFamily: "Lato",
+                        fontSize: "16px",
+                      },
+
+                      "& .MuiInputLabel-root.Mui-focused": {
+                        color: "#e56399",
+                      },
+                      marginTop: "12px",
+                    }}
+                  />
+                  {errors.media?.[index]?.alt && (
+                    <p style={{ color: "red" }}>
+                      {errors.media[index].alt.message}
+                    </p>
+                  )}
+                  <div className={createVenueStyles.removeBtnDiv}>
+                    <Button
+                      className={gStyles.buttonSecondary}
+                      type="button"
+                      onClick={() => removeImage(index)}
+                    >
+                      Remove Image
+                    </Button>
+                  </div>
+                </Box>
+              ))}
+            <div className={createVenueStyles.addBtnDiv}>
+              <Button
+                className={gStyles.buttonPrimary}
+                type="button"
+                onClick={onAddImage}
+              >
+                Add Image
+              </Button>
+            </div>
+
+            <TextField
+              label="Price"
+              type="number"
+              {...register("price")}
+              variant="outlined"
+              fullWidth
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
+
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
+            {errors.price && (
+              <p style={{ color: "red" }}>{errors.price.message}</p>
+            )}
+
+            <TextField
+              label="Max Guests"
+              type="number"
+              {...register("maxGuests")}
+              variant="outlined"
+              fullWidth
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
+
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
+            {errors.maxGuests && (
+              <p style={{ color: "red" }}>{errors.maxGuests.message}</p>
+            )}
+
+            <TextField
+              label="Rating"
+              type="number"
+              {...register("rating")}
+              variant="outlined"
+              fullWidth
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
+
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
+            {errors.rating && (
+              <p style={{ color: "red" }}>{errors.rating.message}</p>
+            )}
+
+            <Box className={createVenueStyles.metaBox}>
+              <Button
+                className={createVenueStyles.metaButton}
+                variant={metaValues.parking ? "contained" : "outlined"}
+                onClick={() => toggleMeta("parking")}
+                sx={{
+                  backgroundColor: metaValues.parking
+                    ? "#e55299"
+                    : "rgb(233, 155, 174)",
+                  boxShadow: metaValues.parking
+                    ? "inset 0 0 40px #320e3b"
+                    : "none",
+                  color: "white",
+                  fontSize: "14px",
+                  fontFamily: "Lato",
+                  "@media (max-width: 486px)": {
+                    fontSize: "12px",
+                  },
+                }}
+              >
+                <img
+                  className={createVenueStyles.metaImg}
+                  src={Parking}
+                  alt=""
+                />
+                Parking
+              </Button>
+
+              <Button
+                className={createVenueStyles.metaButton}
+                variant={metaValues.wifi ? "contained" : "outlined"}
+                onClick={() => toggleMeta("wifi")}
+                sx={{
+                  backgroundColor: metaValues.wifi
+                    ? "#e55299"
+                    : "rgb(233, 155, 174)",
+                  boxShadow: metaValues.wifi
+                    ? "inset 0 0 40px #320e3b"
+                    : "none",
+                  color: "white",
+                  fontSize: "14px",
+                  fontFamily: "Lato",
+                  "@media (max-width: 486px)": {
+                    fontSize: "12px",
+                  },
+                }}
+              >
+                <img className={createVenueStyles.metaImg} src={Wifi} alt="" />
+                Wifi
+              </Button>
+
+              <Button
+                className={createVenueStyles.metaButton}
+                variant={metaValues.breakfast ? "contained" : "outlined"}
+                onClick={() => toggleMeta("breakfast")}
+                sx={{
+                  backgroundColor: metaValues.breakfast
+                    ? "#e55299"
+                    : "rgb(233, 155, 174)",
+                  boxShadow: metaValues.breakfast
+                    ? "inset 0 0 40px #320e3b"
+                    : "none",
+                  color: "white",
+                  fontSize: "14px",
+                  fontFamily: "Lato",
+                  "@media (max-width: 486px)": {
+                    fontSize: "12px",
+                  },
+                }}
+              >
+                <img
+                  className={createVenueStyles.metaImg}
+                  src={Breakfast}
+                  alt=""
+                />
+                Breakfast
+              </Button>
+
+              <Button
+                className={createVenueStyles.metaButton}
+                variant={metaValues.pets ? "contained" : "outlined"}
+                onClick={() => toggleMeta("pets")}
+                sx={{
+                  backgroundColor: metaValues.pets
+                    ? "#e55299"
+                    : "rgb(233, 155, 174)",
+                  boxShadow: metaValues.pets
+                    ? "inset 0 0 40px #320e3b"
+                    : "none",
+                  color: "white",
+                  fontSize: "14px",
+                  fontFamily: "Lato",
+                  "@media (max-width: 486px)": {
+                    fontSize: "12px",
+                  },
+                }}
+              >
+                <img className={createVenueStyles.metaImg} src={Pets} alt="" />
+                Pets
               </Button>
             </Box>
-          ))}
-        <Button type="button" onClick={onAddImage}>
-          Add Image
-        </Button>
 
-        <TextField
-          label="Price"
-          type="number"
-          {...register("price")}
-          variant="outlined"
-          fullWidth
-          required
-          sx={{ marginBottom: 2 }}
-        />
-        {errors.price && <p style={{ color: "red" }}>{errors.price.message}</p>}
+            <TextField
+              label="Address"
+              {...register("location.address")}
+              variant="outlined"
+              fullWidth
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
 
-        <TextField
-          label="Max Guests"
-          type="number"
-          {...register("maxGuests")}
-          variant="outlined"
-          fullWidth
-          required
-          sx={{ marginBottom: 2 }}
-        />
-        {errors.maxGuests && (
-          <p style={{ color: "red" }}>{errors.maxGuests.message}</p>
-        )}
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
+            {errors.location?.address && (
+              <p style={{ color: "red" }}>{errors.location.address.message}</p>
+            )}
 
-        <TextField
-          label="Rating"
-          type="number"
-          {...register("rating")}
-          variant="outlined"
-          fullWidth
-          required
-          sx={{ marginBottom: 2 }}
-        />
-        {errors.rating && (
-          <p style={{ color: "red" }}>{errors.rating.message}</p>
-        )}
+            <TextField
+              label="City"
+              {...register("location.city")}
+              variant="outlined"
+              fullWidth
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: 2,
-          }}
-        >
-          <Button
-            variant={metaValues.parking ? "contained" : "outlined"}
-           onClick={() => {
-  setValue("meta", { ...metaValues, parking: !metaValues.parking });
-}}
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
+            {errors.location?.city && (
+              <p style={{ color: "red" }}>{errors.location.city.message}</p>
+            )}
 
-          >
-            Parking
-          </Button>
+            <TextField
+              label="Zip"
+              {...register("location.zip", { valueAsString: true })}
+              variant="outlined"
+              fullWidth
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
 
-          <Button
-            variant={metaValues.wifi ? "contained" : "outlined"}
-          onClick={() => {
-  setValue("meta", { ...metaValues, wifi: !metaValues.wifi});
-}}
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
+            {errors.location?.zip && (
+              <p style={{ color: "red" }}>{errors.location.zip.message}</p>
+            )}
 
-          >
-            Wifi
-          </Button>
+            <TextField
+              label="Country"
+              {...register("location.country")}
+              variant="outlined"
+              fullWidth
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
 
-          <Button
-            variant={metaValues.breakfast ? "contained" : "outlined"}
-            onClick={() => {
-  setValue("meta", { ...metaValues, breakfast: !metaValues.breakfast });
-}}
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
+            {errors.location?.country && (
+              <p style={{ color: "red" }}>{errors.location.country.message}</p>
+            )}
 
-          >
-            Breakfast
-          </Button>
+            <TextField
+              label="Continent"
+              {...register("location.continent")}
+              variant="outlined"
+              fullWidth
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
 
-          <Button
-            variant={metaValues.pets ? "contained" : "outlined"}
-          onClick={() => {
-  setValue("meta", { ...metaValues, pets: !metaValues.pets });
-}}
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
+            {errors.location?.continent && (
+              <p style={{ color: "red" }}>
+                {errors.location.continent.message}
+              </p>
+            )}
 
-          >
-            Pets
-          </Button>
-        </Box>
+            <TextField
+              label="Latitude"
+              type="number"
+              {...register("location.lat")}
+              variant="outlined"
+              fullWidth
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
 
-        <TextField
-          label="Address"
-          {...register("location.address")}
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        />
-        {errors.location?.address && (
-          <p style={{ color: "red" }}>{errors.location.address.message}</p>
-        )}
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
+            {errors.location?.lat && (
+              <p style={{ color: "red" }}>{errors.location.lat.message}</p>
+            )}
 
-        <TextField
-          label="City"
-          {...register("location.city")}
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        />
-        {errors.location?.city && (
-          <p style={{ color: "red" }}>{errors.location.city.message}</p>
-        )}
+            <TextField
+              label="Longitude"
+              type="number"
+              {...register("location.lng")}
+              variant="outlined"
+              fullWidth
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  backgroundColor: "white",
+                  marginBottom: "16px",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "white",
+                  fontFamily: "Lato",
+                  fontSize: "16px",
+                  marginTop: "-10px",
+                },
 
-        <TextField
-          label="Zip"
-          {...register("location.zip", { valueAsString: true })}
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        />
-        {errors.location?.zip && (
-          <p style={{ color: "red" }}>{errors.location.zip.message}</p>
-        )}
+                "& .MuiInputLabel-root.Mui-focused": {
+                  color: "#e56399",
+                },
+                marginTop: "12px",
+              }}
+            />
+            {errors.location?.lng && (
+              <p style={{ color: "red" }}>{errors.location.lng.message}</p>
+            )}
 
-        <TextField
-          label="Country"
-          {...register("location.country")}
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        />
-        {errors.location?.country && (
-          <p style={{ color: "red" }}>{errors.location.country.message}</p>
-        )}
+            <Button
+              className={gStyles.buttonPrimary}
+              type="submit"
+              style={{ width: "100%" }}
+            >
+              Create Venue
+            </Button>
 
-        <TextField
-          label="Continent"
-          {...register("location.continent")}
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        />
-        {errors.location?.continent && (
-          <p style={{ color: "red" }}>{errors.location.continent.message}</p>
-        )}
-
-        <TextField
-          label="Latitude"
-          type="number"
-          {...register("location.lat")}
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        />
-        {errors.location?.lat && (
-          <p style={{ color: "red" }}>{errors.location.lat.message}</p>
-        )}
-
-        <TextField
-          label="Longitude"
-          type="number"
-          {...register("location.lng")}
-          variant="outlined"
-          fullWidth
-          sx={{ marginBottom: 2 }}
-        />
-        {errors.location?.lng && (
-          <p style={{ color: "red" }}>{errors.location.lng.message}</p>
-        )}
-
-        <button type="submit" style={{ width: "100%" }}>
-          Create Venue
-        </button>
-
-        <Button
-          type="button"
-          variant="contained"
-          color="primary"
-          fullWidth
-          onClick={toggleForm}
-          sx={{ marginTop: 2 }}
-        >
-          CANCEL
-        </Button>
-      </Box>
-    </form>
+            <Button
+              className={gStyles.buttonSecondary}
+              type="button"
+              variant="contained"
+              color="primary"
+              fullWidth
+              onClick={toggleForm}
+              sx={{ marginTop: 2 }}
+            >
+              CANCEL
+            </Button>
+          </Box>
+        </form>
+      </div>
+    </div>
   );
 };
 

@@ -1,3 +1,16 @@
+/**
+ * Handles user login by sending credentials to the specified endpoint,
+ * decoding the JWT token, updating the store with authentication and user profile data,
+ * and navigating to the user's profile page upon successful login.
+ *
+ * @async
+ * @function
+ * @param {string} endpoint - The API endpoint for login.
+ * @param {Object} userData - The user credentials to be sent in the request body.
+ * @param {Function} navigate - Function to navigate to a different route.
+ * @returns {Promise<Object>} The response data from the login API or an error object.
+ */
+
 import useMyStore from "../../Store/index";
 import { jwtDecode } from "jwt-decode";
 import fetchUserProfile from "../../API/FetchUserProfile/index";
@@ -15,10 +28,13 @@ async function onLogin(endpoint, userData, navigate) {
     });
 
     if (!response.ok) {
-      throw new Error("Failed to Login user");
+      const errorData = await response.json();
+      console.error("Login failed:", errorData);
+      return errorData;
     }
 
     const data = await response.json();
+
     const accessToken = data?.data?.accessToken;
     const userName = data?.data?.name;
 
@@ -41,8 +57,7 @@ async function onLogin(endpoint, userData, navigate) {
 
     return data;
   } catch (error) {
-    console.error("Login failed:", error.message || error);
-    throw new Error(`Login failed: ${error.message}`);
+    return { success: false, message: error.message || "Login failed" };
   }
 }
 
