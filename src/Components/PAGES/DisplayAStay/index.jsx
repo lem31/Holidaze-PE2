@@ -167,7 +167,7 @@ const DisplayAStay = () => {
 
   return (
     <div className={stayStyles.stayCardPosition}>
-      <h1 className={gStyles.h1Black}>Venue Availability</h1>
+      <h1 style={{textAlign:'center'}} className={gStyles.h1Black}>Venue Availability</h1>
       <div className={stayStyles.stayContainer}>
         <div className={stayStyles.nameRatingImages}>
           <div className={stayStyles.stayNameRatingDiv}>
@@ -217,6 +217,14 @@ const DisplayAStay = () => {
               numberOfGuests={numberOfGuests}
               setNumberOfGuests={setNumberOfGuests}
             />
+<div className={stayStyles.totalPriceDiv}>
+            {startDate && endDate && totalPrice > 0 && (
+                    <p className={gStyles.bodyWhite}>
+                      Total Price:{" "}
+                      {totalPrice > 0 ? `${totalPrice} NOK` : "Select dates"}
+                    </p>
+                  )}
+                  </div>
             <div className={stayStyles.locDescFacilDiv}>
               <div className={stayStyles.locationDescDiv}>
                 <div className={stayStyles.locationDiv}>
@@ -241,12 +249,7 @@ const DisplayAStay = () => {
                     <img className={stayStyles.icon} src={Price} alt="price" />
                     Price: {selectedStay.price} NOK
                   </p>
-                  {startDate && endDate && totalPrice > 0 && (
-                    <p className={gStyles.bodyWhite}>
-                      Total Price:{" "}
-                      {totalPrice > 0 ? `${totalPrice} NOK` : "Select dates"}
-                    </p>
-                  )}
+                  
                 </div>
               </div>
             </div>
@@ -286,6 +289,14 @@ const DisplayAStay = () => {
               </Alert>
             </Snackbar>
           </div>
+          <div className={stayStyles.totalPriceDivSmScreen}>
+            {startDate && endDate && totalPrice > 0 && (
+                    <p className={gStyles.bodyWhite}>
+                      Total Price:{" "}
+                      {totalPrice > 0 ? `${totalPrice} NOK` : "Select dates"}
+                    </p>
+                  )}
+                  </div>
         </div>
         <div className={stayStyles.facilH2Div}>
           <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>
