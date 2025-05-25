@@ -54,9 +54,9 @@ const DisplayCustomerBookings = () => {
           : "N/A";
 
         return (
-          <div className={cBookingStyles.outerContainer}>
+          <div className={cBookingStyles.outerContainer} key={booking.id}>
             <div className={cBookingStyles.innerContainer}>
-              <div className={cBookingStyles.cardLayout} key={booking.id}>
+              <div className={cBookingStyles.cardLayout} >
                 <div className={cBookingStyles.nameCreatedDiv}>
                   <div className={cBookingStyles.h2Div}>
                     <h2 className={`${gStyles.h2White} ${cBookingStyles.h2}`}>
