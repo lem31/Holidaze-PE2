@@ -167,7 +167,7 @@ const DisplayAStay = () => {
 
   return (
     <div className={stayStyles.stayCardPosition}>
-      <h1 className={gStyles.h1Black}>Venue Availability</h1>
+      <h1 style={{textAlign:'center'}} className={gStyles.h1Black}>Venue Availability</h1>
       <div className={stayStyles.stayContainer}>
         <div className={stayStyles.nameRatingImages}>
           <div className={stayStyles.stayNameRatingDiv}>
@@ -289,6 +289,14 @@ const DisplayAStay = () => {
               </Alert>
             </Snackbar>
           </div>
+          <div className={stayStyles.totalPriceDivSmScreen}>
+            {startDate && endDate && totalPrice > 0 && (
+                    <p className={gStyles.bodyWhite}>
+                      Total Price:{" "}
+                      {totalPrice > 0 ? `${totalPrice} NOK` : "Select dates"}
+                    </p>
+                  )}
+                  </div>
         </div>
         <div className={stayStyles.facilH2Div}>
           <h2 className={`${gStyles.h2White} ${stayStyles.h2Stay}`}>

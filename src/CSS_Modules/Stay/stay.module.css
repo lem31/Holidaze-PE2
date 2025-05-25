@@ -18,6 +18,11 @@
   overflow-y: hidden;
 }
 
+.h2{
+  max-height: 100px;
+  overflow-y: auto;
+}
+
 .responsiveDiv {
   display: flex;
   flex-direction: column;
@@ -25,14 +30,27 @@
   align-items: center;
 }
 
+.totalPriceDivSmScreen {
+  display: none;
+}
+
 .locationDescDiv {
- 
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 400px;
+  height: 300px;
   width: 400px;
 }
+
+  .facilityUl {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
 .descriptionPriceDiv {
   display: flex;
@@ -86,8 +104,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 28px;
-  overflow-y: hidden;
+overflow-x: hidden;
+  overflow-y: auto;
   width: auto;
   padding: 10px;
   position: static;
@@ -134,10 +152,10 @@
   overflow-y: auto;
 }
 
-.totalPriceDiv{
+.totalPriceDiv {
   width: 400px;
   align-items: center;
-  display : flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -249,7 +267,7 @@
 
   .locationDescDiv {
     width: 300px;
-
+height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -264,6 +282,17 @@
     gap: 0;
     width: 300px;
     justify-content: flex-start;
+  }
+
+  .totalPriceDiv {
+    display: none;
+  }
+
+  .totalPriceDivSmScreen {
+     width: 400px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   }
 
   .facilityDiv {
@@ -286,7 +315,7 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    height: 600px;
+    height: 320px;
   }
 
   .facilH2Div {
@@ -328,6 +357,8 @@
   .locationDescDiv {
     align-items: center;
     width: 250px;
+    height: 300px;
+
   }
 
   .locationDiv {
@@ -356,6 +387,10 @@
     width: 100%;
   }
 
+  .totalPriceDiv {
+    display: none;
+  }
+
   .description {
     max-width: 180px;
     align-items: center;
@@ -372,11 +407,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+max-width: 200px;
 
-    width: 300px;
     margin: 0;
     padding: 0;
   }
+
+ 
 
   .facilityDiv {
     justify-content: center;
@@ -393,8 +430,8 @@
   }
 
   .imageListContainer {
-    width: 230px;
-    height: 250px;
+    width: 200px;
+    height: 180px;
     display: grid;
     gap: 10px;
     grid-template-columns: repeat(2, 1fr);
