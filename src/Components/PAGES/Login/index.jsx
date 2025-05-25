@@ -65,7 +65,7 @@ function Login() {
               boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
             }}
           >
-            <Alert severity="success" onClose={() => setSuccessMessage(null)}>
+            <Alert sx={{zIndex: 9999, marginTop: '-500px'}} severity="success" onClose={() => setSuccessMessage(null)}>
               {successMessage}
             </Alert>
           </Snackbar>
