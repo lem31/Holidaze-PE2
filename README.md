@@ -17,6 +17,28 @@ PE2 Travel App is an accommodation booking platform for Holidaze, allowing users
 
 <table> <tr> <th><strong>🏠<h4> Browse Available Venues </h4></strong></th> <th><strong> 🔍 <h4>Search and Filter Venues </h4> </strong></th> <th><strong> 📅 <h4> Book Stays </h4> </strong></th> <th><strong> 📚 <h4> View Bookings </h4> </strong></th> <th><strong> 🏛️<h4> Manage Venues </h4> </strong></th> <th><strong> 🎨 <h4> Login </h4> </strong></th> <th><strong> <h4> 📁 Authentication </h4> </strong></th> </tr>  <td> All users can browse available venues with an interactive calendar</td> <td>All users can search for venues by name or filter by country</td> <td>Secure authentication using JWT</td> <td>Customers can book stays and view their upcoming bookings</td> <td>Venue managers can create, update, and delete venues, as well as view any bookings made at their venues.</td> <td>All registered users can login, view their profile and edit their profile details</td> <td>Secure authentication using JWT</td> </tr> </table>
 
+
+<h2> <strong> Tech Stack </strong> </h2>
+
+<table>
+<tr>
+<th align='center' > ✨<strong><h4>Frontend </h4> </strong>  </th>
+<th align='center' > 🎨 <strong><h4> State Management </h4> </strong> </th>
+<th align='center' > 🗂️  <strong><h4> Styling</h4></strong>  </th>
+<th align='center' > 🛣️ <strong> <h4>Forms & Validation</h4> </strong>  </th>
+<th align='center' > 📝 <strong> <h4>Routing</h4> </strong>  </th>
+<th align='center' > 🛠️ <strong> <h4>Development Tools</h4></strong></th>
+</tr>
+<tr>
+    <td>React, Vite</td>
+    <td>Zustand</td>
+    <td>MUI, Emotion, CSS Modules</td>
+    <td>React Router</td>
+    <td>React Hook Form, Yup</td>
+    <td>React Router DOM</td>
+  </tr>
+  </table>
+
 **Installation**
 
 1. 🚀 Clone the repository:
@@ -45,19 +67,7 @@ npm run build
 
 npm run preview
 
-**Tech Stack:**
 
-1. Frontend: React, Vite
-
-2. State Management: Zustand
-
-3. Styling: MUI, Emotion, CSS Modules
-
-4. Forms & Validation: React Hook Form, Yup
-
-5. Authentication: JWT Decode
-
-6. Routing: React Router DOM
 
 **API Integration**
 
