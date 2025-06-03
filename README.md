@@ -8,7 +8,12 @@
 
 PE2 Travel App is an accommodation booking platform for Holidaze, allowing users to explore and book venues. It allows customers to make bookings and for venue managers to manage their venue listings.
 
- <h2> 🎨<strong> Design </strong> </h2> <br>
+ <h2> 🎨<strong> Planning & Design </strong> </h2> <br>
+
+ ✅ Kanban Board: Used for task tracking in GitHub Projects/Trello
+
+✅ Style Guide: Designed in Figma with logo, fonts, and colors
+
 ✅ Prototype: Created in Figma for desktop and mobile
 [Visit the design page](https://www.figma.com/design/P4O11wG36Qvu9bNSIVjA4W/HOLIDAZE-PE2?node-id=67-514&t=aoyvUyu64jcgSth0-1)  <br>
 
@@ -71,51 +76,6 @@ npm run preview
 
 This project integrates with the Holidaze API, allowing users to manage venue listings and bookings. Ensure you have a valid API key for authentication.
 
-**Development Process**
-
-1️⃣ **Planning & Design**
-
-✅ Kanban Board: Used for task tracking in GitHub Projects/Trello
-
-✅ Style Guide: Designed in Figma with logo, fonts, and colors
-
-✅ Prototype: Created in Figma for desktop and mobile
-
-2️⃣ **User Stories**
-
-👥 **All Users**
-
-1. View a list of venues
-
-2. Search for a venue
-
-3. Register as a Customer or Venue Manager
-
-4. View a venue’s availability on a calendar
-
-👤 **Customers**
-
-1. Browse Stays and individual stays
-
-2. Login/logout
-
-3. Create bookings
-
-4. View upcoming bookings
-
-5. View profile and update profile/avatar
-
-👔 **Venue Managers**
-
-1. Browse Stays and individual stays
-
-2. Login/logout
-
-3. Create, edit, delete venues
-
-4. View bookings for managed venues
-
-5. View profile and update profile/avatar
 
 **Testing & Deployment**
 
