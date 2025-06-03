@@ -41,7 +41,7 @@ PE2 Travel App is an accommodation booking platform for Holidaze, allowing users
 
 **Installation**
 
-1. 🚀 Clone the repository:
+## 🚀 Clone the repository ##
 
 git clone https://github.com/lem31/pe2-travel-app.git
 
