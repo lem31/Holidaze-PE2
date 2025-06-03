@@ -29,7 +29,7 @@ PE2 Travel App is an accommodation booking platform for Holidaze, allowing users
 
 ✨ Features
 
-<table> <tr> <th><strong>🏠<h4> Browse Available Venues </h4></strong></th> <th><strong> 🔍 <h4>Search and Filter Venues </h4> </strong></th> <th><strong> 📅 <h4> Book Stays </h4> </strong></th> <th><strong>  <h4> View Bookings </h4> </strong></th> <th><strong> Manage Venues </h4> </strong></th> <th><strong> 🎨 <h4> Login </h4> <h4> 📁 Authentication </h4> </strong></th> </tr> <tr> 👤<td> All users can browse available venues with an interactive calendar</td> <td>All users can search for venues by name or filter by country</td> <td>Secure authentication using JWT</td> <td>All registered users can login, view their profile and edit their profile details</td> <td>Venue managers can create, update, and delete venues, as well as view any bookings made at their venues</td> </tr> </table>
+<table> <tr> <th><strong>🏠<h4> Browse Available Venues </h4></strong></th> <th><strong> 🔍 <h4>Search and Filter Venues </h4> </strong></th> <th><strong> 📅 <h4> Book Stays </h4> </strong></th> <th><strong>  <h4> View Bookings </h4> </strong></th> <th><strong> <h4> Manage Venues </h4> </strong></th> <th><strong> 🎨 <h4> Login </h4> </strong></th> <th><strong> <h4> 📁 Authentication </h4> </strong></th> </tr> <tr> 👤<td> All users can browse available venues with an interactive calendar</td> <td>All users can search for venues by name or filter by country</td> <td>Secure authentication using JWT</td> <td>All registered users can login, view their profile and edit their profile details</td> <td>Venue managers can create, update, and delete venues, as well as view any bookings made at their venues</td> </tr> </table>
 
 **Installation**
 
