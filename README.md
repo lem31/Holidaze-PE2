@@ -5,8 +5,8 @@
 
 
 <h2> 📽  <strong>Video Demo </strong></h2>
- ![Video Demo](https://i.ibb.co/7xsxtkVQ/Holidaze-Clip.gif)
- <img src="https://i.ibb.co/7xsxtkVQ/Holidaze-Clip.gif" alt="Image Description">
+ ![Video Demo](./src/assets/Images/HoldazeClip.gif)
+
 
 
 <h2> 🖼 <strong> Overview </strong> </h2> <br>
