@@ -5,7 +5,9 @@
 
 
 <h2> 📽  <strong>Video Demo </strong></h2>
-![Video Demo](./src/assets/images/HolidazeVidClip.gif)
+![Video Demo](src/assets/images/HolidazeVidClip.gif)
+
+<img src="src/assets/images/HolidazeVidClip.gif" alt="Video Demo">
 
 
 
