@@ -39,35 +39,33 @@ PE2 Travel App is an accommodation booking platform for Holidaze, allowing users
   </tr>
   </table>
 
-**Installation**
+<h3><strong>Installation</strong></h3>
 
-## 🚀 Clone the repository ##
+**🚀 Clone the repository**
 
 git clone https://github.com/lem31/pe2-travel-app.git
 
-2. 📁 Navigate to the project folder:
+**📁 Navigate to the project folder**
 
 cd pe2-travel-app
 
-3. 📦 Install Dependencies:
+**📦 Install Dependencies**
 
 npm install
 
-**Running the App**
+<h3><strong>Running the App</strong></h3>
 
-1. 🖥️ Start the development server: 
+**🖥️ Start the development server** 
 
 npm run dev
 
-2. 🏗️ Build for Production: 
+**🏗️ Build for Production** 
 
 npm run build
 
-3. 👀 Preview the production build: 
+**👀 Preview the production build** 
 
 npm run preview
-
-
 
 **API Integration**
 
