@@ -1,6 +1,16 @@
-**Overview**
+<div align="center">
+  <h1><strong>Holidaze App 🌴</strong></h1>
+  <br><br>
+</div>
+
+
+<h2> 🖼 <strong> Overview </strong> </h2> <br>
 
 PE2 Travel App is an accommodation booking platform for Holidaze, allowing users to explore and book venues. It allows customers to make bookings and for venue managers to manage their venue listings.
+
+ <h2> 🎨<strong> Design </strong> </h2> <br>
+✅ Prototype: Created in Figma for desktop and mobile
+[Visit the design page](https://www.figma.com/design/P4O11wG36Qvu9bNSIVjA4W/HOLIDAZE-PE2?node-id=67-514&t=aoyvUyu64jcgSth0-1)
 
 **Features**
 
@@ -15,6 +25,11 @@ PE2 Travel App is an accommodation booking platform for Holidaze, allowing users
 👤 All registered users can login, view their profile and edit their profile details.
 
 📁 Secure authentication using JWT
+
+
+✨ Features
+
+<table> <tr> <th><strong>🏠<h4> Browse Available Venues </h4></strong></th> <th><strong> 🔍 <h4>Search and Filter Venues </h4> </strong></th> <th><strong> 📅 <h4> Book Stays </h4> </strong></th> <th><strong>  <h4> View Bookings </h4> </strong></th> <th><strong> Manage Venues </h4> </strong></th> <th><strong> 🎨 <h4> Login </h4> <h4> 📁 Authentication </h4> </strong></th> </tr> <tr> 👤<td> All users can browse available venues with an interactive calendar</td> <td>All users can search for venues by name or filter by country</td> <td>Venue managers can create, update, and delete venues, as well as view any bookings made at their venues</td> <td>All registered users can login, view their profile and edit their profile details</td> <td>Secure authentication using JWT</td> </tr> </table>
 
 **Installation**
 
