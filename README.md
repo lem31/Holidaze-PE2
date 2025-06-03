@@ -9,6 +9,9 @@
 
 
 
+
+
+
 <h2> 🖼 <strong> Overview </strong> </h2> <br>
 
 PE2 Travel App is an accommodation booking platform for Holidaze, allowing users to explore and book venues. It allows customers to make bookings and for venue managers to manage their venue listings.
