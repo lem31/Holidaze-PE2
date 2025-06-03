@@ -10,7 +10,7 @@ PE2 Travel App is an accommodation booking platform for Holidaze, allowing users
 
  <h2> 🎨<strong> Design </strong> </h2> <br>
 ✅ Prototype: Created in Figma for desktop and mobile
-[Visit the design page](https://www.figma.com/design/P4O11wG36Qvu9bNSIVjA4W/HOLIDAZE-PE2?node-id=67-514&t=aoyvUyu64jcgSth0-1)
+[Visit the design page](https://www.figma.com/design/P4O11wG36Qvu9bNSIVjA4W/HOLIDAZE-PE2?node-id=67-514&t=aoyvUyu64jcgSth0-1)  <br>
 
 
 ✨ Features
