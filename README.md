@@ -5,7 +5,7 @@
 
 
 <h2> 📽  <strong>Video Demo </strong></h2>
-![Video Demo](https://raw.githubusercontent.com/lem31/Holidaze-PE2/main/src/assets/images/HolidazeVidClip.gif)
+![Video Demo](https://raw.githubusercontent.com/lem31/Holidaze-PE2/main/src/assets/Images/HolidazeVidClip.gif)
 
 
 
